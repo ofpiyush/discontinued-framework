@@ -16,22 +16,22 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  *	Stores all Lazy load paths according to the namespaces they are in.
  *	We've kept the defaults here to make it easier to follow(Dont mess with them unless you are sure what you are doing)
  *
- * 	Note: In case you use 'pb' namespace in your application to 
- *		override the default classes in phpbull, use loader::addlazypath($path,true)
- *		adding them here will make phpbull look for them after it has looked into its own directories.
+ * 	Note: In case you use 'sb' namespace in your application to 
+ *		override the default classes in sambhuti, use loader::addlazypath($path,true)
+ *		adding them here will make sambhuti look for them after it has looked into its own directories.
  * 	Note: Order of namespaces donot affect the load time,
  *		but you should really care about the order of paths within the namespaces,
  *		Specially if you are going override older versions of some classes with new ones, higher in the hierarchy
  */
-$app_config['lazy_path']['global']['model']=PB_APP_PATH.'model/';
-$app_config['lazy_path']['global']['controller']=PB_APP_PATH.'controller/';
+$app_config['lazy_path']['global']['model']=SB_APP_PATH.'model/';
+$app_config['lazy_path']['global']['controller']=SB_APP_PATH.'controller/';
 
 /**
  * @var $app_config['view_path'] string path to the view folder
- * @default $app_config['view_path']=PB_APP_PATH.'view/';
+ * @default $app_config['view_path']=SB_APP_PATH.'view/';
  *
  */
-$app_config['view_path']=PB_APP_PATH.'view/';
+$app_config['view_path']=SB_APP_PATH.'view/';
 
 /**
  * Db config vars
