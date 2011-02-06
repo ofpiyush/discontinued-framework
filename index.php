@@ -4,10 +4,9 @@ $time1=microtime(true);
  * @package sambhuti
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
-
 $sb_engine='engine';
 /**
- * $pb_apps['full_url']='relative/path/from/this/file'
+ * $sb_apps['full_url']='relative/path/from/this/file'
  * specific to generic to prevent overriding
  * donot use a trailing slash
  */
