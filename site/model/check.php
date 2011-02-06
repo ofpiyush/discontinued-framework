@@ -1,7 +1,7 @@
 <?php
-if ( ! defined('PB_ENGINE_PATH')) exit('No direct script access allowed');
+if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
- * @package phpbull
+ * @package sambhuti
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
 
