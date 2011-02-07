@@ -1,0 +1,3 @@
+[submodule "engine/thirdparty/Pimple"]
+	path = engine/thirdparty/Pimple
+	url = git://github.com/piyushmishra/Pimple.git
