@@ -53,6 +53,75 @@ final class sambhuti
 		// All good.
 		return $fullpath;
 	}
+	public static function ping($type)
+	{
+		switch($type)
+		{
+			case 'SBbase':
+			return array('uri'=>self::$_pimple->uri,'load'=>self::$_pimple->load);
+			break;
+			case 'database':
+			return array('_config'=>self::$_pimple->config);
+			break;
+			default:
+			throw new SBException(__CLASS__,"Unknown ping from ".$type);
+		}
+	}
+	
+	public static function getthirdparty()
+	{
+		return self::$_thirdparty;
+	}
+	public static function addthirdparty($thirdparty)
+	{
+		if(is_array($thirdparty))
+			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
+	}
+	public static function addlazypath($path,$ulta=false)
+	{
+		if(is_array($path))
+			if(is_bool($ulta) && $ulta)
+				self::$_lazy_paths=array_merge_recursive($path,self::$_lazy_paths);
+			else
+				self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$path);
+	}
+	public static function autoload($class,$type="any")
+	{
+		$break_array = explode('\\',$class);
+		$classname=array_pop($break_array);
+		$name=implode($break_array,'\\');
+		$namespace = ($name=='') ? 'global' : $name;		
+		if(class_exists($classname, false))
+			return;
+		
+		if(array_key_exists($namespace,self::$_lazy_paths))
+		{
+			foreach(self::$_lazy_paths[$namespace] as $key=>$path) 
+			{
+				if($type=='any' || $key==$type)
+					$file_name = $path.$classname.'.php';
+					if(file_exists($file_name))
+					{
+						require_once $file_name;
+						return true;
+					}
+			}
+			
+		}
+		elseif(array_key_exists($class,self::$_thirdparty))
+		{
+			require_once self::$_thirdparty[$class];
+			return true;
+		}
+			throw new SBException($classname,404,"Not Found");
+	}
+	public static function stop()
+	{
+		self::$_lazy_paths=array();
+		self::$_thirdparty=array();
+		spl_autoload_unregister(array(__CLASS__, 'autoload' ));
+	}
+	
 	private static function pimpleinit()
 	{
 		self::$_pimple= new \Pimple();
@@ -76,17 +145,6 @@ final class sambhuti
 			{
 				return new $pimple->_cname();
 			});
-	}
-	static function ping($type)
-	{
-		switch($type)
-		{
-			case 'SBbase':
-			return array('uri'=>self::$_pimple->uri,'load'=>self::$_pimple->load);
-			break;
-			default:
-			throw new SBException(__CLASS__,"Unknown ping from ".$type);
-		}
 	}
 	private static function sbinit($asd="aaa")
 	{
@@ -147,61 +205,7 @@ final class sambhuti
 			self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$paths);
 		if(isset($thirdparty) && is_array($thirdparty))
 			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
-	}
-	public static function getthirdparty()
-	{
-		return self::$_thirdparty;
-	}
-	public static function addthirdparty($thirdparty)
-	{
-		if(is_array($thirdparty))
-			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
-	}
-	public static function addlazypath($path,$ulta=false)
-	{
-		if(is_array($path))
-			if(is_bool($ulta) && $ulta)
-				self::$_lazy_paths=array_merge_recursive($path,self::$_lazy_paths);
-			else
-				self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$path);
-	}
-	public static function autoload($class,$type="any")
-	{
-		$break_array = explode('\\',$class);
-		$classname=array_pop($break_array);
-		$name=implode($break_array,'\\');
-		$namespace = ($name=='') ? 'global' : $name;		
-		if(class_exists($classname, false))
-			return;
-		
-		if(array_key_exists($namespace,self::$_lazy_paths))
-		{
-			foreach(self::$_lazy_paths[$namespace] as $key=>$path) 
-			{
-				if($type=='any' || $key==$type)
-					$file_name = $path.$classname.'.php';
-					if(file_exists($file_name))
-					{
-						require_once $file_name;
-						return true;
-					}
-			}
-			
-		}
-		elseif(array_key_exists($class,self::$_thirdparty))
-		{
-			require_once self::$_thirdparty[$class];
-			return true;
-		}
-			throw new SBException($classname,404,"Not Found");
-	}
-	public static function stop()
-	{
-		self::$_lazy_paths=array();
-		self::$_thirdparty=array();
-		spl_autoload_unregister(array(__CLASS__, 'autoload' ));
-	}
-	
+	}	
 	
 }
 

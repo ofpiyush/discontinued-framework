@@ -6,13 +6,15 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
 
-abstract class database
+abstract class database extends model
 {
 	protected static $_dbh=null;
 	protected $_config;
-	function __construct(config $config)
+	function __construct()
 	{
-		$this->_config=$config;
+		parent::__construct();
+		foreach(sambhuti::ping('database') as $key=>$value)
+			$this->_cannula($key,$value); 
 	}
 	/**
 	 * Connects to the dbase if no connection already exists
