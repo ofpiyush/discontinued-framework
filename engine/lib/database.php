@@ -83,12 +83,18 @@ abstract class database
 		}
 		return $stmt;
 	}
-	protected final function getinsertid($stmt,$key='master')
+	protected final function insertid($stmt,$key='master')
 	{
 		
 		$count=$stmt->rowCount();
 		$id= self::$_dbh[$key]->lastInsertId();
 		return ($count>0 && $id>0) ? $id : 0 ;
+	}
+	protected final function insertcount($stmt)
+	{
+		$count = $stmt->rowCount();
+		$stmt->closeCursor();
+		return $count;
 	}
 	protected final function assocrows($stmt)
 	{
