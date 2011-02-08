@@ -12,10 +12,8 @@ abstract class SBbase
 	protected $uri;
 	public function __construct()
 	{
-		foreach(sambhuti::ping('SBbase')	as $key=>$object)
-		{
+		foreach(sambhuti::ping('SBbase') as $key=>$object)
 			$this->_cannula($key,$object);
-		}
 	}
 	final public function _cannula($key,$value)
 	{
