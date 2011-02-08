@@ -83,59 +83,71 @@ abstract class database
 		}
 		return $stmt;
 	}
-	protected final function insertid($stmt,$key='master')
+	
+	
+	protected final function fetch($stmt)
 	{
-		$count=$stmt->rowCount();
-		$id= self::$_dbh[$key]->lastInsertId();
-		return ($count>0 && $id>0) ? $id : 0 ;
+		$result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
 	}
+		
+	protected final function fetchall($stmt)
+	{
+		$result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+	}
+	
 	protected final function updatecount($stmt)
 	{
 		$count = $stmt->rowCount();
 		$stmt->closeCursor();
 		return $count;
 	}
-	protected final function assocrows($stmt)
+	
+	protected final function insertid($stmt,$key='master')
 	{
-		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $result;
+		$count=$this->updatecount($stmt);
+		$id= self::$_dbh[$key]->lastInsertId();
+		return ($count>0 && $id>0) ? $id : 0 ;
 	}
+	
 	protected final function isreturned($stmt)
 	{
-		$row = $stmt->fetch();
-		$stmt->closeCursor();
+		$row = $this->fetch($stmt);
 		$return = false;
 		if($row && count($row) > 0) 
 			$return = true;
 		return $return;
 	}
+	
 	protected final function assocrow($stmt)
 	{
-		$result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $result;
+		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $this->fetch($stmt);
+	}
+	protected final function assocrows($stmt)
+	{
+		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $this->fetchall($stmt);
+	}
+	
+	protected final function objrow($stmt,$class)
+	{
+		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
+        return $this->fetch($stmt);
 	}
 	protected final function objrows($stmt,$class)
 	{
 		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
-		$result = $stmt->fetchAll(\PDO::FETCH_CLASS);
-        $stmt->closeCursor();
-        return $result;
-	}
-	protected final function objrow($stmt,$class)
-	{
-		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
-		$result = $stmt->fetch(\PDO::FETCH_CLASS);
-        $stmt->closeCursor();
-        return $result;
+		return $this->fetchall($stmt);
 	}
 	protected final function disconnect($key='all')
 	{
 		if(is_array(self::$_dbh))
 			if($key=='all')
 			{
-			
 				foreach(self::$_dbh as $index=>$val)	
 					self::$_dbh[$index]=null;
 			}elseif(array_key_exists($key,self::$_dbh))
