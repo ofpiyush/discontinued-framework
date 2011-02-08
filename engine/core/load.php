@@ -13,8 +13,9 @@ class load
 	{
 		$this->_config=$config;
 	}
-	function model($model)
+	function model($model_orig)
 	{
+		$model=str_replace('/#type#/',$this->_config->get('db','type'),str_replace('/#class#/',$model_orig,$this->_config->get('db','DAO_name')));
 		sambhuti::autoload($model,'model');
 		$pimple=sambhuti::pimple();
 		$modname="_".$model;
@@ -23,7 +24,6 @@ class load
 				return new $model();
 			});
 		$pimple->controller->_cannula($model,$pimple->$modname);
-		
 	}
 	function view($pb_view,$array=array())
 	{
