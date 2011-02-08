@@ -55,13 +55,11 @@ class uri
 	}
 	private function populate($path)
 	{
-
-		$relative = rtrim(substr($this->_request_uri, strlen($path)),'/');
-		echo $relative;
+		$relative = trim(substr($this->_request_uri, strlen($path)),'/');
 		$segments=explode('/',$relative);
 		$this->_segments=$segments;
-		array_pop($this->_segments);
-		array_unshift($this->_segments,'');
+		if($this->_segments[0]!='')
+			array_unshift($this->_segments,'');
 		unset($this->_segments[0]);
 	}
 	private function request_uri()
