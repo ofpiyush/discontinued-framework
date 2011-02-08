@@ -96,6 +96,15 @@ abstract class database
         $stmt->closeCursor();
         return $result;
 	}
+	protected final function isreturned($stmt)
+	{
+		$row = $stmt->fetch();
+		$stmt->closeCursor();
+		$return = false;
+		if($row && count($row) > 0) 
+			$ret = true;
+		return $return;
+	}
 	protected final function assocrow($stmt)
 	{
 		$result = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -125,7 +134,7 @@ abstract class database
 			self::$_dbh[$key]=null;
 		}
 	}
-
+	
 	function __destruct()
 	{
 		$this->disconnect();
