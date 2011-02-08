@@ -27,19 +27,10 @@ class load
 	}
 	function view($pb_view,$array=array())
 	{
-		$view_path= realpath($this->_config->get('view_path'))."/";
+		$pb_view_fn = $this->getfullpath('view_path', $pb_view);
 		if (!is_array($array))
 			$array = array();
-		if($view_path!="/")
-		{
-			$pb_view_fn=$view_path.$pb_view.".php"; 
-			if(file_exists($pb_view_fn))
-				self::CleanRequire($pb_view_fn, $array);
-		}
-		else
-		{
-			//throw new PBException(__CLASS__,0,"Set the view path correctly");
-		}
+		self::cleanrequire($pb_view_fn, $array);
 	}
 	function helper($helper)
 	{
@@ -49,11 +40,40 @@ class load
 
 	
 
-	static function CleanRequire($file, $vars)
+	// FIXME: iyush: Please put this function wherever you deem appropriate.
+	// This seems like a good place to me, please move it if you have
+	// something better in mind.
+	static function cleanrequire($file, $vars)
 	{
 		unset($file, $vars);
 		extract(func_get_arg(1));
 		require(func_get_arg(0));
+	}
+	
+	
+	// FIXME: Does this function belong inside _config instead?
+	// Piyush: I don't know where you want this to go.  Plese put it
+	// wherever you think is the most appropriate spot.
+	function getfullpath($type, $relpath, $ext = '.php')
+	{
+		// Make sure we have a valid root directory.
+		$root = realpath($this->_config->get($type));
+		if (strlen($root) <= 1)
+			throw new Exception("An administrator should set the $type path properly.");
+
+		// Make sure the requested path is a real file.
+		$fullpath = realpath($root . '/' . $relpath . $ext);
+		if (!strlen($fullpath))
+			throw new Exception("Requested file, $relpath, does not exist");
+		if (!is_file($fullpath))
+			throw new Exception("Requested file, $relpath, is not a " . filetype($fullpath) . ", expected regular file");
+
+		// Make sure we haven't tried to escape the root directory.
+		if (substr($fullpath, 0, strlen($root)) != $root)
+			throw new Exception("Requested file, $relpath, does not exist within its root directory");
+		
+		// All good.
+		return $fullpath;
 	}
 	
 }
