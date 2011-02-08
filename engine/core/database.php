@@ -116,15 +116,15 @@ abstract class database
         $stmt->closeCursor();
         return $result;
 	}
-	protected final function objrows($stmt)
+	protected final function objrows($stmt,$class)
 	{
-		$result = $stmt->fetchAll(\PDO::FETCH_OBJ);
+		$result = $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
         $stmt->closeCursor();
         return $result;
 	}
-	protected final function objrow($stmt)
+	protected final function objrow($stmt,$class)
 	{
-		$result = $stmt->fetch(\PDO::FETCH_OBJ);
+		$result = $stmt->fetch(\PDO::FETCH_CLASS,$class);
         $stmt->closeCursor();
         return $result;
 	}
