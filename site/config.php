@@ -36,7 +36,7 @@ $app_config['view_path']=SB_APP_PATH.'view/';
 /**
  * Db config vars
  */
-$app_config['db']['DAO_name']="/#type#//#class#/dao";
+$app_config['db']['DAO_name']="/#type#//#class#/DAO";
 $app_config['db']['type']='mysql';
 /**
  * Conn params
