@@ -28,16 +28,13 @@ class load
 	function view($pb_view,$array=array())
 	{
 		$view_path= realpath($this->_config->get('view_path'))."/";
+		if (!is_array($array))
+			$array = array();
 		if($view_path!="/")
 		{
 			$pb_view_fn=$view_path.$pb_view.".php"; 
 			if(file_exists($pb_view_fn))
-				{
-					if(is_array($array))
-						extract($array);
-					unset($array);
-					require_once($pb_view_fn);
-				}
+				self::CleanRequire($pb_view_fn, $array);
 		}
 		else
 		{
@@ -48,6 +45,15 @@ class load
 	{
 		echo "helpers are not yet supported";
 		die();
+	}
+
+	
+
+	static function CleanRequire($file, $vars)
+	{
+		unset($file, $vars);
+		extract(func_get_arg(1));
+		require(func_get_arg(0));
 	}
 	
 }
