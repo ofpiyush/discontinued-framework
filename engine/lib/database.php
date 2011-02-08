@@ -90,7 +90,7 @@ abstract class database
 		$id= self::$_dbh[$key]->lastInsertId();
 		return ($count>0 && $id>0) ? $id : 0 ;
 	}
-	protected final function insertcount($stmt)
+	protected final function updatecount($stmt)
 	{
 		$count = $stmt->rowCount();
 		$stmt->closeCursor();
