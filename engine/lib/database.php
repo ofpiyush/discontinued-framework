@@ -102,7 +102,7 @@ abstract class database
 		$stmt->closeCursor();
 		$return = false;
 		if($row && count($row) > 0) 
-			$ret = true;
+			$return = true;
 		return $return;
 	}
 	protected final function assocrow($stmt)
