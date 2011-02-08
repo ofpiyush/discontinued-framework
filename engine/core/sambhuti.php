@@ -31,6 +31,28 @@ final class sambhuti
 		if(! defined('SB_APP_PATH') || SB_APP_PATH=='/')
 		exit('Please check your $sb_apps array.');
 	}
+	
+	public static function getfullpath($type, $relpath, $ext = '.php')
+	{
+		// Make sure we have a valid root directory.
+		$root = realpath(self::$_pimple->config->get($type));
+		if (strlen($root) <= 1)
+			throw new Exception("An administrator should set the $type path properly.");
+
+		// Make sure the requested path is a real file.
+		$fullpath = realpath($root . '/' . $relpath . $ext);
+		if (!strlen($fullpath))
+			throw new Exception("Requested file, $relpath, does not exist in $type.");
+		if (!is_file($fullpath))
+			throw new Exception("Requested file, $relpath in $type, is a(n) " . filetype($fullpath) . ", expected regular file.");
+
+		// Make sure we haven't tried to escape the root directory.
+		if (substr($fullpath, 0, strlen($root)) != $root)
+			throw new Exception("Requested file, $relpath, does not exist within its the $type directory.");
+		
+		// All good.
+		return $fullpath;
+	}
 	private static function pimpleinit()
 	{
 		self::$_pimple= new \Pimple();
