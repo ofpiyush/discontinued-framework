@@ -21,9 +21,9 @@ class load
 		$modname="_".$model;
 		$pimple->$modname=$pimple->asShared(function($p) use($model)
 			{
-				return new $model();
+				return new $model($p->config);
 			});
-		$pimple->controller->_cannula($model,$pimple->$modname);
+		$pimple->controller->_cannula($model_orig,$pimple->$modname);
 	}
 	function view($pb_view,$array=array())
 	{

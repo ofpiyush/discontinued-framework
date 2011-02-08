@@ -10,7 +10,7 @@ abstract class database
 {
 	protected static $_dbh=null;
 	protected $_config;
-	protected function __construct(config $config)
+	function __construct(config $config)
 	{
 		$this->_config=$config;
 	}
@@ -26,8 +26,8 @@ abstract class database
 		if(!isset(self::$_dbh[$key]) && is_null(self::$_dbh[$key]))
 		{
 			//list($db_type,$db_host,$db_dbname, $db_user, $db_pass, $db_options)=array_values(self::$_config->$method());
-			extract($this->_config->getval('db',$key),EXTR_PREFIX_ALL,'db');
-			$db_type=strtolower($this->_config->getval('db','type'));
+			extract($this->_config->get('db',$key),EXTR_PREFIX_ALL,'db');
+			$db_type=strtolower($this->_config->get('db','type'));
 			$dsn=$db_type.":dbname=".$db_dbname.";host=".$db_host;
 			try
 			{
@@ -58,7 +58,7 @@ abstract class database
 	protected final function execute($sql, $bindings=array(),$key='master')
 	{
 		$key=$this->connect($key);
-		$sql=str_replace('/#prefix#/',$this->_config->getval('db',$key,'prefix'),$sql);
+		$sql=str_replace('/#prefix#/',$this->_config->get('db',$key,'prefix'),$sql);
 		$stmt = self::$_dbh[$key]->prepare($sql);
 		if(is_array($bindings) and count($bindings) >= 1) 
 		{
@@ -130,14 +130,14 @@ abstract class database
 	}
 	protected final function disconnect($key='all')
 	{
-		if($key=='all')
-		{
-			foreach(self::$_dbh as $index=>$val)	
-				self::$_dbh[$index]=null;
-		}else
-		{
-			self::$_dbh[$key]=null;
-		}
+		if(is_array(self::$_dbh))
+			if($key=='all')
+			{
+			
+				foreach(self::$_dbh as $index=>$val)	
+					self::$_dbh[$index]=null;
+			}elseif(array_key_exists($key,self::$_dbh))
+				self::$_dbh[$key]=null;
 	}
 	
 	function __destruct()
