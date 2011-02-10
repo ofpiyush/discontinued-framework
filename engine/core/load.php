@@ -20,13 +20,15 @@ class load extends SBbase
 	private function pimpleLoadPush($class,$name=null) 
 	{
 		$pimple=sambhuti::pimple();
-		$pimple->$class=$pimple->asShared(function($p) use($class)
+		extract(sambhuti::explodeNS($class));
+		if(! isset($pimple->$classname))
+		$pimple->$classname=$pimple->asShared(function($p) use($class)
 		{
 			return new $class();
 		});
 		if(is_null($name))
-			$name=$class;
-		$this->_cannula($name,$pimple->$class);
+			$name=$classname;
+		$this->_cannula($name,$pimple->$classname);
 	}
 	function view($pb_view,$array=array())
 	{
