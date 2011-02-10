@@ -16,7 +16,7 @@ final class sambhuti
 		self::setlazypaths($paths,$thirdparty);
 		spl_autoload_register(array(__CLASS__, 'autoload' ));
 		self::pimpleinit();
-		self::setapppath($sb_apps);
+		self::setAppPath($sb_apps);
 		self::sbinit();		
 	}
 	public static function pimple()
@@ -24,7 +24,7 @@ final class sambhuti
 		return self::$_pimple;
 	}
 
-	public static function setapppath($sb_apps)
+	public static function setAppPath($sb_apps)
 	{
 		self::$_pimple->_app_paths=$sb_apps;
 		self::$_pimple->uri;
@@ -32,7 +32,7 @@ final class sambhuti
 		exit('Please check your $sb_apps array.');
 	}
 	
-	public static function getfullpath($type, $relpath, $ext = '.php')
+	public static function getFullPath($type, $relpath, $ext = '.php')
 	{
 		// Make sure we have a valid root directory.
 		$root = realpath(self::$_pimple->config->get($type));
@@ -55,29 +55,25 @@ final class sambhuti
 	}
 	public static function ping($type)
 	{
-		switch($type)
-		{
-			case 'SBbase':
-			return array('uri'=>self::$_pimple->uri,'load'=>self::$_pimple->load);
-			break;
-			case 'database':
-			return array('_config'=>self::$_pimple->config);
-			break;
-			default:
-			throw new SBException(__CLASS__,"Unknown ping from ".$type);
-		}
+		if($type=='SBbase')
+		return array('uri'=>self::$_pimple->uri,'load'=>self::$_pimple->load,'config'=>self::$_pimple->config);
+		elseif(isset(self::$_pimple->$type))
+			return self::$_pimple->$type;
+		else
+			return false;
+		//throw new SBException(__CLASS__,"Unknown ping from ".$type);
 	}
 	
-	public static function getthirdparty()
+	public static function getThirdParty()
 	{
 		return self::$_thirdparty;
 	}
-	public static function addthirdparty($thirdparty)
+	public static function addThirdParty($thirdparty)
 	{
 		if(is_array($thirdparty))
 			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
 	}
-	public static function addlazypath($path,$ulta=false)
+	public static function addLazyPath($path,$ulta=false)
 	{
 		if(is_array($path))
 			if(is_bool($ulta) && $ulta)
@@ -122,7 +118,7 @@ final class sambhuti
 		spl_autoload_unregister(array(__CLASS__, 'autoload' ));
 	}
 	
-	private static function pimpleinit()
+	private static function pimpleInit()
 	{
 		self::$_pimple= new \Pimple();
 		self::$_pimple->config=self::$_pimple->asShared(function($pimple)
@@ -146,13 +142,13 @@ final class sambhuti
 				return new $pimple->_cname();
 			});
 	}
-	private static function sbinit($asd="aaa")
+	private static function SBInit($asd="aaa")
 	{
 		require_once SB_APP_PATH.'config.php';
 		if(isset($app_config) && is_array($app_config))
 			self::$_pimple->_conf=$app_config;
 		unset($app_config);
-		self::addlazypath(self::$_pimple->config->get('lazy_path'));
+		self::addLazyPath(self::$_pimple->config->get('lazy_path'));
 		$segments=self::$_pimple->uri->total_segments();
 		//print_r(self::$_pimple->uri->segment_array());
 		self::$_pimple->_cname=($segments) ? self::$_pimple->uri->segment(1) : self::$_pimple->config->get('default_controller');		
@@ -182,12 +178,12 @@ final class sambhuti
 		catch(SBException $e)
 		{
 			
-			echo "Exception:".$e->getclassname()." Not found.";
+			echo "Exception:".$e->getClassName()." Not found.";
 
 		}
 	}
 	
-	private static function setlazypaths($paths=null,$thirdparty=null)
+	private static function setLazyPaths($paths=null,$thirdparty=null)
 	{
 		self::$_lazy_paths=array
 		(
@@ -195,7 +191,8 @@ final class sambhuti
 			(
 				SB_ENGINE_PATH.'core/',
 				SB_ENGINE_PATH.'lib/'
-			)
+			),
+			'global'=>array('helper'=>SB_ENGINE_PATH.'helpers/')
 		);
 		self::$_thirdparty=array
 		(

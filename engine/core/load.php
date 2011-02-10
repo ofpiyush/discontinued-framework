@@ -14,34 +14,42 @@ class load
 	{
 		$this->_config=$config;
 	}
-	function model($model_orig)
-	{
-		$model=str_replace('/#type#/',$this->_config->get('db','type'),str_replace('/#class#/',$model_orig,$this->_config->get('db','DAO_name')));
+	function model($model_name,$fake_name=null)
+	{		
+		$model=str_replace('/#type#/',$this->_config->get('db','type'),str_replace('/#class#/',$model_name,$this->_config->get('db','DAO_name')));
+		if(! is_null($fake_name))
+			$model_name=$fake_name;
 		sambhuti::autoload($model,'model');
+		$this->pimpleLoadPush($model,$model_name);
+	}
+	private function pimpleLoadPush($class,$name=null) 
+	{
 		$pimple=sambhuti::pimple();
-		$modname="_".$model;
-		if(!isset($pimple->$modname))
+		$pimple->$class=$pimple->asShared(function($p) use($class)
 		{
-			$pimple->$modname=$pimple->asShared(function($p) use($model)
-			{
-				return new $model($p->config);
-			});
-			$pimple->controller->_cannula($model_orig,$pimple->$modname);
-		}
+			return new $class();
+		});
+		if(is_null($name))
+			$name=$class;
+		$pimple->controller->_cannula($name,$pimple->$class);
 	}
 	function view($pb_view,$array=array())
 	{
-		$pb_view_fn = sambhuti::getfullpath('view_path', $pb_view);
+		$pb_view_fn = sambhuti::getFullPath('view_path', $pb_view);
 		if (!is_array($array))
 			$array = array();
-		self::CleanRequire($pb_view_fn, $array);
+		self::cleanRequire($pb_view_fn, $array);
+	}
+	function library($library)
+	{
+		sambhuti::autoload($library);
+		$this->pimpleLoadPush($library);
 	}
 	function helper($helper)
 	{
-		
+		sambhuti::autoload($helper,'helper');
 	}
-
-	static function CleanRequire($file, $vars)
+	static function cleanRequire($file, $vars)
 	{
 		unset($file, $vars);
 		extract(func_get_arg(1));
