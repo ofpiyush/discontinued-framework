@@ -13,11 +13,11 @@ final class sambhuti
 	private function __construct(){}
 	public static function run($sb_apps,$paths=null,$thirdparty=null)
 	{
-		self::setlazypaths($paths,$thirdparty);
+		self::setLazyPaths($paths,$thirdparty);
 		spl_autoload_register(array(__CLASS__, 'autoload' ));
-		self::pimpleinit();
+		self::pimpleInit();
 		self::setAppPath($sb_apps);
-		self::sbinit();		
+		self::SBInit();		
 	}
 	public static function pimple()
 	{
