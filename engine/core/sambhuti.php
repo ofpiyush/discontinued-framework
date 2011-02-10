@@ -126,6 +126,10 @@ final class sambhuti
 			{
 				return new load();
 			});
+		self::$_pimple->session=self::$_pimple->asShared(function()
+			{
+				return new session();
+			});
 		self::$_pimple->uri=self::$_pimple->asShared(function($pimple)
 			{
 				$uriinst= new uri($pimple->_app_paths);
