@@ -11,7 +11,7 @@ class load extends SBbase
 {
 	function model($model_name,$fake_name=null)
 	{		
-		$model=str_replace('/#type#/',$this->_config->get('db','type'),str_replace('/#class#/',$model_name,$this->config->get('db','DAO_name')));
+		$model=str_replace('/#type#/',$this->config->get('db','type'),str_replace('/#class#/',$model_name,$this->config->get('db','DAO_name')));
 		if(! is_null($fake_name))
 			$model_name=$fake_name;
 		sambhuti::autoload($model,'model');

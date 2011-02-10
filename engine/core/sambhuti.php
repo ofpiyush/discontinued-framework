@@ -19,9 +19,13 @@ final class sambhuti
 		self::setAppPath($sb_apps);
 		self::SBInit();		
 	}
-	public static function pimple()
+	public static function pimple($key=null)
 	{
-		return self::$_pimple;
+		if(is_null($key))
+			return self::$_pimple;
+		if(isset(self::$_pimple->$key))
+			return self::$_pimple->$key;
+		return false;
 	}
 
 	public static function setAppPath($sb_apps)
@@ -53,17 +57,6 @@ final class sambhuti
 		// All good.
 		return $fullpath;
 	}
-	public static function ping($type)
-	{
-		if($type=='SBbase')
-		return array('uri'=>self::$_pimple->uri,'load'=>self::$_pimple->load,'config'=>self::$_pimple->config);
-		elseif(isset(self::$_pimple->$type))
-			return self::$_pimple->$type;
-		else
-			return false;
-		//throw new SBException(__CLASS__,"Unknown ping from ".$type);
-	}
-	
 	public static function getThirdParty()
 	{
 		return self::$_thirdparty;
@@ -128,17 +121,18 @@ final class sambhuti
 				$confinst= new config($pimple->_conf);
 				unset($pimple->_conf);
 				return $confinst;
-				});
+			});
+		self::$_pimple->load=self::$_pimple->asShared(function()
+			{
+				return new load();
+			});
 		self::$_pimple->uri=self::$_pimple->asShared(function($pimple)
 			{
 				$uriinst= new uri($pimple->_app_paths);
 				unset($pimple->_app_paths);
 				return $uriinst;
 			});
-		self::$_pimple->load=function($pimple)
-			{
-				return new load($pimple->config);
-			};
+		
 		self::$_pimple->controller=self::$_pimple->asShared(function($pimple)
 			{
 				return new $pimple->_cname();
