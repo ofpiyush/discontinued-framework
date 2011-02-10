@@ -31,7 +31,7 @@ class load
 		});
 		if(is_null($name))
 			$name=$class;
-		$pimple->controller->_cannula($name,$pimple->$class);
+		$pimple->base->_cannula($name,$pimple->$class);
 	}
 	function view($pb_view,$array=array())
 	{
@@ -42,8 +42,9 @@ class load
 	}
 	function library($library)
 	{
-		sambhuti::autoload($library);
-		$this->pimpleLoadPush($library);
+		$lib="sb\\".$library;
+		sambhuti::autoload($lib);
+		$this->pimpleLoadPush($lib,$library);
 	}
 	function helper($helper)
 	{
