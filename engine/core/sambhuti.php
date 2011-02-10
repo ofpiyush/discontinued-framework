@@ -74,12 +74,18 @@ final class sambhuti
 			else
 				self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$path);
 	}
+	public static function explodeNS($class)
+	{
+		$return=array();
+		$break_array = explode('\\',$class);
+		$return['classname']=array_pop($break_array);
+		$return['namespace']=implode($break_array,'\\');
+		return $return;
+	}
 	public static function autoload($class,$type="any")
 	{
-		$break_array = explode('\\',$class);
-		$classname=array_pop($break_array);
-		$name=implode($break_array,'\\');
-		$namespace = ($name=='') ? 'global' : $name;		
+		extract(self::explodeNS($class));
+		$namespace = ($namespace=='') ? 'global' : $namespace;		
 		if(class_exists($classname, false))
 			return;
 		

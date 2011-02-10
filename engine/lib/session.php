@@ -5,9 +5,6 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @package sambhuti
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
-/**
- * Singleton class to add/remove data to the session and keep it consistent during page loads
- */
 final class session
 {
 	private static $_session=array();
