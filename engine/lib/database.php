@@ -11,9 +11,6 @@ abstract class database extends model
 	protected static $_dbh=null;
 	function __construct()
 	{
-		parent::__construct();
-		foreach(sambhuti::ping('database') as $key=>$value)
-			$this->_cannula($key,$value); 
 	}
 	/**
 	 * Connects to the dbase if no connection already exists
