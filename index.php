@@ -1,5 +1,6 @@
 <?php
 $time1=microtime(true);
+echo "<pre>";
 /**
  * @package sambhuti
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>

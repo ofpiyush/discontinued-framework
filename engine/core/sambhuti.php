@@ -95,16 +95,18 @@ final class sambhuti
 			foreach(self::$_lazy_paths[$namespace] as $key=>$path) 
 			{
 				if($type=='any' || $key==$type)
+				{
 					$file_name = $path.$classname.'.php';
 					if(file_exists($file_name))
 					{
 						require_once $file_name;
 						return true;
 					}
+				}
 			}
 			
 		}
-		elseif(array_key_exists($class,self::$_thirdparty))
+		if(array_key_exists($class,self::$_thirdparty))
 		{
 			require_once self::$_thirdparty[$class];
 			return true;
@@ -192,7 +194,10 @@ final class sambhuti
 				SB_ENGINE_PATH.'core/',
 				SB_ENGINE_PATH.'lib/'
 			),
-			'global'=>array('helper'=>SB_ENGINE_PATH.'helpers/')
+			'global'=>array
+			(
+				'helper'=>SB_ENGINE_PATH.'helpers/'
+			)
 		);
 		self::$_thirdparty=array
 		(
