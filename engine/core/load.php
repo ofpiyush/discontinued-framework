@@ -35,7 +35,7 @@ class load extends SBbase
 		$pb_view_fn = sambhuti::getFullPath('view_path', $pb_view);
 		if (!is_array($array))
 			$array = array();
-		self::cleanRequire($pb_view_fn, $array);
+		$this->cleanRequire($pb_view_fn, $array);
 	}
 	function library($library)
 	{
@@ -47,9 +47,10 @@ class load extends SBbase
 	{
 		sambhuti::autoload($helper,'helper');
 	}
-	static function cleanRequire($file, $vars)
+	 function cleanRequire($file, $vars)
 	{
 		unset($file, $vars);
+		$this->load->helper('functions');
 		extract(func_get_arg(1));
 		require(func_get_arg(0));
 	}
