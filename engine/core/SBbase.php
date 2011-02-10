@@ -9,12 +9,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 abstract class SBbase
 {
 	private static $loads=null;
-	public function __construct()
-	{
-		if(is_null(self::$loads))
-			foreach(sambhuti::ping('SBbase') as $key=>$object)
-				$this->_cannula($key,$object);
-	}
+	public function __construct(){}
 	final public function _cannula($key,$value)
 	{
 		self::$loads[$key]=$value;
@@ -24,8 +19,8 @@ abstract class SBbase
 		$output=false;
 		if(isset(self::$loads[$key]))
 			$output= self::$loads[$key];
-		if(sambhuti::ping($key))
-			$output= sambhuti::ping($key);
+		if(sambhuti::pimple($key))
+			$output= sambhuti::pimple($key);
 		$this->$key=$output;
 		return $output;
 	}
