@@ -10,28 +10,28 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 final class session
 {
-	private $_session=array();
-	protected function __construct()
+	private static $_session=array();
+	public function __construct()
 	{
 		session_start();
 		if(isset($_SESSION[__CLASS__]))
 		{
-			$this->_session=$_SESSION[__CLASS__];
+			self::$_session=$_SESSION[__CLASS__];
 		}
 	}
 	public function set($key,$val)
 	{
-	 	$this->_session[$key]=$val;
+	 	self::$_session[$key]=$val;
 	}
 	
 	public function get($key)
 	{
-		if(isset($this->_session[$key]))
-			return 	$this->_session[$key];		
+		if(isset(self::$_session[$key]))
+			return 	self::$_session[$key];		
 	}
 	public function destroy()
 	{
-		unset($this->_session);
+		unset(self::$_session);
 		session_destroy();
 	}
 	private function log()
@@ -40,10 +40,10 @@ final class session
 	}
 	function __destruct()
 	{
-		if(isset($this->_session))
+		if(isset(self::$_session))
 		{
 			$this->log();
-			$_SESSION[__CLASS__]=$this->_session;
+			$_SESSION[__CLASS__]=self::$_session;
 		}
 	}
 }
