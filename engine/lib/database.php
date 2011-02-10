@@ -9,7 +9,6 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 abstract class database extends model
 {
 	protected static $_dbh=null;
-	protected $_config;
 	function __construct()
 	{
 		parent::__construct();
@@ -28,8 +27,8 @@ abstract class database extends model
 		if(!isset(self::$_dbh[$key]) && is_null(self::$_dbh[$key]))
 		{
 			//list($db_type,$db_host,$db_dbname, $db_user, $db_pass, $db_options)=array_values(self::$_config->$method());
-			extract($this->_config->get('db',$key),EXTR_PREFIX_ALL,'db');
-			$db_type=strtolower($this->_config->get('db','type'));
+			extract($this->config->get('db',$key),EXTR_PREFIX_ALL,'db');
+			$db_type=strtolower($this->config->get('db','type'));
 			$dsn=$db_type.":dbname=".$db_dbname.";host=".$db_host;
 			try
 			{
@@ -60,7 +59,7 @@ abstract class database extends model
 	protected final function execute($sql, $bindings=array(),$key='master')
 	{
 		$key=$this->connect($key);
-		$sql=str_replace('/#prefix#/',$this->_config->get('db',$key,'prefix'),$sql);
+		$sql=str_replace('/#prefix#/',$this->config->get('db',$key,'prefix'),$sql);
 		$stmt = self::$_dbh[$key]->prepare($sql);
 		if(is_array($bindings) and count($bindings) >= 1) 
 		{

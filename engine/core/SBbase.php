@@ -22,7 +22,7 @@ abstract class SBbase
 	{
 		if(isset(self::$loads[$key]))
 			return self::$loads[$key];
-		return false;
+		return sambhuti::ping($key);
 	}
 }
 

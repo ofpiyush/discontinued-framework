@@ -17,7 +17,7 @@ class SBException extends \Exception
 		$this->_code=$code;
 		
 	}
-	function getclassname()
+	function getClassName()
 	{
 		return $this->_classname;
 	}
