@@ -8,12 +8,14 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 final class session
 {
 	private static $_session=array();
+	public $ip;
 	public function __construct()
 	{
 		session_start();
-		if(isset($_SESSION[__CLASS__]))
+		$this->ip=filter_input(INPUT_SERVER,'REMOTE_ADDR')
+		if(isset($_SESSION[$this->ip]))
 		{
-			self::$_session=$_SESSION[__CLASS__];
+			self::$_session=$_SESSION[$this->ip];
 		}
 	}
 	public function set($key,$val)
@@ -40,7 +42,7 @@ final class session
 		if(isset(self::$_session))
 		{
 			$this->log();
-			$_SESSION[__CLASS__]=self::$_session;
+			$_SESSION[$this->ip]=self::$_session;
 		}
 	}
 }
