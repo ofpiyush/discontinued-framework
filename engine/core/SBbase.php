@@ -8,11 +8,12 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 abstract class SBbase
 {
-	private static $loads;
+	private static $loads=null;
 	public function __construct()
 	{
-		foreach(sambhuti::ping('SBbase') as $key=>$object)
-			$this->_cannula($key,$object);
+		if(is_null($loads))
+			foreach(sambhuti::ping('SBbase') as $key=>$object)
+				$this->_cannula($key,$object);
 	}
 	final public function _cannula($key,$value)
 	{
@@ -20,9 +21,13 @@ abstract class SBbase
 	}
 	final function __get($key)
 	{
+		$output=false;
 		if(isset(self::$loads[$key]))
-			return self::$loads[$key];
-		return sambhuti::ping($key);
+			$output= self::$loads[$key];
+		if(sambhuti::ping($key))
+			$output= sambhuti::ping($key);
+		$this->$key=$output;
+		return $output;
 	}
 }
 

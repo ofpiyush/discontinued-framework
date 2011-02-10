@@ -135,6 +135,10 @@ final class sambhuti
 				unset($pimple->_app_paths);
 				return $uriinst;
 			});
+		self::$_pimple->base=self::$_pimple->asShared(function()
+			{
+				return new SBbase();
+			});
 		self::$_pimple->load=function($pimple)
 			{
 				return new load($pimple->config);
