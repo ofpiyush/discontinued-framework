@@ -11,7 +11,7 @@ abstract class SBbase
 	private static $loads=null;
 	public function __construct()
 	{
-		if(is_null($loads))
+		if(is_null(self::$loads))
 			foreach(sambhuti::ping('SBbase') as $key=>$object)
 				$this->_cannula($key,$object);
 	}
