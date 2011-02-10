@@ -12,7 +12,7 @@ final class session
 	public function __construct()
 	{
 		session_start();
-		$this->ip=filter_input(INPUT_SERVER,'REMOTE_ADDR')
+		$this->ip=filter_input(INPUT_SERVER,'REMOTE_ADDR');
 		if(isset($_SESSION[$this->ip]))
 		{
 			self::$_session=$_SESSION[$this->ip];
