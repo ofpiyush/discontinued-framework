@@ -30,7 +30,7 @@ class uri
 				{
 					if(strpos($request_uri,$urla['path'])===0)
 					{
-						$this->site_url=$url;
+						$this->site_url=rtrim($url,'/').'/';
 						$this->populate($urla['path']);
 						define('SB_APP_PATH',realpath($relpath).'/');
 						break;
