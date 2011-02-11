@@ -30,7 +30,7 @@ final class session
 	}
 	public function destroy()
 	{
-		unset(self::$_session);
+		self::$_session=null;
 		session_destroy();
 	}
 	private function log()

@@ -90,28 +90,28 @@ abstract class database extends model
         return $result;
 	}
 		
-	protected final function fetchall($stmt)
+	protected final function fetchAll($stmt)
 	{
 		$result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
 	}
 	
-	protected final function updatecount($stmt)
+	protected final function updateCount($stmt)
 	{
 		$count = $stmt->rowCount();
 		$stmt->closeCursor();
 		return $count;
 	}
 	
-	protected final function insertid($stmt,$key='master')
+	protected final function insertId($stmt,$key='master')
 	{
-		$count=$this->updatecount($stmt);
-		$id= self::$_dbh[$key]->lastInsertId();
+		$count=$this->updateCount($stmt);
+		$id= self::$_dbh[$key]->lastinsertId();
 		return ($count>0 && $id>0) ? $id : 0 ;
 	}
 	
-	protected final function isreturned($stmt)
+	protected final function isReturned($stmt)
 	{
 		$row = $this->fetch($stmt);
 		$return = false;
@@ -120,26 +120,26 @@ abstract class database extends model
 		return $return;
 	}
 	
-	protected final function assocrow($stmt)
+	protected final function assocRow($stmt)
 	{
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetch($stmt);
 	}
-	protected final function assocrows($stmt)
+	protected final function assocRows($stmt)
 	{
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-        return $this->fetchall($stmt);
+        return $this->fetchAll($stmt);
 	}
 	
-	protected final function objrow($stmt,$class)
+	protected final function objRow($stmt,$class)
 	{
 		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
         return $this->fetch($stmt);
 	}
-	protected final function objrows($stmt,$class)
+	protected final function objRows($stmt,$class)
 	{
 		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
-		return $this->fetchall($stmt);
+		return $this->fetchAll($stmt);
 	}
 	protected final function disconnect($key='all')
 	{
