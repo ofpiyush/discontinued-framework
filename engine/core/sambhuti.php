@@ -132,6 +132,10 @@ final class sambhuti
 			{
 				return new load();
 			});
+		self::$_pimple->input=self::$_pimple->asShared(function()
+			{
+				return new input();
+			});
 		self::$_pimple->session=self::$_pimple->asShared(function()
 			{
 				return new session();
