@@ -96,7 +96,20 @@ abstract class database extends model
 		$stmt->closeCursor();
 		return $count;
 	}
-	
+	protected final function getCount($stmt)
+	{
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$row = $this->fetch($stmt);
+		if(!$row or !isset($row['count']))
+		{
+			$count = 0;
+		}
+		else 
+		{
+			$count = (int) $row['count'];
+		}
+		return $count;
+	}
 	protected final function insertId($stmt,$key='master')
 	{
 		$count=$this->updateCount($stmt);
