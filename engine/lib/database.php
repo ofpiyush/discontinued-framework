@@ -58,19 +58,12 @@ abstract class database extends model
 		$key=$this->connect($key);
 		$sql=str_replace('/#prefix#/',$this->config->get('db',$key,'prefix'),$sql);
 		$stmt = self::$_dbh[$key]->prepare($sql);
-		if(is_array($bindings) and count($bindings) >= 1) 
-		{
-            foreach ($bindings as $key => $value) {
-                if(is_int($value)) {
-                    $stmt->bindValue($key, $value, \PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($key, $value, \PDO::PARAM_STR);
-                }
-            }
-        }
 		try
 		{
-			$stmt->execute();
+			if(is_array($bindings))
+				$stmt->execute($bindings);
+			else
+				$stmt->execute();
 		}catch(PDOException $e)
 		{
 			$exception_details="Database Error";
