@@ -30,6 +30,11 @@ final class config
 	{
 		$this->_conf[$key]=$val;
 	}
+	public function __get($key)
+	{
+		if(array_key_exists($key,$this->_conf))
+			return $this->_conf[$key];
+	}
 }
 
 
