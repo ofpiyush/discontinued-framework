@@ -4,7 +4,8 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @package sambhuti
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
-
+$app_config['sitename']='Sambhuti';
+$app_config['tagline']='yet another php framework';
 /**
  * @var $app_config[lazy_path] array
  *				('namespace'=>array
