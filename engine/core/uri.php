@@ -28,7 +28,7 @@ class uri
 					$urla['port']='';
 				if($urla['scheme']==$scheme && $urla['host']==$http_host && $urla['port'] == $http_port)
 				{
-					if(strpos($request_uri,$urla['path'])===0)
+					if(!isset($urla['path']) || strpos($request_uri,$urla['path'])===0)
 					{
 						$this->site_url=rtrim($url,'/').'/';
 						$this->populate($urla['path']);
