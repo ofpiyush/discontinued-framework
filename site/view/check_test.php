@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title><?php echo $this->config->get('sitename')," | ",$this->config->get('tagline'); ?></title>
+	<title><?php echo $this->config->sitename," | ",$this->config->tagline; ?></title>
 </head>
 <body>
 View called<br />
