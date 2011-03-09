@@ -200,7 +200,7 @@ final class sambhuti
 			'sb'=>array
 			(
 				SB_ENGINE_PATH.'core/',
-				SB_ENGINE_PATH.'lib/'
+				'library'=>SB_ENGINE_PATH.'lib/'
 			),
 			'global'=>array
 			(
