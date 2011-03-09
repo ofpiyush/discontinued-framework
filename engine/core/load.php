@@ -39,7 +39,7 @@ class load extends SBbase
 	}
 	function library($library)
 	{
-		$lib=(file_exists(SB_ENGINE_PATH.'library/'.$library.'.php'))? "sb\\".$library : $library;
+		$lib=(file_exists(SB_ENGINE_PATH.'lib/'.$library.'.php'))? "sb\\".$library : $library;
 		sambhuti::autoload($lib,'library');
 	}
 	function helper($helper)
