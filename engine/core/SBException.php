@@ -10,7 +10,7 @@ class SBException extends \Exception
 {
 	private $_classname;
 	private $_code;
-	function __construct($classname,$code,$message)
+	function __construct($message,$code=0,$classname="")
 	{
 		parent::__construct($message);
 		$this->_classname=$classname;

@@ -41,6 +41,7 @@ class load extends SBbase
 	{
 		$lib=(file_exists(SB_ENGINE_PATH.'lib/'.$library.'.php'))? "sb\\".$library : $library;
 		sambhuti::autoload($lib,'library');
+		$this->pimpleLoadPush($lib,$library);
 	}
 	function helper($helper)
 	{

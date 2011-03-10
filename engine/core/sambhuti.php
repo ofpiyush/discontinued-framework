@@ -39,10 +39,10 @@ final class sambhuti
 	public static function getFullPath($type, $relpath, $ext = '.php')
 	{
 		// Make sure we have a valid root directory.
+		try{
 		$root = realpath(self::$_pimple->config->get($type));
 		if (strlen($root) <= 1)
 			throw new SBException("An administrator should set the $type path properly.");
-
 		// Make sure the requested path is a real file.
 		$fullpath = realpath($root . '/' . $relpath . $ext);
 		if (!strlen($fullpath))
@@ -53,7 +53,12 @@ final class sambhuti
 		// Make sure we haven't tried to escape the root directory.
 		if (substr($fullpath, 0, strlen($root)) != $root)
 			throw new SBException("Requested file, $relpath, does not exist within its the $type directory.");
-		
+		}
+		catch(SBException $e)
+		{
+			echo $e->getMessage();
+			die();
+		}
 		// All good.
 		return $fullpath;
 	}
@@ -110,7 +115,7 @@ final class sambhuti
 			require_once self::$_thirdparty[$class];
 			return true;
 		}
-			throw new SBException($classname,404,"Not Found");
+			throw new SBException("Not Found",404,$classname);
 	}
 	public static function stop()
 	{
@@ -177,7 +182,7 @@ final class sambhuti
 						array_shift($args);
 					}	
 				}else
-					throw new SBException($method,404,"Not Found");
+					throw new SBException("Not Found",404,$method);
 			}else
 				$method='index';
 			if(is_callable(array($controller,$method)))
