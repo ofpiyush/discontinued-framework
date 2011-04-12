@@ -1,5 +1,4 @@
 <?php
-namespace sb;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -28,7 +27,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 
 
-require_once SB_ENGINE_PATH.'core/sambhuti.php';
+require_once SB_ENGINE_PATH.'core/Sambhuti.php';
 /**
  * Start the Lazy Loader
  */
