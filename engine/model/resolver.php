@@ -1,5 +1,5 @@
 <?php
-namespace sb;
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -27,20 +27,41 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class request
+class resolver
 {
-	function __construct()
+	private $base;
+	private $notFound;
+	private $defaultCntrl;
+	private $instances = array();
+	function __construct($default)
 	{
+		$this->base			= new \ReflectionClass('sb\controller\base');
+		$this->notFound		= $this->loadController('sb\controller\notFound');
+		$this->defaultCntrl	= $this->loadController($default);
 		
 	}
-	function get($key)
+	function getController($classname)
 	{
-		
+		if(is_null($classname))
+			return $this->defaultCntrl;
+		if(load::auto($classname))
+		{
+			if(class_exists($classname))
+			{
+				return $this->loadController($classname);
+			}
+		}
+		else
+			return $this->defaultCntrl;
 	}
-
+	function loadController($classname)
+	{
+		$controller = new \ReflectionClass($classname);
+		if($controller->isSubClassOf($this->base))
+		{
+			$this->instances[$classname] = $controller->newInstance();
+			return $this->instances[$classname];
+		}
+		return $this->notFound;
+	}
 }
-
-/**
- * End of file Request
- */
-

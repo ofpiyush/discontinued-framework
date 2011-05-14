@@ -1,4 +1,5 @@
 <?php
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,23 +27,12 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Exception extends Exception
+final class utils
 {
-	private $_classname;
-	private $_code;
-	function __construct($message,$classname="",$code=0)
-	{
-		parent::__construct($message);
-		$this->_classname=$classname;
-		$this->_code=$code;
-		
-	}
-	function getClassName()
-	{
-		return $this->_classname;
-	}
+	private function __construct();
+	
 }
 
 /**
- * End of file SBException
+ * End of file utils
  */

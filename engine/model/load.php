@@ -1,4 +1,5 @@
 <?php
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -25,39 +26,49 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-final class SB_Config
+class load
 {
-	
-	private $_conf=array();
-	public function __construct($config)
+	private static $lazyPaths = array();
+	function __construct()
 	{
-		$this->_conf=$config;
+		
 	}
-	public function get($key)
+	public static function register()
 	{
-		$args=func_get_args();
-		$tmp=$this->_conf;
-		foreach($args as $arg)
-		{
-			if(array_key_exists($arg,$tmp))
-				$tmp=$tmp[$arg];
-			else
-				return;
-		}
-		return $tmp;
+		self::addLazyPath('sb',SB_ENGINE_PATH);
+		spl_autoload_register(array(__CLASS__, 'auto' ));
 	}
-	public function set($key,$val)
+	public static function fetch($type,$class)
 	{
-		$this->_conf[$key]=$val;
+		
 	}
-	public function __get($key)
+	public static function auto($class)
 	{
-		if(array_key_exists($key,$this->_conf))
-			return $this->_conf[$key];
+		if(class_exists($class))
+			return true;
+		$array = explode('\\',$class);
+		if(array_key_exists($array[0],self::$lazyPaths))
+			$array[0] = self::$lazyPaths[$array[0]];
+			return self::checkRequire(implode($array,'/'));
+		return false;
+	}
+	public static function unreg()
+	{
+		self::$lazy_paths=array();
+		spl_autoload_unregister(array(__CLASS__, 'auto' ));
+	}
+	public static function checkRequire($path)
+	{
+		$fullpath = $path.'.php';
+		if(file_exists($fullpath))
+			{
+				require_once($fullpath);
+				return true;
+			}
+			return false;
+	}
+	public static function addLazyPath($namespace,$path)
+	{
+		self::$lazyPaths[$namespace] = rtrim($path,'/');
 	}
 }
-
-
-/**
- * End of file Config
- */

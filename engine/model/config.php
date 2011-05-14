@@ -1,4 +1,5 @@
 <?php
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,47 +27,36 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Registry
+class config
 {
-	private $objects=array();
-	public function __construct()
+	private static $conf = array();
+	function __construct($array = null)
 	{
-		
+		if(!is_null($array))
+			self::$conf = $array;
+		unset($array);
 	}
 	public function get($key)
 	{
-		if(array_key_exists($key,$this->objects))
-			return $this->objects[$key];
-		elseif(method_exists($this,$key.'Init'))
-			return $this->objects[$key] = call_user_func(array($this,$key.'Init'));
+		$args=func_get_args();
+		$tmp = self::$conf;
+		foreach($args as $arg)
+		{
+			if(array_key_exists($arg,$tmp))
+				$tmp=$tmp[$arg];
+			else
+				return null;
+		}
+		return $tmp;
 	}
-	public function set($key,$instance)
+	public function __get($key)
 	{
-		$this->objects[$key]=$instance;
+		if(array_key_exists($key,self::$conf))
+			return self::$conf[$key];
+		return false;
 	}
-	private function configInit()
+	public function __set($key,$val)
 	{
-		require_once SB_APP_PATH.'config.php';
-		if(isset($app_config) && is_array($app_config))
-			$return = new SB_Config($app_config);
-		unset($app_config);
-		return $return;
+		self::$conf[$key] = $value;	
 	}
-	private function loadInit()
-	{
-		return new SB_Load();
-	}
-	private function inputInit()
-	{
-		return new SB_Input();
-	}
-	private function sessionInit()
-	{
-		return new SB_Session();
-	}
-	
 }
-
-/**
- * End of file Registry
- */

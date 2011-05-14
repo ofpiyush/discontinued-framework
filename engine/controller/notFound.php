@@ -1,4 +1,5 @@
 <?php
+namespace sb\controller;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,45 +27,12 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Input extends SB_Base
+class notFound extends base
 {
-	private $validate;
-	private $hasvar;
-	function __construct()
+	private $context;
+	private static $callbacks = array();
+	function execute(\sb\model\request $request)
 	{
-	
-	}
-	function set($key,$filter,$options=null,$flags=null)
-	{
-		$this->validate[$key]['filter']=$filter;
-		$this->validate[$key]['options']=$options;
-		$this->validate[$key]['flags']=$flags;
-		//print_r($this->validate);
-	}
-	function get($key,$post=true)
-	{
-		
-		if($post)
-			return filter_input(INPUT_POST,$key,$this->validate[$key]['filter'],$this->validate[$key]['options']);
-		else
-			return filter_input(INPUT_GET,$key,$this->validate[$key]['filter'],$this->validate[$key]['options']);
-	}
-	function getAll($post=true)
-	{
-		if($post)
-			return filter_input_array(INPUT_POST,$this->validate);
-		else
-			return filter_input_array(INPUT_GET,$this->validate);
-	}
-	function hasVar($var,$post=true)
-	{
-		if($post)
-			return filter_has_var(INPUT_POST,$var);
-		else
-			return filter_has_var(INPUT_GET,$var);
+		echo $request->controller." not found";
 	}
 }
-
-/**
- * End of file Input
- */
