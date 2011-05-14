@@ -5,7 +5,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
 
-class welcome extends \sb\controller
+class welcome extends SB_Controller
 {
 	function __construct()
 	{

@@ -28,7 +28,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 
 
-abstract class database extends model
+abstract class SB_Database extends SB_Model
 {
 	protected static $_dbh=null;
 	function __construct()

@@ -30,17 +30,13 @@ abstract class SB_Base
 {
 	private static $loads=null;
 	public function __construct(){}
-	final public function _cannula($key,$value)
-	{
-		self::$loads[$key]=$value;
-	}
 	final function __get($key)
 	{
 		$output=false;
 		if(isset(self::$loads[$key]))
 			$output= self::$loads[$key];
-		if(sambhuti::pimple($key))
-			$output= sambhuti::pimple($key);
+		if(sambhuti::registry($key))
+			$output= sambhuti::registry($key);
 		$this->$key=$output;
 		return $output;
 	}

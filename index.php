@@ -1,5 +1,4 @@
 <?php
-$time1=microtime(true);
 /**
  * Sambhuti
  * Copyright (C) 2010-2011  Piyush Mishra

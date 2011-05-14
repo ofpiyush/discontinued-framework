@@ -36,7 +36,7 @@ class SB_Load extends SB_Base
 		if(! is_null($fake_name))
 			$model_name=$fake_name;
 		sambhuti::autoload($model,'model');
-		$this->pimpleLoadPush($model,$model_name);
+		$this->loadPush($model,$model_name);
 	}
 	
 	public function view($pb_view,$array=array())
@@ -50,7 +50,7 @@ class SB_Load extends SB_Base
 	{
 		$lib=(file_exists(SB_ENGINE_PATH.'lib/'.$library.'.php'))? "sb\\".$library : $library;
 		sambhuti::autoload($lib,'library');
-		$this->pimpleLoadPush($lib,$library);
+		$this->loadPush($lib,$library);
 	}
 	function helper($helper)
 	{
@@ -63,9 +63,9 @@ class SB_Load extends SB_Base
 		extract(func_get_arg(1));
 		require(func_get_arg(0));
 	}
-	private function pimpleLoadPush($class,$name=null) 
+	private function loadPush($class,$name=null) 
 	{
-		$pimple=sambhuti::pimple();
+		$pimple=sambhuti::registry();
 		extract(sambhuti::explodeNS($class));
 		if(! isset($pimple->$classname))
 		$pimple->$classname=$pimple->asShared(function($p) use($class)
