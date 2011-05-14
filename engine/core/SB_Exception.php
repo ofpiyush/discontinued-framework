@@ -30,7 +30,7 @@ class SB_Exception extends Exception
 {
 	private $_classname;
 	private $_code;
-	function __construct($message,$code=0,$classname="")
+	function __construct($message,$classname="",$code=0)
 	{
 		parent::__construct($message);
 		$this->_classname=$classname;

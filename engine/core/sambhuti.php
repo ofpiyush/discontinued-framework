@@ -27,31 +27,30 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-final class Sambhuti
+final class sambhuti
 {
-	private static $_lazy_paths = array();
-	private static $_thirdparty = array();
-	private static $_objects = array();
+	private static $lazy_paths = array();
+	private static $third_party = array();
+	private static $registry = null;
 	private function __construct(){}
 	public static function run($sb_apps,$paths=null,$thirdparty=null)
 	{
 		self::setLazyPaths($paths,$thirdparty);
 		spl_autoload_register(array(__CLASS__, 'autoload' ));
-		self::setAppPath($sb_apps);
-		self::Init();		
+		self::registryInit($sb_apps);
+		self::init();
 	}
-	public static function setAppPath($sb_apps)
+	public static function registry($key=null)
 	{
-		self::$_objects['uri'] = new SB_Uri($sb_apps);
-		if(! defined('SB_APP_PATH') || SB_APP_PATH=='/')
-		exit('Please check your $sb_apps array.');
+		if(is_null($key))
+			return self::$registry;
+		return self::$registry->get($key);
 	}
-	
 	public static function getFullPath($type, $relpath, $ext = '.php')
 	{
 		// Make sure we have a valid root directory.
 		try{
-		$root = realpath(self::$_pimple->config->get($type));
+		$root = realpath(self::$objects['config']->get($type));
 		if (strlen($root) <= 1)
 			throw new SB_Exception("An administrator should set the $type path properly.");
 		// Make sure the requested path is a real file.
@@ -75,20 +74,20 @@ final class Sambhuti
 	}
 	public static function getThirdParty()
 	{
-		return self::$_thirdparty;
+		return self::$third_party;
 	}
 	public static function addThirdParty($thirdparty)
 	{
 		if(is_array($thirdparty))
-			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
+			self::$third_party=array_merge_recursive(self::$third_party,$thirdparty);
 	}
 	public static function addLazyPath($path,$ulta=false)
 	{
 		if(is_array($path))
 			if(is_bool($ulta) && $ulta)
-				self::$_lazy_paths=array_merge_recursive($path,self::$_lazy_paths);
+				self::$lazy_paths=array_merge_recursive($path,self::$lazy_paths);
 			else
-				self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$path);
+				self::$lazy_paths=array_merge_recursive(self::$lazy_paths,$path);
 	}
 	public static function explodeNS($class)
 	{
@@ -100,14 +99,14 @@ final class Sambhuti
 	}
 	public static function autoload($class,$type="any")
 	{
-		extract(self::explodeNS($class));
+		extract(self::explodeNS($class));//php 5.3 stuff. always gives out global now
 		$namespace = ($namespace=='') ? 'global' : $namespace;		
 		if(class_exists($classname, false))
 			return;
 		
-		if(array_key_exists($namespace,self::$_lazy_paths))
+		if(array_key_exists($namespace,self::$lazy_paths))
 		{
-			foreach(self::$_lazy_paths[$namespace] as $key=>$path) 
+			foreach(self::$lazy_paths[$namespace] as $key=>$path) 
 			{
 				if($type=='any' || $key==$type)
 				{
@@ -121,65 +120,41 @@ final class Sambhuti
 			}
 			
 		}
-		if(array_key_exists($class,self::$_thirdparty))
+		if(array_key_exists($class,self::$third_party))
 		{
-			require_once self::$_thirdparty[$class];
+			require_once self::$third_party[$class];
 			return true;
 		}
 			throw new SB_Exception("Not Found",404,$classname);
 	}
 	public static function stop()
 	{
-		self::$_lazy_paths=array();
-		self::$_thirdparty=array();
+		self::$lazy_paths=array();
+		self::$third_party=array();
 		spl_autoload_unregister(array(__CLASS__, 'autoload' ));
 	}
-	
-	private static function pimpleInit()
+	private static function registryInit($sb_apps=array())
 	{
-		self::$_pimple= new Pimple();
-		self::$_pimple->config=self::$_pimple->asShared(function($pimple)
-			{
-				$confinst= new config($pimple->_conf);
-				unset($pimple->_conf);
-				return $confinst;
-			});
-		self::$_pimple->load=self::$_pimple->asShared(function()
-			{
-				return new load();
-			});
-		self::$_pimple->input=self::$_pimple->asShared(function()
-			{
-				return new input();
-			});
-		self::$_pimple->session=self::$_pimple->asShared(function()
-			{
-				return new session();
-			});
-		self::$_pimple->controller=self::$_pimple->asShared(function($pimple)
-			{
-				return new $pimple->_cname();
-			});
+		self::$registry = new SB_Registry();
+		self::$registry->set('uri',new SB_Uri($sb_apps));
+		if(! defined('SB_APP_PATH') || SB_APP_PATH=='/')
+			exit('Please check your $sb_apps array.');
 	}
-	private static function Init($asd="aaa")
+	private static function init()
 	{
-		require_once SB_APP_PATH.'config.php';
-		if(isset($app_config) && is_array($app_config))
-			self::$_pimple->_conf=$app_config;
-		unset($app_config);
-		self::addLazyPath(self::$_pimple->config->get('lazy_path'));
-		$segments=self::$_pimple->uri->total_segments();
-		//print_r(self::$_pimple->uri->segment_array());
-		self::$_pimple->_cname=($segments) ? self::$_pimple->uri->segment(1) : self::$_pimple->config->get('default_controller');		
+		self::addLazyPath(self::$registry->get('config')->get('lazy_path'));
+		$cname = (self::$registry->get('uri')->total_segments()) ? self::$registry->get('uri')->segment(1) : self::$registry->get('config')->get('default_controller');
 		try{
-			$controller=self::$_pimple->controller;
+			$controller= new $cname;
+			unset($cname);
 			$args=array();
-			if($segments>1)
+			print_r(self::$registry->get('uri')->total_segments());
+			if(self::$registry->get('uri')->total_segments()>1)
 			{
 				$method=self::$_pimple->uri->segment(2);
 				if(method_exists($controller,$method))
 				{
-					if($segments>2)
+					if(self::$registry->get('uri')->total_segments()>2)
 					{
 						$args=self::$_pimple->uri->segment_array();
 						array_shift($args);
@@ -204,19 +179,19 @@ final class Sambhuti
 	
 	private static function setLazyPaths($paths=null,$thirdparty=null)
 	{
-		self::$_lazy_paths=array
+		self::$lazy_paths=array
 		(
 			'global'=>array
 			(
 				'helper'=>SB_ENGINE_PATH.'helpers/',
-				SB_ENGINE_PATH.'core/',
+				'core'=>SB_ENGINE_PATH.'core/',
 				'library'=>SB_ENGINE_PATH.'lib/'
 			)
 		);
 		if(isset($paths) && is_array($paths))
-			self::$_lazy_paths=array_merge_recursive(self::$_lazy_paths,$paths);
+			self::$lazy_paths=array_merge_recursive(self::$lazy_paths,$paths);
 		if(isset($thirdparty) && is_array($thirdparty))
-			self::$_thirdparty=array_merge_recursive(self::$_thirdparty,$thirdparty);
+			self::$third_party=array_merge_recursive(self::$third_party,$thirdparty);
 	}	
 	
 }

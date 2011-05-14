@@ -38,11 +38,11 @@ class SB_Uri
 	public function __construct($apps)
 	{
 		$scheme= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='off') ? 'https':'http';
-		$host_parts = explode(':', $_SERVER['HTTP_HOST'], 2);
-		$http_host = array_shift($host_parts);
-		$http_port = array_shift($host_parts);
-		$request_uri=$this->request_uri();
-		if(filter_var($scheme."://".$http_host.$request_uri, FILTER_VALIDATE_URL))
+		$hostParts = explode(':', $_SERVER['HTTP_HOST'], 2);
+		$httpHost = array_shift($hostParts);
+		$httpPort = array_shift($hostParts);
+		$requestURI = $this->request_uri();
+		if(filter_var($scheme."://".$httpHost.$requestURI, FILTER_VALIDATE_URL))
 		{
 			if(isset($apps) && is_array($apps))
 			foreach($apps as $url=>$relpath)
@@ -50,12 +50,12 @@ class SB_Uri
 				$urla=parse_url($url);
 				if(!isset($urla['port']))
 					$urla['port']='';
-				if($urla['scheme']==$scheme && $urla['host']==$http_host && $urla['port'] == $http_port)
+				if($urla['scheme']==$scheme && $urla['host']==$httpHost && $urla['port'] == $httpPort)
 				{
-					if(!isset($urla['path']) || strpos($request_uri,$urla['path'])===0)
+					if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
 					{
 						$this->site_url=rtrim($url,'/').'/';
-						$this->populate($urla['path']);
+						$this->populate($urla['path'],$requestURI);
 						define('SB_APP_PATH',realpath($relpath).'/');
 						break;
 					}
@@ -77,10 +77,10 @@ class SB_Uri
 	{
 		return $this->_segments;
 	}
-	private function populate($path)
+	private function populate($path,$requestURI)
 	{
-		$relative = trim(substr($this->_request_uri, strlen($path)),'/');
-		$segments=explode('/',$relative);
+		$relative	= trim(substr($this->_request_uri, strlen($path)),'/');
+		$segments	= explode('/',$relative);
 		$this->_segments=$segments;
 		if($this->_segments[0]!='')
 			array_unshift($this->_segments,'');

@@ -28,6 +28,42 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class SB_Registry
 {
+	private $objects=array();
+	public function __construct()
+	{
+		
+	}
+	public function get($key)
+	{
+		if(array_key_exists($key,$this->objects))
+			return $this->objects[$key];
+		elseif(method_exists($this,$key.'Init'))
+			return $this->objects[$key] = call_user_func(array($this,$key.'Init'));
+	}
+	public function set($key,$instance)
+	{
+		$this->objects[$key]=$instance;
+	}
+	private function configInit()
+	{
+		require_once SB_APP_PATH.'config.php';
+		if(isset($app_config) && is_array($app_config))
+			$return = new SB_Config($app_config);
+		unset($app_config);
+		return $return;
+	}
+	private function loadInit()
+	{
+		return new SB_Load();
+	}
+	private function inputInit()
+	{
+		return new SB_Input();
+	}
+	private function sessionInit()
+	{
+		return new SB_Session();
+	}
 	
 }
 

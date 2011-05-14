@@ -26,7 +26,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Model extends SBbase
+class SB_Model extends SB_Base
 {
 	public function __construct()
 	{
