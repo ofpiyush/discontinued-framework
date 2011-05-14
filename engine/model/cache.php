@@ -1,4 +1,5 @@
 <?php
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,16 +27,11 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Request
+class cache
 {
-	private $get;
-	public function __construct()
+	function __construct()
 	{
 		
 	}
 	
 }
-
-/**
- * End of file Request
- */

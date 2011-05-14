@@ -1,4 +1,5 @@
 <?php
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,22 +27,30 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-class SB_Uri
+class request
 {
-	private $_segments;
-	private $_request_uri;
-	public $site_url;
-	/**
-	 * Constructor
-	 * @param $apps array of apps for sambhuti
-	 */
-	public function __construct($apps)
+	var $type		= null;
+	var $controller	= null;
+	var $segments	= null;
+	var $action		= null;
+	var $raw		= null;
+	var $filtered	= null;
+	var $siteURL	= null;
+	function __construct($apps)
 	{
-		$scheme= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='off') ? 'https':'http';
-		$hostParts = explode(':', $_SERVER['HTTP_HOST'], 2);
-		$httpHost = array_shift($hostParts);
-		$httpPort = array_shift($hostParts);
-		$requestURI = $this->request_uri();
+		$this->processType();
+		if($this->type=='web')
+		{
+			$this->parseURL($apps);
+		}
+	}
+	private function parseURL($apps)
+	{
+		$scheme		= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='off') ? 'https':'http';
+		$hostParts	= explode(':', $_SERVER['HTTP_HOST'], 2);
+		$httpHost	= array_shift($hostParts);
+		$httpPort	= array_shift($hostParts);
+		$requestURI	= rtrim($_SERVER['REQUEST_URI'],'/').'/';
 		if(filter_var($scheme."://".$httpHost.$requestURI, FILTER_VALIDATE_URL))
 		{
 			if(isset($apps) && is_array($apps))
@@ -54,7 +63,7 @@ class SB_Uri
 				{
 					if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
 					{
-						$this->site_url=rtrim($url,'/').'/';
+						$this->siteURL = rtrim($url,'/').'/';
 						$this->populate($urla['path'],$requestURI);
 						define('SB_APP_PATH',realpath($relpath).'/');
 						break;
@@ -63,36 +72,20 @@ class SB_Uri
 			}
 		}
 	}
-	public function segment($id,$false=false)
-	{
-		if(array_key_exists($id,$this->_segments))
-			return $this->_segments[$id];
-		return $false;
-	}
-	public function total_segments()
-	{
-		return count($this->_segments);
-	}
-	public function segment_array()
-	{
-		return $this->_segments;
-	}
 	private function populate($path,$requestURI)
 	{
-		$relative	= trim(substr($this->_request_uri, strlen($path)),'/');
+		$relative	= trim(substr($requestURI, strlen($path)),'/');
 		$segments	= explode('/',$relative);
-		$this->_segments=$segments;
-		if($this->_segments[0]!='')
-			array_unshift($this->_segments,'');
-		unset($this->_segments[0]);
+		if($segments[0]!='')
+		{
+			$this->controller = $segments[0];
+			unset($segments[0]);
+			if(array_key_exists(1,$segments))
+				$this->segments = $segments;
+		}
 	}
-	private function request_uri()
+	private function processType()
 	{
-		$this->_request_uri=rtrim($_SERVER['REQUEST_URI'],'/').'/';
-		return $this->_request_uri;
+		$this->type = (PHP_SAPI == 'cli')?'cli' : 'web';
 	}
 }
-
-/**
- * End of file Uri
- */

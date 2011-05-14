@@ -1,4 +1,5 @@
 <?php
+namespace sb;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -25,15 +26,9 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-
-
-require_once SB_ENGINE_PATH.'core/Sambhuti.php';
-/**
- * Start the Lazy Loader
- */
-sambhuti::run($sb_apps);
-
-
-/**
- * End of file Init
- */
+ini_set('display_errors', 'on');
+error_reporting(E_ALL);
+require_once(SB_ENGINE_PATH.'model/load.php');
+model\load::register();
+$sambhuti = new controller\sambhuti();
+$sambhuti->execute(new model\request($sb_apps));

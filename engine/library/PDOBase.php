@@ -1,5 +1,5 @@
 <?php
-namespace sb;
+namespace sb\library;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -28,11 +28,14 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 
 
-abstract class SB_Database extends SB_Model
+abstract class PDOBase 
 {
-	protected static $_dbh=null;
+	protected static $_dbh	= null;
+	protected static $config	= null;
 	function __construct()
 	{
+		if(is_null(self::$config))
+			self::$config = \sb\model\loader::fetch('config');
 	}
 	/**
 	 * Connects to the dbase if no connection already exists
@@ -46,13 +49,13 @@ abstract class SB_Database extends SB_Model
 		if(!isset(self::$_dbh[$key]) && is_null(self::$_dbh[$key]))
 		{
 			//list($db_type,$db_host,$db_dbname, $db_user, $db_pass, $db_options)=array_values(self::$_config->$method());
-			extract($this->config->get('db',$key),EXTR_PREFIX_ALL,'db');
-			$db_type=strtolower($this->config->get('db','type'));
+			extract(self::$config->get('db',$key),EXTR_PREFIX_ALL,'db');
+			$db_type=strtolower(self::$config->get('db','type'));
 			$dsn=$db_type.":dbname=".$db_dbname.";host=".$db_host;
 			try
 			{
-				self::$_dbh[$key] = new \PDO($dsn, $db_user, $db_pass, $db_options);
-				self::$_dbh[$key]->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION);
+				self::$_dbh[$key] = new PDO($dsn, $db_user, $db_pass, $db_options);
+				self::$_dbh[$key]->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 				self::$_dbh[$key]->exec('SET CHARACTER SET utf8');
 			}catch(PDOException $e)
 			{
@@ -78,7 +81,7 @@ abstract class SB_Database extends SB_Model
 	protected final function execute($sql, $bindings=array(),$key='master')
 	{
 		$key=$this->connect($key);
-		$sql=str_replace('/#prefix#/',$this->config->get('db',$key,'prefix'),$sql);
+		$sql=str_replace('/#prefix#/',self::$config->get('db',$key,'prefix'),$sql);
 		$stmt = self::$_dbh[$key]->prepare($sql);
 		try
 		{
@@ -91,7 +94,7 @@ abstract class SB_Database extends SB_Model
 			$exception_details="Database Error";
 			$exception_details .= '<br />Could not execute the following query:<br /> '.
 				str_replace(chr(10), "", $stmt->queryString) . '  <br />PDOException: '. $e->getMessage();
-			throw new PBException ($exception_details,get_called_class());
+			throw new SB_Exception ($exception_details,$e->getCode(),get_called_class());
 			
 		}
 		return $stmt;
@@ -150,23 +153,23 @@ abstract class SB_Database extends SB_Model
 	
 	protected final function assocRow($stmt)
 	{
-		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
         return $this->fetch($stmt);
 	}
 	protected final function assocRows($stmt)
 	{
-		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
         return $this->fetchAll($stmt);
 	}
 	
 	protected final function objRow($stmt,$class)
 	{
-		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
+		$stmt->setFetchMode(PDO::FETCH_CLASS,$class);
         return $this->fetch($stmt);
 	}
 	protected final function objRows($stmt,$class)
 	{
-		$stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
+		$stmt->setFetchMode(PDO::FETCH_CLASS,$class);
 		return $this->fetchAll($stmt);
 	}
 	protected final function disconnect($key='all')

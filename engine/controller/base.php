@@ -1,5 +1,5 @@
 <?php
-namespace sb;
+namespace sb\controller;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -27,12 +27,9 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-
-class uploader
+abstract class base
 {
-	
+	protected static $log = null;
+	final function __construct(){}
+	abstract function execute(\sb\model\request $request);
 }
-
-/**
- * End of file Uploader
- */
