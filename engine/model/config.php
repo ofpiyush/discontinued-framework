@@ -29,17 +29,17 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class config
 {
-	private static $conf = array();
+	private $conf = array();
+	var $exceptions = array();
 	function __construct($array = null)
 	{
 		if(!is_null($array))
-			self::$conf = $array;
-		unset($array);
+			$this->conf = $array;
 	}
 	public function get($key)
 	{
 		$args=func_get_args();
-		$tmp = self::$conf;
+		$tmp = $this->conf;
 		foreach($args as $arg)
 		{
 			if(array_key_exists($arg,$tmp))
@@ -51,12 +51,12 @@ class config
 	}
 	public function __get($key)
 	{
-		if(array_key_exists($key,self::$conf))
-			return self::$conf[$key];
+		if(array_key_exists($key,$this->conf))
+			return $this->conf[$key];
 		return false;
 	}
 	public function __set($key,$val)
 	{
-		self::$conf[$key] = $value;	
+		$this->conf[$key] = $val;	
 	}
 }

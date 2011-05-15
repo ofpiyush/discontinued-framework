@@ -47,10 +47,8 @@ class load
 			$name = self::fetch('model',$class);
 			if($name)
 			{
-				
 				self::$models[$class]['reflection'] = new \ReflectionClass($name);
-				
-					return self::$models[$class]['instance'] = self::$models[$class]['reflection']->newInstance($args);
+				return self::$models[$class]['instance'] = self::$models[$class]['reflection']->newInstance($args);
 			}
 			else
 			{

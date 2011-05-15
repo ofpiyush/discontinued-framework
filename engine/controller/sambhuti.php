@@ -31,26 +31,27 @@ class sambhuti extends base
 {
 	public function execute(\sb\model\request $request)
 	{
-		if(file_exists(SB_APP_PATH.'config/config.php'))
-		{
-			require_once(SB_APP_PATH.'config/config.php');
-		\sb\model\load::addLazyPath($config['namespace'],SB_APP_PATH);
 		try
 		{
-			\sb\model\load::model('config',true,$config);
+			if(file_exists(SB_APP_PATH.'config/config.php'))
+			{
+				require_once(SB_APP_PATH.'config/config.php');
+				\sb\model\load::addLazyPath($config['namespace'],SB_APP_PATH);
+				\sb\model\load::model('config',true,$config);
+				$resolver = \sb\model\load::model('resolver',true,$config['namespace'].'\\controller\\'.$config['defaultController']);
+				$resolver->getController($config['namespace'].'\\controller\\'.$request->controller)->execute($request);			
+			}
+			else
+			{
+				throw new \sb\model\Exception("Please setup the config.php file");
+			}
 		}
-		catch(\sb\model\Exception $e){}
-		try
+		catch(\sb\model\Exception $e)
 		{
-			$resolver = \sb\model\load::model('resolver',true,$config['namespace'].'\\controller\\'.$config['defaultController']);
+			
 		}
-		catch(\sb\model\Exception $e){}
-			$resolver->getController($config['namespace'].'\\controller\\'.$request->controller)->execute($request);
-		}
-		else
-		{
-			throw new \sb\model\Exception("Please setup the config.php file");
-		}
+		foreach (\sb\model\load::model('config')->exceptions as $exception)
+		echo "<pre>",$exception;
 	}
 	
 }

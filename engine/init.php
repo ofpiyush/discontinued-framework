@@ -31,14 +31,4 @@ error_reporting(E_ALL);
 require_once(SB_ENGINE_PATH.'model/load.php');
 model\load::register();
 $sambhuti = new controller\sambhuti();
-try
-{
-	$sambhuti->execute(model\load::model('request',true,$sb_apps));
-}
-catch(model\Exception $e)
-{
-	$exceptions = $e->getExceptions();
-	//print_r($exceptions);
-	foreach($exceptions as $exception)
-		echo "<pre>",$exception;
-}
+$sambhuti->execute(model\load::model('request',true,$sb_apps));
