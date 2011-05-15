@@ -1,5 +1,5 @@
 <?php
-namespace sb\library;
+namespace app;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -27,43 +27,23 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-final class session
-{
-	private static $session=array();
-	public $ip;
-	public function __construct()
-	{
-		session_start();
-		$this->ip = filter_input(INPUT_SERVER,'REMOTE_ADDR');
-		if(isset($_SESSION[$this->ip]))
-		{
-			self::$session = $_SESSION[$this->ip];
-		}
-	}
-	public function set($key,$val)
-	{
-	 	self::$session[$key] = $val;
-	}
-	
-	public function get($key)
-	{
-		if(isset(self::$session[$key]))
-			return 	self::$session[$key];		
-	}
-	public function destroy()
-	{
-		self::$session = null;
-		session_destroy();
-	}
-	function __destruct()
-	{
-		if(isset(self::$session) && ! is_null(self::$session))
-		{
-			$_SESSION[$this->ip] = self::$session;
-		}
-	}
-}
 
+$config['namespace']			= __NAMESPACE__;
+$config['defaultController']	= 'welcome';
+$config['displayExceptions']	= true;
+$config['autologExceptions']	= true;
 /**
- *End of file Session
+ * Db config vars
  */
+$app_config['db']['DAOSyntax']	= "/#type#//#class#/DAO";
+$app_config['db']['type']		= 'mysql';
+/**
+ * Conn params
+ */
+$app_config['db']['master']['host']		= 'localhost';
+$app_config['db']['master']['dbname']	= 'sambhuti';
+$app_config['db']['master']['user']		= 'mysqluser';
+$app_config['db']['master']['pass']		= 'mysqlpass';
+$app_config['db']['master']['options']	= array();
+$app_config['db']['master']['prefix']	= 'sb_';
+

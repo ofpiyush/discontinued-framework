@@ -64,7 +64,7 @@ class request
 					if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
 					{
 						$this->siteURL = rtrim($url,'/').'/';
-						$this->populate($urla['path'],$requestURI);
+						$this->populate((array_key_exists('path',$urla))? $urla['path'] : '',$requestURI);
 						define('SB_APP_PATH',realpath($relpath).'/');
 						break;
 					}

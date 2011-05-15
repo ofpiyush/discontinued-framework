@@ -1,5 +1,5 @@
 <?php
-namespace sb;
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,19 +26,44 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-ini_set('display_errors', 'on');
-error_reporting(E_ALL);
-require_once(SB_ENGINE_PATH.'model/load.php');
-model\load::register();
-$sambhuti = new controller\sambhuti();
-try
+
+final class session
 {
-	$sambhuti->execute(model\load::model('request',true,$sb_apps));
+	private static $session=array();
+	public $ip;
+	public function __construct()
+	{
+		session_start();
+		$this->ip = filter_input(INPUT_SERVER,'REMOTE_ADDR');
+		if(isset($_SESSION[$this->ip]))
+		{
+			self::$session = $_SESSION[$this->ip];
+		}
+	}
+	public function set($key,$val)
+	{
+	 	self::$session[$key] = $val;
+	}
+	
+	public function get($key)
+	{
+		if(isset(self::$session[$key]))
+			return 	self::$session[$key];		
+	}
+	public function destroy()
+	{
+		self::$session = null;
+		session_destroy();
+	}
+	function __destruct()
+	{
+		if(isset(self::$session) && ! is_null(self::$session))
+		{
+			$_SESSION[$this->ip] = self::$session;
+		}
+	}
 }
-catch(model\Exception $e)
-{
-	$exceptions = $e->getExceptions();
-	//print_r($exceptions);
-	foreach($exceptions as $exception)
-		echo "<pre>",$exception;
-}
+
+/**
+ *End of file Session
+ */

@@ -28,19 +28,46 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 class load
 {
+	private static $models = array();
 	private static $lazyPaths = array();
-	function __construct()
-	{
-		
-	}
 	public static function register()
 	{
 		self::addLazyPath('sb',SB_ENGINE_PATH);
 		spl_autoload_register(array(__CLASS__, 'auto' ));
 	}
-	public static function fetch($type,$class)
+	public static function model($class,$new = false,$args = array())
 	{
-		
+		if(! $new && array_key_exists($class,self::$models))
+		{
+			if(array_key_exists('instance',self::$models[$class]))
+				return self::$models[$class]['instance'];
+		}
+		else
+		{
+			$name = self::fetch('model',$class);
+			if($name)
+			{
+				
+				self::$models[$class]['reflection'] = new \ReflectionClass($name);
+				
+					return self::$models[$class]['instance'] = self::$models[$class]['reflection']->newInstance($args);
+			}
+			else
+			{
+				throw new Exception("No model for ".$class." found");
+			}
+		}
+			
+	}
+	
+	public static function fetch($type,$classname)
+	{
+		foreach(array_reverse(self::$lazyPaths) as $ns => $path)
+		{
+			if(self::checkRequire($path.'/'.$type.'/'.$classname))
+				return $ns.'\\'.$type.'\\'.$classname;
+		}
+		return false;
 	}
 	public static function auto($class)
 	{
@@ -48,8 +75,10 @@ class load
 			return true;
 		$array = explode('\\',$class);
 		if(array_key_exists($array[0],self::$lazyPaths))
+		{
 			$array[0] = self::$lazyPaths[$array[0]];
 			return self::checkRequire(implode($array,'/'));
+		}
 		return false;
 	}
 	public static function unreg()
