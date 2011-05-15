@@ -1,5 +1,5 @@
 <?php
-namespace sb;
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,19 +26,25 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-ini_set('display_errors', 'on');
-error_reporting(E_ALL);
-require_once(SB_ENGINE_PATH.'model/load.php');
-model\load::register();
-$sambhuti = new controller\sambhuti();
-try
+
+class Exception extends \Exception
 {
-	$sambhuti->execute(model\load::model('request',true,$sb_apps));
+	private $config;
+	private static $exceptions = null;
+	function __construct($message = "",$code=  0, \Exception $previous =null)
+	{
+		if(!$message)
+			throw new $this('Unknown '. get_called_class(),0,$this);
+		parent::__construct($message,$code,$previous);
+		self::$exceptions[]=$this;
+		//throw new $this($message,$code,$previous);
+	}
+	function getExceptions()
+	{
+		return self::$exceptions;
+	}
 }
-catch(model\Exception $e)
-{
-	$exceptions = $e->getExceptions();
-	//print_r($exceptions);
-	foreach($exceptions as $exception)
-		echo "<pre>",$exception;
-}
+
+/**
+ * End of file Exception
+ */

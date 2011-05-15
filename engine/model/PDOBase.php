@@ -1,5 +1,5 @@
 <?php
-namespace sb\library;
+namespace sb\model;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -35,7 +35,11 @@ abstract class PDOBase
 	function __construct()
 	{
 		if(is_null(self::$config))
-			self::$config = \sb\model\loader::fetch('config');
+			try
+			{
+				self::$config = load::model('config');
+			}
+			catch(Exception $e){}
 	}
 	/**
 	 * Connects to the dbase if no connection already exists

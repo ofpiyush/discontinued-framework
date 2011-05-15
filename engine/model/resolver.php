@@ -56,10 +56,24 @@ class resolver
 	}
 	function loadController($classname)
 	{
-		$controller = new \ReflectionClass($classname);
+		try
+		{
+			$controller = new \ReflectionClass($classname);
+		}
+		catch (\ReflectionException $e)
+		{
+			throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
+		}
 		if($controller->isSubClassOf($this->base))
 		{
-			$this->instances[$classname] = $controller->newInstance();
+			try
+			{
+				$this->instances[$classname] = $controller->newInstance();
+			}
+			catch( \ReflectionException $e)
+			{
+				throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
+			}
 			return $this->instances[$classname];
 		}
 		return $this->notFound;

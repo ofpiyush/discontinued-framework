@@ -29,14 +29,28 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class sambhuti extends base
 {
-	private static $config;
 	public function execute(\sb\model\request $request)
 	{
-		require_once(SB_APP_PATH.'config/config.php');
+		if(file_exists(SB_APP_PATH.'config/config.php'))
+		{
+			require_once(SB_APP_PATH.'config/config.php');
 		\sb\model\load::addLazyPath($config['namespace'],SB_APP_PATH);
-		self::$config = new \sb\model\config($config);
-		$resolver = new \sb\model\resolver($config['namespace'].'\\controller\\'.$config['defaultController']);
-		$resolver->getController($config['namespace'].'\\controller\\'.$request->controller)->execute($request);
+		try
+		{
+			\sb\model\load::model('config',true,$config);
+		}
+		catch(\sb\model\Exception $e){}
+		try
+		{
+			$resolver = \sb\model\load::model('resolver',true,$config['namespace'].'\\controller\\'.$config['defaultController']);
+		}
+		catch(\sb\model\Exception $e){}
+			$resolver->getController($config['namespace'].'\\controller\\'.$request->controller)->execute($request);
+		}
+		else
+		{
+			throw new \sb\model\Exception("Please setup the config.php file");
+		}
 	}
 	
 }

@@ -32,6 +32,19 @@ class welcome extends \sb\controller\base
 	function execute(\sb\model\request $request)
 	{
 		global $time1;
+		try
+		{
+			$test = \sb\model\load::model('test');
+		}
+		catch(\sb\model\Exception $e){}
+		try
+		{
+			$test2 = \sb\model\load::model('test2');
+		}
+		catch(\sb\model\Exception $e){}
+		
+		throw new \sb\model\Exception("hahah");
+		echo SB_APP_PATH ,"<br />", SB_ENGINE_PATH , "<br />";
 		echo "default controller called <br />";
 		echo microtime(true)-$time1," Seconds";
 	}
