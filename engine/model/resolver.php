@@ -42,8 +42,10 @@ class resolver
 	}
 	function getController($classname)
 	{
-		if(is_null($classname))
+		if(substr($classname,-1) == '\\')
+		{
 			return $this->defaultCntrl;
+		}
 		if(load::auto($classname))
 		{
 			if(class_exists($classname))
@@ -52,7 +54,7 @@ class resolver
 			}
 		}
 		else
-			return $this->defaultCntrl;
+			return $this->notFound;
 	}
 	function loadController($classname)
 	{
