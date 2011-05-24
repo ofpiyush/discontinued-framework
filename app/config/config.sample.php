@@ -32,11 +32,11 @@ $config['namespace']			= __NAMESPACE__;
 $config['defaultController']	= 'welcome';
 $config['displayExceptions']	= true;
 $config['autologExceptions']	= true;
+$app_config['DAOSyntax']		= "#dbType##class#DAO";
 /**
  * Db config vars
  */
-$app_config['db']['DAOSyntax']	= "/#type#//#class#/DAO";
-$app_config['db']['type']		= 'mysql';
+$app_config['db']['type'] = 'mysql';
 /**
  * Conn params
  */

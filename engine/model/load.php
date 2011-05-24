@@ -28,35 +28,51 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 class load
 {
-	private static $models = array();
+	private static $instances = array();
 	private static $lazyPaths = array();
-	public static function register()
+	public static function dao($class,$new = false,$args = array())
 	{
-		self::addLazyPath('sb',SB_ENGINE_PATH);
-		spl_autoload_register(array(__CLASS__, 'auto' ));
+		$config = self::model('config');
+		$model=str_replace('#dbType#',$config->get('db','type'),str_replace('#class#',$class,$config->DAOSyntax));
+		try
+		{
+			return self::model($class,$new,$args);
+		}
+		catch(Exception $e){}
 	}
 	public static function model($class,$new = false,$args = array())
 	{
-		if(! $new && array_key_exists($class,self::$models))
+		return self::getInstance('model',$class,$new,$args);
+	}
+	
+	public static function view($name)
+	{
+		return self::getInstance('view',$class,$new,$args);
+	}
+	
+	protected static function getInstance($type,$class,$new = false,$args = array())
+	{
+		if(! $new && array_key_exists($class,self::$instances[$type]))
 		{
-			if(array_key_exists('instance',self::$models[$class]))
-				return self::$models[$class]['instance'];
+			if(array_key_exists('instance',self::$instances[$type][$class]))
+				return self::$instances[$type][$class]['instance'];
 		}
 		else
 		{
 			$name = self::fetch('model',$class);
 			if($name)
 			{
-				self::$models[$class]['reflection'] = new \ReflectionClass($name);
-				return self::$models[$class]['instance'] = self::$models[$class]['reflection']->newInstance($args);
+				self::$instances[$type][$class]['reflection'] = new \ReflectionClass($name);
+				return self::$instances[$type][$class]['instance'] = self::$instances[$type][$class]['reflection']->newInstance($args);
 			}
 			else
 			{
-				throw new Exception("No model for ".$class." found");
+				throw new Exception("No $type for ".$class." found");
 			}
 		}
-			
 	}
+	
+	
 	
 	public static function fetch($type,$classname)
 	{
@@ -66,6 +82,16 @@ class load
 				return $ns.'\\'.$type.'\\'.$classname;
 		}
 		return false;
+	}
+	public static function checkRequire($path)
+	{
+		$fullpath = $path.'.php';
+		if(file_exists($fullpath))
+			{
+				require_once($fullpath);
+				return true;
+			}
+			return false;
 	}
 	public static function auto($class)
 	{
@@ -79,20 +105,15 @@ class load
 		}
 		return false;
 	}
+	public static function register()
+	{
+		self::addLazyPath('sb',SB_ENGINE_PATH);
+		spl_autoload_register(array(__CLASS__, 'auto' ));
+	}
 	public static function unreg()
 	{
 		self::$lazy_paths=array();
 		spl_autoload_unregister(array(__CLASS__, 'auto' ));
-	}
-	public static function checkRequire($path)
-	{
-		$fullpath = $path.'.php';
-		if(file_exists($fullpath))
-			{
-				require_once($fullpath);
-				return true;
-			}
-			return false;
 	}
 	public static function addLazyPath($namespace,$path)
 	{

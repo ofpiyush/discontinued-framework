@@ -30,7 +30,6 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 final class utils
 {
 	private function __construct();
-	
 }
 
 /**
