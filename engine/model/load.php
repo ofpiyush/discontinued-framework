@@ -36,7 +36,7 @@ class load
 		$model=str_replace('#dbType#',$config->get('db','type'),str_replace('#class#',$class,$config->DAOSyntax));
 		try
 		{
-			return self::model($class,$new,$args);
+			return self::model($model,$new,$args);
 		}
 		catch(Exception $e){}
 	}
@@ -45,9 +45,9 @@ class load
 		return self::getInstance('model',$class,$new,$args);
 	}
 	
-	public static function view($name)
+	public static function view($name,$args = array())
 	{
-		return self::getInstance('view',$class,$new,$args);
+		return self::getInstance('view',$name,true,$args);
 	}
 	
 	protected static function getInstance($type,$class,$new = false,$args = array())
@@ -67,7 +67,7 @@ class load
 			}
 			else
 			{
-				throw new Exception("No $type for ".$class." found");
+				throw new Exception("No $type for '$class' found");
 			}
 		}
 	}

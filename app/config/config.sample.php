@@ -32,18 +32,18 @@ $config['namespace']			= __NAMESPACE__;
 $config['defaultController']	= 'welcome';
 $config['displayExceptions']	= true;
 $config['autologExceptions']	= true;
-$app_config['DAOSyntax']		= "#dbType##class#DAO";
+$config['DAOSyntax']		= "#dbType##class#DAO";
 /**
  * Db config vars
  */
-$app_config['db']['type'] = 'mysql';
+$config['db']['type'] = 'mysql';
 /**
  * Conn params
  */
-$app_config['db']['master']['host']		= 'localhost';
-$app_config['db']['master']['dbname']	= 'sambhuti';
-$app_config['db']['master']['user']		= 'mysqluser';
-$app_config['db']['master']['pass']		= 'mysqlpass';
-$app_config['db']['master']['options']	= array();
-$app_config['db']['master']['prefix']	= 'sb_';
+$config['db']['master']['host']		= 'localhost';
+$config['db']['master']['dbname']	= 'sambhuti';
+$config['db']['master']['user']		= 'mysqluser';
+$config['db']['master']['pass']		= 'mysqlpass';
+$config['db']['master']['options']	= array();
+$config['db']['master']['prefix']	= 'sb_';
 
