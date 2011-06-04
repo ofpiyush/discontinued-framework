@@ -160,5 +160,5 @@ class user extends \app\model\dao\user
 }
 
 /**
- * End of file Mysqluserdao
+ * End of file app\model\dao\mysql\user
  */

@@ -157,23 +157,23 @@ abstract class PDOBase
     
     protected final function assocRow($stmt)
     {
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetch($stmt);
     }
     protected final function assocRows($stmt)
     {
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetchAll($stmt);
     }
     
     protected final function objRow($stmt,$class)
     {
-        $stmt->setFetchMode(PDO::FETCH_CLASS,$class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
         return $this->fetch($stmt);
     }
     protected final function objRows($stmt,$class)
     {
-        $stmt->setFetchMode(PDO::FETCH_CLASS,$class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
         return $this->fetchAll($stmt);
     }
     protected final function disconnect($key='all')
