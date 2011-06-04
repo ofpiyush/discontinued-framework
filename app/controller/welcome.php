@@ -35,10 +35,8 @@ class welcome extends \sb\controller\base
         $user = $this->load('dao','user');
         $user->create("Piyush","Mishra","mymail".rand(1,10000)."@piyush.com","slug".rand(1,10000),"pass","wtf".rand(1,10000)."key");
         $userobj = $user->getbyid(1);
-        echo "<pre>";
-        print_r($userobj);
-        echo "</pre>";
-        echo microtime(true)-$time1," Seconds";
+        $view = $this->load('view','login');
+        echo $view->render(array("user" => $userobj, "time" => microtime(true) - $time1));
     }
 }
 
