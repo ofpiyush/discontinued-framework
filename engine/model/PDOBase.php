@@ -58,13 +58,13 @@ abstract class PDOBase
             $dsn=$db_type.":dbname=".$db_dbname.";host=".$db_host;
             try
             {
-                self::$_dbh[$key] = new PDO($dsn, $db_user, $db_pass, $db_options);
-                self::$_dbh[$key]->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                self::$_dbh[$key] = new \PDO($dsn, $db_user, $db_pass, $db_options);
+                self::$_dbh[$key]->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION);
                 self::$_dbh[$key]->exec('SET CHARACTER SET utf8');
-            }catch(PDOException $e)
+            }
+            catch(\PDOException $e)
             {
-                echo $e->getMessage();
-                die();
+                throw new Exception($e->getMessage(),$e->getCode(),$e);
             }
             
         }

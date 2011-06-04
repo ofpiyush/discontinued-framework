@@ -33,7 +33,7 @@ class load
     public static function dao($class,$new = false,$args = array())
     {
         $config = self::model('config');
-        $model='dao\\'.$congif->get('db','type').'\\'.$class;
+        $model='dao\\'.$config->get('db','type').'\\'.$class;
         try
         {
             return self::model($model,$new,$args);
@@ -59,7 +59,7 @@ class load
         }
         else
         {
-            $name = self::fetch('model',$class);
+            $name = self::fetch($type,$class);
             if($name)
             {
                 self::$instances[$type][$class]['reflection'] = new \ReflectionClass($name);
@@ -85,7 +85,7 @@ class load
     }
     public static function checkRequire($path)
     {
-        $fullpath = $path.'.php';
+        $fullpath = str_replace('\\','/',$path).'.php';
         if(file_exists($fullpath))
             {
                 require_once($fullpath);
