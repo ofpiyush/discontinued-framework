@@ -20,7 +20,7 @@ abstract class user extends \sb\model\PDOBase
 	abstract public function activate($email);
 	protected $_getquery=	" uid, firstname, lastname, email, slug, active ";
 	protected $_users	=	" #prefix#users ";
-	protected $_object	=	"user";
+	protected $_object	=	"app\model\user";
 	public function keygen($email)
 	{
 		return md5(sha1($email.rand()));

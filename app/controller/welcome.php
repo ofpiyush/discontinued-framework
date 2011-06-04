@@ -33,6 +33,11 @@ class welcome extends \sb\controller\base
     {
         global $time1;
         $user = $this->load('dao','user');
+        $user->create("Piyush","Mishra","mymail".rand(1,10000)."@piyush.com","slug".rand(1,10000),"pass","wtf".rand(1,10000)."key");
+        $userobj = $user->getbyid(1);
+        echo "<pre>";
+        print_r($userobj);
+        echo "</pre>";
         echo microtime(true)-$time1," Seconds";
     }
 }
