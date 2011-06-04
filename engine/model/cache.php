@@ -29,9 +29,9 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class cache
 {
-	function __construct()
-	{
-		
-	}
-	
+    function __construct()
+    {
+        
+    }
+    
 }

@@ -29,55 +29,55 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class resolver
 {
-	private $base;
-	private $notFound;
-	private $defaultCntrl;
-	private $instances = array();
-	function __construct($default)
-	{
-		$this->base			= new \ReflectionClass('sb\controller\base');
-		$this->notFound		= $this->loadController('sb\controller\notFound');
-		$this->defaultCntrl	= $this->loadController($default);
-		
-	}
-	function getController($classname)
-	{
-		if(substr($classname,-1) == '\\')
-		{
-			return $this->defaultCntrl;
-		}
-		if(load::auto($classname))
-		{
-			if(class_exists($classname))
-			{
-				return $this->loadController($classname);
-			}
-		}
-		else
-			return $this->notFound;
-	}
-	function loadController($classname)
-	{
-		try
-		{
-			$controller = new \ReflectionClass($classname);
-		}
-		catch (\ReflectionException $e)
-		{
-			throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
-		}
-		if($controller->isSubClassOf($this->base))
-		{
-			try
-			{
-				$this->instances[$classname] = $controller->newInstance();
-			}
-			catch( \ReflectionException $e)
-			{
-				throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
-			}
-			return $this->instances[$classname];
-		}
-		return $this->notFound;
-	}
+    private $base;
+    private $notFound;
+    private $defaultCntrl;
+    private $instances = array();
+    function __construct($default)
+    {
+        $this->base         = new \ReflectionClass('sb\controller\base');
+        $this->notFound     = $this->loadController('sb\controller\notFound');
+        $this->defaultCntrl = $this->loadController($default);
+        
+    }
+    function getController($classname)
+    {
+        if(substr($classname,-1) == '\\')
+        {
+            return $this->defaultCntrl;
+        }
+        if(load::auto($classname))
+        {
+            if(class_exists($classname))
+            {
+                return $this->loadController($classname);
+            }
+        }
+        else
+            return $this->notFound;
+    }
+    function loadController($classname)
+    {
+        try
+        {
+            $controller = new \ReflectionClass($classname);
+        }
+        catch (\ReflectionException $e)
+        {
+            throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
+        }
+        if($controller->isSubClassOf($this->base))
+        {
+            try
+            {
+                $this->instances[$classname] = $controller->newInstance();
+            }
+            catch( \ReflectionException $e)
+            {
+                throw new Exception("ReflectionException: ".$e->getMessage(),$e->getCode(),$e);
+            }
+            return $this->instances[$classname];
+        }
+        return $this->notFound;
+    }
 }

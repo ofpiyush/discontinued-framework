@@ -31,4 +31,11 @@ error_reporting(E_ALL);
 require_once(SB_ENGINE_PATH.'model/load.php');
 model\load::register();
 $sambhuti = new controller\sambhuti();
-$sambhuti->execute(model\load::model('request',true,$sb_apps));
+try
+{
+    $sambhuti->execute(model\load::model('request',true,$sb_apps));
+}
+catch(model\Exception $e)
+{
+    //do some catching
+}

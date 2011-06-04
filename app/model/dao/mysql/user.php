@@ -1,5 +1,5 @@
 <?php
-namespace sb\model;
+namespace app\model\dao\mysql;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -27,43 +27,14 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-final class session
+class user extends app\model\dao\user
 {
-    private static $session=array();
-    public $ip;
-    public function __construct()
+    function speak()
     {
-        session_start();
-        $this->ip = filter_input(INPUT_SERVER,'REMOTE_ADDR');
-        if(isset($_SESSION[$this->ip]))
-        {
-            self::$session = $_SESSION[$this->ip];
-        }
-    }
-    public function set($key,$val)
-    {
-        self::$session[$key] = $val;
-    }
-    
-    public function get($key)
-    {
-        if(isset(self::$session[$key]))
-            return  self::$session[$key];       
-    }
-    public function destroy()
-    {
-        self::$session = null;
-        session_destroy();
-    }
-    function __destruct()
-    {
-        if(isset(self::$session) && ! is_null(self::$session))
-        {
-            $_SESSION[$this->ip] = self::$session;
-        }
+        echo "test model called <br />";
     }
 }
 
 /**
- *End of file Session
+ * End of file test
  */
