@@ -29,6 +29,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 require_once(SB_ENGINE_PATH.'model/load.php');
+require_once(SB_ENGINE_PATH.'thirdparty/Twig/Autoloader.php');
 model\load::register();
 $sambhuti = new controller\sambhuti();
 try

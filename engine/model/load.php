@@ -28,8 +28,8 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 class load
 {
-    private static $instances = array();
-    private static $lazyPaths = array();
+    private static $models      = array();
+    private static $lazyPaths   = array();
     public static function dao($class,$new = false,$args = array())
     {
         $config = self::model('config');
@@ -40,34 +40,32 @@ class load
         }
         catch(Exception $e){}
     }
-    public static function model($class,$new = false,$args = array())
-    {
-        return self::getInstance('model',$class,$new,$args);
-    }
-    
+
     public static function view($name,$args = array())
     {
-        return self::getInstance('view',$name,true,$args);
+        if(!isset(self::$models['twigEnv']['instance']))
+            self::$models['twigEnv']['instance'] = new \Twig_Environment(self::model('twigLoader'), array('cache'=> SB_APP_PATH."cache/twig"));
+        return (is_array($args) && count($args))? self::model('twigEnv')->loadTemplate($name)->render($args) : self::model('twigEnv')->loadTemplate($name) ;
     }
     
-    protected static function getInstance($type,$class,$new = false,$args = array())
+    public static function model($class,$new = false,$args = array())
     {
-        if(! $new && array_key_exists($class,self::$instances[$type]))
+        if(! $new && array_key_exists($class,self::$models))
         {
-            if(array_key_exists('instance',self::$instances[$type][$class]))
-                return self::$instances[$type][$class]['instance'];
+            if(array_key_exists('instance',self::$models[$class]))
+                return self::$models[$class]['instance'];
         }
         else
         {
-            $name = self::fetch($type,$class);
+            $name = self::fetch('model',$class);
             if($name)
             {
-                self::$instances[$type][$class]['reflection'] = new \ReflectionClass($name);
-                return self::$instances[$type][$class]['instance'] = self::$instances[$type][$class]['reflection']->newInstance($args);
+                self::$models[$class]['reflection'] = new \ReflectionClass($name);
+                return self::$models[$class]['instance'] = self::$models[$class]['reflection']->newInstance($args);
             }
             else
             {
-                throw new Exception("No $type for '$class' found");
+                throw new Exception("No Model for '$class' found");
             }
         }
     }
@@ -107,8 +105,10 @@ class load
     }
     public static function register()
     {
+        \Twig_Autoloader::register();
         self::addLazyPath('sb',SB_ENGINE_PATH);
-        spl_autoload_register(array(__CLASS__, 'auto' ));
+        spl_autoload_register(array(__CLASS__, 'auto' ),false,true);
+        
     }
     public static function unreg()
     {
@@ -117,6 +117,11 @@ class load
     }
     public static function addLazyPath($namespace,$path)
     {
-        self::$lazyPaths[$namespace] = rtrim($path,'/');
+        $path = rtrim($path,'/');
+        if(isset(self::$models['twigLoader']['instance']))
+            self::model('twigLoader')->setPaths($path."/view");
+        else
+            self::$models['twigLoader']['instance'] = new \Twig_Loader_Filesystem($path."/view");
+        self::$lazyPaths[$namespace] = $path;
     }
 }
