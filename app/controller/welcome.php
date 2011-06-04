@@ -32,9 +32,7 @@ class welcome extends \sb\controller\base
     function execute(\sb\model\request $request)
     {
         global $time1;
-        $this->load('model','test');
-        echo SB_APP_PATH ,"<br />", SB_ENGINE_PATH , "<br />";
-        echo "default controller called <br />";
+        $user = $this->load('dao','user');
         echo microtime(true)-$time1," Seconds";
     }
 }

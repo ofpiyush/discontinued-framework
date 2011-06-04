@@ -2,36 +2,48 @@
 namespace app\model\dao;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
- * Sambhuti
- * Copyright (C) 2010-2011  Piyush Mishra
- *
- * License:
- * This file is part of Sambhuti (http://sambhuti.org)
- * 
- * Sambhuti is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Sambhuti is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @package Sambhuti
- * @author Piyush Mishra <me[at]piyushmishra[dot]com>
- * @license http://www.gnu.org/licenses/gpl.html
- * @copyright 2010-2011 Piyush Mishra
+ * @package sambhuti
+ * @author Piyush Mishra<me[at]piyushmishra[dot]com>
  */
-
 abstract class user extends \sb\model\PDOBase
 {
-    abstract function speak();
+	abstract public function idexists($id);
+	abstract public function emailexists($email);
+	abstract public function getbyid($id);
+	abstract public function getbyslug($slug);
+	abstract public function getbyemail($email);
+	abstract public function create($fname,$lname,$email,$slug,$pass,$key);
+	abstract public function getall($all=true);
+	abstract public function getpass($email);
+	abstract public function checkactivate($actkey);
+	abstract public function clearkey($email);
+	abstract public function activate($email);
+	protected $_getquery=	" uid, firstname, lastname, email, slug, active ";
+	protected $_users	=	" #prefix#users ";
+	protected $_object	=	"user";
+	public function keygen($email)
+	{
+		return md5(sha1($email.rand()));
+	}
+	public function fetchsalt($hashedpass)
+	{
+		return substr($hashedpass,0,28);
+	}
+	public function hashpass($pass,$salt=null)
+	{
+		$base_str='abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJHKLMONPRSTUVWXYZ/0123456789';
+		if(is_null($salt) || strlen($salt)<28)
+		{
+			$salt='$2a$07$';
+			for($i=1;$i<21;$i++)
+				$salt.=$base_str[mt_rand(0,63)];
+			$salt.='$';
+		}
+		return crypt($pass, $salt);
+	}
+	
 }
 
 /**
- * End of file test
+ * End of file Userdao
  */
