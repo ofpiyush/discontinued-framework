@@ -28,11 +28,10 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 
 
-$config['namespace']			= __NAMESPACE__;
-$config['defaultController']	= 'welcome';
-$config['displayExceptions']	= true;
-$config['autologExceptions']	= true;
-$config['DAOSyntax']		= "#dbType##class#DAO";
+$config['namespace']            = __NAMESPACE__;
+$config['defaultController']    = 'welcome';
+$config['displayExceptions']    = true;
+$config['autologExceptions']    = true;
 /**
  * Db config vars
  */
@@ -40,10 +39,10 @@ $config['db']['type'] = 'mysql';
 /**
  * Conn params
  */
-$config['db']['master']['host']		= 'localhost';
-$config['db']['master']['dbname']	= 'sambhuti';
-$config['db']['master']['user']		= 'mysqluser';
-$config['db']['master']['pass']		= 'mysqlpass';
-$config['db']['master']['options']	= array();
-$config['db']['master']['prefix']	= 'sb_';
+$config['db']['master']['host']     = 'localhost';
+$config['db']['master']['dbname']   = 'sambhuti';
+$config['db']['master']['user']     = 'mysqluser';
+$config['db']['master']['pass']     = 'mysqlpass';
+$config['db']['master']['options']  = array();
+$config['db']['master']['prefix']   = 'sb_';
 

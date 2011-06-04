@@ -29,10 +29,10 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class notFound extends base
 {
-	private $context;
-	private static $callbacks = array();
-	function execute(\sb\model\request $request)
-	{
-		echo $request->controller." not found";
-	}
+    private $context;
+    private static $callbacks = array();
+    function execute(\sb\model\request $request)
+    {
+        echo $request->controller." not found";
+    }
 }

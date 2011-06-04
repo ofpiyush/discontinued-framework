@@ -29,14 +29,14 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class Exception extends \Exception
 {
-	private $config;
-	function __construct($message = "",$code=  0, \Exception $previous =null)
-	{
-		if(!$message)
-			throw new $this('Unknown '. get_called_class(),0,$this);
-		parent::__construct($message,$code,$previous);
-		load::model('config')->exceptions[] = $this;
-	}
+    private $config;
+    function __construct($message = "",$code=  0, \Exception $previous =null)
+    {
+        if(!$message)
+            throw new $this('Unknown '. get_called_class(),0,$this);
+        parent::__construct($message,$code,$previous);
+        load::model('config')->exceptions[] = $this;
+    }
 }
 
 /**
