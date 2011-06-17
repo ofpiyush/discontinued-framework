@@ -27,43 +27,36 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 
-final class session
+class logger
 {
-    private static $session=array();
-    public $ip;
-    public function __construct()
+    private $dir = array();
+
+    function __construct()
     {
-        session_start();
-        $this->ip = filter_input(INPUT_SERVER,'REMOTE_ADDR');
-        if(isset($_SESSION[$this->ip]))
+        if(! $this->setDir(SB_APP_PATH.'logs/')) throw new Exception("Please make the {SB_APP_PATH}logs/ directory writeable");
+    }
+
+    function setDir($path)
+    {
+        if(is_dir($path) && is_writable($path))
+            $this->dir[] = rtrim(realpath($path),'/').'/';
+        else
+            throw new Exception("$path is not writeable. PS: A full path to directory is needed for this to work");
+    }
+
+    function write($file,$data)
+    {
+        if(is_array($this->dir) && count($this->dir))
         {
-            self::$session = $_SESSION[$this->ip];
+            $fp = @fopen($this->dir.$file,"a");
+            @fwrite(PHP_EOL.date("r").PHP_EOL.$fp,$data);
+            @fclose($fp);
         }
     }
-    public function set($key,$val)
+
+    function restoreDir()
     {
-        self::$session[$key] = $val;
-    }
-    
-    public function get($key)
-    {
-        if(isset(self::$session[$key]))
-            return  self::$session[$key];       
-    }
-    public function destroy()
-    {
-        self::$session = null;
-        session_destroy();
-    }
-    function __destruct()
-    {
-        if(isset(self::$session) && ! is_null(self::$session))
-        {
-            $_SESSION[$this->ip] = self::$session;
-        }
+        if(is_array($this->dir) && count($this->dir))
+            array_pop($this->dir);
     }
 }
-
-/**
- *End of file Session
- */

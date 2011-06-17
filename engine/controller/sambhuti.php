@@ -31,27 +31,40 @@ class sambhuti extends base
 {
     public function execute(\sb\model\request $request)
     {
+        if(!defined('SB_APP_PATH')) define('SB_APP_PATH',SB_ENGINE_PATH);
         try
         {
             if(file_exists(SB_APP_PATH.'config/config.php'))
             {
                 require_once(SB_APP_PATH.'config/config.php');
                 \sb\model\load::addLazyPath($config['namespace'],SB_APP_PATH);
-                \sb\model\load::model('config',true,$config);
-                $resolver = \sb\model\load::model('resolver',true,$config['namespace'].'\\controller\\'.$config['defaultController']);
-                $resolver->getController($config['namespace'].'\\controller\\'.$request->controller)->execute($request);            
+                $config = \sb\model\load::model('config',true,$config);
+                $resolver = \sb\model\load::model('resolver',true,$config->namespace.'\\controller\\'.$config->defaultController);
+                $resolver->getController($config->namespace.'\\controller\\'.$request->controller)->execute($request);
             }
             else
             {
                 throw new \sb\model\Exception("Please setup the config.php file");
             }
         }
-        catch(\sb\model\Exception $e)
+        catch(\sb\model\Exception $e) {}
+        if(!isset($config))
         {
-            
+            $config = \sb\model\load::model('config');
+            $config->autologExceptions = true;
+            $config->displayExceptions = false;
         }
-        foreach (\sb\model\load::model('config')->exceptions as $exception)
-        echo "<pre>",$exception;
+        if($config->displayExceptions || $config->autologExceptions)
+        {
+            $exceptions = implode(PHP_EOL,$config->exceptions);
+            if($config->autologExceptions)
+            {
+                \sb\model\load::model('logger')->write('exceptions',$exceptions);
+            }
+            if($config->displayExceptions) {
+                echo "<pre>",$exceptions,"</pre>";
+            }
+        }
     }
     
 }

@@ -27,7 +27,6 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @copyright 2010-2011 Piyush Mishra
  */
 ini_set('display_errors', 'off');
-error_reporting(E_ALL);
 require_once(SB_ENGINE_PATH.'model/load.php');
 require_once(SB_ENGINE_PATH.'thirdparty/Twig/Autoloader.php');
 model\load::register();
@@ -40,3 +39,4 @@ catch(model\Exception $e)
 {
     //do some catching
 }
+
