@@ -32,6 +32,7 @@ class sambhuti extends base
     public function execute(\sb\model\request $request)
     {
         if(!defined('SB_APP_PATH')) define('SB_APP_PATH',SB_ENGINE_PATH);
+        if(file_exists(SB_APP_PATH.'init.php')) require_once(SB_APP_PATH.'init.php');
         try
         {
             if(file_exists(SB_APP_PATH.'config/config.php'))

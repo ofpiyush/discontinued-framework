@@ -39,4 +39,3 @@ catch(model\Exception $e)
 {
     //do some catching
 }
-

@@ -1,5 +1,5 @@
 <?php
-namespace sb\model;
+namespace app;
 if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 /**
  * Sambhuti
@@ -26,37 +26,5 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-
-class logger
-{
-    private $dir = array();
-
-    function __construct()
-    {
-        $this->setDir(SB_APP_PATH.'logs/');
-    }
-
-    function setDir($path)
-    {
-        if(is_dir($path) && is_writable($path))
-            $this->dir[] = rtrim(realpath($path),'/').'/';
-        else
-            throw new Exception("$path is not writeable. PS: A full path to directory is needed for this to work");
-    }
-
-    function write($file,$data)
-    {
-        if(is_array($this->dir) && count($this->dir))
-        {
-            $fp = @fopen($this->dir.$file,"a");
-            @fwrite(PHP_EOL.date("r").PHP_EOL.$fp,$data);
-            @fclose($fp);
-        }
-    }
-
-    function restoreDir()
-    {
-        if(is_array($this->dir) && count($this->dir))
-            array_pop($this->dir);
-    }
-}
+ 
+ //This file can be used to override anything in sambhuti. any configuration and even the whole setup ;)
