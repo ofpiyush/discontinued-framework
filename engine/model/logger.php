@@ -48,8 +48,8 @@ class logger
     {
         if(is_array($this->dir) && count($this->dir))
         {
-            $fp = @fopen($this->dir.$file,"a");
-            @fwrite(PHP_EOL.date("r").PHP_EOL.$fp,$data);
+            $fp = @fopen(end($this->dir).$file,"a");
+            @fwrite($fp,PHP_EOL.date("r").PHP_EOL.$data.PHP_EOL);
             @fclose($fp);
         }
     }

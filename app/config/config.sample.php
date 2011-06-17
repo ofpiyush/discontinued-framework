@@ -30,7 +30,7 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 $config['namespace']            = __NAMESPACE__;
 $config['defaultController']    = 'welcome';
-$config['displayExceptions']    = true;
+$config['displayExceptions']    = false;
 $config['autologExceptions']    = true;
 /**
  * Db config vars
