@@ -1,4 +1,6 @@
 app/config/config.php
-app/cache/*
-!app/cache/index.html
-!app/cache/twig/index.html
+*/cache/*
+*/logs/*
+!*/cache/index.html
+!*/cache/twig/index.html
+!*/logs/index.html
