@@ -55,7 +55,8 @@ class sambhuti extends base
             $config->autologExceptions = true;
             $config->displayExceptions = false;
         }
-        if($config->displayExceptions || $config->autologExceptions)
+        if((is_array($config->exceptions) && count($config->exceptions) )
+            && ($config->displayExceptions || $config->autologExceptions))
         {
             $exceptions = implode(PHP_EOL,$config->exceptions);
             if($config->autologExceptions)
