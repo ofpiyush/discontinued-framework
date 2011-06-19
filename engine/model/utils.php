@@ -29,7 +29,26 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 final class utils
 {
-    private function __construct();
+    private function __construct() {}
+    public static function handleExceptions($e = null)
+    {
+        $config = load::model('config');
+        if((is_array($config->exceptions) && count($config->exceptions) )
+            && ($config->displayExceptions || $config->autologExceptions))
+        {
+            $exceptions = implode(PHP_EOL,$config->exceptions);
+            if(!is_null($e))
+                $exceptions = $e.PHP_EOL.$exceptions;
+            if($config->autologExceptions)
+            {
+                \sb\model\load::model('logger')->write('exceptions',$exceptions);
+            }
+            if($config->displayExceptions) {
+                echo "<pre>",$exceptions,"</pre>";
+            }
+        }
+        die();
+    }
 }
 
 /**

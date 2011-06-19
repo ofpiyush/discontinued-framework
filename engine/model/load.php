@@ -45,7 +45,7 @@ class load
     {
         if(!isset(self::$models['twigEnv']['instance']))
             self::$models['twigEnv']['instance'] = new \Twig_Environment(self::model('twigLoader'), self::model('config')->twigEnvVars);
-        return (is_array($args) && count($args))? self::model('twigEnv')->loadTemplate($name)->render($args) : self::model('twigEnv')->loadTemplate($name) ;
+        return (is_array($args) && count($args))? self::model('twigEnv')->render($name,$args) : self::model('twigEnv')->loadTemplate($name) ;
     }
     
     public static function model($class,$new = false,$args = array())

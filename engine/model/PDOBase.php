@@ -98,7 +98,7 @@ abstract class PDOBase
             $exception_details="Database Error";
             $exception_details .= '<br />Could not execute the following query:<br /> '.
                 str_replace(chr(10), "", $stmt->queryString) . '  <br />PDOException: '. $e->getMessage();
-            throw new SB_Exception ($exception_details,$e->getCode(),get_called_class());
+            throw new SB_Exception ($exception_details,$e->getCode(),$e);
             
         }
         return $stmt;
