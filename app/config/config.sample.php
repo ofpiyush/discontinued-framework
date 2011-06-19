@@ -28,10 +28,22 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  */
 
 
-$config['namespace']            = __NAMESPACE__;
-$config['defaultController']    = 'welcome';
-$config['displayExceptions']    = false;
-$config['autologExceptions']    = true;
+$config['namespace']			= __NAMESPACE__;
+$config['defaultController']	= 'welcome'; //string (fullname of class. fill in the blanks for app/controller/_______.php)
+$config['displayExceptions']	= false; // bool (true|false)
+$config['autologExceptions']	= true; // bool (true|false)
+/**
+ * Twig Environment vars
+ * http://www.twig-project.org/doc/api.html#environment-options
+ */
+$config['twigEnvVars']['debug']                 = false; // bool (true|false)
+$config['twigEnvVars']['charset']               = 'utf-8'; // string charset
+$config['twigEnvVars']['cache']                 = SB_APP_PATH."cache/twig"; //mixed {bool (false) for no caching | string ('/fullpath/to/twig/cache/dir')}
+$config['twigEnvVars']['auto_reload']           = false; // bool (true|false)
+$config['twigEnvVars']['autoescape']            = true; // bool (true|false)
+$config['twigEnvVars']['optimizations']         =  -1;
+$config['twigEnvVars']['strict_variables']      = false; // bool (true|false)
+$config['twigEnvVars']['base_template_class']   = 'Twig_Template'; //string (fullname of class with NS if necessary)
 /**
  * Db config vars
  */
@@ -39,10 +51,10 @@ $config['db']['type'] = 'mysql';
 /**
  * Conn params
  */
-$config['db']['master']['host']     = 'localhost';
-$config['db']['master']['dbname']   = 'sambhuti';
-$config['db']['master']['user']     = 'mysqluser';
-$config['db']['master']['pass']     = 'mysqlpass';
-$config['db']['master']['options']  = array();
-$config['db']['master']['prefix']   = 'sb_';
+$config['db']['master']['host']		= 'localhost';
+$config['db']['master']['dbname']	= 'sambhuti';
+$config['db']['master']['user']		= 'mysqluser';
+$config['db']['master']['pass']		= 'mysqlpass';
+$config['db']['master']['options']	= array();
+$config['db']['master']['prefix']	= 'sb_';
 
