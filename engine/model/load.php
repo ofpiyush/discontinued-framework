@@ -44,7 +44,7 @@ class load
     public static function view($name,$args = array())
     {
         if(!isset(self::$models['twigEnv']['instance']))
-            self::$models['twigEnv']['instance'] = new \Twig_Environment(self::model('twigLoader'), array('cache'=> SB_APP_PATH."cache/twig"));
+            self::$models['twigEnv']['instance'] = new \Twig_Environment(self::model('twigLoader'), self::model('config')->twigEnvVars);
         return (is_array($args) && count($args))? self::model('twigEnv')->loadTemplate($name)->render($args) : self::model('twigEnv')->loadTemplate($name) ;
     }
     
