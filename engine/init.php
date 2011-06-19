@@ -26,7 +26,8 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-ini_set('display_errors', 'off');
+ini_set('display_errors', 'on');
+error_reporting(E_ALL);
 require_once(SB_ENGINE_PATH.'model/load.php');
 require_once(SB_ENGINE_PATH.'thirdparty/Twig/Autoloader.php');
 model\load::register();
@@ -37,5 +38,9 @@ try
 }
 catch(model\Exception $e)
 {
-    //do some catching
+    model\utils::handleExceptions();
+}
+catch(\Exception $e)
+{
+    model\utils::handleExceptions($e);
 }

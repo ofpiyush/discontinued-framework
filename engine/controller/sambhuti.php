@@ -49,24 +49,8 @@ class sambhuti extends base
             }
         }
         catch(\sb\model\Exception $e) {}
-        if(!isset($config))
-        {
-            $config = \sb\model\load::model('config');
-            $config->autologExceptions = true;
-            $config->displayExceptions = false;
-        }
-        if((is_array($config->exceptions) && count($config->exceptions) )
-            && ($config->displayExceptions || $config->autologExceptions))
-        {
-            $exceptions = implode(PHP_EOL,$config->exceptions);
-            if($config->autologExceptions)
-            {
-                \sb\model\load::model('logger')->write('exceptions',$exceptions);
-            }
-            if($config->displayExceptions) {
-                echo "<pre>",$exceptions,"</pre>";
-            }
-        }
+        catch(\Exception $e){ throw new \sb\model\Exception($e->getMessage(),$e->getCode(),$e);}
+        \sb\model\utils::handleExceptions();
     }
     
 }
