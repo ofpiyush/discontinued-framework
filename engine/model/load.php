@@ -69,9 +69,7 @@ class load
             }
         }
     }
-    
-    
-    
+
     public static function fetch($type,$classname)
     {
         foreach(array_reverse(self::$lazyPaths) as $ns => $path)

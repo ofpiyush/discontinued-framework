@@ -40,8 +40,8 @@ class sambhuti extends base
                 require_once(SB_APP_PATH.'config/config.php');
                 \sb\model\load::addLazyPath($config['namespace'],SB_APP_PATH);
                 $config = \sb\model\load::model('config',true,$config);
-                $resolver = \sb\model\load::model('resolver',true,$config->namespace.'\\controller\\'.$config->defaultController);
-                $resolver->getController($config->namespace.'\\controller\\'.$request->controller)->execute($request);
+                $resolver = \sb\model\load::model('resolver',true,$config->defaultController);
+                $resolver->getController($request->controller)->execute($request);
             }
             else
             {

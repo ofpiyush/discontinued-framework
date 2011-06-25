@@ -29,28 +29,29 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 
 class resolver
 {
-    private $base;
-    private $notFound;
-    private $defaultCntrl;
+    private $base = null;
+    private $notFound = null;
+    private $defaultCntrl = null;
     private $instances = array();
     function __construct($default)
     {
         $this->base         = new \ReflectionClass('sb\controller\base');
-        $this->notFound     = $this->loadController('sb\controller\notFound');
-        $this->defaultCntrl = $this->loadController($default);
+        $this->notFound     = $this->getController('_notFound');
+        $this->defaultCntrl = $this->getController($default);
         
     }
     function getController($classname)
     {
-        if(substr($classname,-1) == '\\')
-        {
+        if(is_null($classname))
             return $this->defaultCntrl;
-        }
-        if(load::auto($classname))
+        if($classname[0] == "_" && !is_null($this->notFound))
+            return $this->notFound;
+        $name = load::fetch('controller',$classname);
+        if($name)
         {
-            if(class_exists($classname))
+            if(class_exists($name))
             {
-                return $this->loadController($classname);
+                return $this->loadController($name);
             }
         }
         else
