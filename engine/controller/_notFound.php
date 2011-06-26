@@ -33,6 +33,7 @@ class _notFound extends base
     private static $callbacks = array();
     function execute(\sb\model\request $request)
     {
+        header("HTTP/1.0 404 Not Found",true,404);
         echo $request->controller." not found";
     }
 }
