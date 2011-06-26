@@ -1,5 +1,4 @@
 <?php
-$time1 = microtime(true);
 /**
  * Sambhuti
  * Copyright (C) 2010-2011  Piyush Mishra
@@ -32,8 +31,9 @@ $relative_engine_path='engine';
  * specific to generic to prevent overriding
  * donot use a trailing slash
  */
-$sb_apps['http://localhost/sambhuti'] = 'app';
-$sb_apps['cli'] = 'app';
+$sb_apps[0]['siteURL'] = '%1$s';
+$sb_apps[0]['regexURL'] = '(.*)';
+$sb_apps[0]['folder'] = 'app';
 /**
  * Now let sambhuti handle the rest
  */
