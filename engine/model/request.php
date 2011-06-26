@@ -50,40 +50,41 @@ class request
         $hostParts  = explode(':', $_SERVER['HTTP_HOST'], 2);
         $httpHost   = array_shift($hostParts);
         $httpPort   = array_shift($hostParts);
-        $requestURI = $_SERVER['REQUEST_URI'];
+        $requestURI = trim($_SERVER['REQUEST_URI'],'/');
         if(filter_var($scheme."://".$httpHost.$requestURI, FILTER_VALIDATE_URL))
         {
             if(isset($apps) && is_array($apps))
-            foreach($apps as $app)
-            {
-                if(!array_key_exists('regexURL',$app))
+                foreach($apps as $app)
                 {
-                    $urla=parse_url($app['siteURL']);
-                    if(!isset($urla['port']))
-                        $urla['port']='';
-                    if($urla['scheme'] == $scheme && $urla['host']==$httpHost && $urla['port'] ==$httpPort)
+                    if(!array_key_exists('regexURL',$app))
                     {
-                        if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
+                        $urla=parse_url($app['siteURL']);
+                        $urla['path']= trim($urla['path'],'/');
+                        if(!isset($urla['port']))
+                            $urla['port']='';
+                        if($urla['scheme'] == $scheme && $urla['host']==$httpHost && $urla['port'] ==$httpPort)
                         {
-                            $this->siteURL = $app['siteURL'].'/';
-                            $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
-                            $this->populate();
-                            if($this->setAppPath($app['folder']))
-                                break;
+                            if(!isset($urla['path']) || stripos($requestURI,$urla['path'])===0)
+                            {
+                                $this->siteURL = $app['siteURL'].'/';
+                                $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
+                                $this->populate();
+                                if($this->setAppPath($app['folder']))
+                                    break;
+                            }
                         }
                     }
+                    elseif(preg_match('/'.$app['regexURL'].'/i',$scheme."://".$httpHost.$requestURI,$matches))
+                    {
+                        $this->siteURL = array_key_exists('siteURL',$app) ? vsprintf($app['siteURL'],$matches) : $matches[0];
+                        $this->path = array_key_exists('path', $app)? vsprintf($app['path'],$matches) : null;
+                        $this->populate();
+                        if(array_key_exists('controller', $app))
+                            $this->controller = vsprintf($app['controller'],$matches);
+                        if($this->setAppPath(vsprintf($app['folder'],$matches)))
+                            break;
+                    }
                 }
-                elseif(preg_match('/'.$app['regexURL'].'/i',$scheme."://".$httpHost.$requestURI,$matches))
-                {
-                    $this->siteURL = array_key_exists('siteURL',$app) ? vsprintf($app['siteURL'],$matches) : $matches[0];
-                    $this->path = array_key_exists('path', $app)? vsprintf($app['path'],$matches) : null;
-                    $this->populate();
-                    if(array_key_exists('controller', $app))
-                        $this->controller = vsprintf($app['controller'],$matches);
-                    if($this->setAppPath(vsprintf($app['folder'],$matches)))
-                        break;
-                }
-            }
         }
     }
 
