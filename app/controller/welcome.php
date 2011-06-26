@@ -31,9 +31,8 @@ class welcome extends \sb\controller\base
 {
     function execute(\sb\model\request $request)
     {
-        global $time1;
         $view = $this->load('view','base.html');
-        echo $view->render(array("user" => $userobj, "time" => microtime(true) - $time1));
+        $view->display(array());
     }
 }
 
