@@ -68,8 +68,8 @@ class request
                             $this->siteURL = $app['siteURL'].'/';
                             $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
                             $this->populate();
-                            define('SB_APP_PATH',realpath($app['folder']).'/');
-                            break;
+                            if($this->setAppPath($app['folder']))
+                                break;
                         }
                     }
                 }
@@ -80,12 +80,19 @@ class request
                     $this->populate();
                     if(array_key_exists('controller', $app))
                         $this->controller = vsprintf($app['controller'],$matches);
-                    define('SB_APP_PATH',realpath(vsprintf($app['folder'],$matches)).'/');
-                    if(SB_APP_PATH != '/')
+                    if($this->setAppPath(vsprintf($app['folder'],$matches)))
                         break;
                 }
             }
         }
+    }
+
+    private function setAppPath($path)
+    {
+        $realpath = realpath($path).'/';
+        if($realpath != '/')
+            return define('SB_APP_PATH',$realpath);
+        return false;
     }
 
     private function populate()
