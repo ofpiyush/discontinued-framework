@@ -32,50 +32,65 @@ class request
     var $type       = null;
     var $controller = null;
     var $segments   = null;
-    var $action     = null;
-    var $raw        = null;
-    var $filtered   = null;
     var $siteURL    = null;
+    private $path;
+
     function __construct($apps)
     {
         $this->processType();
-        if($this->type=='web')
+        if($this->type =='web')
         {
             $this->parseURL($apps);
         }
     }
+
     private function parseURL($apps)
     {
         $scheme     = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='off') ? 'https':'http';
         $hostParts  = explode(':', $_SERVER['HTTP_HOST'], 2);
         $httpHost   = array_shift($hostParts);
         $httpPort   = array_shift($hostParts);
-        $requestURI = rtrim($_SERVER['REQUEST_URI'],'/').'/';
+        $requestURI = $_SERVER['REQUEST_URI'];
         if(filter_var($scheme."://".$httpHost.$requestURI, FILTER_VALIDATE_URL))
         {
             if(isset($apps) && is_array($apps))
-            foreach($apps as $url=>$relpath)
+            foreach($apps as $app)
             {
-                $urla=parse_url($url);
-                if(!isset($urla['port']))
-                    $urla['port']='';
-                if($urla['scheme']==$scheme && $urla['host']==$httpHost && $urla['port'] == $httpPort)
+                if(!array_key_exists('regexURL',$app))
                 {
-                    if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
+                    $urla=parse_url($app['siteURL']);
+                    if(!isset($urla['port']))
+                        $urla['port']='';
+                    if($urla['scheme'] == $scheme && $urla['host']==$httpHost && $urla['port'] ==$httpPort)
                     {
-                        $this->siteURL = rtrim($url,'/').'/';
-                        $this->populate((array_key_exists('path',$urla))? $urla['path'] : '',$requestURI);
-                        define('SB_APP_PATH',realpath($relpath).'/');
-                        break;
+                        if(!isset($urla['path']) || strpos($requestURI,$urla['path'])===0)
+                        {
+                            $this->siteURL = $app['siteURL'].'/';
+                            $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
+                            $this->populate();
+                            define('SB_APP_PATH',realpath($app['folder']).'/');
+                            break;
+                        }
                     }
+                }
+                elseif(preg_match('/'.$app['regexURL'].'/i',$scheme."://".$httpHost.$requestURI,$matches))
+                {
+                    $this->siteURL = array_key_exists('siteURL',$app) ? vsprintf($app['siteURL'],$matches) : $matches[0];
+                    $this->path = array_key_exists('path', $app)? vsprintf($app['path'],$matches) : null;
+                    $this->populate();
+                    if(array_key_exists('controller', $app))
+                        $this->controller = vsprintf($app['controller'],$matches);
+                    define('SB_APP_PATH',realpath(vsprintf($app['folder'],$matches)).'/');
+                    if(SB_APP_PATH != '/')
+                        break;
                 }
             }
         }
     }
-    private function populate($path,$requestURI)
+
+    private function populate()
     {
-        $relative   = trim(substr($requestURI, strlen($path)),'/');
-        $segments   = explode('/',$relative);
+        $segments = explode('/',trim($this->path,'/'));
         if($segments[0]!='')
         {
             $this->controller = $segments[0];
@@ -84,6 +99,7 @@ class request
                 $this->segments = $segments;
         }
     }
+
     private function processType()
     {
         $this->type = (PHP_SAPI == 'cli')?'cli' : 'web';
