@@ -65,10 +65,13 @@ class request
                             $urla['port']='';
                         if($urla['scheme'] == $scheme && $urla['host']==$httpHost && $urla['port'] ==$httpPort)
                         {
-                            if(!isset($urla['path']) || stripos($requestURI,$urla['path'])===0)
+                            if(!(isset($urla['path']) && !empty($urla['path'])) || stripos($requestURI,$urla['path'])===0)
                             {
                                 $this->siteURL = $app['siteURL'];
-                                $this->path = @trim(substr($requestURI, strlen($urla['path'])),'/');
+                                if(isset($urla['path']))
+                                    $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
+                                else
+                                    $this->path = trim($requestURI,'/');
                                 $this->populate();
                                 if($this->setAppPath($app['folder']))
                                     break;
