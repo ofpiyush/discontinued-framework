@@ -66,7 +66,7 @@ class request
                         {
                             if(!isset($urla['path']) || stripos($requestURI,$urla['path'])===0)
                             {
-                                $this->siteURL = $app['siteURL'].'/';
+                                $this->siteURL = $app['siteURL'];
                                 $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
                                 $this->populate();
                                 if($this->setAppPath($app['folder']))
