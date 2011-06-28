@@ -30,7 +30,6 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
 abstract class base
 {
     protected static $log = null;
-    final function __construct(){}
     protected function load($type,$name,$new = false, $args = array())
     {
         if(is_callable(array('\sb\model\load',$type)))
