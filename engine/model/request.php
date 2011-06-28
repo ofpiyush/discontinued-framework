@@ -60,8 +60,7 @@ class request
                     {
                         $urla=parse_url($app['siteURL']);
                         if(!isset($urla['path']))
-                            $urla['path'] = "";
-                        $urla['path']= trim($urla['path'],'/');
+                            $urla['path']= trim($urla['path'],'/');
                         if(!isset($urla['port']))
                             $urla['port']='';
                         if($urla['scheme'] == $scheme && $urla['host']==$httpHost && $urla['port'] ==$httpPort)
@@ -69,7 +68,7 @@ class request
                             if(!isset($urla['path']) || stripos($requestURI,$urla['path'])===0)
                             {
                                 $this->siteURL = $app['siteURL'];
-                                $this->path = trim(substr($requestURI, strlen($urla['path'])),'/');
+                                $this->path = @trim(substr($requestURI, strlen($urla['path'])),'/');
                                 $this->populate();
                                 if($this->setAppPath($app['folder']))
                                     break;
