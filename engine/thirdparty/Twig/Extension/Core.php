@@ -23,6 +23,7 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_TokenParser_Extends(),
             new Twig_TokenParser_Include(),
             new Twig_TokenParser_Block(),
+            new Twig_TokenParser_Use(),
             new Twig_TokenParser_Filter(),
             new Twig_TokenParser_Macro(),
             new Twig_TokenParser_Import(),
@@ -47,7 +48,7 @@ class Twig_Extension_Core extends Twig_Extension
 
             // encoding
             'url_encode'  => new Twig_Filter_Function('twig_urlencode_filter'),
-            'json_encode' => new Twig_Filter_Function('json_encode'),
+            'json_encode' => new Twig_Filter_Function('twig_jsonencode_filter'),
 
             // string filters
             'title'      => new Twig_Filter_Function('twig_title_string_filter', array('needs_environment' => true)),
@@ -126,6 +127,7 @@ class Twig_Extension_Core extends Twig_Extension
             'defined'     => new Twig_Test_Function('twig_test_defined'),
             'sameas'      => new Twig_Test_Function('twig_test_sameas'),
             'none'        => new Twig_Test_Function('twig_test_none'),
+            'null'        => new Twig_Test_Function('twig_test_none'),
             'divisibleby' => new Twig_Test_Function('twig_test_divisibleby'),
             'constant'    => new Twig_Test_Function('twig_test_constant'),
             'empty'       => new Twig_Test_Function('twig_test_empty'),
@@ -199,10 +201,23 @@ class Twig_Extension_Core extends Twig_Extension
     }
 }
 
-function twig_date_format_filter($date, $format = 'F j, Y H:i')
+function twig_date_format_filter($date, $format = 'F j, Y H:i', $timezone = null)
 {
     if (!$date instanceof DateTime) {
-        $date = new DateTime((ctype_digit($date) ? '@' : '').$date);
+        if (ctype_digit((string) $date)) {
+            $date = new DateTime('@'.$date);
+            $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+        } else {
+            $date = new DateTime($date);
+        }
+    }
+
+    if (null !== $timezone) {
+        if (!$timezone instanceof DateTimeZone) {
+            $timezone = new DateTimeZone($timezone);
+        }
+
+        $date->setTimezone($timezone);
     }
 
     return $date->format($format);
@@ -215,6 +230,24 @@ function twig_urlencode_filter($url, $raw = false)
     }
 
     return urlencode($url);
+}
+
+function twig_jsonencode_filter($value, $options = 0)
+{
+    if ($value instanceof Twig_Markup) {
+        $value = (string) $value;
+    } elseif (is_array($value)) {
+        array_walk_recursive($value, '_twig_markup2string');
+    }
+
+    return json_encode($value, $options);
+}
+
+function _twig_markup2string(&$value)
+{
+    if ($value instanceof Twig_Markup) {
+        $value = (string) $value;
+    }
 }
 
 function twig_array_merge($arr1, $arr2)
@@ -495,5 +528,5 @@ function twig_test_defined($name, $context)
 
 function twig_test_empty($value)
 {
-    return null === $value || false === $value || '' === (string) $value;
+    return false === $value || (empty($value) && '0' != $value);
 }

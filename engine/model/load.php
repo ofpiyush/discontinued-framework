@@ -117,7 +117,7 @@ class load
     {
         $path = rtrim($path,'/');
         if(isset(self::$models['twigLoader']['instance']))
-            self::model('twigLoader')->setPaths($path."/view");
+            self::model('twigLoader')->addPath($path."/view");
         else
             self::$models['twigLoader']['instance'] = new \Twig_Loader_Filesystem($path."/view");
         self::$lazyPaths[$namespace] = $path;
