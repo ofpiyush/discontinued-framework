@@ -59,7 +59,7 @@ class request
                     if(!array_key_exists('regexURL',$app))
                     {
                         $urla=parse_url($app['siteURL']);
-                        if(!isset($urla['path']))
+                        if(isset($urla['path']))
                             $urla['path']= trim($urla['path'],'/');
                         if(!isset($urla['port']))
                             $urla['port']='';
