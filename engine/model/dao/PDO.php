@@ -32,6 +32,11 @@ abstract class PDO
 {
     protected static $_dbh  = null;
     protected static $config = null;
+
+    abstract function make();
+
+    abstract function save(\sb\model\base $base);
+
     function __construct()
     {
         if(is_null(self::$config))
@@ -41,6 +46,7 @@ abstract class PDO
             }
             catch(Exception $e){}
     }
+
     /**
      * Connects to the dbase if no connection already exists
      *
@@ -70,7 +76,7 @@ abstract class PDO
         }
         return $key;
     }
-    
+
     /**
      * Executes the query with Bindings and returns Statement
      *
@@ -161,20 +167,21 @@ abstract class PDO
         $stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
         return $this->fetch($stmt);
     }
+
     protected final function objRows($stmt,$class)
     {
         $stmt->setFetchMode(\PDO::FETCH_CLASS,$class);
         return $this->fetchAll($stmt);
     }
+
     protected final function disconnect($key='all')
     {
         if(is_array(self::$_dbh))
             if($key=='all')
-            {
-                foreach(self::$_dbh as $index=>$val)    
-                    self::$_dbh[$index]=null;
-            }elseif(array_key_exists($key,self::$_dbh))
-                self::$_dbh[$key]=null;
+                foreach(self::$_dbh as $index => $val)    
+                    self::$_dbh[$index] = null;
+            elseif(array_key_exists($key,self::$_dbh))
+                self::$_dbh[$key] = null;
     }
     
     function __destruct()
