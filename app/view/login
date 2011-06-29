@@ -1,4 +1,0 @@
-If you see this, it means sambhuti is working successfully on your localhost. <br />
-The automatically generated username is {{user.slug}}. (just a test of object passing) <br />
-Sambhuti took {{time}} Seconds to reach this line. Its probably a lot faster than just the init of most Frameworks. <br />
-Thats the time taken in init + writing one record to the database + reading 1 record from the database + generating a template cache and rendering it. (accurate to the third decimal point unless you are on some really old processor)
