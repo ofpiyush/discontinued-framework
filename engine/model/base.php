@@ -26,27 +26,11 @@ if ( ! defined('SB_ENGINE_PATH')) exit('No direct script access allowed');
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2010-2011 Piyush Mishra
  */
-
-final class utils
+ 
+abstract class base
 {
-    private function __construct() {}
-    public static function handleExceptions($e = null)
+    function __sleep()
     {
-        $config = load::model('config');
-        if((is_array($config->exceptions) && count($config->exceptions) )
-            && ($config->displayExceptions || $config->autologExceptions))
-        {
-            $exceptions = implode(PHP_EOL,$config->exceptions);
-            if(!is_null($e))
-                $exceptions = $e.PHP_EOL.$exceptions;
-            if($config->autologExceptions)
-            {
-                \sb\model\load::model('logger')->write('exceptions',$exceptions);
-            }
-            if($config->displayExceptions) {
-                echo "<pre>",$exceptions,"</pre>";
-            }
-        }
-        die();
+        return array_keys(get_object_vars($this));
     }
 }

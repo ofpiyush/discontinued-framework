@@ -66,6 +66,3 @@ class input
     }
 }
 
-/**
- * End of file Input
- */
