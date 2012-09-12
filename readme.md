@@ -2,7 +2,6 @@
 
 ##Requirements
 * php5.3
-* Apache server
 * SPL library
 
 ##Setting up: 
