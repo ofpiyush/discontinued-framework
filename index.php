@@ -25,23 +25,4 @@
  * @copyright 2010-2011 Piyush Mishra
  */
 
-$relative_engine_path='engine';
-/**
- * $sb_apps['full_url']='relative/path/from/this/file'
- * specific to generic to prevent overriding
- * donot use a trailing slash
- */
-$sb_apps[0]['siteURL'] = '%1$s';
-$sb_apps[0]['regexURL'] = '(.*)';
-$sb_apps[0]['folder'] = 'app';
-/**
- * Now let sambhuti handle the rest
- */
-
-define('SB_ENGINE_PATH',realpath($relative_engine_path).'/');
-if(SB_ENGINE_PATH=='/')
-	exit('Please check your $relative_engine_path in '.__FILE__);
-require_once SB_ENGINE_PATH.'init.php';
-/**
- * End of file Index
- */
+//clean slate
