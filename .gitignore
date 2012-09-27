@@ -1,6 +1,1 @@
-app/config/config.php
-*/cache/*
-*/logs/*
-!*/cache/index.html
-!*/cache/twig/index.html
-!*/logs/index.html
+
