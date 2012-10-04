@@ -42,7 +42,7 @@ abstract class base implements face {
             ->set('controller',trim($this->controller, '/'))
             ->set('get',$this->get)
             ->set('post',$this->post)
-            ->set('server',$this->post);
+            ->set('server',$this->server);
     }
 
     function parse(array &$array, $string) {

@@ -29,7 +29,7 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 
 class web extends base {
     function go() {
-        $this->controller = empty($_SERVER['PATH_INFO']) ? '' : $_SERVER['PATH_INFO'];
+        $this->controller = trim(str_replace($_SERVER["SCRIPT_NAME"],"",$_SERVER["PHP_SELF"]),"/");
         $this->get = $this->parseGet($_SERVER['QUERY_STRING']);
         $this->post = $_POST;
         $this->server = $_SERVER;
