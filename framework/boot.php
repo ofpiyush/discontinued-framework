@@ -20,12 +20,12 @@
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Sambhuti
- * @author Piyush<piyush[at]codeitout[dot]com>
+ * @author Piyush<piyush[at]cio[dot]bz>
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-define('SAMBHUTI_ROOT_PATH',realpath(__DIR__).'/');
+define('SAMBHUTI_ROOT_PATH',realpath($sambhuti_path).'/');
 require_once(SAMBHUTI_ROOT_PATH.'core/loader.php');
 $loader = new core\loader();
 $loader->addLazyPath('sambhuti',SAMBHUTI_ROOT_PATH);

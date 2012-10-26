@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\cache;
+namespace sambhuti\request;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,15 +26,14 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-interface face {
-
-    function __construct($identifier);
-
-    function store($data);
-
-    function fetch();
-
-    function remove();
-
-    function modified();
+use sambhuti\core;
+class container extends core\container {
+    public $instance = null;
+    function get($data = null) {
+        if(null === $this->instance) {
+            //Show only web for the moment and assume $data to be working
+            $this->instance = new web($data);
+        }
+        return $this->instance;
+    }
 }

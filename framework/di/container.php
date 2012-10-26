@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\cache;
+namespace sambhuti\di;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,15 +26,10 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-interface face {
+use sambhuti\core;
 
-    function __construct($identifier);
-
-    function store($data);
-
-    function fetch();
-
-    function remove();
-
-    function modified();
+class container extends core\container {
+    function get($instance = null) {
+        
+    }
 }

@@ -22,18 +22,20 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Sambhuti
- * @author Piyush<piyush[at]codeitout[dot]com>
+ * @author Piyush<piyush[at]cio[dot]bz>
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\di;
-class container {
+use sambhuti\core;
+class container extends core\container {
 
     private $face = null;
     private $container = null;
     protected $notFound = null;
     protected $controllers = array();
-    
+
+
     function __construct($face, $default, di\container $container) {
         $this->face = $face;
         $this->notFound = $this->get('_notFound');
@@ -41,7 +43,7 @@ class container {
         $this->controllers['home'] = $this->get($default);
     }
 
-    function get($controller) {
+    function get($controller = null) {
         if(empty($controller)) {
             return $this->controllers['home'];
         } elseif(empty($this->controllers[$controller])) {

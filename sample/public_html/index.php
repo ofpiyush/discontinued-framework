@@ -1,6 +1,4 @@
 <?php
-namespace sambhuti\cache;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -26,15 +24,11 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-interface face {
+$app_path = "../";
+$sambhuti_path = "../../framework/";
 
-    function __construct($identifier);
-
-    function store($data);
-
-    function fetch();
-
-    function remove();
-
-    function modified();
-}
+use sambhuti\core;
+use sambhuti\request;
+require_once($sambhuti_path.'boot.php');
+$request = new request\container();
+$boot = new core\boot($request->get(new core\data()));

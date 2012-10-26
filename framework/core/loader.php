@@ -22,7 +22,7 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Sambhuti
- * @author Piyush<piyush[at]codeitout[dot]com>
+ * @author Piyush<piyush[at]cio[dot]bz>
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
@@ -48,11 +48,25 @@ class loader {
         $array = explode('\\',$class);
         if(array_key_exists($array[0],$this->lazypath)) {
             $array[0] = $this->lazypath[$array[0]];
-            $fullpath=implode($array,'/').'.php';
-            if(file_exists($fullpath)) {
-                require_once($fullpath);
-                return true;
-            }
+            return $this->checkRequire(implode($array,'/'));
+        }
+        return false;
+    }
+
+    function checkRequire($path) {
+        $fullpath = str_replace('\\','/',$path).'.php';
+        if(file_exists($fullpath)) {
+            require_once($fullpath);
+            return true;
+        }
+        return false;
+    }
+
+    function fetch($type,$classname) {
+        $paths = array_reverse($this->lazypath);
+        foreach( $paths as $ns => $path) {
+            if($this->checkRequire($path.'/'.$type.'/'.$classname))
+                return $ns.'\\'.$type.'\\'.$classname;
         }
         return false;
     }
@@ -61,9 +75,8 @@ class loader {
      * Add single lazypath for autoloader
      * @param string $namespace namespace for replacement
      * @param string $path the full path to the directory to be added
-     * @param bool $prefix whether to add the path before others or after
      */
-    function addLazyPath($namespace, $path) {
+    function addLazyPath($namespace, $path, $prefix = false) {
         $path = rtrim($path,'/');
         $this->lazypath[$namespace] = $path;
         return $this;
