@@ -22,7 +22,7 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Sambhuti
- * @author Piyush<piyush[at]codeitout[dot]com>
+ * @author Piyush<piyush[at]cio[dot]bz>
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
