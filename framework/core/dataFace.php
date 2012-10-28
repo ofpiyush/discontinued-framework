@@ -31,4 +31,7 @@ interface dataFace {
 	function get($key);
 	function set($key,$value);
     function update($key,$value);
+    function getAll();
+    function __get($key);
+    function __set($key,$value);
 }

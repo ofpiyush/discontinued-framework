@@ -30,12 +30,14 @@ use sambhuti\request;
 class boot {
     private $request = null;
 
-    function __construct(request\face $request) {
-        $this->request = $request->data();
-        var_dump($this->request);
+    function __construct(core $core) {
+        $this->core = $core;
+        $this->request = $core->get('request')->get(new data())->data();
     }
 
     function go() {
-        
+        $response = new data();
+        $this->core->get('controller')->get($this->request->get('controller'))->go($this->request,$response);
+        return $response;
     }
 }

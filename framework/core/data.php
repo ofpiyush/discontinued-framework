@@ -36,11 +36,10 @@ class data implements dataFace {
 
 	public function get($key) {
         $args=func_get_args();
-        $tmp = $this->conf;
-        foreach($args as $arg)
-        {
+        $tmp = $this->data;
+        foreach($args as $arg) {
             if(array_key_exists($arg,$tmp))
-                $tmp=$tmp[$arg];
+                $tmp = $tmp[$arg];
             else
                 return null;
         }
@@ -59,4 +58,17 @@ class data implements dataFace {
         $this->data[$key]=$value;
         return $this;
 	}
+
+    function getAll() {
+        return $this->data;
+    }
+
+    function __get($key) {
+        return $this->get($key);
+    }
+
+    function __set($key,$value) {
+        throw new \Exception('Trying to save "'.$value.'" to Config "'.$key.'" 
+        via __set use config::set() instead');
+    }
 }
