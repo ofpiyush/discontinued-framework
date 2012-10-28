@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\controllers;
+namespace sambhuti\controller;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -28,45 +28,36 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  */
 use sambhuti\di;
 use sambhuti\core;
-class container extends core\container {
+class controller extends core\container {
 
+    static $dependencies = array('%routing','core');
     private $face = null;
-    private $container = null;
+    private $core = null;
     protected $notFound = null;
     protected $controllers = array();
 
 
-    function __construct($face, $default, di\container $container) {
-        $this->face = $face;
-        $this->notFound = $this->get('_notFound');
-        $this->container = $container;
-        $this->controllers['home'] = $this->get($default);
+    function __construct(core\data $routing, core\core $core) {
+        $this->core = $core;
+        $this->face = $routing->get('interface');
+        $this->notFound = $this->get($routing->get('404'));
+        $this->controllers['home'] = $this->get($routing->get('home'));
     }
 
     function get($controller = null) {
+        if(null === $controller) return $this;
         if(empty($controller)) {
-            return $this->controllers['home'];
+            return $this->get('home');
         } elseif(empty($this->controllers[$controller])) {
-            $this->controllers[$controller] = $this->go($this->name($controller))->newInstance($this->container);
-        }
-        return $this->controllers[$controller];
-    }
-
-    function name($class, array $extras = array()) {
-        return (strpos($class, '\\') === false) ? $class.'\\index' : $class);
-    }
-
-    protected function go($controller) {
-        if(class_exists($controller)) {
-            $reflection = new ReflectionClass($controller);
-            if($reflection->implementsInterface($this->face) && $reflection->isInstantiable()) {
-                return $reflection;
+            $name = (strpos($controller, '\\') === false) ? $controller.'\\index' : $controller;
+            $class = $this->core->get('loader')->fetch('controller',$name);
+            if(null !== $class) {
+                $this->controllers[$controller] = $this->core->process( $class, 'sambhuti\controller\base');
+            } else {
+                $this->controllers[$controller] = $this->notFound;
             }
         }
-        if($this->notFound instanceof ReflectionClass) {
-            return $this->notFound;
-        }
-        return null;
+        return $this->controllers[$controller];
     }
 
 }

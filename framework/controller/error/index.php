@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\di;
+namespace sambhuti\controller\error;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,10 +26,10 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+use sambhuti\controller;
 use sambhuti\core;
-
-class container extends core\container {
-    function get($instance = null) {
-        
+class index extends controller\base {
+    function go(core\dataFace $request, core\dataFace $response) {
+        echo $request->get('controller')." Not found";
     }
 }

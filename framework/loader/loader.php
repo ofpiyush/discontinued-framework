@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\core;
+namespace sambhuti\loader;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,7 +26,9 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-class loader {
+
+use sambhuti\core;
+class loader extends core\container {
 
     /**
      * Paths for lazyloading
@@ -35,14 +37,14 @@ class loader {
     private $lazypath = array();
 
     function __construct() {
-        spl_autoload_register(array($this, 'auto'));
+        spl_autoload_register(array($this, 'get'));
     }
 
     /**
      * Autoloader to load the classes under all lazypaths
-     * @param string $classname name of the class to be loaded
+     * @param string $class name of the class to be loaded
      */
-    function auto($class) {
+    function get($class = null) {
         if(class_exists($class))
             return true;
         $array = explode('\\',$class);
@@ -68,7 +70,7 @@ class loader {
             if($this->checkRequire($path.'/'.$type.'/'.$classname))
                 return $ns.'\\'.$type.'\\'.$classname;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -76,7 +78,7 @@ class loader {
      * @param string $namespace namespace for replacement
      * @param string $path the full path to the directory to be added
      */
-    function addLazyPath($namespace, $path, $prefix = false) {
+    function addLazyPath($namespace, $path) {
         $path = rtrim($path,'/');
         $this->lazypath[$namespace] = $path;
         return $this;

@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\di;
+namespace sambhuti\cache;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,3 +26,10 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+use sambhuti\core;
+
+class cache extends core\container {
+    function get($type = null) {
+        
+    }
+}

@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\controllers;
+namespace sambhuti\controller;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,20 +26,8 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\di;
-use sambhuti\request;
-use sambhuti\session;
-interface face {
+use sambhuti\core;
+abstract class base {
 
-    function __construct(di\container $container);
-
-    function container($key = null);
-
-    function conf($id);
-
-    function model($id);
-
-    function auth(session\face $session);
-
-    function go(core\dataFace $request);
+    abstract function go(core\dataFace $request , core\dataFace $response );
 }

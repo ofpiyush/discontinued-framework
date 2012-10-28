@@ -28,5 +28,6 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  */
 
 abstract class container {
+
     abstract function get($data = null);
 }

@@ -27,8 +27,9 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-class container extends core\container {
+class request extends core\container {
     public $instance = null;
+
     function get($data = null) {
         if(null === $this->instance) {
             //Show only web for the moment and assume $data to be working

@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\cache;
+namespace sambhuti\controller\home;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -26,10 +26,10 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+use sambhuti\controller;
 use sambhuti\core;
-
-class container extends core\container {
-    function get($type = null) {
-        
+class index extends controller\base {
+    function go(core\dataFace $request, core\dataFace $response) {
+        echo "home loaded";
     }
 }
