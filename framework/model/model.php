@@ -50,10 +50,10 @@ class model extends core\controller {
     function get($id = null) {
         if(empty($this->instances[$id])) {
             $class = $this->loader->fetch('model\\'.$this->type,$id);
-            if(null !== $class) {
+            if(null === $class) {
                 $this->instances[$id] = new $class($this->connection);
             } else {
-                throw new Exception("Cannot find model ". $id);
+                throw new \Exception("Cannot find model ". $id);
             }
         }
         return $this->instances[$id];

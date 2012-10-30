@@ -52,7 +52,7 @@ class core extends container {
                 } else {
                     $current = $this;
                     foreach ($parts as $part) {
-                        if(!is_object($current)) throw new Exception ('Cannot load '.$identifier.' dependency '.$part.' can not be loaded from a non-object');
+                        if(!is_object($current)) throw new \Exception ('Cannot load '.$identifier.' dependency '.$part.' can not be loaded from a non-object');
                         $current = $current->get($part);
                     }
                     $this->processed[$identifier] = $current;
