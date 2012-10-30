@@ -30,7 +30,7 @@ use sambhuti\di;
 use sambhuti\core;
 class controller extends core\container {
 
-    static $dependencies = array('%routing','core');
+    static $dependencies = array('config.routing','core');
     private $face = null;
     private $core = null;
     protected $notFound = null;

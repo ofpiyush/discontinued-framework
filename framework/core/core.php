@@ -39,11 +39,25 @@ class core extends container {
     function get($identifier = null) {
         if(null === $identifier || 'core' === $identifier) return $this;
         if(empty($this->processed[$identifier])) {
-            $this->processed[$identifier] = $this->process(
-                    $this->get('loader')->fetch($identifier,$identifier),
-                    'sambhuti\core\container'
-                );
-            //Get the class of container to load
+            if(false === strpos($identifier,'.')) {
+                $this->processed[$identifier] = $this->process(
+                        $this->get('loader')->fetch($identifier,$identifier),
+                        'sambhuti\core\container'
+                    );
+            } else {
+                $parts = explode('.',$identifier);
+                if($parts[0] == 'core') {
+                    unset($parts[0]);
+                    $this->processed[$identifier] = $this->get(implode('.',$parts));
+                } else {
+                    $current = $this;
+                    foreach ($parts as $part) {
+                        if(!is_object($current)) throw new Exception ('Cannot load '.$identifier.' dependency '.$part.' can not be loaded from a non-object');
+                        $current = $current->get($part);
+                    }
+                    $this->processed[$identifier] = $current;
+                }
+            }
 
         }
         return $this->processed[$identifier];
@@ -56,7 +70,7 @@ class core extends container {
             $dependencies = array();
             $staticProps = $reflection->getStaticProperties();
             if(array_key_exists('dependencies',$staticProps)) {
-                $dependencies = array_map(array($this,'dependency'),$staticProps['dependencies']);
+                $dependencies = array_map(array($this,'get'),$staticProps['dependencies']);
             }
             if($reflection->isSubclassOf($base)) {
                 return $reflection->newInstanceArgs($dependencies);
@@ -66,11 +80,4 @@ class core extends container {
         throw new \Exception($class.' not found');
     }
 
-    function dependency($string) {
-        if('%' == $string[0]) {
-            $string = ltrim($string, '%');
-            return $this->get('config')->get($string);
-        }
-        return $this->get($string);
-    }
 }
