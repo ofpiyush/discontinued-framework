@@ -29,5 +29,6 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 
 abstract class container {
 
+    abstract function __construct(array $dependencies = array());
     abstract function get($data = null);
 }

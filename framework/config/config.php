@@ -34,8 +34,8 @@ class config extends core\container {
     static $dependencies = array('loader');
     private $confs = array();
 
-    function __construct(loader\loader $loader) {
-        $this->lazyPaths = $loader->getLazyPaths();
+    function __construct(array $dependencies = array()) {
+        $this->lazyPaths = $dependencies['loader']->getLazyPaths();
         $this->defaultPath = end($this->lazyPaths);
     }
 

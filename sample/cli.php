@@ -1,6 +1,4 @@
 <?php
-namespace sambhuti\request;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -26,21 +24,8 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-
-class web extends base {
-    function go() {
-        $this->controller = trim(str_replace($_SERVER["SCRIPT_NAME"],"",$_SERVER["PHP_SELF"]),"/");
-        $this->get = $this->parseGet($_SERVER['QUERY_STRING']);
-        $this->post = $_POST;
-        $this->server = $_SERVER;
-    }
-
-    private function parseGet($path) {
-        $parts = explode('&', $path);
-        $get = array();
-        foreach($parts as $part) {
-            $this->parse($get, $part);
-        }
-        return $get;
-    }
-}
+$app_path = "./";
+$sambhuti_path = "../framework/";
+define('ISCLI',true);
+chdir(dirname(__FILE__));
+require_once($app_path.'boot.php');

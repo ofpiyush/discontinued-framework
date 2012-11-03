@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\request;
+namespace sambhuti\controller;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -27,11 +27,12 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-interface face {
+class _error extends base {
+    function index(array $args = array()) {
+        echo $this->request->get('command')." Unknown Error";
+    }
 
-    function __construct(core\dataFace $data);
-
-    function go();
-
-    function data();
+    function _404() {
+        echo $this->request->get('command')." not Found";
+    }
 }

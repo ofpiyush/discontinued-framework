@@ -1,6 +1,4 @@
 <?php
-namespace sambhuti\controller\home;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -26,10 +24,11 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\controller;
 use sambhuti\core;
-class index extends controller\base {
-    function go(core\dataFace $request, core\dataFace $response) {
-        echo "home loaded";
-    }
-}
+use sambhuti\request;
+require_once($sambhuti_path.'boot.php');
+$loader->addLazyPath('sample',realpath($app_path));
+//keep 5.3 compatibility
+$core = new core\core(array('loader'=>$loader));
+$boot = new core\boot($core);
+$boot->go();

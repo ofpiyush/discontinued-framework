@@ -27,7 +27,21 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-abstract class base {
+abstract class base extends core\container {
+    protected $request = null;
+    protected $response = null;
+    protected $raw = array();
 
-    abstract function go(core\dataFace $request , core\dataFace $response );
+    static $dependencies = array('request.request','request.response');
+    final function __construct(array $dependencies = array()) {
+        $this->request = $dependencies['request.request'];
+        $this->response = $dependencies['request.response'];
+        $this->raw = $dependencies;
+    }
+
+    function get($id = null) {
+        return $this->response;
+    }
+
+    abstract function index(array $args = array());
 }
