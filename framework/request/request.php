@@ -28,13 +28,38 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  */
 use sambhuti\core;
 class request extends core\container {
-    public $instance = null;
+    private $request = null;
+    private $controller = '';
+    private $get = array();
+    private $post = array();
+    private $server = array();
+
+    function __construct(array $dependencies = array()) {
+        $data = ISCLI ? $this->cli() : $this->web();
+        $this->request = new core\data($data);
+        $this->response = new core\data();
+        
+    }
 
     function get($data = null) {
-        if(null === $this->instance) {
-            //Show only web for the moment and assume $data to be working
-            $this->instance = new web($data);
-        }
-        return $this->instance;
+        if($data === 'response') return $this->response;
+        return $this->request;
+    }
+
+    function web() {
+        return array (
+            'command' => trim(str_replace($_SERVER["SCRIPT_NAME"],"",$_SERVER["PHP_SELF"]),"/"),
+            'get' =>$_GET,
+            'post' =>$_POST,
+            'server'=>$_SERVER,
+            'file'=>$_FILES,
+            'cookies'=>$_COOKIE
+        );
+    }
+
+    function cli() {
+        global $argv;
+        var_dump($argv);
+        return array();
     }
 }

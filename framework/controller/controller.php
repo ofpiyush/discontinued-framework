@@ -26,38 +26,52 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\di;
+
 use sambhuti\core;
 class controller extends core\container {
 
     static $dependencies = array('config.routing','core');
-    private $face = null;
-    private $core = null;
+    protected $core = null;
+    protected $routing = null;
+    protected $request = null;
     protected $notFound = null;
     protected $controllers = array();
 
 
-    function __construct(core\data $routing, core\core $core) {
-        $this->core = $core;
-        $this->face = $routing->get('interface');
-        $this->notFound = $this->get($routing->get('404'));
-        $this->controllers['home'] = $this->get($routing->get('home'));
+    function __construct(array $dependencies = array()) {
+        $this->routing = $dependencies['config.routing'];
+        $this->core = $dependencies['core'];
+        $this->notFound = $this->process($this->routing->get('404'));
+        $this->controllers['home'] = $this->process($this->routing->get('home'));
     }
 
-    function get($controller = null) {
-        if(null === $controller) return $this;
-        if(empty($controller)) {
+    function get($command = null) {
+        if(empty($command)) {
             return $this->get('home');
-        } elseif(empty($this->controllers[$controller])) {
-            $name = (strpos($controller, '\\') === false) ? $controller.'\\index' : $controller;
-            $class = $this->core->get('loader')->fetch('controller',$name);
+        }
+        if(null !== $this->routing->get($command)) $command = $this->routing->get($command);
+        //TODO: fixme
+        $args = explode('/',$command);
+        $controller = array_shift($args);
+        $method = !empty($args) ? array_shift($args) : 'index';
+        $object = $this->process($controller);
+        if(null === $object) {
+            $object = $this->notFound;
+            $method = '_404';
+        }
+        $object->$method($args);
+        return $object;
+    }
+
+    function process($controller) {
+        if(empty($this->controllers[$controller])) {
+            $class = $this->core->get('loader')->fetch('controller',$controller);
             if(null !== $class) {
-                $this->controllers[$controller] = $this->core->process( $class, 'sambhuti\controller\base');
+                $this->controllers[$controller] = $this->core->process($class, 'sambhuti\controller\base');
             } else {
-                $this->controllers[$controller] = $this->notFound;
+                $this->controllers[$controller] = null;
             }
         }
         return $this->controllers[$controller];
     }
-
 }

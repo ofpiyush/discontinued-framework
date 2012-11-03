@@ -1,5 +1,5 @@
 <?php
-namespace sambhuti\request;
+namespace sambhuti\controller;
 if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
@@ -27,31 +27,8 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-
-abstract class base implements face {
-
-    protected $data = null;
-    protected $controller = '';
-    protected $get = array();
-    protected $post = array();
-    protected $server = array();
-
-    final function __construct(core\dataFace $data) {
-        $this->go();
-        $this->data = $data
-            ->set('controller',trim($this->controller, '/'))
-            ->set('get',$this->get)
-            ->set('post',$this->post)
-            ->set('server',$this->server);
+class home extends base {
+    function index(array $args = array()) {
+        echo "home loaded";
     }
-
-    function parse(array &$array, $string) {
-        $vars = explode('=', $string, 2);
-        $array[$vars[0]] = !empty($vars[1]) ? $vars[1] : '';
-    }
-
-    final function data() {
-        return $this->data;
-    }
-
 }

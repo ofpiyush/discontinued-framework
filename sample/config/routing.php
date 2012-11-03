@@ -1,5 +1,3 @@
 <?php
-
-$config['interface'] = 'sambhuti\controller\face';
-$config['404'] = 'error';
+$config['404'] = '_error';
 $config['home'] = 'home';

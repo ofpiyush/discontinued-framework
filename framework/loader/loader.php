@@ -36,7 +36,7 @@ class loader extends core\container {
      */
     private $lazypath = array();
 
-    function __construct() {
+    function __construct(array $dependencies = array()) {
         spl_autoload_register(array($this, 'get'));
     }
 
@@ -50,13 +50,13 @@ class loader extends core\container {
         $array = explode('\\',$class);
         if(array_key_exists($array[0],$this->lazypath)) {
             $array[0] = $this->lazypath[$array[0]];
-            return $this->checkRequire(implode($array,'/'));
+            return $this->checkRequire(implode($array,DIRECTORY_SEPARATOR));
         }
         return false;
     }
 
     function checkRequire($path) {
-        $fullpath = str_replace('\\','/',$path).'.php';
+        $fullpath = str_replace('\\',DIRECTORY_SEPARATOR,$path).'.php';
         if(file_exists($fullpath)) {
             require_once($fullpath);
             return true;
@@ -67,7 +67,7 @@ class loader extends core\container {
     function fetch($type,$classname) {
         $paths = array_reverse($this->lazypath);
         foreach( $paths as $ns => $path) {
-            if($this->checkRequire($path.'/'.$type.'/'.$classname))
+            if($this->checkRequire($path.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.$classname))
                 return $ns.'\\'.$type.'\\'.$classname;
         }
         return null;

@@ -26,12 +26,5 @@
  */
 $app_path = "../";
 $sambhuti_path = "../../framework/";
-
-use sambhuti\core;
-use sambhuti\request;
-require_once($sambhuti_path.'boot.php');
-$loader->addLazyPath('sample',realpath($app_path));
-//keep 5.3 compatibility
-$core = new core\core($loader);
-$boot = new core\boot($core);
-$boot->go();
+define('ISCLI',false);
+require_once($app_path.'boot.php');

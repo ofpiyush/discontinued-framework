@@ -32,12 +32,12 @@ class boot {
 
     function __construct(core $core) {
         $this->core = $core;
-        $this->request = $core->get('request')->get(new data())->data();
+        $this->request = $core->get('request');
     }
 
     function go() {
         $response = new data();
-        $this->core->get('controller')->get($this->request->get('controller'))->go($this->request,$response);
-        return $response;
+        $this->core->get('controller')->get($this->request->get()->get('command'));
+        return $this->request->get('response');
     }
 }

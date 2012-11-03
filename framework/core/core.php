@@ -31,8 +31,8 @@ class core extends container {
     static $dependencies = array('loader');
     protected $processed = array();
 
-    function __construct(loader\loader $loader) {
-        $this->processed['loader'] = $loader;
+    function __construct(array $dependencies = array()) {
+        $this->processed['loader'] = $dependencies['loader'];
         $this->processed['core'] = $this;
     }
 
@@ -63,21 +63,12 @@ class core extends container {
         return $this->processed[$identifier];
     }
 
+
     function process($class,$base) {
-        if(null !== $class && class_exists($class)) {
-            //load dependencies
-            $reflection = new \ReflectionClass($class);
-            $dependencies = array();
-            $staticProps = $reflection->getStaticProperties();
-            if(array_key_exists('dependencies',$staticProps)) {
-                $dependencies = array_map(array($this,'get'),$staticProps['dependencies']);
-            }
-            if($reflection->isSubclassOf($base)) {
-                return $reflection->newInstanceArgs($dependencies);
-            }
-            throw new \Exception($class.' not subclass of '.$base);
-        }
-        throw new \Exception($class.' not found');
+        if(empty($class) || !class_exists($class)) throw new \Exception($class.' not found');
+        if(!is_subclass_of($class,$base)) throw new \Exception($class.' not subclass of '.$base);
+        $dependencies = !empty($class::$dependencies) ? array_combine($class::$dependencies,array_map(array($this,'get'),$class::$dependencies)) : array();
+        return new $class($dependencies);
     }
 
 }
