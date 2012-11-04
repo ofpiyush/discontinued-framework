@@ -47,8 +47,15 @@ class request extends core\container {
     }
 
     function web() {
+        $request_uri = $_SERVER["REQUEST_URI"];
+        if( false !== strpos($request_uri,'?'))
+            $request_uri = substr($request_uri, 0 , -1-strlen($_SERVER["QUERY_STRING"]));
+        $path = dirname($_SERVER["SCRIPT_NAME"]);
+        $command = $request_uri;
+        if(strpos($request_uri,$path) === 0)
+            $command = substr($request_uri,strlen($path));
         return array (
-            'command' => trim(str_replace($_SERVER["SCRIPT_NAME"],"",$_SERVER["PHP_SELF"]),"/"),
+            'command' => trim($command,"/"),
             'get' =>$_GET,
             'post' =>$_POST,
             'server'=>$_SERVER,
