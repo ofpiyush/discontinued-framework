@@ -48,8 +48,8 @@ class request extends core\container {
 
     function web() {
         $request_uri = $_SERVER["REQUEST_URI"];
-        if( false !== strpos($request_uri,'?'))
-            $request_uri = substr($request_uri, 0 , -1-strlen($_SERVER["QUERY_STRING"]));
+        if( false !== ($pos = strpos($request_uri,'?')))
+            $request_uri = substr($request_uri, 0 , $pos);
         $path = dirname($_SERVER["SCRIPT_NAME"]);
         $command = $request_uri;
         if(strpos($request_uri,$path) === 0)
