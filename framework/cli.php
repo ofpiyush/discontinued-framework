@@ -1,6 +1,4 @@
 <?php
-namespace sambhuti\core;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -26,18 +24,13 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\request;
-class boot {
-    private $request = null;
-
-    function __construct(core $core) {
-        $this->core = $core;
-        $this->request = $core->get('request');
-    }
-
-    function go() {
-        $response = new data();
-        $this->core->get('controller')->get($this->request->get()->get('command'));
-        return $this->request->get('response');
-    }
-}
+$app_path = realpath('./');
+$sambhuti_path = dirname(__FILE__);
+define('ISCLI',true);
+chdir($sambhuti_path);
+require_once('boot.php');
+use sambhuti\core;
+//keep 5.3 compatibility
+$core = new core\core(array('loader'=>$loader));
+$boot = new core\boot($core);
+$boot->go();

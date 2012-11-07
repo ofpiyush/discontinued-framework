@@ -25,7 +25,6 @@
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-use sambhuti\request;
 require_once($sambhuti_path.'boot.php');
 $loader->addLazyPath('sample',realpath($app_path));
 //keep 5.3 compatibility
