@@ -54,7 +54,12 @@ class controller extends core\container {
         $args = explode('/',$command);
         $controller = array_shift($args);
         $method = !empty($args) ? array_shift($args) : 'index';
-        $object = $this->process($controller);
+        if('_' === $controller[0] && false === ISCLI) {
+            $object = $this->notFound;
+            $method = '_403';
+        } else {
+            $object = $this->process($controller);
+        }
         if(null === $object) {
             $object = $this->notFound;
             $method = '_404';
