@@ -19,12 +19,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 $app_path = "../";
 $sambhuti_path = "../../framework/";
-define('ISCLI',false);
-require_once($app_path.'boot.php');
+define('ISCLI', false);
+require_once($app_path . 'boot.php');

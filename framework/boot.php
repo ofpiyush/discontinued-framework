@@ -19,14 +19,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\loader;
-define('SAMBHUTI_ROOT_PATH',realpath($sambhuti_path).'/');
-require_once(SAMBHUTI_ROOT_PATH.'core/container.php');
-require_once(SAMBHUTI_ROOT_PATH.'loader/loader.php');
+
+define('SAMBHUTI_ROOT_PATH', realpath($sambhuti_path) . '/');
+require_once(SAMBHUTI_ROOT_PATH . 'core/container.php');
+require_once(SAMBHUTI_ROOT_PATH . 'loader/loader.php');
 $loader = new loader\loader();
-$loader->addLazyPath('sambhuti',SAMBHUTI_ROOT_PATH);
+$loader->addLazyPath('sambhuti', SAMBHUTI_ROOT_PATH);

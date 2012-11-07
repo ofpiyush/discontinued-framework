@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\core;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,54 +20,55 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 class data implements dataFace {
 
     private $data = array();
 
-    function __construct(array $array = array()) {
+    function __construct ( array $array = array() ) {
         $this->data = $array;
-	}
+    }
 
-	public function get($key) {
-        $args=func_get_args();
+    public function get ( $key ) {
+        $args = func_get_args();
         $tmp = $this->data;
-        foreach($args as $arg) {
-            if(array_key_exists($arg,$tmp))
+        foreach ( $args as $arg ) {
+            if (array_key_exists($arg, $tmp)) {
                 $tmp = $tmp[$arg];
-            else
+            } else {
                 return null;
+            }
         }
         return $tmp;
     }
 
-	function set($key,$value) {
-        if(!array_key_exists($key,$this->data)){
-            $this->update($key,$value);
+    function set ( $key, $value ) {
+        if (!array_key_exists($key, $this->data)) {
+            $this->update($key, $value);
             return $this;
         }
-        throw new Exception('Data already set');
-	}
+        throw new \Exception('Data already set');
+    }
 
-	function update($key,$value) {
-        $this->data[$key]=$value;
+    function update ( $key, $value ) {
+        $this->data[$key] = $value;
         return $this;
-	}
+    }
 
-    function getAll() {
+    function getAll () {
         return $this->data;
     }
 
-    function __get($key) {
+    function __get ( $key ) {
         return $this->get($key);
     }
 
-    function __set($key,$value) {
-        throw new \Exception('Trying to save "'.$value.'" to Config "'.$key.'" 
+    function __set ( $key, $value ) {
+        throw new \Exception('Trying to save "' . $value . '" to Config "' . $key . '"
         via __set use config::set() instead');
     }
 }

@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\core;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,38 +20,43 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\loader;
+
 class core extends container {
     static $dependencies = array('loader');
     protected $processed = array();
+    /** @var null|\sambhuti\loader\loader */
+    protected $loader = null;
 
-    function __construct(array $dependencies = array()) {
+    function __construct ( array $dependencies = array() ) {
         $this->processed['loader'] = $dependencies['loader'];
+        $this->loader = $this->processed['loader'];
         $this->processed['core'] = $this;
     }
 
-    function get($identifier = null) {
-        if(null === $identifier || 'core' === $identifier) return $this;
-        if(empty($this->processed[$identifier])) {
-            if(false === strpos($identifier,'.')) {
-                $this->processed[$identifier] = $this->process(
-                        $this->get('loader')->fetch($identifier,$identifier),
-                        'sambhuti\core\container'
-                    );
+    function get ( $identifier = null ) {
+        if (null === $identifier || 'core' === $identifier) {
+            return $this;
+        }
+        if (empty($this->processed[$identifier])) {
+            if (false === strpos($identifier, '.')) {
+                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier, $identifier), 'sambhuti\core\container');
             } else {
-                $parts = explode('.',$identifier);
-                if($parts[0] == 'core') {
+                $parts = explode('.', $identifier);
+                if ($parts[0] == 'core') {
                     unset($parts[0]);
-                    $this->processed[$identifier] = $this->get(implode('.',$parts));
+                    $this->processed[$identifier] = $this->get(implode('.', $parts));
                 } else {
                     $current = $this;
-                    foreach ($parts as $part) {
-                        if(!is_object($current)) throw new \Exception ('Cannot load '.$identifier.' dependency '.$part.' can not be loaded from a non-object');
+                    foreach ( $parts as $part ) {
+                        if (!is_object($current)) {
+                            throw new \Exception ('Cannot load ' . $identifier . ' dependency ' . $part . ' can not be loaded from a non-object');
+                        }
                         $current = $current->get($part);
                     }
                     $this->processed[$identifier] = $current;
@@ -64,10 +68,17 @@ class core extends container {
     }
 
 
-    function process($class,$base) {
-        if(empty($class) || !class_exists($class)) throw new \Exception($class.' not found');
-        if(!is_subclass_of($class,$base)) throw new \Exception($class.' not subclass of '.$base);
-        $dependencies = !empty($class::$dependencies) ? array_combine($class::$dependencies,array_map(array($this,'get'),$class::$dependencies)) : array();
+    function process ( $class, $base ) {
+        if (empty($class) || !class_exists($class)) {
+            throw new \Exception($class . ' not found');
+        }
+        if (!is_subclass_of($class, $base)) {
+            throw new \Exception($class . ' not subclass of ' . $base);
+        }
+        /** @var array $dependencies */
+        $dependencies = !empty($class::$dependencies) ? array_combine($class::$dependencies, array_map(array(
+                                                                                                            $this, 'get'
+                                                                                                       ), $class::$dependencies)) : array();
         return new $class($dependencies);
     }
 

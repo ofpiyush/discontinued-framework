@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\config;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,32 +20,36 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-use sambhuti\loader;
+
 class config extends core\container {
+    static $dependencies = array('loader');
     private $lazyPaths = array();
     private $defaultPath = '';
-    static $dependencies = array('loader');
     private $confs = array();
 
-    function __construct(array $dependencies = array()) {
-        $this->lazyPaths = $dependencies['loader']->getLazyPaths();
+    /**
+     * @param $dependencies array List of dependencies
+     */
+    function __construct ( array $dependencies = array() ) {
+        /** @var $loader \sambhuti\loader\loader */
+        $loader = $dependencies['loader'];
+        $this->lazyPaths = $loader->getLazyPaths();
         $this->defaultPath = end($this->lazyPaths);
     }
 
-    function get($id = null) {
-        if(empty($this->confs[$id])) {
+    function get ( $id = null ) {
+        if (empty($this->confs[$id])) {
             $config = array();
-            $path = $fullpath = "";
-            foreach($this->lazyPaths as $path) {
-                $fullpath = $path.'/config/'.$id.'.php';
-                if(file_exists($fullpath)) {
-                    include $fullpath;
+            foreach ( $this->lazyPaths as $path ) {
+                $fullPath = $path . '/config/' . $id . '.php';
+                if (file_exists($fullPath)) {
+                    include $fullPath;
                 }
             }
             $this->confs[$id] = new core\data($config);
@@ -54,17 +57,20 @@ class config extends core\container {
         return $this->confs[$id];
     }
 
-    function save($id, core\dataFace $data, $id = null) {
+    function save ( $id, core\dataFace $data, $lazyId = null ) {
         $config = $data->getAll();
-        $fileString = "<?php".PHP_EOL;
-        foreach($config as $key => $value) {
-            $fileString.= '$config["'.$key.'"] = '.$value.';'.PHP_EOL;
+        $fileString = "<?php" . PHP_EOL;
+        foreach ( $config as $key => $value ) {
+            $fileString .= '$config["' . $key . '"] = ' . $value . ';' . PHP_EOL;
         }
-        $fullpath = $this->defaultPath;
-        if ($id !== null && !empty($this->lazyPaths[$id]))
-            $fullpath = $this->lazyPaths[$id];
-        $fp = fopen($fullpath.'/config/'.$id.'.php', 'wb');
-        if(empty($fp)) throw new \Exception('Config folder not writable');
+        $fullPath = $this->defaultPath;
+        if ($lazyId !== null && !empty($this->lazyPaths[$lazyId])) {
+            $fullPath = $this->lazyPaths[$lazyId];
+        }
+        $fp = fopen($fullPath . '/config/' . $id . '.php', 'wb');
+        if (empty($fp)) {
+            throw new \Exception('Config folder not writable');
+        }
         fwrite($fp, $fileString);
         fclose($fp);
         $this->confs[$id] = $data;

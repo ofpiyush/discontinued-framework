@@ -19,18 +19,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 $app_path = realpath('./');
 $sambhuti_path = dirname(__FILE__);
-define('ISCLI',true);
+define('ISCLI', true);
 chdir($sambhuti_path);
 require_once('boot.php');
 use sambhuti\core;
+
 //keep 5.3 compatibility
-$core = new core\core(array('loader'=>$loader));
+$core = new core\core(array('loader'=> $loader));
 $boot = new core\boot($core);
 $boot->go();

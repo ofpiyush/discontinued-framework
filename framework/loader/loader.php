@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\loader;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,82 +20,88 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 
 use sambhuti\core;
+
 class loader extends core\container {
 
     /**
      * Paths for lazyloading
-     * @var array
+     *
+     * @var $lazyPath array
      */
-    private $lazypath = array();
+    private $lazyPath = array();
 
-    function __construct(array $dependencies = array()) {
+    function __construct ( array $dependencies = array() ) {
         spl_autoload_register(array($this, 'get'));
     }
 
     /**
      * Autoloader to load the classes under all lazypaths
+     *
      * @param string $class name of the class to be loaded
      */
-    function get($class = null) {
-        if(class_exists($class))
+    function get ( $class = null ) {
+        if (class_exists($class)) {
             return true;
-        $array = explode('\\',$class);
-        if(array_key_exists($array[0],$this->lazypath)) {
-            $array[0] = $this->lazypath[$array[0]];
-            return $this->checkRequire(implode($array,DIRECTORY_SEPARATOR));
+        }
+        $array = explode('\\', $class);
+        if (array_key_exists($array[0], $this->lazyPath)) {
+            $array[0] = $this->lazyPath[$array[0]];
+            return $this->checkRequire(implode($array, DIRECTORY_SEPARATOR));
         }
         return false;
     }
 
-    function checkRequire($path) {
-        $fullpath = str_replace('\\',DIRECTORY_SEPARATOR,$path).'.php';
-        if(file_exists($fullpath)) {
-            require_once($fullpath);
+    function checkRequire ( $path ) {
+        $fullPath = str_replace('\\', DIRECTORY_SEPARATOR, $path) . '.php';
+        if (file_exists($fullPath)) {
+            require_once($fullPath);
             return true;
         }
         return false;
     }
 
-    function fetch($type,$classname) {
-        $paths = array_reverse($this->lazypath);
-        foreach( $paths as $ns => $path) {
-            if($this->checkRequire($path.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.$classname))
-                return $ns.'\\'.$type.'\\'.$classname;
+    function fetch ( $type, $classname ) {
+        $paths = array_reverse($this->lazyPath);
+        foreach ( $paths as $ns => $path ) {
+            if ($this->checkRequire($path . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $classname)) {
+                return $ns . '\\' . $type . '\\' . $classname;
+            }
         }
         return null;
     }
 
     /**
-     * Add single lazypath for autoloader
+     * Add single lazyPath for autoloader
+     *
      * @param string $namespace namespace for replacement
-     * @param string $path the full path to the directory to be added
+     * @param string $path      the full path to the directory to be added
      */
-    function addLazyPath($namespace, $path) {
-        $path = rtrim($path,'/');
-        $this->lazypath[$namespace] = $path;
+    function addLazyPath ( $namespace, $path ) {
+        $path = rtrim($path, '/');
+        $this->lazyPath[$namespace] = $path;
         return $this;
     }
 
-    function getLazyPath($key) {
-        if(!empty($this->lazypath[$key])) {
-            return $this->lazypath[$key];
+    function getLazyPath ( $key ) {
+        if (!empty($this->lazyPath[$key])) {
+            return $this->lazyPath[$key];
         }
         return false;
     }
 
-    function getLazyPaths() {
-        return $this->lazypath;
+    function getLazyPaths () {
+        return $this->lazyPath;
     }
 
-    function __sleep() {
-        return array('lazypath');
+    function __sleep () {
+        return array('lazyPath');
     }
 
 }

@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\model;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,39 +20,45 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 use sambhuti\core;
-class model extends core\controller {
 
-    static $dependencies = array('loader','config.database');
+class model extends core\container {
+
+    static $dependencies = array('loader', 'config.database');
+    /** @var null|\PDO */
     private $connection = null;
-    private $allTypes = array('mysql'=>'MySQL');
+    private $allTypes = array('mysql'=> 'MySQL');
     private $type = '';
+    /** @var null|\sambhuti\loader\loader */
     private $loader = null;
     private $instances = array();
 
-    function __construct(loader\loader $loader, core\dataFace $data) {
-        $this->loader = $loader;
+    function __construct ( array $dependencies = array() ) {
+        $this->loader = $dependencies['loader'];
+        /** @var \sambhuti\core\dataFace $data  */
+        $data = $dependencies['config.database'];
         $type = strtolower($data->get('type'));
         $this->type = $this->allTypes[$type];
-        $dsn= $type.":dbname=".$data->get('select').";host=".$data->get('database').";charset=utf8";
+        $dsn = $type . ":dbname=" . $data->get('select') . ";host=" . $data->get('database') . ";charset=utf8";
         try {
-            $this->connection = new PDO($dsn,$data->get('username'),$data->get('password'));
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {}
+            $this->connection = new \PDO($dsn, $data->get('username'), $data->get('password'));
+            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+        }
     }
 
-    function get($id = null) {
-        if(empty($this->instances[$id])) {
-            $class = $this->loader->fetch('model\\'.$this->type,$id);
-            if(null === $class) {
+    function get ( $id = null ) {
+        if (empty($this->instances[$id])) {
+            $class = $this->loader->fetch('model\\' . $this->type, $id);
+            if (null === $class) {
                 $this->instances[$id] = new $class($this->connection);
             } else {
-                throw new \Exception("Cannot find model ". $id);
+                throw new \Exception("Cannot find model " . $id);
             }
         }
         return $this->instances[$id];
