@@ -20,12 +20,13 @@
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 $app_path = "./";
 $sambhuti_path = "../framework/";
+/** @ignore */
 define('ISCLI', true);
 chdir(dirname(__FILE__));
 require_once($app_path . 'boot.php');

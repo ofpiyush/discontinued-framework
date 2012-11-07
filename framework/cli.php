@@ -20,12 +20,17 @@
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 $app_path = realpath('./');
 $sambhuti_path = dirname(__FILE__);
+/**
+ * Is Command line
+ * 
+ * Boolean value stores if the current call is from the command line or not
+ */
 define('ISCLI', true);
 chdir($sambhuti_path);
 require_once('boot.php');

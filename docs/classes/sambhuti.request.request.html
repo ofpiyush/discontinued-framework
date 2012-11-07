@@ -35,7 +35,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">114</span></a></li>
+                <span class="label label-info">84</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -60,27 +60,20 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#method_cli" title="cli :: "><span class="description">cli()
-        </span><pre>cli()</pre></a></li>
-<li class="method public "><a href="#method_get" title="get :: "><span class="description">get()
-        </span><pre>get()</pre></a></li>
-<li class="method public "><a href="#method_web" title="web :: "><span class="description">web()
-        </span><pre>web()</pre></a></li>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_cli" title="cli :: Command line Request"><span class="description">Command line Request</span><pre>cli()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Get"><span class="description">Get</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_web" title="web :: Web Request"><span class="description">Web Request</span><pre>web()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
                     <ul></ul>
 </li>
-<li class="nav-header private">» Private
+<li class="nav-header protected">» Protected
                     <ul>
-<li class="property private "><a href="#property_controller" title="$controller :: "><span class="description">$controller</span><pre>$controller</pre></a></li>
-<li class="property private "><a href="#property_get" title="$get :: "><span class="description">$get</span><pre>$get</pre></a></li>
-<li class="property private "><a href="#property_post" title="$post :: "><span class="description">$post</span><pre>$post</pre></a></li>
-<li class="property private "><a href="#property_request" title="$request :: "><span class="description">$request</span><pre>$request</pre></a></li>
-<li class="property private "><a href="#property_server" title="$server :: "><span class="description">$server</span><pre>$server</pre></a></li>
+<li class="property protected "><a href="#property_request" title="$request :: Request"><span class="description">Request</span><pre>$request</pre></a></li>
+<li class="property protected "><a href="#property_response" title="$response :: Response"><span class="description">Response</span><pre>$response</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -99,32 +92,39 @@
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Sambhuti
-Copyright (C) 2012-2013 Piyush</p>
+<p class="short_description">Class Request</p>
 <div class="details">
-<div class="long_description"><p>License:
-This file is part of Sambhuti (http://sambhuti.org)</p>
+<div class="long_description"><p>Container for request and response objects
+Differentiates between web and cli request and populates the request object appropriately
+Can be accessed by the string 'request.*'.</p>
 
-<p>Sambhuti is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.</p>
+<pre><code>class test extends \sambhuti\core\container {
+    static $dependencies = array('request.request','request.response');
+    public $request = null;
+    public $response = null;
 
-<p>Sambhuti is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.</p>
-
-<p>You should have received a copy of the GNU General Public License
-along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p></div>
+    function __construct(array $dependencies = array()) {
+        $this->request = $dependencies['request.request'];
+        $this->response = $dependencies['request.response'];
+    }
+}
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Default.html">Sambhuti</a></td>
+<td><a href="../packages/Sambhuti.request.html">Sambhuti</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>request</td>
 </tr>
 <tr>
 <th>author</th>
-<td><a href="">Piyush&lt;piyush[at]cio[dot]bz&gt;</a></td>
+<td><a href="mailto:piyush@cio.bz">Piyush</a></td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a></td>
 </tr>
 <tr>
 <th>copyright</th>
@@ -134,72 +134,72 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>__construct()
-        </h2>
+<h2>Constructor</h2>
 <pre>__construct(array $dependencies) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Determines Command line or web request based on ISCLI constant and executes
+the relevant method.
+Initializes request and response objects</p></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$dependencies</h4></div>
+<div class="subelement argument">
+<h4>$dependencies</h4>
+<code>array</code><p>empty</p></div>
 </div></div>
 </div>
 <a id="method_cli"></a><div class="element clickable method public method_cli" data-toggle="collapse" data-target=".method_cli .collapse">
-<h2>cli()
-        </h2>
-<pre>cli() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
-<h2>get()
-        </h2>
-<pre>get($data) </pre>
+<h2>Command line Request</h2>
+<pre>cli() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Command is always 'cli' gives 'argv' and 'argc' for request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of options for request data</div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Get</h2>
+<pre>get(string | null $type) : <a href="../classes/sambhuti.core.data.html">\sambhuti\core\data</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Implements abstract Get method
+Gives \sambhuti\request\request::$response on type 'response' and
+\sambhuti\request\request::$request otherwise</p></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$data</h4></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><code>null</code><p>type of object needed</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/sambhuti.core.data.html">\sambhuti\core\data</a></code>request or response object</div>
 </div></div>
 </div>
 <a id="method_web"></a><div class="element clickable method public method_web" data-toggle="collapse" data-target=".method_web .collapse">
-<h2>web()
-        </h2>
-<pre>web() </pre>
+<h2>Web Request</h2>
+<pre>web() : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Parses REQUEST_URI to determine the command and returns
+other standard request parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of options for request data</div>
+</div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a id="property_controller"> </a><div class="element clickable property private property_controller" data-toggle="collapse" data-target=".property_controller .collapse">
-<h2>$controller</h2>
-<pre>$controller </pre>
+<a id="property_request"> </a><div class="element clickable property protected property_request" data-toggle="collapse" data-target=".property_request .collapse">
+<h2>Request</h2>
+<pre>$request : null | <a href="../classes/sambhuti.core.data.html">\sambhuti\core\data</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Stores request data later passed to controller</p></div></div></div>
 </div>
-<a id="property_get"> </a><div class="element clickable property private property_get" data-toggle="collapse" data-target=".property_get .collapse">
-<h2>$get</h2>
-<pre>$get </pre>
+<a id="property_response"> </a><div class="element clickable property protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
+<h2>Response</h2>
+<pre>$response : null | <a href="../classes/sambhuti.core.data.html">\sambhuti\core\data</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="property_post"> </a><div class="element clickable property private property_post" data-toggle="collapse" data-target=".property_post .collapse">
-<h2>$post</h2>
-<pre>$post </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="property_request"> </a><div class="element clickable property private property_request" data-toggle="collapse" data-target=".property_request .collapse">
-<h2>$request</h2>
-<pre>$request </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="property_server"> </a><div class="element clickable property private property_server" data-toggle="collapse" data-target=".property_server .collapse">
-<h2>$server</h2>
-<pre>$server </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Stores response data later passed to controller</p></div></div></div>
 </div>
 </div>
 </div>
@@ -208,7 +208,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-08T00:53:59+05:30.<br></footer></div>
+            generated on 2012-11-08T03:23:58+05:30.<br></footer></div>
 </div>
 </body>
 </html>

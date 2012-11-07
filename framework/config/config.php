@@ -1,5 +1,4 @@
 <?php
-namespace sambhuti\config;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,10 +20,12 @@ namespace sambhuti\config;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+
+namespace sambhuti\config;
 use sambhuti\core;
 
 class config extends core\container {
@@ -34,7 +35,7 @@ class config extends core\container {
     private $confs = array();
 
     /**
-     * @param $dependencies array List of dependencies
+     * @param array $dependencies List of dependencies
      */
     function __construct ( array $dependencies = array() ) {
         /** @var $loader \sambhuti\loader\loader */
