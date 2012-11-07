@@ -29,9 +29,9 @@ use sambhuti\core;
 
 abstract class base extends core\container {
     static $dependencies = array('request.request', 'request.response');
-    /** @var \sambhuti\core\dataFace $request */
+    /** @var null|\sambhuti\core\dataFace $request */
     protected $request = null;
-    /** @var \sambhuti\core\dataFace $response */
+    /** @var null|\sambhuti\core\dataFace $response */
     protected $response = null;
     protected $raw = array();
 
