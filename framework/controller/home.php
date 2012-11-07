@@ -26,7 +26,6 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\core;
 class home extends base {
     function index(array $args = array()) {
         echo "home loaded";

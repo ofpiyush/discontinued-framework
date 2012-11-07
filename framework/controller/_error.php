@@ -26,7 +26,6 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\core;
 class _error extends base {
     function index(array $args = array()) {
         echo $this->request->get('command')." Unknown Error";
@@ -34,5 +33,9 @@ class _error extends base {
 
     function _404() {
         echo $this->request->get('command')." not Found";
+    }
+
+    function _403() {
+        echo $this->request->get('command')." Forbidden access";
     }
 }

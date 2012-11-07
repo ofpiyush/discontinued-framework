@@ -26,21 +26,8 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * @license http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-abstract class base extends core\container {
-    protected $request = null;
-    protected $response = null;
-    protected $raw = array();
-
-    static $dependencies = array('request.request','request.response');
-    final function __construct(array $dependencies = array()) {
-        $this->request = $dependencies['request.request'];
-        $this->response = $dependencies['request.response'];
-        $this->raw = $dependencies;
+class _cli extends base {
+    function index(array $args = array()) {
+        var_dump($this->request->get('argv'));
     }
-
-    function get($id = null) {
-        return $this->response;
-    }
-
-    abstract function index(array $args = array());
 }

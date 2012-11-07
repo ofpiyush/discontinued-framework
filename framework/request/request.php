@@ -65,8 +65,11 @@ class request extends core\container {
     }
 
     function cli() {
-        global $argv;
-        var_dump($argv);
-        return array();
+        return array(
+            'command' => 'cli',
+            'server'=>$_SERVER,
+            'argv'=>$_SERVER['argv'],
+            'argc' =>$_SERVER['argc']
+        );
     }
 }
