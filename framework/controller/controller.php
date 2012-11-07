@@ -1,8 +1,4 @@
 <?php
-namespace sambhuti\controller;
-if (!defined('SAMBHUTI_ROOT_PATH')) {
-    exit;
-}
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -24,11 +20,12 @@ if (!defined('SAMBHUTI_ROOT_PATH')) {
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 
+namespace sambhuti\controller;
 use sambhuti\core;
 
 class controller extends core\container {

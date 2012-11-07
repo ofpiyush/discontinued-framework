@@ -1,5 +1,4 @@
 <?php
-namespace sambhuti\core;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,10 +20,12 @@ namespace sambhuti\core;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+
+namespace sambhuti\core;
 use sambhuti\loader;
 
 class core extends container {
@@ -34,8 +35,8 @@ class core extends container {
     protected $loader = null;
 
     function __construct ( array $dependencies = array() ) {
+        $this->loader = $dependencies['loader'];
         $this->processed['loader'] = $dependencies['loader'];
-        $this->loader = $this->processed['loader'];
         $this->processed['core'] = $this;
     }
 

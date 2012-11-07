@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a10" title="">
-  <file path="framework/boot.php" hash="bf8a77c94c17598b2c5737300584a6f6" package="Sambhuti">
+  <file path="framework/boot.php" hash="2fbba147f9755f99c08f58e7c81ec9f7" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -20,7 +20,7 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
       <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
@@ -37,288 +37,474 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       <value><![CDATA[realpath($sambhuti_path) . ]]></value>
     </constant>
   </file>
-  <file path="framework/loader/loader.php" hash="8cd5212216b91dd04eb21f4a9bc8282b" package="Default">
+  <file path="framework/loader/loader.php" hash="b4cfe9bacbe6aacc9c7a96a0fff8007e" package="Default">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <include line="64" type="Require Once" package="Default">
+    <include line="103" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="sambhuti\loader" line="31" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\loader" line="51" package="Sambhuti\loader">
       <extends>\sambhuti\core\container</extends>
       <name>loader</name>
       <full_name>\sambhuti\loader\loader</full_name>
-      <property final="false" static="false" visibility="private" line="38" namespace="sambhuti\loader" package="Default">
+      <docblock line="27">
+        <description><![CDATA[Class Loader]]></description>
+        <long-description><![CDATA[<p>Contains auto loader for lazy loading.
+Allows type based class fetching for loading classes from particular modules
+Can be accessed by the string 'loader'.</p>
+
+<pre><code>class test extends \sambhuti\core\container {
+    static $dependencies = array('loader');
+    public $loader = null;
+
+    function __construct(array $dependencies = array()) {
+        $this->loader = $dependencies['loader'];
+    }
+}
+</code></pre>]]></long-description>
+        <tag line="27" name="package" description="Sambhuti"/>
+        <tag line="27" name="subpackage" description="loader"/>
+        <tag line="27" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+        <tag line="27" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+        <tag line="27" name="copyright" description="2012 Piyush"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="60" namespace="sambhuti\loader" package="Default">
         <name>$lazyPath</name>
         <default><![CDATA[array()]]></default>
-        <docblock line="33">
-          <description><![CDATA[Paths for lazyloading]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="33" name="var" description="array" type="\sambhuti\loader\$lazyPath">
-            <type by_reference="false">\sambhuti\loader\$lazyPath</type>
+        <docblock line="53">
+          <description><![CDATA[Lazy Path]]></description>
+          <long-description><![CDATA[<p>Array of [namespace => Path] for lazyloading</p>]]></long-description>
+          <tag line="53" name="var" description="" type="array">
+            <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="40" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="68" package="Sambhuti\loader">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="40">
+        <docblock line="62">
+          <description><![CDATA[Constructor]]></description>
+          <long-description><![CDATA[<p>Registers loader::get() as the autoload method</p>]]></long-description>
+          <tag line="62" name="param" description="" type="array" variable="$dependencies">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="68">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="49" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="80" package="Sambhuti\loader">
         <name>get</name>
         <full_name>get</full_name>
-        <docblock line="44">
-          <description><![CDATA[Autoloader to load the classes under all lazypaths]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="44" name="param" description="name of the class to be loaded" type="string" variable="$class">
+        <docblock line="72">
+          <description><![CDATA[Get - Autoloader]]></description>
+          <long-description><![CDATA[<p>Autoloader to load the classes under all lazypaths</p>]]></long-description>
+          <tag line="72" name="param" description="name of the class to be loaded" type="string" variable="$class">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="72" name="return" description="true if found, false otherwise" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
         </docblock>
-        <argument line="49">
+        <argument line="80">
           <name>$class</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="61" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="100" package="Sambhuti\loader">
         <name>checkRequire</name>
         <full_name>checkRequire</full_name>
-        <argument line="61">
-          <name>$path</name>
+        <docblock line="92">
+          <description><![CDATA[Check Require]]></description>
+          <long-description><![CDATA[<p>Looks for a file and require_once it if it exists</p>]]></long-description>
+          <tag line="92" name="param" description="partial path or classname to look for." type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="92" name="return" description="true if found, false otherwise" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="100">
+          <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="70" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="119" package="Sambhuti\loader">
         <name>fetch</name>
         <full_name>fetch</full_name>
-        <argument line="70">
+        <docblock line="109">
+          <description><![CDATA[Fetch]]></description>
+          <long-description><![CDATA[<p>Looks for a class of certain type in all registered paths and
+returns the class name if matches else gives null</p>]]></long-description>
+          <tag line="109" name="param" description="type of class to look for" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="109" name="param" description="name of class to look for" type="string" variable="$class">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="109" name="return" description="string full classname if class exists else null" type="string|null">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="119">
           <name>$type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="70">
-          <name>$classname</name>
+        <argument line="119">
+          <name>$class</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="86" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="140" package="Sambhuti\loader">
         <name>addLazyPath</name>
         <full_name>addLazyPath</full_name>
-        <docblock line="80">
-          <description><![CDATA[Add single lazyPath for autoloader]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="80" name="param" description="namespace for replacement" type="string" variable="$namespace">
+        <docblock line="131">
+          <description><![CDATA[Add Lazy Path]]></description>
+          <long-description><![CDATA[<p>Add single lazyPath for loader</p>]]></long-description>
+          <tag line="131" name="param" description="namespace for replacement" type="string" variable="$namespace">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="80" name="param" description="the full path to the directory to be added" type="string" variable="$path">
+          <tag line="131" name="param" description="the full path to the directory to be added" type="string" variable="$path">
             <type by_reference="false">string</type>
+          </tag>
+          <tag line="131" name="return" description="instance" type="\sambhuti\loader\loader">
+            <type by_reference="false">\sambhuti\loader\loader</type>
           </tag>
         </docblock>
-        <argument line="86">
+        <argument line="140">
           <name>$namespace</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="86">
+        <argument line="140">
           <name>$path</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="92" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="154" package="Sambhuti\loader">
         <name>getLazyPath</name>
         <full_name>getLazyPath</full_name>
-        <argument line="92">
+        <docblock line="146">
+          <description><![CDATA[Get Lazy Path]]></description>
+          <long-description><![CDATA[<p>Get single lazyPath from loader</p>]]></long-description>
+          <tag line="146" name="param" description="namespace of the lazypath" type="string" variable="$key">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="return" description="string path if $key exists else boolean false" type="string|bool">
+            <type by_reference="false">string</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="154">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="99" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="168" package="Sambhuti\loader">
         <name>getLazyPaths</name>
         <full_name>getLazyPaths</full_name>
+        <docblock line="161">
+          <description><![CDATA[Get Lazy Paths]]></description>
+          <long-description><![CDATA[<p>Get all lazyPath from loader</p>]]></long-description>
+          <tag line="161" name="return" description="all lazypaths." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="103" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="177" package="Sambhuti\loader">
         <name>__sleep</name>
         <full_name>__sleep</full_name>
+        <docblock line="172">
+          <description><![CDATA[Sleep]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="172" name="return" description="lazypath to be cached" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </method>
     </class>
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/loader/loader.php</error>
-      <error line="31" code="50000">No DocBlock was found for \sambhuti\loader\loader</error>
-      <error line="40" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="61" code="50010">No DocBlock was found for method checkRequire()</error>
-      <error line="70" code="50010">No DocBlock was found for method fetch()</error>
-      <error line="92" code="50010">No DocBlock was found for method getLazyPath()</error>
-      <error line="99" code="50010">No DocBlock was found for method getLazyPaths()</error>
-      <error line="103" code="50010">No DocBlock was found for method __sleep()</error>
-    </parse_markers>
   </file>
-  <file path="framework/request/request.php" hash="b477bd4f3bb813882adbaafbe81eb478" package="Default">
+  <file path="framework/request/request.php" hash="6e7dd6be5483caf41449283861408c9b" package="Default">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <class final="false" abstract="false" namespace="sambhuti\request" line="33" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\request" line="53" package="Sambhuti\request">
       <extends>\sambhuti\core\container</extends>
       <name>request</name>
       <full_name>\sambhuti\request\request</full_name>
-      <property final="false" static="false" visibility="private" line="34" namespace="sambhuti\request" package="Default">
+      <docblock line="27">
+        <description><![CDATA[Class Request]]></description>
+        <long-description><![CDATA[<p>Container for request and response objects
+Differentiates between web and cli request and populates the request object appropriately
+Can be accessed by the string 'request.*'.</p>
+
+<pre><code>class test extends \sambhuti\core\container {
+    static $dependencies = array('request.request','request.response');
+    public $request = null;
+    public $response = null;
+
+    function __construct(array $dependencies = array()) {
+        $this->request = $dependencies['request.request'];
+        $this->response = $dependencies['request.response'];
+    }
+}
+</code></pre>]]></long-description>
+        <tag line="27" name="package" description="Sambhuti"/>
+        <tag line="27" name="subpackage" description="request"/>
+        <tag line="27" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+        <tag line="27" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+        <tag line="27" name="copyright" description="2012 Piyush"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="62" namespace="sambhuti\request" package="Default">
         <name>$request</name>
         <default><![CDATA[null]]></default>
+        <docblock line="55">
+          <description><![CDATA[Request]]></description>
+          <long-description><![CDATA[<p>Stores request data later passed to controller</p>]]></long-description>
+          <tag line="55" name="var" description="" type="null|\sambhuti\core\data">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\sambhuti\core\data</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="35" namespace="sambhuti\request" package="Default">
-        <name>$controller</name>
-        <default><![CDATA['']]></default>
+      <property final="false" static="false" visibility="protected" line="71" namespace="sambhuti\request" package="Default">
+        <name>$response</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="64">
+          <description><![CDATA[Response]]></description>
+          <long-description><![CDATA[<p>Stores response data later passed to controller</p>]]></long-description>
+          <tag line="64" name="var" description="" type="null|\sambhuti\core\data">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\sambhuti\core\data</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="36" namespace="sambhuti\request" package="Default">
-        <name>$get</name>
-        <default><![CDATA[array()]]></default>
-      </property>
-      <property final="false" static="false" visibility="private" line="37" namespace="sambhuti\request" package="Default">
-        <name>$post</name>
-        <default><![CDATA[array()]]></default>
-      </property>
-      <property final="false" static="false" visibility="private" line="38" namespace="sambhuti\request" package="Default">
-        <name>$server</name>
-        <default><![CDATA[array()]]></default>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="40" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="82" package="Sambhuti\request">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="40">
+        <docblock line="73">
+          <description><![CDATA[Constructor]]></description>
+          <long-description><![CDATA[<p>Determines Command line or web request based on ISCLI constant and executes
+the relevant method.
+Initializes request and response objects</p>]]></long-description>
+          <tag line="73" name="param" description="empty" type="array" variable="$dependencies">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="82">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="47" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="99" package="Sambhuti\request">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="47">
-          <name>$data</name>
+        <docblock line="89">
+          <description><![CDATA[Get]]></description>
+          <long-description><![CDATA[<p>Implements abstract Get method
+Gives \sambhuti\request\request::$response on type 'response' and
+\sambhuti\request\request::$request otherwise</p>]]></long-description>
+          <tag line="89" name="param" description="type of object needed" type="string|null" variable="$type">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="89" name="return" description="request or response object" type="\sambhuti\core\data">
+            <type by_reference="false">\sambhuti\core\data</type>
+          </tag>
+        </docblock>
+        <argument line="99">
+          <name>$type</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="54" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="114" package="Sambhuti\request">
         <name>web</name>
         <full_name>web</full_name>
+        <docblock line="106">
+          <description><![CDATA[Web Request]]></description>
+          <long-description><![CDATA[<p>Parses REQUEST_URI to determine the command and returns
+other standard request parameters</p>]]></long-description>
+          <tag line="106" name="return" description="list of options for request data" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="70" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\request" line="141" package="Sambhuti\request">
         <name>cli</name>
         <full_name>cli</full_name>
+        <docblock line="134">
+          <description><![CDATA[Command line Request]]></description>
+          <long-description><![CDATA[<p>Command is always 'cli' gives 'argv' and 'argc' for request</p>]]></long-description>
+          <tag line="134" name="return" description="list of options for request data" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </method>
     </class>
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/request/request.php</error>
-      <error line="33" code="50000">No DocBlock was found for \sambhuti\request\request</error>
-      <error line="34" code="50018">No DocBlock was found for property $request</error>
-      <error line="35" code="50018">No DocBlock was found for property $controller</error>
-      <error line="36" code="50018">No DocBlock was found for property $get</error>
-      <error line="37" code="50018">No DocBlock was found for property $post</error>
-      <error line="38" code="50018">No DocBlock was found for property $server</error>
-      <error line="40" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="47" code="50010">No DocBlock was found for method get()</error>
-      <error line="54" code="50010">No DocBlock was found for method web()</error>
-      <error line="70" code="50010">No DocBlock was found for method cli()</error>
-    </parse_markers>
   </file>
-  <file path="framework/controller/controller.php" hash="21ab179a93e8685f97656f8226a5485a" package="Default">
+  <file path="framework/controller/controller.php" hash="02c95924680b5f2cdce1a255962a9f34" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <class final="false" abstract="false" namespace="sambhuti\controller" line="34" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\controller" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>controller</name>
       <full_name>\sambhuti\controller\controller</full_name>
-      <property final="false" static="true" visibility="public" line="36" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="true" visibility="public" line="33" namespace="sambhuti\controller" package="Default">
         <name>$dependencies</name>
         <default><![CDATA[array('config.routing', 'core', 'loader')]]></default>
       </property>
-      <property final="false" static="false" visibility="protected" line="38" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="35" namespace="sambhuti\controller" package="Default">
         <name>$core</name>
         <default><![CDATA[null]]></default>
-        <docblock line="37">
+        <docblock line="34">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="37" name="var" description="" type="null|\sambhuti\core\core">
+          <tag line="34" name="var" description="" type="null|\sambhuti\core\core">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\core\core</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="40" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="37" namespace="sambhuti\controller" package="Default">
         <name>$routing</name>
         <default><![CDATA[null]]></default>
-        <docblock line="39">
+        <docblock line="36">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="39" name="var" description="" type="null|\sambhuti\core\dataFace">
+          <tag line="36" name="var" description="" type="null|\sambhuti\core\dataFace">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\core\dataFace</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="42" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="39" namespace="sambhuti\controller" package="Default">
         <name>$loader</name>
         <default><![CDATA[null]]></default>
-        <docblock line="41">
+        <docblock line="38">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="41" name="var" description="" type="null|\sambhuti\loader\loader">
+          <tag line="38" name="var" description="" type="null|\sambhuti\loader\loader">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\loader\loader</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="44" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="41" namespace="sambhuti\controller" package="Default">
         <name>$notFound</name>
         <default><![CDATA[null]]></default>
-        <docblock line="43">
+        <docblock line="40">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="43" name="var" description="" type="null|\sambhuti\controller\base">
+          <tag line="40" name="var" description="" type="null|\sambhuti\controller\base">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\controller\base</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="45" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="42" namespace="sambhuti\controller" package="Default">
         <name>$controllers</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="48" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="45" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="48">
+        <argument line="45">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="58" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="55" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="58">
+        <argument line="55">
           <name>$command</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="87" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="84" package="Default">
         <name>process</name>
         <full_name>process</full_name>
-        <docblock line="82">
+        <docblock line="79">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="82" name="param" description="controller name" type="string" variable="$controller">
+          <tag line="79" name="param" description="controller name" type="string" variable="$controller">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="82" name="return" description="controller instance" type="\sambhuti\controller\base">
+          <tag line="79" name="return" description="controller instance" type="\sambhuti\controller\base">
             <type by_reference="false">\sambhuti\controller\base</type>
           </tag>
         </docblock>
-        <argument line="87">
+        <argument line="84">
           <name>$controller</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -326,28 +512,66 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/controller/controller.php</error>
-      <error line="34" code="50000">No DocBlock was found for \sambhuti\controller\controller</error>
-      <error line="36" code="50018">No DocBlock was found for property $dependencies</error>
-      <critical line="37" code="50019">No short description for property $core</critical>
-      <critical line="39" code="50019">No short description for property $routing</critical>
-      <critical line="41" code="50019">No short description for property $loader</critical>
-      <critical line="43" code="50019">No short description for property $notFound</critical>
-      <error line="45" code="50018">No DocBlock was found for property $controllers</error>
-      <error line="48" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="58" code="50010">No DocBlock was found for method get()</error>
-      <error line="82" code="50012">No short description for method process()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\controller\controller</error>
+      <error line="33" code="50018">No DocBlock was found for property $dependencies</error>
+      <critical line="34" code="50019">No short description for property $core</critical>
+      <critical line="36" code="50019">No short description for property $routing</critical>
+      <critical line="38" code="50019">No short description for property $loader</critical>
+      <critical line="40" code="50019">No short description for property $notFound</critical>
+      <error line="42" code="50018">No DocBlock was found for property $controllers</error>
+      <error line="45" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="55" code="50010">No DocBlock was found for method get()</error>
+      <error line="79" code="50012">No short description for method process()</error>
     </parse_markers>
   </file>
-  <file path="framework/controller/home.php" hash="ba14b228327341c18f8036bf1f2b9c42" package="Default">
-    <class final="false" abstract="false" namespace="sambhuti\controller" line="28" package="Sambhuti">
+  <file path="framework/controller/home.php" hash="901839be21b827e14d8e927cc038f017" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="sambhuti\controller" line="30" package="Default">
       <extends>\sambhuti\controller\base</extends>
       <name>home</name>
       <full_name>\sambhuti\controller\home</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="31" package="Default">
+        <name>index</name>
+        <full_name>index</full_name>
+        <argument line="31">
+          <name>$args</name>
+          <default><![CDATA[array()]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\controller\home</error>
+      <error line="31" code="50010">No DocBlock was found for method index()</error>
+    </parse_markers>
+  </file>
+  <file path="framework/controller/_cli.php" hash="6d97e33e3dda49270f50f9c3b04961ff" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -362,58 +586,19 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="29" package="Sambhuti">
-        <name>index</name>
-        <full_name>index</full_name>
-        <argument line="29">
-          <name>$args</name>
-          <default><![CDATA[array()]]></default>
-          <type>array</type>
-        </argument>
-      </method>
-    </class>
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/controller/home.php</error>
-      <error line="29" code="50010">No DocBlock was found for method index()</error>
-    </parse_markers>
-  </file>
-  <file path="framework/controller/_cli.php" hash="ca5cac5ee1501a5f915bf311b0bfbfab" package="Default">
-    <class final="false" abstract="false" namespace="sambhuti\controller" line="28" package="Sambhuti">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="sambhuti\controller" line="30" package="Default">
       <extends>\sambhuti\controller\base</extends>
       <name>_cli</name>
       <full_name>\sambhuti\controller\_cli</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
-Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
-This file is part of Sambhuti (http://sambhuti.org)</p>
-
-<p>Sambhuti is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.</p>
-
-<p>Sambhuti is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.</p>
-
-<p>You should have received a copy of the GNU General Public License
-along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="29" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="31" package="Default">
         <name>index</name>
         <full_name>index</full_name>
-        <argument line="29">
+        <argument line="31">
           <name>$args</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
@@ -421,19 +606,15 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/controller/_cli.php</error>
-      <error line="29" code="50010">No DocBlock was found for method index()</error>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\controller\_cli</error>
+      <error line="31" code="50010">No DocBlock was found for method index()</error>
     </parse_markers>
   </file>
-  <file path="framework/controller/_error.php" hash="7e2909e7d74eda273e75fa931b8379dd" package="Default">
-    <class final="false" abstract="false" namespace="sambhuti\controller" line="28" package="Sambhuti">
-      <extends>\sambhuti\controller\base</extends>
-      <name>_error</name>
-      <full_name>\sambhuti\controller\_error</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/controller/_error.php" hash="1a3c74c16935a8f085ec99e4f9a586ae" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -448,96 +629,123 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="29" package="Sambhuti">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="sambhuti\controller" line="30" package="Default">
+      <extends>\sambhuti\controller\base</extends>
+      <name>_error</name>
+      <full_name>\sambhuti\controller\_error</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="31" package="Default">
         <name>index</name>
         <full_name>index</full_name>
-        <argument line="29">
+        <argument line="31">
           <name>$args</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="33" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="35" package="Default">
         <name>_404</name>
         <full_name>_404</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="37" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="39" package="Default">
         <name>_403</name>
         <full_name>_403</full_name>
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/controller/_error.php</error>
-      <error line="29" code="50010">No DocBlock was found for method index()</error>
-      <error line="33" code="50010">No DocBlock was found for method _404()</error>
-      <error line="37" code="50010">No DocBlock was found for method _403()</error>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\controller\_error</error>
+      <error line="31" code="50010">No DocBlock was found for method index()</error>
+      <error line="35" code="50010">No DocBlock was found for method _404()</error>
+      <error line="39" code="50010">No DocBlock was found for method _403()</error>
     </parse_markers>
   </file>
-  <file path="framework/controller/base.php" hash="baff0fce7c1f56dc494ee7c44baf874b" package="Default">
+  <file path="framework/controller/base.php" hash="4db40f9b7a879ca4338ac80f3f7e4543" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <class final="true" abstract="true" namespace="sambhuti\controller" line="30" package="Default">
+    <class final="true" abstract="true" namespace="sambhuti\controller" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>base</name>
       <full_name>\sambhuti\controller\base</full_name>
-      <property final="false" static="true" visibility="public" line="31" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="true" visibility="public" line="32" namespace="sambhuti\controller" package="Default">
         <name>$dependencies</name>
         <default><![CDATA[array('request.request', 'request.response')]]></default>
       </property>
-      <property final="false" static="false" visibility="protected" line="33" namespace="sambhuti\controller" package="Default">
+      <property final="false" static="false" visibility="protected" line="34" namespace="sambhuti\controller" package="Default">
         <name>$request</name>
         <default><![CDATA[null]]></default>
-        <docblock line="32">
+        <docblock line="33">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="32" name="var" description="" type="null|\sambhuti\core\dataFace">
-            <type by_reference="false">null</type>
-            <type by_reference="false">\sambhuti\core\dataFace</type>
-          </tag>
-        </docblock>
-      </property>
-      <property final="false" static="false" visibility="protected" line="35" namespace="sambhuti\controller" package="Default">
-        <name>$response</name>
-        <default><![CDATA[null]]></default>
-        <docblock line="34">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="34" name="var" description="" type="null|\sambhuti\core\dataFace">
+          <tag line="33" name="var" description="" type="null|\sambhuti\core\dataFace">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\core\dataFace</type>
           </tag>
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="36" namespace="sambhuti\controller" package="Default">
+        <name>$response</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="35">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="35" name="var" description="" type="null|\sambhuti\core\dataFace">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\sambhuti\core\dataFace</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="37" namespace="sambhuti\controller" package="Default">
         <name>$raw</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <method final="true" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="38" package="Default">
+      <method final="true" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="39" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="38">
+        <argument line="39">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="44" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="45" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="44">
+        <argument line="45">
           <name>$id</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\controller" line="48" package="Default">
+      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\controller" line="49" package="Default">
         <name>index</name>
         <full_name>index</full_name>
-        <argument line="48">
+        <argument line="49">
           <name>$args</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
@@ -545,36 +753,58 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/controller/base.php</error>
-      <error line="30" code="50000">No DocBlock was found for \sambhuti\controller\base</error>
-      <error line="31" code="50018">No DocBlock was found for property $dependencies</error>
-      <critical line="32" code="50019">No short description for property $request</critical>
-      <critical line="34" code="50019">No short description for property $response</critical>
-      <error line="36" code="50018">No DocBlock was found for property $raw</error>
-      <error line="38" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="44" code="50010">No DocBlock was found for method get()</error>
-      <error line="48" code="50010">No DocBlock was found for method index()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\controller\base</error>
+      <error line="32" code="50018">No DocBlock was found for property $dependencies</error>
+      <critical line="33" code="50019">No short description for property $request</critical>
+      <critical line="35" code="50019">No short description for property $response</critical>
+      <error line="37" code="50018">No DocBlock was found for property $raw</error>
+      <error line="39" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="45" code="50010">No DocBlock was found for method get()</error>
+      <error line="49" code="50010">No DocBlock was found for method index()</error>
     </parse_markers>
   </file>
-  <file path="framework/cache/cache.php" hash="4eeeec5fb0cddd93ad27f0a2ce7e5715" package="Default">
+  <file path="framework/cache/cache.php" hash="4992c481f9a52dc86861e8ad1bf9ff02" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <class final="false" abstract="false" namespace="sambhuti\cache" line="30" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\cache" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>cache</name>
       <full_name>\sambhuti\cache\cache</full_name>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="31" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="32" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="31">
+        <argument line="32">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="35" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="36" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="35">
+        <argument line="36">
           <name>$type</name>
           <default><![CDATA[null]]></default>
           <type/>
@@ -582,20 +812,16 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/cache/cache.php</error>
-      <error line="30" code="50000">No DocBlock was found for \sambhuti\cache\cache</error>
-      <error line="31" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="35" code="50010">No DocBlock was found for method get()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\cache\cache</error>
+      <error line="32" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="36" code="50010">No DocBlock was found for method get()</error>
     </parse_markers>
   </file>
-  <file path="framework/cache/face.php" hash="8f3eefda5aa391726d76309efc8729a0" package="Default">
-    <interface namespace="sambhuti\cache" line="28" package="Sambhuti">
-      <name>face</name>
-      <full_name>\sambhuti\cache\face</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/cache/face.php" hash="551e6c3315905dd32affc76e5f824680" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -610,125 +836,174 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <interface namespace="sambhuti\cache" line="33" package="Default">
+      <name>face</name>
+      <full_name>\sambhuti\cache\face</full_name>
+      <docblock line="30">
+        <description><![CDATA[Cache Interface]]></description>
+        <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="30" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="35" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="30">
+        <argument line="35">
           <name>$identifier</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="32" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="37" package="Default">
         <name>store</name>
         <full_name>store</full_name>
-        <argument line="32">
+        <argument line="37">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="34" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="39" package="Default">
         <name>fetch</name>
         <full_name>fetch</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="36" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="41" package="Default">
         <name>remove</name>
         <full_name>remove</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="38" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\cache" line="43" package="Default">
         <name>modified</name>
         <full_name>modified</full_name>
       </method>
     </interface>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/cache/face.php</error>
-      <error line="30" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="32" code="50010">No DocBlock was found for method store()</error>
-      <error line="34" code="50010">No DocBlock was found for method fetch()</error>
-      <error line="36" code="50010">No DocBlock was found for method remove()</error>
-      <error line="38" code="50010">No DocBlock was found for method modified()</error>
+      <error line="35" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="37" code="50010">No DocBlock was found for method store()</error>
+      <error line="39" code="50010">No DocBlock was found for method fetch()</error>
+      <error line="41" code="50010">No DocBlock was found for method remove()</error>
+      <error line="43" code="50010">No DocBlock was found for method modified()</error>
     </parse_markers>
   </file>
-  <file path="framework/cache/file.php" hash="d41d8cd98f00b204e9800998ecf8427e" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/cache/file.php</error>
-    </parse_markers>
+  <file path="framework/cache/file.php" hash="3d1fc8dc2498259130a50067c6a3022c" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
   </file>
   <file path="framework/config/routing.php" hash="6b38a466290e9b9e03c015d0a228196c" package="Default">
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file framework/config/routing.php</error>
     </parse_markers>
   </file>
-  <file path="framework/config/config.php" hash="937ee52cf8d522b940fcd68ce7967e25" package="Default">
+  <file path="framework/config/config.php" hash="6138c87f2bc42c5b22beed93eff403c2" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <include line="52" type="Include" package="Default">
+    <include line="53" type="Include" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="sambhuti\config" line="30" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\config" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>config</name>
       <full_name>\sambhuti\config\config</full_name>
-      <property final="false" static="true" visibility="public" line="31" namespace="sambhuti\config" package="Default">
+      <property final="false" static="true" visibility="public" line="32" namespace="sambhuti\config" package="Default">
         <name>$dependencies</name>
         <default><![CDATA[array('loader')]]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="32" namespace="sambhuti\config" package="Default">
+      <property final="false" static="false" visibility="private" line="33" namespace="sambhuti\config" package="Default">
         <name>$lazyPaths</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="33" namespace="sambhuti\config" package="Default">
+      <property final="false" static="false" visibility="private" line="34" namespace="sambhuti\config" package="Default">
         <name>$defaultPath</name>
         <default><![CDATA['']]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="34" namespace="sambhuti\config" package="Default">
+      <property final="false" static="false" visibility="private" line="35" namespace="sambhuti\config" package="Default">
         <name>$confs</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="39" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="40" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <docblock line="36">
+        <docblock line="37">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="param" description="array List of dependencies" type="\sambhuti\config\$dependencies" variable="$dependencies">
-            <type by_reference="false">\sambhuti\config\$dependencies</type>
+          <tag line="37" name="param" description="List of dependencies" type="array" variable="$dependencies">
+            <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="39">
+        <argument line="40">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="46" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="47" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="46">
+        <argument line="47">
           <name>$id</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="60" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="61" package="Default">
         <name>save</name>
         <full_name>save</full_name>
-        <argument line="60">
+        <argument line="61">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="60">
+        <argument line="61">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type>\sambhuti\core\dataFace</type>
         </argument>
-        <argument line="60">
+        <argument line="61">
           <name>$lazyId</name>
           <default><![CDATA[null]]></default>
           <type/>
@@ -736,27 +1011,21 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/config/config.php</error>
-      <error line="30" code="50000">No DocBlock was found for \sambhuti\config\config</error>
-      <error line="31" code="50018">No DocBlock was found for property $dependencies</error>
-      <error line="32" code="50018">No DocBlock was found for property $lazyPaths</error>
-      <error line="33" code="50018">No DocBlock was found for property $defaultPath</error>
-      <error line="34" code="50018">No DocBlock was found for property $confs</error>
-      <error line="36" code="50012">No short description for method __construct()</error>
-      <error line="36" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $dependencies in __construct()</error>
-      <error line="46" code="50010">No DocBlock was found for method get()</error>
-      <error line="60" code="50010">No DocBlock was found for method save()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\config\config</error>
+      <error line="32" code="50018">No DocBlock was found for property $dependencies</error>
+      <error line="33" code="50018">No DocBlock was found for property $lazyPaths</error>
+      <error line="34" code="50018">No DocBlock was found for property $defaultPath</error>
+      <error line="35" code="50018">No DocBlock was found for property $confs</error>
+      <error line="37" code="50012">No short description for method __construct()</error>
+      <error line="47" code="50010">No DocBlock was found for method get()</error>
+      <error line="61" code="50010">No DocBlock was found for method save()</error>
     </parse_markers>
   </file>
-  <file path="framework/core/boot.php" hash="73ba850ad423dd460d336eda7775d67f" package="Default">
-    <class final="false" abstract="false" namespace="sambhuti\core" line="28" package="Sambhuti">
-      <extends/>
-      <name>boot</name>
-      <full_name>\sambhuti\core\boot</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/core/boot.php" hash="5f32d92b48e8a7922ce1954fcb8f47ed" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -771,53 +1040,53 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <property final="false" static="false" visibility="private" line="30" namespace="sambhuti\core" package="Default">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="sambhuti\core" line="30" package="Default">
+      <extends/>
+      <name>boot</name>
+      <full_name>\sambhuti\core\boot</full_name>
+      <property final="false" static="false" visibility="private" line="32" namespace="sambhuti\core" package="Default">
         <name>$request</name>
         <default><![CDATA[null]]></default>
-        <docblock line="29">
+        <docblock line="31">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="29" name="var" description="" type="null|\sambhuti\core\container">
+          <tag line="31" name="var" description="" type="null|\sambhuti\core\container">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\core\container</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="32" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="34" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="32">
+        <argument line="34">
           <name>$core</name>
           <default><![CDATA[]]></default>
           <type>\sambhuti\core\core</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="37" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="39" package="Default">
         <name>go</name>
         <full_name>go</full_name>
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/core/boot.php</error>
-      <critical line="29" code="50019">No short description for property $request</critical>
-      <error line="32" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="37" code="50010">No DocBlock was found for method go()</error>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\core\boot</error>
+      <critical line="31" code="50019">No short description for property $request</critical>
+      <error line="34" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="39" code="50010">No DocBlock was found for method go()</error>
     </parse_markers>
   </file>
-  <file path="framework/core/container.php" hash="6999e9d06ffb028a4917e04754e434ca" package="Default">
-    <class final="true" abstract="true" namespace="sambhuti\core" line="29" package="Sambhuti">
-      <extends/>
-      <name>container</name>
-      <full_name>\sambhuti\core\container</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/core/container.php" hash="7736bd372d336c236d616862ad2d8119" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -832,24 +1101,28 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\core" line="31" package="Sambhuti">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="true" abstract="true" namespace="sambhuti\core" line="30" package="Default">
+      <extends/>
+      <name>container</name>
+      <full_name>\sambhuti\core\container</full_name>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\core" line="32" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="31">
+        <argument line="32">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\core" line="33" package="Sambhuti">
+      <method final="false" abstract="true" static="false" visibility="public" namespace="sambhuti\core" line="34" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="33">
+        <argument line="34">
           <name>$data</name>
           <default><![CDATA[null]]></default>
           <type/>
@@ -857,19 +1130,16 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/core/container.php</error>
-      <error line="31" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="33" code="50010">No DocBlock was found for method get()</error>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\core\container</error>
+      <error line="32" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="34" code="50010">No DocBlock was found for method get()</error>
     </parse_markers>
   </file>
-  <file path="framework/core/dataFace.php" hash="bef8d464373e1346a07b1dac00bd1dc2" package="Default">
-    <interface namespace="sambhuti\core" line="28" package="Sambhuti">
-      <name>dataFace</name>
-      <full_name>\sambhuti\core\dataFace</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/core/dataFace.php" hash="c2ef5247bc748da7c3af1ffb41d4877e" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -884,79 +1154,82 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="29" package="Sambhuti">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <interface namespace="sambhuti\core" line="30" package="Default">
+      <name>dataFace</name>
+      <full_name>\sambhuti\core\dataFace</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="31" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="29">
+        <argument line="31">
           <name>$array</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="31" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="33" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="31">
+        <argument line="33">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="33" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="35" package="Default">
         <name>set</name>
         <full_name>set</full_name>
-        <argument line="33">
+        <argument line="35">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="33">
+        <argument line="35">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="35" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="37" package="Default">
         <name>update</name>
         <full_name>update</full_name>
-        <argument line="35">
+        <argument line="37">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="35">
+        <argument line="37">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="37" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="39" package="Default">
         <name>getAll</name>
         <full_name>getAll</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="39" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="41" package="Default">
         <name>__get</name>
         <full_name>__get</full_name>
-        <argument line="39">
+        <argument line="41">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="41" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="43" package="Default">
         <name>__set</name>
         <full_name>__set</full_name>
-        <argument line="41">
+        <argument line="43">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="41">
+        <argument line="43">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -964,69 +1237,91 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </interface>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/core/dataFace.php</error>
-      <error line="29" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="31" code="50010">No DocBlock was found for method get()</error>
-      <error line="33" code="50010">No DocBlock was found for method set()</error>
-      <error line="35" code="50010">No DocBlock was found for method update()</error>
-      <error line="37" code="50010">No DocBlock was found for method getAll()</error>
-      <error line="39" code="50010">No DocBlock was found for method __get()</error>
-      <error line="41" code="50010">No DocBlock was found for method __set()</error>
+      <error line="31" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="33" code="50010">No DocBlock was found for method get()</error>
+      <error line="35" code="50010">No DocBlock was found for method set()</error>
+      <error line="37" code="50010">No DocBlock was found for method update()</error>
+      <error line="39" code="50010">No DocBlock was found for method getAll()</error>
+      <error line="41" code="50010">No DocBlock was found for method __get()</error>
+      <error line="43" code="50010">No DocBlock was found for method __set()</error>
     </parse_markers>
   </file>
-  <file path="framework/core/core.php" hash="10f2a1527c94a0aad4aae801d9acab40" package="Default">
+  <file path="framework/core/core.php" hash="2f724c1b787485facb1eef659bf37a50" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="loader">sambhuti\loader</namespace-alias>
-    <class final="false" abstract="false" namespace="sambhuti\core" line="30" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\core" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>core</name>
       <full_name>\sambhuti\core\core</full_name>
-      <property final="false" static="true" visibility="public" line="31" namespace="sambhuti\core" package="Default">
+      <property final="false" static="true" visibility="public" line="32" namespace="sambhuti\core" package="Default">
         <name>$dependencies</name>
         <default><![CDATA[array('loader')]]></default>
       </property>
-      <property final="false" static="false" visibility="protected" line="32" namespace="sambhuti\core" package="Default">
+      <property final="false" static="false" visibility="protected" line="33" namespace="sambhuti\core" package="Default">
         <name>$processed</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <property final="false" static="false" visibility="protected" line="34" namespace="sambhuti\core" package="Default">
+      <property final="false" static="false" visibility="protected" line="35" namespace="sambhuti\core" package="Default">
         <name>$loader</name>
         <default><![CDATA[null]]></default>
-        <docblock line="33">
+        <docblock line="34">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="33" name="var" description="" type="null|\sambhuti\loader\loader">
+          <tag line="34" name="var" description="" type="null|\sambhuti\loader\loader">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\loader\loader</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="36" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="37" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="36">
+        <argument line="37">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="42" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="43" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="42">
+        <argument line="43">
           <name>$identifier</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="71" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="72" package="Default">
         <name>process</name>
         <full_name>process</full_name>
-        <argument line="71">
+        <argument line="72">
           <name>$class</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="71">
+        <argument line="72">
           <name>$base</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -1034,26 +1329,20 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/core/core.php</error>
-      <error line="30" code="50000">No DocBlock was found for \sambhuti\core\core</error>
-      <error line="31" code="50018">No DocBlock was found for property $dependencies</error>
-      <error line="32" code="50018">No DocBlock was found for property $processed</error>
-      <critical line="33" code="50019">No short description for property $loader</critical>
-      <error line="36" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="42" code="50010">No DocBlock was found for method get()</error>
-      <error line="71" code="50010">No DocBlock was found for method process()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\core\core</error>
+      <error line="32" code="50018">No DocBlock was found for property $dependencies</error>
+      <error line="33" code="50018">No DocBlock was found for property $processed</error>
+      <critical line="34" code="50019">No short description for property $loader</critical>
+      <error line="37" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="43" code="50010">No DocBlock was found for method get()</error>
+      <error line="72" code="50010">No DocBlock was found for method process()</error>
     </parse_markers>
   </file>
-  <file path="framework/core/data.php" hash="8401f85c54a4c1c007ff52bfa697a707" package="Default">
-    <class final="false" abstract="false" namespace="sambhuti\core" line="28" package="Sambhuti">
-      <extends/>
-      <implements>\sambhuti\core\dataFace</implements>
-      <name>data</name>
-      <full_name>\sambhuti\core\data</full_name>
-      <docblock line="3">
-        <description><![CDATA[Sambhuti
+  <file path="framework/core/data.php" hash="dd0d65d08f00dcd7bdbcd3ee0655c73c" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
-        <long-description><![CDATA[<p>License:
+      <long-description><![CDATA[<p>License:
 This file is part of Sambhuti (http://sambhuti.org)</p>
 
 <p>Sambhuti is free software: you can redistribute it and/or modify
@@ -1068,83 +1357,88 @@ GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-        <tag line="3" name="package" description="Sambhuti"/>
-        <tag line="3" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
-        <tag line="3" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="3" name="copyright" description="2012 Piyush"/>
-      </docblock>
-      <property final="false" static="false" visibility="private" line="30" namespace="sambhuti\core" package="Default">
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="sambhuti\core" line="30" package="Default">
+      <extends/>
+      <implements>\sambhuti\core\dataFace</implements>
+      <name>data</name>
+      <full_name>\sambhuti\core\data</full_name>
+      <property final="false" static="false" visibility="private" line="32" namespace="sambhuti\core" package="Default">
         <name>$data</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="32" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="34" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="32">
+        <argument line="34">
           <name>$array</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="36" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="38" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="36">
+        <argument line="38">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="49" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="51" package="Default">
         <name>set</name>
         <full_name>set</full_name>
-        <argument line="49">
+        <argument line="51">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="49">
+        <argument line="51">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="57" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="59" package="Default">
         <name>update</name>
         <full_name>update</full_name>
-        <argument line="57">
+        <argument line="59">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="57">
+        <argument line="59">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="62" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="64" package="Default">
         <name>getAll</name>
         <full_name>getAll</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="66" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="68" package="Default">
         <name>__get</name>
         <full_name>__get</full_name>
-        <argument line="66">
+        <argument line="68">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="70" package="Sambhuti">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="72" package="Default">
         <name>__set</name>
         <full_name>__set</full_name>
-        <argument line="70">
+        <argument line="72">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="70">
+        <argument line="72">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -1152,81 +1446,124 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/core/data.php</error>
-      <error line="30" code="50018">No DocBlock was found for property $data</error>
-      <error line="32" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="36" code="50010">No DocBlock was found for method get()</error>
-      <error line="49" code="50010">No DocBlock was found for method set()</error>
-      <error line="57" code="50010">No DocBlock was found for method update()</error>
-      <error line="62" code="50010">No DocBlock was found for method getAll()</error>
-      <error line="66" code="50010">No DocBlock was found for method __get()</error>
-      <error line="70" code="50010">No DocBlock was found for method __set()</error>
+      <error line="30" code="50000">No DocBlock was found for \sambhuti\core\data</error>
+      <error line="32" code="50018">No DocBlock was found for property $data</error>
+      <error line="34" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="38" code="50010">No DocBlock was found for method get()</error>
+      <error line="51" code="50010">No DocBlock was found for method set()</error>
+      <error line="59" code="50010">No DocBlock was found for method update()</error>
+      <error line="64" code="50010">No DocBlock was found for method getAll()</error>
+      <error line="68" code="50010">No DocBlock was found for method __get()</error>
+      <error line="72" code="50010">No DocBlock was found for method __set()</error>
     </parse_markers>
   </file>
-  <file path="framework/model/pdo.php" hash="d41d8cd98f00b204e9800998ecf8427e" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/model/pdo.php</error>
-    </parse_markers>
+  <file path="framework/model/pdo.php" hash="d55081158b51c7bc18b584151a78638d" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
   </file>
-  <file path="framework/model/model.php" hash="56d89760185691300cd235433531798e" package="Default">
+  <file path="framework/model/model.php" hash="378aacafe464797e303ac87a1219f79c" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <class final="false" abstract="false" namespace="sambhuti\model" line="30" package="Default">
+    <class final="false" abstract="false" namespace="sambhuti\model" line="31" package="Default">
       <extends>\sambhuti\core\container</extends>
       <name>model</name>
       <full_name>\sambhuti\model\model</full_name>
-      <property final="false" static="true" visibility="public" line="32" namespace="sambhuti\model" package="Default">
+      <property final="false" static="true" visibility="public" line="33" namespace="sambhuti\model" package="Default">
         <name>$dependencies</name>
         <default><![CDATA[array('loader', 'config.database')]]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="34" namespace="sambhuti\model" package="Default">
+      <property final="false" static="false" visibility="private" line="35" namespace="sambhuti\model" package="Default">
         <name>$connection</name>
         <default><![CDATA[null]]></default>
-        <docblock line="33">
+        <docblock line="34">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="33" name="var" description="" type="null|\PDO">
+          <tag line="34" name="var" description="" type="null|\PDO">
             <type by_reference="false">null</type>
             <type by_reference="false">\PDO</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="35" namespace="sambhuti\model" package="Default">
+      <property final="false" static="false" visibility="private" line="36" namespace="sambhuti\model" package="Default">
         <name>$allTypes</name>
         <default><![CDATA[array('mysql' => 'MySQL')]]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="36" namespace="sambhuti\model" package="Default">
+      <property final="false" static="false" visibility="private" line="37" namespace="sambhuti\model" package="Default">
         <name>$type</name>
         <default><![CDATA['']]></default>
       </property>
-      <property final="false" static="false" visibility="private" line="38" namespace="sambhuti\model" package="Default">
+      <property final="false" static="false" visibility="private" line="39" namespace="sambhuti\model" package="Default">
         <name>$loader</name>
         <default><![CDATA[null]]></default>
-        <docblock line="37">
+        <docblock line="38">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="37" name="var" description="" type="null|\sambhuti\loader\loader">
+          <tag line="38" name="var" description="" type="null|\sambhuti\loader\loader">
             <type by_reference="false">null</type>
             <type by_reference="false">\sambhuti\loader\loader</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="39" namespace="sambhuti\model" package="Default">
+      <property final="false" static="false" visibility="private" line="40" namespace="sambhuti\model" package="Default">
         <name>$instances</name>
         <default><![CDATA[array()]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\model" line="41" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\model" line="42" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <argument line="41">
+        <argument line="42">
           <name>$dependencies</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\model" line="55" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\model" line="56" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <argument line="55">
+        <argument line="56">
           <name>$id</name>
           <default><![CDATA[null]]></default>
           <type/>
@@ -1234,19 +1571,18 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file framework/model/model.php</error>
-      <error line="30" code="50000">No DocBlock was found for \sambhuti\model\model</error>
-      <error line="32" code="50018">No DocBlock was found for property $dependencies</error>
-      <critical line="33" code="50019">No short description for property $connection</critical>
-      <error line="35" code="50018">No DocBlock was found for property $allTypes</error>
-      <error line="36" code="50018">No DocBlock was found for property $type</error>
-      <critical line="37" code="50019">No short description for property $loader</critical>
-      <error line="39" code="50018">No DocBlock was found for property $instances</error>
-      <error line="41" code="50010">No DocBlock was found for method __construct()</error>
-      <error line="55" code="50010">No DocBlock was found for method get()</error>
+      <error line="31" code="50000">No DocBlock was found for \sambhuti\model\model</error>
+      <error line="33" code="50018">No DocBlock was found for property $dependencies</error>
+      <critical line="34" code="50019">No short description for property $connection</critical>
+      <error line="36" code="50018">No DocBlock was found for property $allTypes</error>
+      <error line="37" code="50018">No DocBlock was found for property $type</error>
+      <critical line="38" code="50019">No short description for property $loader</critical>
+      <error line="40" code="50018">No DocBlock was found for property $instances</error>
+      <error line="42" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="56" code="50010">No DocBlock was found for method get()</error>
     </parse_markers>
   </file>
-  <file path="framework/cli.php" hash="0fe5ca6178fa50eb9a57911fbee46e3a" package="Sambhuti">
+  <file path="framework/cli.php" hash="4a7568ef12ce860d360c99070374efc6" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1266,21 +1602,25 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
       <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
-    <include line="31" type="Require Once" package="Default">
+    <include line="36" type="Require Once" package="Default">
       <name>boot.php</name>
     </include>
-    <constant namespace="global" line="29" package="Sambhuti">
+    <constant namespace="global" line="34" package="Sambhuti">
       <name>ISCLI</name>
       <full_name>\ISCLI</full_name>
       <value><![CDATA[true]]></value>
+      <docblock line="29">
+        <description><![CDATA[Is Command line]]></description>
+        <long-description><![CDATA[<p>Boolean value stores if the current call is from the command line or not</p>]]></long-description>
+      </docblock>
     </constant>
   </file>
-  <file path="sample/boot.php" hash="63bced562af58b733fd107d5fa23f848" package="Sambhuti">
+  <file path="sample/boot.php" hash="3390959b65eb31d1614102b0c866a1cf" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1300,7 +1640,7 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
       <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
@@ -1316,7 +1656,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </docblock>
     </include>
   </file>
-  <file path="sample/public_html/index.php" hash="50cf8cf6e51556edf7fb10bc93ebd8f3" package="Sambhuti">
+  <file path="sample/public_html/index.php" hash="3215a4cf12d304281c27614c1dceed9a" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1336,17 +1676,22 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
       <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
-    <include line="30" type="Require Once" package="Default">
+    <include line="31" type="Require Once" package="Default">
       <name/>
     </include>
-    <constant namespace="global" line="29" package="Sambhuti">
+    <constant namespace="global" line="30" package="Sambhuti">
       <name>ISCLI</name>
       <full_name>\ISCLI</full_name>
       <value><![CDATA[false]]></value>
+      <docblock line="29">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="29" name="ignore" description=""/>
+      </docblock>
     </constant>
   </file>
   <file path="sample/config/routing.php" hash="3166bc333856c70ab2c6bbd98f7bd1dd" package="Default">
@@ -1359,7 +1704,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       <error line="0" code="50007">No page-level DocBlock was found in file sample/config/database.sample.php</error>
     </parse_markers>
   </file>
-  <file path="sample/cli.php" hash="c69515fdda9396aeb4d9b25feb7937ea" package="Sambhuti">
+  <file path="sample/cli.php" hash="8ef7a70adc89a85c52465c16977a42bd" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1379,21 +1724,29 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License
 along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
       <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush&lt;piyush[at]cio[dot]bz&gt;"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
-    <include line="31" type="Require Once" package="Default">
+    <include line="32" type="Require Once" package="Default">
       <name/>
     </include>
-    <constant namespace="global" line="29" package="Sambhuti">
+    <constant namespace="global" line="30" package="Sambhuti">
       <name>ISCLI</name>
       <full_name>\ISCLI</full_name>
       <value><![CDATA[true]]></value>
+      <docblock line="29">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="29" name="ignore" description=""/>
+      </docblock>
     </constant>
   </file>
   <package name="Default" full_name="Default"/>
-  <package name="Sambhuti" full_name="Sambhuti"/>
+  <package name="Sambhuti" full_name="Sambhuti">
+    <package name="loader" full_name="Sambhuti\loader"/>
+    <package name="request" full_name="Sambhuti\request"/>
+  </package>
   <namespace name="global" full_name="global"/>
   <namespace name="sambhuti" full_name="sambhuti">
     <namespace name="cache" full_name="sambhuti\cache"/>

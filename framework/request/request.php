@@ -1,8 +1,4 @@
 <?php
-namespace sambhuti\request;
-if (!defined('SAMBHUTI_ROOT_PATH')) {
-    exit;
-}
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -23,20 +19,66 @@ if (!defined('SAMBHUTI_ROOT_PATH')) {
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
+ */
+
+namespace sambhuti\request;
+use sambhuti\core;
+
+/**
+ * Class Request
+ *
+ * Container for request and response objects
+ * Differentiates between web and cli request and populates the request object appropriately
+ * Can be accessed by the string 'request.*'.
+ *
+ * <code>
+ * class test extends \sambhuti\core\container {
+ *     static $dependencies = array('request.request','request.response');
+ *     public $request = null;
+ *     public $response = null;
+ *
+ *     function __construct(array $dependencies = array()) {
+ *         $this->request = $dependencies['request.request'];
+ *         $this->response = $dependencies['request.response'];
+ *     }
+ * }
+ * </code>
+ *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @subpackage request
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\core;
-
 class request extends core\container {
-    private $request = null;
-    private $controller = '';
-    private $get = array();
-    private $post = array();
-    private $server = array();
 
+    /**
+     * Request
+     *
+     * Stores request data later passed to controller 
+     *
+     * @var null|\sambhuti\core\data
+     */
+    protected $request = null;
+
+    /**
+     * Response
+     *
+     * Stores response data later passed to controller 
+     *
+     * @var null|\sambhuti\core\data
+     */
+    protected $response = null;
+
+    /**
+     * Constructor
+     *
+     * Determines Command line or web request based on ISCLI constant and executes
+     * the relevant method.
+     * Initializes request and response objects
+     *
+     * @param array $dependencies empty
+     */
     function __construct ( array $dependencies = array() ) {
         $data = ISCLI ? $this->cli() : $this->web();
         $this->request = new core\data($data);
@@ -44,13 +86,31 @@ class request extends core\container {
 
     }
 
-    function get ( $data = null ) {
-        if ($data === 'response') {
+    /**
+     * Get
+     *
+     * Implements abstract Get method
+     * Gives \sambhuti\request\request::$response on type 'response' and 
+     * \sambhuti\request\request::$request otherwise
+     *
+     * @param string|null $type type of object needed
+     * @return \sambhuti\core\data request or response object
+     */
+    function get ( $type = null ) {
+        if ($type === 'response') {
             return $this->response;
         }
         return $this->request;
     }
 
+    /**
+     * Web Request
+     *
+     * Parses REQUEST_URI to determine the command and returns
+     * other standard request parameters
+     *
+     * @return array list of options for request data
+     */
     function web () {
         $request_uri = $_SERVER["REQUEST_URI"];
         if (false !== ($pos = strpos($request_uri, '?'))) {
@@ -62,14 +122,28 @@ class request extends core\container {
             $command = substr($request_uri, strlen($path));
         }
         return array(
-            'command' => trim($command, "/"), 'get' => $_GET, 'post' => $_POST, 'server'=> $_SERVER, 'file'=> $_FILES,
+            'command' => trim($command, "/"),
+            'get' => $_GET,
+            'post' => $_POST,
+            'server'=> $_SERVER,
+            'file'=> $_FILES,
             'cookies' => $_COOKIE
         );
     }
 
+    /**
+     * Command line Request
+     *
+     * Command is always 'cli' gives 'argv' and 'argc' for request
+     *
+     * @return array list of options for request data
+     */
     function cli () {
         return array(
-            'command' => 'cli', 'server'=> $_SERVER, 'argv'=> $_SERVER['argv'], 'argc' => $_SERVER['argc']
+            'command' => 'cli',
+            'server'=> $_SERVER,
+            'argv'=> $_SERVER['argv'],
+            'argc' => $_SERVER['argc']
         );
     }
 }

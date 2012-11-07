@@ -1,5 +1,4 @@
 <?php
-namespace sambhuti\cache;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,10 +20,12 @@ namespace sambhuti\cache;
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package   Sambhuti
- * @author    Piyush<piyush[at]cio[dot]bz>
+ * @author    Piyush <piyush@cio.bz>
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
+
+namespace sambhuti\cache;
 use sambhuti\core;
 
 class cache extends core\container {
