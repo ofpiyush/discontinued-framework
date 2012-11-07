@@ -1,6 +1,5 @@
 <?php
 namespace sambhuti\core;
-if(!defined('SAMBHUTI_ROOT_PATH')) exit;
 /**
  * Sambhuti
  * Copyright (C) 2012-2013 Piyush
@@ -21,17 +20,23 @@ if(!defined('SAMBHUTI_ROOT_PATH')) exit;
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package Sambhuti
- * @author Piyush<piyush[at]cio[dot]bz>
- * @license http://www.gnu.org/licenses/gpl.html
+ * @package   Sambhuti
+ * @author    Piyush<piyush[at]cio[dot]bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
 interface dataFace {
-    function __construct(array $array=array());
-	function get($key);
-	function set($key,$value);
-    function update($key,$value);
-    function getAll();
-    function __get($key);
-    function __set($key,$value);
+    function __construct ( array $array = array() );
+
+    function get ( $key );
+
+    function set ( $key, $value );
+
+    function update ( $key, $value );
+
+    function getAll ();
+
+    function __get ( $key );
+
+    function __set ( $key, $value );
 }
