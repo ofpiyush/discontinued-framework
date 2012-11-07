@@ -64,7 +64,7 @@ class config extends core\container {
         if ($id !== null && !empty($this->lazyPaths[$id]))
             $fullpath = $this->lazyPaths[$id];
         $fp = fopen($fullpath.'/config/'.$id.'.php', 'wb');
-        if(empty($fp)) throw new Exception('Config folder not writable');
+        if(empty($fp)) throw new \Exception('Config folder not writable');
         fwrite($fp, $fileString);
         fclose($fp);
         $this->confs[$id] = $data;
