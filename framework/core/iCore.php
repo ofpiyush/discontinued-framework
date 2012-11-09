@@ -25,13 +25,13 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\cache;
-use sambhuti\core;
+namespace sambhuti\core;
+use sambhuti\loader;
 
-class cache implements core\iContainer {
+interface iCore extends iContainer {
 
+    function __construct ( loader\iLoader $loader );
 
-    function get ( $type = null ) {
+    function process ( $class );
 
-    }
 }

@@ -28,7 +28,7 @@ $app_path = realpath('./');
 $sambhuti_path = dirname(__FILE__);
 /**
  * Is Command line
- * 
+ *
  * Boolean value stores if the current call is from the command line or not
  */
 define('ISCLI', true);

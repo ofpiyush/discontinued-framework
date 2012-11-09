@@ -27,7 +27,7 @@
 
 namespace sambhuti\core;
 
-class data implements dataFace {
+class data implements iData {
 
     private $data = array();
 

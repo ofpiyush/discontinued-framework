@@ -25,13 +25,17 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\cache;
-use sambhuti\core;
+namespace sambhuti\core;
 
-class cache implements core\iContainer {
-
-
-    function get ( $type = null ) {
-
-    }
+interface iContainer {
+    /**
+     * Get
+     *
+     * Every container should implement this in order to provide a clean interface
+     *
+     * @param null $data
+     *
+     * @return mixed
+     */
+    function get ( $data = null );
 }

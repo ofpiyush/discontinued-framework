@@ -32,41 +32,42 @@ use sambhuti\core;
  * Can be accessed by the string 'request.*'.
  *
  * <code>
- * class test extends \sambhuti\core\container {
+ * use sambhuti\core;
+ * class test implements core\iContainer {
  *     static $dependencies = array('request.request','request.response');
  *     public $request = null;
  *     public $response = null;
  *
- *     function __construct(array $dependencies = array()) {
- *         $this->request = $dependencies['request.request'];
- *         $this->response = $dependencies['request.response'];
+ *     function __construct(core\iData $request, core\iData $response) {
+ *         $this->request = $request;
+ *         $this->response = $response;
  *     }
  * }
  * </code>
  *
- * @package   Sambhuti
+ * @package    Sambhuti
  * @subpackage request
- * @author    Piyush <piyush@cio.bz>
- * @license   http://www.gnu.org/licenses/gpl.html
- * @copyright 2012 Piyush
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
  */
-class request extends core\container {
+class request implements iRequest {
 
     /**
      * Request
      *
-     * Stores request data later passed to controller 
+     * Stores request data later passed to controller
      *
-     * @var null|\sambhuti\core\data
+     * @var null|\sambhuti\core\iData
      */
     protected $request = null;
 
     /**
      * Response
      *
-     * Stores response data later passed to controller 
+     * Stores response data later passed to controller
      *
-     * @var null|\sambhuti\core\data
+     * @var null|\sambhuti\core\iData
      */
     protected $response = null;
 
@@ -77,9 +78,8 @@ class request extends core\container {
      * the relevant method.
      * Initializes request and response objects
      *
-     * @param array $dependencies empty
      */
-    function __construct ( array $dependencies = array() ) {
+    function __construct () {
         $data = ISCLI ? $this->cli() : $this->web();
         $this->request = new core\data($data);
         $this->response = new core\data();
@@ -90,11 +90,12 @@ class request extends core\container {
      * Get
      *
      * Implements abstract Get method
-     * Gives \sambhuti\request\request::$response on type 'response' and 
+     * Gives \sambhuti\request\request::$response on type 'response' and
      * \sambhuti\request\request::$request otherwise
      *
      * @param string|null $type type of object needed
-     * @return \sambhuti\core\data request or response object
+     *
+     * @return \sambhuti\core\iData request or response object
      */
     function get ( $type = null ) {
         if ($type === 'response') {
@@ -122,11 +123,7 @@ class request extends core\container {
             $command = substr($request_uri, strlen($path));
         }
         return array(
-            'command' => trim($command, "/"),
-            'get' => $_GET,
-            'post' => $_POST,
-            'server'=> $_SERVER,
-            'file'=> $_FILES,
+            'command' => trim($command, "/"), 'get' => $_GET, 'post' => $_POST, 'server'=> $_SERVER, 'file'=> $_FILES,
             'cookies' => $_COOKIE
         );
     }
@@ -140,10 +137,7 @@ class request extends core\container {
      */
     function cli () {
         return array(
-            'command' => 'cli',
-            'server'=> $_SERVER,
-            'argv'=> $_SERVER['argv'],
-            'argc' => $_SERVER['argc']
+            'command' => 'cli', 'server'=> $_SERVER, 'argv'=> $_SERVER['argv'], 'argc' => $_SERVER['argc']
         );
     }
 }

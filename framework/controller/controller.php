@@ -27,13 +27,14 @@
 
 namespace sambhuti\controller;
 use sambhuti\core;
+use sambhuti\loader;
 
-class controller extends core\container {
+class controller implements iController {
 
     static $dependencies = array('config.routing', 'core', 'loader');
     /** @var null|\sambhuti\core\core $core */
     protected $core = null;
-    /** @var null|\sambhuti\core\dataFace $routing */
+    /** @var null|\sambhuti\core\iData $routing */
     protected $routing = null;
     /** @var null|\sambhuti\loader\loader $loader */
     protected $loader = null;
@@ -42,12 +43,10 @@ class controller extends core\container {
     protected $controllers = array();
 
 
-    function __construct ( array $dependencies = array() ) {
-        /** @var \sambhuti\core\dataFace $routing  */
-        $routing = $dependencies['config.routing'];
+    function __construct ( core\iData $routing, core\iCore $core, loader\loader $loader ) {
         $this->routing = $routing;
-        $this->core = $dependencies['core'];
-        $this->loader = $dependencies['loader'];
+        $this->core = $core;
+        $this->loader = $loader;
         $this->notFound = $this->process($routing->get('404'));
         $this->controllers['home'] = $this->process($routing->get('home'));
     }
@@ -79,13 +78,13 @@ class controller extends core\container {
     /**
      * @param string controller name
      *
-     * @return \sambhuti\controller\base controller instance
+     * @return null|\sambhuti\controller\iController controller instance
      */
     function process ( $controller ) {
         if (empty($this->controllers[$controller])) {
-            $class = $this->loader->fetch('controller', $controller);
+            $class = $this->loader->fetch('controller' . '\\' . $controller);
             if (null !== $class) {
-                $this->controllers[$controller] = $this->core->process($class, 'sambhuti\controller\base');
+                $this->controllers[$controller] = $this->core->process($class);
             } else {
                 $this->controllers[$controller] = null;
             }

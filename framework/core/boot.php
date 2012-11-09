@@ -28,7 +28,7 @@
 namespace sambhuti\core;
 
 class boot {
-    /** @var null|\sambhuti\core\container */
+    /** @var null|\sambhuti\core\iContainer */
     private $request = null;
 
     function __construct ( core $core ) {

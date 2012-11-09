@@ -22,6 +22,7 @@
  */
 
 namespace sambhuti\loader;
+use sambhuti\core;
 
 /**
  * Class Loader
@@ -47,16 +48,7 @@ namespace sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class loader implements iLoader {
-
-    /**
-     * Lazy Path
-     *
-     * Array of [namespace => Path] for lazyloading
-     *
-     * @var array $lazyPath
-     */
-    private $lazyPath = array();
+interface iLoader extends core\iContainer {
 
     /**
      * Constructor
@@ -65,30 +57,8 @@ class loader implements iLoader {
      *
      * @param array $dependencies
      */
-    function __construct () {
-        spl_autoload_register(array($this, 'get'));
-    }
+    function __construct ();
 
-    /**
-     * Get - Autoloader
-     *
-     * Autoloader to load the classes under all lazypaths
-     *
-     * @param string $class name of the class to be loaded
-     *
-     * @return bool true if found, false otherwise
-     */
-    function get ( $class = null ) {
-        if (class_exists($class)) {
-            return true;
-        }
-        $array = explode('\\', $class);
-        if (array_key_exists($array[0], $this->lazyPath)) {
-            $array[0] = $this->lazyPath[$array[0]];
-            return $this->checkRequire(implode($array, DIRECTORY_SEPARATOR));
-        }
-        return false;
-    }
 
     /**
      * Check Require
@@ -99,14 +69,7 @@ class loader implements iLoader {
      *
      * @return bool true if found, false otherwise
      */
-    function checkRequire ( $name ) {
-        $fullPath = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
-        if (file_exists($fullPath)) {
-            require_once($fullPath);
-            return true;
-        }
-        return false;
-    }
+    function checkRequire ( $name );
 
     /**
      * Fetch
@@ -118,19 +81,7 @@ class loader implements iLoader {
      *
      * @return string|null string full classname if class exists else null
      */
-    function fetch ( $class ) {
-        if (class_exists($class)) {
-            return $class;
-        }
-        $paths = array_reverse($this->lazyPath);
-        $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        foreach ( $paths as $ns => $path ) {
-            if ($this->checkRequire($path . DIRECTORY_SEPARATOR . $classPath)) {
-                return $ns . '\\' . $class;
-            }
-        }
-        return null;
-    }
+    function fetch ( $class );
 
     /**
      * Add Lazy Path
@@ -142,11 +93,7 @@ class loader implements iLoader {
      *
      * @return \sambhuti\loader\loader instance
      */
-    function addLazyPath ( $namespace, $path ) {
-        $path = rtrim($path, '/');
-        $this->lazyPath[$namespace] = $path;
-        return $this;
-    }
+    function addLazyPath ( $namespace, $path );
 
     /**
      * Get Lazy Path
@@ -157,12 +104,7 @@ class loader implements iLoader {
      *
      * @return string|bool string path if $key exists else boolean false
      */
-    function getLazyPath ( $key ) {
-        if (!empty($this->lazyPath[$key])) {
-            return $this->lazyPath[$key];
-        }
-        return false;
-    }
+    function getLazyPath ( $key );
 
     /**
      * Get Lazy Paths
@@ -171,17 +113,6 @@ class loader implements iLoader {
      *
      * @return array all lazypaths.
      */
-    function getLazyPaths () {
-        return $this->lazyPath;
-    }
-
-    /**
-     * Sleep
-     *
-     * @return array lazypath to be cached
-     */
-    function __sleep () {
-        return array('lazyPath');
-    }
+    function getLazyPaths ();
 
 }

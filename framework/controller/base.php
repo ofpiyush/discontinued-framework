@@ -28,18 +28,16 @@
 namespace sambhuti\controller;
 use sambhuti\core;
 
-abstract class base extends core\container {
+abstract class base implements core\iContainer {
     static $dependencies = array('request.request', 'request.response');
-    /** @var null|\sambhuti\core\dataFace $request */
+    /** @var null|\sambhuti\core\iData $request */
     protected $request = null;
-    /** @var null|\sambhuti\core\dataFace $response */
+    /** @var null|\sambhuti\core\iData $response */
     protected $response = null;
-    protected $raw = array();
 
-    final function __construct ( array $dependencies = array() ) {
-        $this->request = $dependencies['request.request'];
-        $this->response = $dependencies['request.response'];
-        $this->raw = $dependencies;
+    function __construct ( core\iData $request, core\iData $response ) {
+        $this->request = $request;
+        $this->response = $response;
     }
 
     function get ( $id = null ) {
