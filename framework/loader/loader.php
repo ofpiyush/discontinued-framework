@@ -27,11 +27,11 @@ namespace sambhuti\loader;
  * Class Loader
  *
  * Contains auto loader for lazy loading.
- * Allows type based class fetching for loading classes from particular modules
+ * Allows class fetching for loading classes from particular modules
  * Can be accessed by the string 'loader'.
  *
  * <code>
- * class test extends \sambhuti\core\container {
+ * class test implements \sambhuti\core\iContainer {
  *     static $dependencies = array('loader');
  *     public $loader = null;
  *
@@ -63,7 +63,6 @@ class loader implements iLoader {
      *
      * Registers loader::get() as the autoload method
      *
-     * @param array $dependencies
      */
     function __construct () {
         spl_autoload_register(array($this, 'get'));
@@ -111,7 +110,7 @@ class loader implements iLoader {
     /**
      * Fetch
      *
-     * Looks for a class of certain type in all registered paths and
+     * Looks for a class in all registered paths and
      * returns the class name if matches else gives null
      *
      * @param string $class name of class to look for

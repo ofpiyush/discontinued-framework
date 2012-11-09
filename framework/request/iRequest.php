@@ -28,22 +28,10 @@ use sambhuti\core;
  * Interface Request
  *
  * Container for request and response objects
- * Differentiates between web and cli request and populates the request object appropriately
+ * Should differentiate between web and cli request and populate the request object appropriately
  * Can be accessed by the string 'request.*'.
  *
- * <code>
- * use sambhuti\core;
- * class test implements core\iContainer {
- *     static $dependencies = array('request.request','request.response');
- *     public $request = null;
- *     public $response = null;
- *
- *     function __construct(core\iData $request, core\iData $response) {
- *         $this->request = $request;
- *         $this->response = $response;
- *     }
- * }
- * </code>
+ * @link ../../docs/source/framework/request/request.php.html
  *
  * @package    Sambhuti
  * @subpackage request
@@ -56,9 +44,7 @@ interface iRequest extends core\iContainer {
     /**
      * Constructor
      *
-     * Determines Command line or web request based on ISCLI constant and executes
-     * the relevant method.
-     * Initializes request and response objects
+     * Should initializes request and response objects
      *
      */
     function __construct ();
@@ -67,17 +53,12 @@ interface iRequest extends core\iContainer {
     /**
      * Web Request
      *
-     * Parses REQUEST_URI to determine the command and returns
-     * other standard request parameters
-     *
      * @return array list of options for request data
      */
     function web ();
 
     /**
      * Command line Request
-     *
-     * Command is always 'cli' gives 'argv' and 'argc' for request
      *
      * @return array list of options for request data
      */

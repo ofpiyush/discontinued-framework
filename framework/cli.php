@@ -37,6 +37,6 @@ require_once('boot.php');
 use sambhuti\core;
 
 //keep 5.3 compatibility
-$core = new core\core(array('loader'=> $loader));
+$core = new core\core($loader);
 $boot = new core\boot($core);
 $boot->go();
