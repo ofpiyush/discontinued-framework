@@ -27,7 +27,25 @@
 
 namespace sambhuti\controller;
 
+/**
+ * Home Controller
+ *
+ * Default controller for sambhuti
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+
 class home extends controller {
+
+    /**
+     * Home page index
+     *
+     * @param array $args
+     */
     function index ( array $args = array() ) {
         echo "home loaded";
     }

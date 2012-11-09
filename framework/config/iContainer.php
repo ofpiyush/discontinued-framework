@@ -26,13 +26,40 @@
  */
 
 namespace sambhuti\config;
+
 use sambhuti\core;
 use \sambhuti\loader;
 
+/**
+ * config Container Interface
+ *
+ * All config files should be loaded and stored by the class implementing this
+ * interface
+ *
+ * @package    Sambhuti
+ * @subpackage config
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iContainer extends core\iContainer {
 
+    /**
+     * Constructor
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     */
     function __construct ( loader\iContainer $loader );
 
 
+    /**
+     * Save
+     *
+     * @param                      $id
+     * @param \sambhuti\core\iData $data
+     * @param null                 $lazyId
+     *
+     * @return void|\sambhuti\config\iContainer
+     */
     function save ( $id, core\iData $data, $lazyId = null );
 }

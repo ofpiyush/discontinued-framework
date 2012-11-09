@@ -26,9 +26,28 @@
  */
 
 namespace sambhuti\controller;
+
 use sambhuti\core;
 
+/**
+ * controller Interface
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iController extends core\iContainer {
 
+    /**
+     * Index page
+     *
+     * Should serve as the home page for every controller
+     *
+     * @param array $args
+     *
+     * @return void|mixed
+     */
     function index ( array $args = array() );
 }

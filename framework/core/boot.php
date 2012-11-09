@@ -27,15 +27,45 @@
 
 namespace sambhuti\core;
 
+/**
+ * Boot Class
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 class boot {
-    /** @var null|\sambhuti\core\iContainer */
+
+    /**
+     * Request Container
+     *
+     * @var null|\sambhuti\request\iContainer
+     */
     private $request = null;
 
+    /**
+     * Constructor
+     *
+     * Sets up everything
+     *
+     * @param \sambhuti\core\core $core
+     */
     function __construct ( core $core ) {
         $this->core = $core;
         $this->request = $core->get('request');
     }
 
+    /**
+     * Go
+     *
+     * Heart of Sambhuti's processing
+     *
+     * @todo add templating here or in a new method
+     *
+     * @return \sambhuti\core\iData Response
+     */
     function go () {
         $this->core->get('controller')->get($this->request->get()->get('command'));
         return $this->request->get('response');

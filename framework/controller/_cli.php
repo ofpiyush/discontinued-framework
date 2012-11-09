@@ -27,7 +27,27 @@
 
 namespace sambhuti\controller;
 
+/**
+ * Command line Controller
+ *
+ * implements command line functions
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ *
+ */
 class _cli extends controller {
+
+    /**
+     * Command line index
+     *
+     * @todo implement help response from this
+     *
+     * @param array $args
+     */
     function index ( array $args = array() ) {
         $argv = $this->request->get('argv');
         array_shift($argv);

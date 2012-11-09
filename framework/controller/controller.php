@@ -26,33 +26,80 @@
  */
 
 namespace sambhuti\controller;
+
 use sambhuti\core;
 
+/**
+ * Controller abstract
+ *
+ * Makes the way for all child controllers
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 abstract class controller implements iController {
+
     /**
      * Dependencies
+     *
+     * Should at least have these two if overridden in child classes
      *
      * @static
      * @var array Array of dependency strings
      */
     static $dependencies = array('request.request', 'request.response');
+
     /**
+     * Request
+     *
      * @var null|\sambhuti\core\iData $request
      */
     protected $request = null;
+
     /**
+     * Response
+     *
      * @var null|\sambhuti\core\iData $response
      */
     protected $response = null;
 
+    /**
+     * Constructor
+     *
+     * Should always be called from child constructors
+     *
+     * @param \sambhuti\core\iData $request
+     * @param \sambhuti\core\iData $response
+     */
     function __construct ( core\iData $request, core\iData $response ) {
         $this->request = $request;
         $this->response = $response;
     }
 
+    /**
+     * Get
+     *
+     * Always gives back response
+     *
+     * @param null $id
+     *
+     * @return \sambhuti\core\iData Response
+     */
     function get ( $id = null ) {
         return $this->response;
     }
 
+    /**
+     * Index
+     *
+     * Should implement as index page for all controllers
+     *
+     * @param array $args
+     *
+     * @return mixed|void
+     */
     abstract function index ( array $args = array() );
 }

@@ -26,11 +26,12 @@
  */
 
 namespace sambhuti\config;
+
 use sambhuti\core;
 use sambhuti\loader;
 
 /**
- * Config Container
+ * config Container
  *
  * All config files are loaded and stored by this class
  *
@@ -42,6 +43,7 @@ use sambhuti\loader;
  * @copyright  2012 Piyush
  */
 class container implements iContainer {
+
     /**
      * Dependencies
      *
@@ -49,6 +51,7 @@ class container implements iContainer {
      * @var array Array of dependency strings
      */
     static $dependencies = array('loader');
+
     /**
      * Lazy Path
      *
@@ -58,10 +61,16 @@ class container implements iContainer {
      * @var array $lazyPaths
      */
     protected $lazyPaths = array();
+
     /**
+     * Default Path
+     *
+     * Last path in lazy paths
+     *
      * @var string
      */
     protected $defaultPath = '';
+
     /**
      * Array of \sambhuti\core\iData objects
      *
@@ -82,7 +91,10 @@ class container implements iContainer {
     }
 
     /**
+     * Get
      *
+     * Takes in string identifier eg: "file" and makes it into config/file.php
+     * Runs through all available lazy paths.
      *
      * @param null|string $id
      *

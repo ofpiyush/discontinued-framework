@@ -26,6 +26,7 @@
  */
 
 namespace sambhuti\controller;
+
 use sambhuti\core;
 use sambhuti\loader;
 
@@ -42,22 +43,62 @@ use sambhuti\loader;
  */
 class container implements iContainer {
 
-    static $dependencies = array('config.routing', 'core', 'loader');
     /**
+     * Dependencies
+     *
+     * @static
+     * @var array Array of dependency strings
+     */
+    static $dependencies = array('config.routing', 'core', 'loader');
+
+    /**
+     * Core
+     *
+     * Instance of Core
+     *
      * @var null|\sambhuti\core\iCore $core
      */
     protected $core = null;
+
     /**
+     * Routing Config
+     *
      * @var null|\sambhuti\core\iData $routing
      */
     protected $routing = null;
-    /** @var null|\sambhuti\loader\iContainer $loader */
+
+    /**
+     * Loader
+     *
+     * Instance of Loader
+     *
+     * @var null|\sambhuti\loader\iContainer $loader
+     */
     protected $loader = null;
-    /** @var null|\sambhuti\controller\iController */
+
+    /**
+     * Not Found Controller
+     *
+     * @var null|\sambhuti\controller\iController
+     */
     protected $notFound = null;
+
+    /**
+     * Controller instances
+     *
+     * @var array
+     */
     protected $controllers = array();
 
-
+    /**
+     * Constructor
+     *
+     * Sets up not found, home etc from routing
+     *
+     * @param \sambhuti\core\iData        $routing
+     * @param \sambhuti\core\iCore        $core
+     * @param \sambhuti\loader\iContainer $loader
+     */
     function __construct ( core\iData $routing, core\iCore $core, loader\iContainer $loader ) {
         $this->routing = $routing;
         $this->core = $core;
@@ -66,10 +107,22 @@ class container implements iContainer {
         $this->controllers['home'] = $this->process($routing->get('home'));
     }
 
+    /**
+     * Get
+     *
+     * Takes in a command in format controller/method/arg1/arg2...
+     * and calls controller::method(array(arg1,arg2...))
+     * if exists or returns not found controller
+     *
+     * @param null $command
+     *
+     * @return \sambhuti\controller\iController
+     */
     function get ( $command = null ) {
         if (empty($command)) {
             return $this->get('home');
         }
+        /** @todo allow better overrides */
         if (null !== $this->routing->get($command)) {
             $command = $this->routing->get($command);
         }
@@ -93,6 +146,10 @@ class container implements iContainer {
     }
 
     /**
+     * Process
+     *
+     * Processes single controller identifier to full name and returns instance or null
+     *
      * @param string controller name
      *
      * @return null|\sambhuti\controller\iController controller instance

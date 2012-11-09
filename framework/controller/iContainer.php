@@ -26,17 +26,28 @@
  */
 
 namespace sambhuti\controller;
+
 use sambhuti\core;
 use sambhuti\loader;
 
+/**
+ * controller Container Interface
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iContainer extends core\iContainer {
+
     /**
      * Constructor
      *
-     * Sets up not found, home etc from routing
+     * Should set up not found, home etc from routing
      *
-     * @param \sambhuti\core\iData    $routing instance of routing
-     * @param \sambhuti\core\iCore    $core    instance of Core
+     * @param \sambhuti\core\iData        $routing instance of routing
+     * @param \sambhuti\core\iCore        $core    instance of Core
      * @param \sambhuti\loader\iContainer $loader  instance of Loader
      */
     function __construct ( core\iData $routing, core\iCore $core, loader\iContainer $loader );
@@ -44,7 +55,7 @@ interface iContainer extends core\iContainer {
     /**
      * Process
      *
-     * Processes single controller identifier to full name and returns instance or null
+     * Should process single controller identifier to full name and return instance or null
      *
      * @param string controller name
      *

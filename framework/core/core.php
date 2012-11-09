@@ -26,20 +26,72 @@
  */
 
 namespace sambhuti\core;
+
 use sambhuti\loader;
 
+/**
+ * Core Container Class
+ *
+ * This class is the core dependency injection container for everything in sambhuti
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 class core implements iCore {
+
+    /**
+     * Dependencies
+     *
+     * @static
+     * @var array Array of dependency strings
+     */
     static $dependencies = array('loader');
+
+    /**
+     * Processed
+     *
+     * All Containers are stored in this array
+     *
+     * @var array
+     */
     protected $processed = array();
-    /** @var null|\sambhuti\loader\iContainer */
+
+    /**
+     * Loader
+     *
+     * Another copy of loader is kept separate for clarity's sake
+     *
+     * @var null|\sambhuti\loader\iContainer
+     */
     protected $loader = null;
 
+    /**
+     * Constructor
+     *
+     * Sets up Loader and itself into the processed array
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     */
     function __construct ( loader\iContainer $loader ) {
         $this->loader = $loader;
         $this->processed['loader'] = $loader;
         $this->processed['core'] = $this;
     }
 
+    /**
+     * Get
+     *
+     * @fixme Write better doc here
+     *
+     *
+     * @param null|string $identifier
+     *
+     * @return mixed|\sambhuti\core\iContainer container or response of "get" method based on string
+     * @throws \Exception
+     */
     function get ( $identifier = null ) {
         if (null === $identifier || 'core' === $identifier) {
             return $this;
@@ -69,6 +121,16 @@ class core implements iCore {
     }
 
 
+    /**
+     * Process
+     *
+     * @fixme Write better doc here
+     *
+     * @param string $class
+     *
+     * @return object
+     * @throws \Exception
+     */
     function process ( $class ) {
         if (empty($class) || !class_exists($class)) {
             throw new \Exception($class . ' not found');
