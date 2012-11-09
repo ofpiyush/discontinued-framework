@@ -123,7 +123,7 @@ class request implements iRequest {
             $command = substr($request_uri, strlen($path));
         }
         return array(
-            'command' => trim($command, "/"), 'get' => $_GET, 'post' => $_POST, 'server'=> $_SERVER, 'file'=> $_FILES,
+            'command' => trim($command, "/"), 'get' => $_GET, 'post' => $_POST, 'server' => $_SERVER, 'file' => $_FILES,
             'cookies' => $_COOKIE
         );
     }
@@ -136,8 +136,6 @@ class request implements iRequest {
      * @return array list of options for request data
      */
     function cli () {
-        return array(
-            'command' => 'cli', 'server'=> $_SERVER, 'argv'=> $_SERVER['argv'], 'argc' => $_SERVER['argc']
-        );
+        return array('command' => 'cli', 'server' => $_SERVER, 'argv' => $_SERVER['argv'], 'argc' => $_SERVER['argc']);
     }
 }

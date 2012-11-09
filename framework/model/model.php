@@ -34,7 +34,7 @@ class model implements core\iContainer {
     static $dependencies = array('loader', 'config.database');
     /** @var null|\PDO */
     private $connection = null;
-    private $allTypes = array('mysql'=> 'MySQL');
+    private $allTypes = array('mysql' => 'MySQL');
     private $type = '';
     /** @var null|\sambhuti\loader\loader */
     private $loader = null;

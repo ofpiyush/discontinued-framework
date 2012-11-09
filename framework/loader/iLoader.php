@@ -25,22 +25,10 @@ namespace sambhuti\loader;
 use sambhuti\core;
 
 /**
- * Class Loader
+ * Interface iLoader
  *
- * Contains auto loader for lazy loading.
- * Allows type based class fetching for loading classes from particular modules
+ * Should allow class fetching for loading classes from particular modules
  * Can be accessed by the string 'loader'.
- *
- * <code>
- * class test extends \sambhuti\core\container {
- *     static $dependencies = array('loader');
- *     public $loader = null;
- *
- *     function __construct(\sambhuti\loader\iLoader $loader) {
- *         $this->loader = $loader;
- *     }
- * }
- * </code>
  *
  * @package    Sambhuti
  * @subpackage loader
@@ -53,9 +41,6 @@ interface iLoader extends core\iContainer {
     /**
      * Constructor
      *
-     * Registers loader::get() as the autoload method
-     *
-     * @param array $dependencies
      */
     function __construct ();
 
@@ -63,7 +48,7 @@ interface iLoader extends core\iContainer {
     /**
      * Check Require
      *
-     * Looks for a file and require_once it if it exists
+     * Should look for a file and require_once it if it exists
      *
      * @param string $name partial path or classname to look for.
      *
@@ -74,8 +59,8 @@ interface iLoader extends core\iContainer {
     /**
      * Fetch
      *
-     * Looks for a class of certain type in all registered paths and
-     * returns the class name if matches else gives null
+     * Should look for a class in all registered paths and
+     * return the class name if matches else should give null
      *
      * @param string $class name of class to look for
      *
@@ -98,7 +83,7 @@ interface iLoader extends core\iContainer {
     /**
      * Get Lazy Path
      *
-     * Get single lazyPath from loader
+     * Should return single lazy path
      *
      * @param string $key namespace of the lazypath
      *
@@ -109,7 +94,7 @@ interface iLoader extends core\iContainer {
     /**
      * Get Lazy Paths
      *
-     * Get all lazyPath from loader
+     * Should return all lazy paths
      *
      * @return array all lazypaths.
      */
