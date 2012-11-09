@@ -27,68 +27,32 @@
 
 namespace sambhuti\controller;
 use sambhuti\core;
-use sambhuti\loader;
 
-class controller implements iController {
-
-    static $dependencies = array('config.routing', 'core', 'loader');
-    /** @var null|\sambhuti\core\core $core */
-    protected $core = null;
-    /** @var null|\sambhuti\core\iData $routing */
-    protected $routing = null;
-    /** @var null|\sambhuti\loader\loader $loader */
-    protected $loader = null;
-    /** @var null|\sambhuti\controller\base */
-    protected $notFound = null;
-    protected $controllers = array();
-
-
-    function __construct ( core\iData $routing, core\iCore $core, loader\loader $loader ) {
-        $this->routing = $routing;
-        $this->core = $core;
-        $this->loader = $loader;
-        $this->notFound = $this->process($routing->get('404'));
-        $this->controllers['home'] = $this->process($routing->get('home'));
-    }
-
-    function get ( $command = null ) {
-        if (empty($command)) {
-            return $this->get('home');
-        }
-        if (null !== $this->routing->get($command)) {
-            $command = $this->routing->get($command);
-        }
-        $args = explode('/', $command);
-        $controller = array_shift($args);
-        $method = !empty($args) ? array_shift($args) : 'index';
-        if ('_' === $controller[0] && false === ISCLI) {
-            $object = $this->notFound;
-            $method = '_403';
-        } else {
-            $object = $this->process($controller);
-        }
-        if (null === $object) {
-            $object = $this->notFound;
-            $method = '_404';
-        }
-        $object->$method($args);
-        return $object;
-    }
-
+abstract class controller implements iController {
     /**
-     * @param string controller name
+     * Dependencies
      *
-     * @return null|\sambhuti\controller\iController controller instance
+     * @static
+     * @var array Array of dependency strings
      */
-    function process ( $controller ) {
-        if (empty($this->controllers[$controller])) {
-            $class = $this->loader->fetch('controller' . '\\' . $controller);
-            if (null !== $class) {
-                $this->controllers[$controller] = $this->core->process($class);
-            } else {
-                $this->controllers[$controller] = null;
-            }
-        }
-        return $this->controllers[$controller];
+    static $dependencies = array('request.request', 'request.response');
+    /**
+     * @var null|\sambhuti\core\iData $request
+     */
+    protected $request = null;
+    /**
+     * @var null|\sambhuti\core\iData $response
+     */
+    protected $response = null;
+
+    function __construct ( core\iData $request, core\iData $response ) {
+        $this->request = $request;
+        $this->response = $response;
     }
+
+    function get ( $id = null ) {
+        return $this->response;
+    }
+
+    abstract function index ( array $args = array() );
 }

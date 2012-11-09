@@ -27,7 +27,7 @@
 
 namespace sambhuti\controller;
 
-class home extends base {
+class home extends controller {
     function index ( array $args = array() ) {
         echo "home loaded";
     }

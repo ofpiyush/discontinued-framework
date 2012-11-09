@@ -27,28 +27,8 @@
 
 namespace sambhuti\controller;
 use sambhuti\core;
-use sambhuti\loader;
 
 interface iController extends core\iContainer {
-    /**
-     * Constructor
-     *
-     * Sets up not found, home etc from routing
-     *
-     * @param \sambhuti\core\iData    $routing instance of routing
-     * @param \sambhuti\core\iCore    $core    instance of Core
-     * @param \sambhuti\loader\loader $loader  instance of Loader
-     */
-    function __construct ( core\iData $routing, core\iCore $core, loader\loader $loader );
 
-    /**
-     * Process
-     *
-     * Processes single controller identifier to full name and returns instance or null
-     *
-     * @param string controller name
-     *
-     * @return null|\sambhuti\controller\base controller instance
-     */
-    function process ( $controller );
+    function index ( array $args = array() );
 }

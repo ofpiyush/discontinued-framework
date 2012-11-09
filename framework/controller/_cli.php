@@ -27,7 +27,7 @@
 
 namespace sambhuti\controller;
 
-class _cli extends base {
+class _cli extends controller {
     function index ( array $args = array() ) {
         $argv = $this->request->get('argv');
         array_shift($argv);

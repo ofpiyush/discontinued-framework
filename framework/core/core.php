@@ -31,10 +31,10 @@ use sambhuti\loader;
 class core implements iCore {
     static $dependencies = array('loader');
     protected $processed = array();
-    /** @var null|\sambhuti\loader\loader */
+    /** @var null|\sambhuti\loader\iContainer */
     protected $loader = null;
 
-    function __construct ( loader\iLoader $loader ) {
+    function __construct ( loader\iContainer $loader ) {
         $this->loader = $loader;
         $this->processed['loader'] = $loader;
         $this->processed['core'] = $this;
@@ -46,7 +46,7 @@ class core implements iCore {
         }
         if (empty($this->processed[$identifier])) {
             if (false === strpos($identifier, '.')) {
-                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier . "\\" . $identifier));
+                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier . "\\container"));
             } else {
                 $parts = explode('.', $identifier);
                 if ($parts[0] == 'core') {

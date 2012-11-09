@@ -26,41 +26,98 @@
  */
 
 namespace sambhuti\model;
-use sambhuti\core;
-use sambhuti\loader;
 
-class model implements core\iContainer {
+abstract class model {
 
-    static $dependencies = array('loader', 'config.database');
-    /** @var null|\PDO */
-    private $connection = null;
-    private $allTypes = array('mysql' => 'MySQL');
-    private $type = '';
-    /** @var null|\sambhuti\loader\loader */
-    private $loader = null;
-    private $instances = array();
+    protected $conn = null;
 
-    function __construct ( loader\loader $loader, core\iData $data ) {
-        $this->loader = $loader;
-        $type = strtolower($data->get('type'));
-        $this->type = $this->allTypes[$type];
-        $dsn = $type . ":dbname=" . $data->get('select') . ";host=" . $data->get('database') . ";charset=utf8";
+    function __construct ( \PDO $conn ) {
+        $this->conn = $conn;
+    }
+
+    /**
+     * Executes the query with Bindings and returns Statement
+     *
+     * @param  string $sql
+     * @param array $bindings
+     *
+     * @return \PDOStatement
+     */
+    protected function execute ( $sql, array $bindings = array() ) {
+        /** @var $stmt \PDOStatement */
+        $stmt = $this->conn->prepare($sql);
         try {
-            $this->connection = new \PDO($dsn, $data->get('username'), $data->get('password'));
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            if (is_array($bindings)) {
+                $stmt->execute($bindings);
+            } else {
+                $stmt->execute();
+            }
         } catch (\PDOException $e) {
+
+        }
+        return $stmt;
+    }
+
+    protected function fetch (\PDOStatement $stmt ) {
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    protected function fetchAll (\PDOStatement $stmt ) {
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    protected function updateCount (\PDOStatement $stmt ) {
+        $count = $stmt->rowCount();
+        $stmt->closeCursor();
+        return $count;
+    }
+
+    protected function getCount (\PDOStatement $stmt ) {
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        $row = $this->fetch($stmt);
+        if (!$row or !isset($row['count'])) {
+            return 0;
+        } else {
+            return (int)$row['count'];
         }
     }
 
-    function get ( $id = null ) {
-        if (empty($this->instances[$id])) {
-            $class = $this->loader->fetch('model\\' . $this->type . '\\' . $id);
-            if (null === $class) {
-                $this->instances[$id] = new $class($this->connection);
-            } else {
-                throw new \Exception("Cannot find model " . $id);
-            }
-        }
-        return $this->instances[$id];
+    protected function insertId (\PDOStatement $stmt ) {
+        $count = $this->updateCount($stmt);
+        $id = $this->conn->lastinsertId();
+        return ($count > 0 && $id > 0) ? $id : 0;
+    }
+
+    protected function isReturned (\PDOStatement $stmt ) {
+        $row = $this->fetch($stmt);
+        return ($row && count($row) > 0);
+    }
+
+    protected function assocRow (\PDOStatement $stmt ) {
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $this->fetch($stmt);
+    }
+
+    protected function assocRows (\PDOStatement $stmt ) {
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $this->fetchAll($stmt);
+    }
+
+    protected function objRow (\PDOStatement $stmt, $class ) {
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
+        return $this->fetch($stmt);
+    }
+
+    protected function objRows (\PDOStatement $stmt, $class ) {
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
+        return $this->fetchAll($stmt);
+    }
+
+    function disconnect () {
+        $this->conn = null;
     }
 }

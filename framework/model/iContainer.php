@@ -26,4 +26,20 @@
  */
 
 namespace sambhuti\model;
+use sambhuti\core;
+use sambhuti\loader;
 
+/**
+ * model Container interface
+ *
+ *
+ * @package    Sambhuti
+ * @subpackage model
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface iContainer extends core\iContainer {
+
+    function __construct ( loader\iContainer $loader, core\iData $data );
+}

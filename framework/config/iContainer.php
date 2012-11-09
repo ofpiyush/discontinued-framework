@@ -29,9 +29,9 @@ namespace sambhuti\config;
 use sambhuti\core;
 use \sambhuti\loader;
 
-interface iConfig extends core\iContainer {
+interface iContainer extends core\iContainer {
 
-    function __construct ( loader\iLoader $loader );
+    function __construct ( loader\iContainer $loader );
 
 
     function save ( $id, core\iData $data, $lazyId = null );

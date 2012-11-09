@@ -19,32 +19,46 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package   Sambhuti
- * @author    Piyush <piyush@cio.bz>
- * @license   http://www.gnu.org/licenses/gpl.html
- * @copyright 2012 Piyush
  */
 
-namespace sambhuti\cache;
+namespace sambhuti\request;
+use sambhuti\core;
 
 /**
- * Cache Interface
+ * request Container Interface
+ *
+ * Container for request and response objects
+ * Should differentiate between web and cli request and populate the request object appropriately
+ * Should be used for 'request' dependency identifier.
  *
  * @package    Sambhuti
- * @subpackage cache
+ * @subpackage request
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iCache {
+interface iContainer extends core\iContainer {
 
-    function __construct ( $identifier );
+    /**
+     * Constructor
+     *
+     * Should initializes request and response objects
+     *
+     */
+    function __construct ();
 
-    function store ( $data );
 
-    function fetch ();
+    /**
+     * Web Request
+     *
+     * @return array list of options for request data
+     */
+    function web ();
 
-    function remove ();
-
-    function modified ();
+    /**
+     * Command line Request
+     *
+     * @return array list of options for request data
+     */
+    function cli ();
 }

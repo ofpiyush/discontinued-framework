@@ -26,7 +26,7 @@
  */
 use sambhuti\core;
 
-/** @var $sambhuti_path string ../framework/ */
+/** @noinspection PhpIncludeInspection */
 require_once($sambhuti_path . 'boot.php');
 $loader->addLazyPath('sample', realpath($app_path));
 //keep 5.3 compatibility

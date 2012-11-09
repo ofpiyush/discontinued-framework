@@ -29,20 +29,65 @@ namespace sambhuti\config;
 use sambhuti\core;
 use sambhuti\loader;
 
-class config implements iConfig {
+/**
+ * Config Container
+ *
+ * All config files are loaded and stored by this class
+ *
+ *
+ * @package    Sambhuti
+ * @subpackage config
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+class container implements iContainer {
+    /**
+     * Dependencies
+     *
+     * @static
+     * @var array Array of dependency strings
+     */
     static $dependencies = array('loader');
-    private $lazyPaths = array();
-    private $defaultPath = '';
-    private $confs = array();
+    /**
+     * Lazy Path
+     *
+     * Array of [namespace => Path] for lazy loading
+     *
+     * @see \sambhuti\loader\loader::$lazyPath
+     * @var array $lazyPaths
+     */
+    protected $lazyPaths = array();
+    /**
+     * @var string
+     */
+    protected $defaultPath = '';
+    /**
+     * Array of \sambhuti\core\iData objects
+     *
+     * @var array config objects
+     */
+    protected $confs = array();
 
     /**
-     * @param array $dependencies List of dependencies
+     * Constructor
+     *
+     * Sets lazy Path and default path (last lazy path)
+     *
+     * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( loader\iLoader $loader ) {
+    function __construct ( loader\iContainer $loader ) {
         $this->lazyPaths = $loader->getLazyPaths();
         $this->defaultPath = end($this->lazyPaths);
     }
 
+    /**
+     *
+     *
+     * @param null|string $id
+     *
+     * @return \sambhuti\core\iData object
+     */
     function get ( $id = null ) {
         if (empty($this->confs[$id])) {
             $config = array();
@@ -57,6 +102,20 @@ class config implements iConfig {
         return $this->confs[$id];
     }
 
+    /**
+     * Save Config object
+     *
+     * Saves data in a config object to the default path (last lazy path)
+     * Path can be overridden by $lazyId namespace to the path.
+     *
+     * @see \sambhuti\loader\loader::addLazyPath
+     *
+     * @param string               $id     config file identifier
+     * @param \sambhuti\core\iData $data   config object
+     * @param null|string          $lazyId namespace identifier
+     *
+     * @throws \Exception
+     */
     function save ( $id, core\iData $data, $lazyId = null ) {
         $config = $data->getAll();
         $fileString = "<?php" . PHP_EOL;
