@@ -38,13 +38,15 @@ namespace sambhuti\cache;
  */
 interface iCache {
 
-    function __construct ( $identifier );
+    /*
+        function __construct ( $identifier );
 
-    function store ( $data );
+        function store ( $data );
 
-    function fetch ();
+        function fetch ();
 
-    function remove ();
+        function remove ();
 
-    function modified ();
+        function modified ();
+    */
 }

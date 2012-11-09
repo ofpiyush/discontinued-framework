@@ -26,18 +26,30 @@
  */
 
 namespace sambhuti\model;
+
 use sambhuti\core;
 use sambhuti\loader;
 
 class container implements iContainer {
 
+    /**
+     * Dependencies
+     *
+     * @static
+     * @var array Array of dependency strings
+     */
     static $dependencies = array('loader', 'config.database');
+
     /** @var null|\PDO */
     private $connection = null;
+
     private $allTypes = array('mysql' => 'MySQL');
+
     private $type = '';
+
     /** @var null|\sambhuti\loader\iContainer */
     private $loader = null;
+
     private $instances = array();
 
     function __construct ( loader\iContainer $loader, core\iData $data ) {

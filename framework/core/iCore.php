@@ -26,6 +26,7 @@
  */
 
 namespace sambhuti\core;
+
 use sambhuti\loader;
 
 interface iCore extends iContainer {

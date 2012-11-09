@@ -28,6 +28,7 @@
 namespace sambhuti\core;
 
 interface iData {
+
     function __construct ( array $array = array() );
 
     function get ( $key );

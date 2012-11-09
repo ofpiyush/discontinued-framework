@@ -26,6 +26,7 @@
  */
 
 namespace sambhuti\model;
+
 use sambhuti\core;
 use sambhuti\loader;
 

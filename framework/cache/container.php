@@ -26,12 +26,11 @@
  */
 
 namespace sambhuti\cache;
+
 use sambhuti\core;
 
 /**
  * cache Container
- *
- * @todo       Define and add methods
  *
  * @package    Sambhuti
  * @subpackage cache
@@ -42,6 +41,8 @@ use sambhuti\core;
 class container implements iContainer {
 
     /**
+     * Get
+     *
      * @param null|string $type
      *
      * @return void|\sambhuti\cache\iCache

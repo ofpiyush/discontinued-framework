@@ -39,7 +39,7 @@ abstract class model {
      * Executes the query with Bindings and returns Statement
      *
      * @param  string $sql
-     * @param array $bindings
+     * @param array   $bindings
      *
      * @return \PDOStatement
      */
@@ -58,25 +58,25 @@ abstract class model {
         return $stmt;
     }
 
-    protected function fetch (\PDOStatement $stmt ) {
+    protected function fetch ( \PDOStatement $stmt ) {
         $result = $stmt->fetch();
         $stmt->closeCursor();
         return $result;
     }
 
-    protected function fetchAll (\PDOStatement $stmt ) {
+    protected function fetchAll ( \PDOStatement $stmt ) {
         $result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
     }
 
-    protected function updateCount (\PDOStatement $stmt ) {
+    protected function updateCount ( \PDOStatement $stmt ) {
         $count = $stmt->rowCount();
         $stmt->closeCursor();
         return $count;
     }
 
-    protected function getCount (\PDOStatement $stmt ) {
+    protected function getCount ( \PDOStatement $stmt ) {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         $row = $this->fetch($stmt);
         if (!$row or !isset($row['count'])) {
@@ -86,33 +86,33 @@ abstract class model {
         }
     }
 
-    protected function insertId (\PDOStatement $stmt ) {
+    protected function insertId ( \PDOStatement $stmt ) {
         $count = $this->updateCount($stmt);
         $id = $this->conn->lastinsertId();
         return ($count > 0 && $id > 0) ? $id : 0;
     }
 
-    protected function isReturned (\PDOStatement $stmt ) {
+    protected function isReturned ( \PDOStatement $stmt ) {
         $row = $this->fetch($stmt);
         return ($row && count($row) > 0);
     }
 
-    protected function assocRow (\PDOStatement $stmt ) {
+    protected function assocRow ( \PDOStatement $stmt ) {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetch($stmt);
     }
 
-    protected function assocRows (\PDOStatement $stmt ) {
+    protected function assocRows ( \PDOStatement $stmt ) {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetchAll($stmt);
     }
 
-    protected function objRow (\PDOStatement $stmt, $class ) {
+    protected function objRow ( \PDOStatement $stmt, $class ) {
         $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
         return $this->fetch($stmt);
     }
 
-    protected function objRows (\PDOStatement $stmt, $class ) {
+    protected function objRows ( \PDOStatement $stmt, $class ) {
         $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
         return $this->fetchAll($stmt);
     }
