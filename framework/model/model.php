@@ -27,8 +27,9 @@
 
 namespace sambhuti\model;
 use sambhuti\core;
+use sambhuti\loader;
 
-class model extends core\container {
+class model implements core\iContainer {
 
     static $dependencies = array('loader', 'config.database');
     /** @var null|\PDO */
@@ -39,10 +40,8 @@ class model extends core\container {
     private $loader = null;
     private $instances = array();
 
-    function __construct ( array $dependencies = array() ) {
-        $this->loader = $dependencies['loader'];
-        /** @var \sambhuti\core\dataFace $data  */
-        $data = $dependencies['config.database'];
+    function __construct ( loader\loader $loader, core\iData $data ) {
+        $this->loader = $loader;
         $type = strtolower($data->get('type'));
         $this->type = $this->allTypes[$type];
         $dsn = $type . ":dbname=" . $data->get('select') . ";host=" . $data->get('database') . ";charset=utf8";
@@ -55,7 +54,7 @@ class model extends core\container {
 
     function get ( $id = null ) {
         if (empty($this->instances[$id])) {
-            $class = $this->loader->fetch('model\\' . $this->type, $id);
+            $class = $this->loader->fetch('model\\' . $this->type . '\\' . $id);
             if (null === $class) {
                 $this->instances[$id] = new $class($this->connection);
             } else {

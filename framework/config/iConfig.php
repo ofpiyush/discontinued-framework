@@ -25,13 +25,14 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\cache;
+namespace sambhuti\config;
 use sambhuti\core;
+use \sambhuti\loader;
 
-class cache implements core\iContainer {
+interface iConfig extends core\iContainer {
+
+    function __construct ( loader\iLoader $loader );
 
 
-    function get ( $type = null ) {
-
-    }
+    function save ( $id, core\iData $data, $lazyId = null );
 }

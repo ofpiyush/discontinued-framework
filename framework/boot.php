@@ -26,8 +26,14 @@
  */
 use sambhuti\loader;
 
+/**
+ * Sambhuti Root Path
+ *
+ * Path to sambhuti/framework
+ */
 define('SAMBHUTI_ROOT_PATH', realpath($sambhuti_path) . '/');
-require_once(SAMBHUTI_ROOT_PATH . 'core/container.php');
+require_once(SAMBHUTI_ROOT_PATH . 'core/iContainer.php');
+require_once(SAMBHUTI_ROOT_PATH . 'loader/iLoader.php');
 require_once(SAMBHUTI_ROOT_PATH . 'loader/loader.php');
 $loader = new loader\loader();
 $loader->addLazyPath('sambhuti', SAMBHUTI_ROOT_PATH);

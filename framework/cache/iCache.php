@@ -26,12 +26,19 @@
  */
 
 namespace sambhuti\cache;
-use sambhuti\core;
 
-class cache implements core\iContainer {
+/**
+ * Cache Interface
+ */
+interface iCache {
 
+    function __construct ( $identifier );
 
-    function get ( $type = null ) {
+    function store ( $data );
 
-    }
+    function fetch ();
+
+    function remove ();
+
+    function modified ();
 }

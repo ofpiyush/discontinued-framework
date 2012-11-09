@@ -27,8 +27,9 @@
 
 namespace sambhuti\config;
 use sambhuti\core;
+use sambhuti\loader;
 
-class config extends core\container {
+class config implements iConfig {
     static $dependencies = array('loader');
     private $lazyPaths = array();
     private $defaultPath = '';
@@ -37,9 +38,7 @@ class config extends core\container {
     /**
      * @param array $dependencies List of dependencies
      */
-    function __construct ( array $dependencies = array() ) {
-        /** @var $loader \sambhuti\loader\loader */
-        $loader = $dependencies['loader'];
+    function __construct ( loader\iLoader $loader ) {
         $this->lazyPaths = $loader->getLazyPaths();
         $this->defaultPath = end($this->lazyPaths);
     }
@@ -58,7 +57,7 @@ class config extends core\container {
         return $this->confs[$id];
     }
 
-    function save ( $id, core\dataFace $data, $lazyId = null ) {
+    function save ( $id, core\iData $data, $lazyId = null ) {
         $config = $data->getAll();
         $fileString = "<?php" . PHP_EOL;
         foreach ( $config as $key => $value ) {

@@ -25,13 +25,20 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\cache;
-use sambhuti\core;
+namespace sambhuti\core;
 
-class cache implements core\iContainer {
+interface iData {
+    function __construct ( array $array = array() );
 
+    function get ( $key );
 
-    function get ( $type = null ) {
+    function set ( $key, $value );
 
-    }
+    function update ( $key, $value );
+
+    function getAll ();
+
+    function __get ( $key );
+
+    function __set ( $key, $value );
 }

@@ -28,15 +28,15 @@
 namespace sambhuti\core;
 use sambhuti\loader;
 
-class core extends container {
+class core implements iCore {
     static $dependencies = array('loader');
     protected $processed = array();
     /** @var null|\sambhuti\loader\loader */
     protected $loader = null;
 
-    function __construct ( array $dependencies = array() ) {
-        $this->loader = $dependencies['loader'];
-        $this->processed['loader'] = $dependencies['loader'];
+    function __construct ( loader\iLoader $loader ) {
+        $this->loader = $loader;
+        $this->processed['loader'] = $loader;
         $this->processed['core'] = $this;
     }
 
@@ -46,7 +46,7 @@ class core extends container {
         }
         if (empty($this->processed[$identifier])) {
             if (false === strpos($identifier, '.')) {
-                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier, $identifier), 'sambhuti\core\container');
+                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier . "\\" . $identifier));
             } else {
                 $parts = explode('.', $identifier);
                 if ($parts[0] == 'core') {
@@ -69,18 +69,48 @@ class core extends container {
     }
 
 
-    function process ( $class, $base ) {
+    function process ( $class ) {
         if (empty($class) || !class_exists($class)) {
             throw new \Exception($class . ' not found');
         }
-        if (!is_subclass_of($class, $base)) {
-            throw new \Exception($class . ' not subclass of ' . $base);
+        $dependencies = array();
+        if (!empty($class::$dependencies)) {
+            $dependencies = array_map(array($this, 'get'), $class::$dependencies);
         }
-        /** @var array $dependencies */
-        $dependencies = !empty($class::$dependencies) ? array_combine($class::$dependencies, array_map(array(
-                                                                                                            $this, 'get'
-                                                                                                       ), $class::$dependencies)) : array();
-        return new $class($dependencies);
+        $count = count($dependencies);
+        //implement an ugly hack for speed
+        switch ($count) {
+            case 0:
+                return new $class();
+            case 1:
+                return new $class($dependencies[0]);
+            case 2:
+                return new $class($dependencies[0], $dependencies[1]);
+            case 3:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2]);
+            case 4:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3]);
+            case 5:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4]);
+            case 6:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5]);
+            case 7:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6]);
+            case 8:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6], $dependencies[7]);
+            case 9:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6], $dependencies[7], $dependencies[8]);
+            case 10:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6], $dependencies[7], $dependencies[8], $dependencies[9]);
+            case 11:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6], $dependencies[7], $dependencies[8], $dependencies[9], $dependencies[10]);
+            case 12:
+                return new $class($dependencies[0], $dependencies[1], $dependencies[2], $dependencies[3], $dependencies[4], $dependencies[5], $dependencies[6], $dependencies[7], $dependencies[8], $dependencies[9], $dependencies[10], $dependencies[11]);
+            default:
+                //more than 12 dependencies, go for good old reflection
+                $reflection = new \ReflectionClass($class);
+                return $reflection->newInstanceArgs($dependencies);
+        }
     }
 
 }
