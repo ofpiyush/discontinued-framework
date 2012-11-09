@@ -25,10 +25,10 @@ namespace sambhuti\loader;
 use sambhuti\core;
 
 /**
- * Interface iLoader
+ * loader Container Interface
  *
  * Should allow class fetching for loading classes from particular modules
- * Can be accessed by the string 'loader'.
+ * Should be used wherever using the dependency identifier 'loader'.
  *
  * @package    Sambhuti
  * @subpackage loader
@@ -36,11 +36,10 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iLoader extends core\iContainer {
+interface iContainer extends core\iContainer {
 
     /**
      * Constructor
-     *
      */
     function __construct ();
 
@@ -50,7 +49,7 @@ interface iLoader extends core\iContainer {
      *
      * Should look for a file and require_once it if it exists
      *
-     * @param string $name partial path or classname to look for.
+     * @param string $name partial path or class name to look for.
      *
      * @return bool true if found, false otherwise
      */
@@ -64,7 +63,7 @@ interface iLoader extends core\iContainer {
      *
      * @param string $class name of class to look for
      *
-     * @return string|null string full classname if class exists else null
+     * @return string|null string full class name if class exists else null
      */
     function fetch ( $class );
 
@@ -76,7 +75,7 @@ interface iLoader extends core\iContainer {
      * @param string $namespace namespace for replacement
      * @param string $path      the full path to the directory to be added
      *
-     * @return \sambhuti\loader\loader instance
+     * @return \sambhuti\loader\iContainer instance
      */
     function addLazyPath ( $namespace, $path );
 
@@ -85,7 +84,7 @@ interface iLoader extends core\iContainer {
      *
      * Should return single lazy path
      *
-     * @param string $key namespace of the lazypath
+     * @param string $key namespace of the lazy path
      *
      * @return string|bool string path if $key exists else boolean false
      */
@@ -96,7 +95,7 @@ interface iLoader extends core\iContainer {
      *
      * Should return all lazy paths
      *
-     * @return array all lazypaths.
+     * @return array all lazy paths.
      */
     function getLazyPaths ();
 

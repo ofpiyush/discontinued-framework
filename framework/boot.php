@@ -31,9 +31,9 @@ use sambhuti\loader;
  *
  * Path to sambhuti/framework
  */
-define('SAMBHUTI_ROOT_PATH', realpath($sambhuti_path) . '/');
+define('SAMBHUTI_ROOT_PATH', realpath(dirname(__FILE__)) . '/');
 require_once(SAMBHUTI_ROOT_PATH . 'core/iContainer.php');
-require_once(SAMBHUTI_ROOT_PATH . 'loader/iLoader.php');
-require_once(SAMBHUTI_ROOT_PATH . 'loader/loader.php');
-$loader = new loader\loader();
+require_once(SAMBHUTI_ROOT_PATH . 'loader/iContainer.php');
+require_once(SAMBHUTI_ROOT_PATH . 'loader/container.php');
+$loader = new loader\container();
 $loader->addLazyPath('sambhuti', SAMBHUTI_ROOT_PATH);

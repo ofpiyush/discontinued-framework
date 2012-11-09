@@ -27,7 +27,7 @@
 
 namespace sambhuti\controller;
 
-class _error extends base {
+class _error extends controller {
     function index ( array $args = array() ) {
         echo $this->request->get('command') . " Unknown Error";
     }

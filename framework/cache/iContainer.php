@@ -28,10 +28,17 @@
 namespace sambhuti\cache;
 use sambhuti\core;
 
-class cache implements core\iContainer {
+/**
+ * cache Container interface
+ *
+ * @todo       Define and add methods
+ *
+ * @package    Sambhuti
+ * @subpackage cache
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface iContainer extends core\iContainer {
 
-
-    function get ( $type = null ) {
-
-    }
 }

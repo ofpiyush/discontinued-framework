@@ -25,20 +25,23 @@ namespace sambhuti\request;
 use sambhuti\core;
 
 /**
- * Class Request
+ * request Container
  *
  * Container for request and response objects
  * Differentiates between web and cli request and populates the request object appropriately
- * Can be accessed by the string 'request.*'.
+ * Can be accessed by the string 'request'. As the get method is supposed to give out \sambhuti\core\iData instance
+ * every 'request.*' should be marked with \sambhuti\core\iData
  *
  * <code>
  * use sambhuti\core;
  * class test implements core\iContainer {
- *     static $dependencies = array('request.request','request.response');
+ *     static $dependencies = array('request','request.request','request.response');
+ *     public $requestContainer = null;
  *     public $request = null;
  *     public $response = null;
  *
- *     function __construct(core\iData $request, core\iData $response) {
+ *     function __construct(\sambhuti\request\iContainer $container,core\iData $request, core\iData $response) {
+ *         $this->requestContainer = $container;
  *         $this->request = $request;
  *         $this->response = $response;
  *     }
@@ -51,7 +54,7 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class request implements iRequest {
+class container implements iContainer {
 
     /**
      * Request

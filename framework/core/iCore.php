@@ -30,7 +30,7 @@ use sambhuti\loader;
 
 interface iCore extends iContainer {
 
-    function __construct ( loader\iLoader $loader );
+    function __construct ( loader\iContainer $loader );
 
     function process ( $class );
 

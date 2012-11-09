@@ -19,48 +19,34 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * @package   Sambhuti
+ * @author    Piyush <piyush@cio.bz>
+ * @license   http://www.gnu.org/licenses/gpl.html
+ * @copyright 2012 Piyush
  */
 
-namespace sambhuti\request;
+namespace sambhuti\cache;
 use sambhuti\core;
 
 /**
- * Interface Request
+ * cache Container
  *
- * Container for request and response objects
- * Should differentiate between web and cli request and populate the request object appropriately
- * Can be accessed by the string 'request.*'.
- *
- * @link ../../docs/source/framework/request/request.php.html
+ * @todo       Define and add methods
  *
  * @package    Sambhuti
- * @subpackage request
+ * @subpackage cache
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iRequest extends core\iContainer {
+class container implements iContainer {
 
     /**
-     * Constructor
+     * @param null|string $type
      *
-     * Should initializes request and response objects
-     *
+     * @return void|\sambhuti\cache\iCache
      */
-    function __construct ();
+    function get ( $type = null ) {
 
-
-    /**
-     * Web Request
-     *
-     * @return array list of options for request data
-     */
-    function web ();
-
-    /**
-     * Command line Request
-     *
-     * @return array list of options for request data
-     */
-    function cli ();
+    }
 }

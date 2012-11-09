@@ -24,7 +24,7 @@
 namespace sambhuti\loader;
 
 /**
- * Class Loader
+ * loader Container
  *
  * Contains auto loader for lazy loading.
  * Allows class fetching for loading classes from particular modules
@@ -47,16 +47,16 @@ namespace sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class loader implements iLoader {
+class container implements iContainer {
 
     /**
      * Lazy Path
      *
-     * Array of [namespace => Path] for lazyloading
+     * Array of [namespace => Path] for lazy loading
      *
      * @var array $lazyPath
      */
-    private $lazyPath = array();
+    protected $lazyPath = array();
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ class loader implements iLoader {
     /**
      * Get - Autoloader
      *
-     * Autoloader to load the classes under all lazypaths
+     * Autoloader to load the classes under all lazy paths
      *
      * @param string $class name of the class to be loaded
      *
@@ -94,7 +94,7 @@ class loader implements iLoader {
      *
      * Looks for a file and require_once it if it exists
      *
-     * @param string $name partial path or classname to look for.
+     * @param string $name partial path or class name to look for.
      *
      * @return bool true if found, false otherwise
      */
@@ -115,7 +115,7 @@ class loader implements iLoader {
      *
      * @param string $class name of class to look for
      *
-     * @return string|null string full classname if class exists else null
+     * @return string|null string full class name if class exists else null
      */
     function fetch ( $class ) {
         if (class_exists($class)) {
@@ -136,10 +136,10 @@ class loader implements iLoader {
      *
      * Add single lazyPath for loader
      *
-     * @param string $namespace namespace for replacement
+     * @param string $namespace namespace of the path
      * @param string $path      the full path to the directory to be added
      *
-     * @return \sambhuti\loader\loader instance
+     * @return \sambhuti\loader\iContainer instance
      */
     function addLazyPath ( $namespace, $path ) {
         $path = rtrim($path, '/');
@@ -152,7 +152,7 @@ class loader implements iLoader {
      *
      * Get single lazyPath from loader
      *
-     * @param string $key namespace of the lazypath
+     * @param string $key namespace of the lazy path
      *
      * @return string|bool string path if $key exists else boolean false
      */
@@ -168,7 +168,7 @@ class loader implements iLoader {
      *
      * Get all lazyPath from loader
      *
-     * @return array all lazypaths.
+     * @return array all lazy paths.
      */
     function getLazyPaths () {
         return $this->lazyPath;
@@ -177,7 +177,7 @@ class loader implements iLoader {
     /**
      * Sleep
      *
-     * @return array lazypath to be cached
+     * @return array lazy path to be cached
      */
     function __sleep () {
         return array('lazyPath');
