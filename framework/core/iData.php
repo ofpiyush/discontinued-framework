@@ -27,19 +27,100 @@
 
 namespace sambhuti\core;
 
+/**
+ * data Interface
+ *
+ * Basic functions you can be sure of to be present in a data object
+ *
+ * __set is there to throw exceptions
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iData {
 
+    /**
+     * Constructor
+     *
+     * Should accept array list of arguments and store them
+     *
+     * @param array $array
+     */
     function __construct ( array $array = array() );
 
+    /**
+     * Get
+     *
+     * Should accept the key identifier to the array.
+     * Optionally should accept list of arguments for a multidimensional array
+     *
+     * @param $key
+     *
+     * @return mixed
+     */
     function get ( $key );
 
+    /**
+     * Set
+     *
+     * Should accept key value pair to be stored.
+     * Should throw exception if key already stored.
+     *
+     * @param $key
+     * @param $value
+     *
+     * @throws \Exception
+     *
+     * @return \sambhuti\core\iData
+     */
     function set ( $key, $value );
 
+    /**
+     * Update
+     *
+     * Should accept key value pair to be updated
+     *
+     * @param $key
+     * @param $value
+     *
+     * @return \sambhuti\core\iData
+     */
     function update ( $key, $value );
 
+    /**
+     * Get All
+     *
+     * Should return all key value pairs in the array
+     *
+     * @return array
+     */
     function getAll ();
 
+    /**
+     * Magic Get
+     *
+     * Should function the same as \sambhuti\core\iData::get()
+     *
+     * @param $key
+     *
+     * @return mixed
+     */
     function __get ( $key );
 
+    /**
+     * Magic set
+     *
+     * Should always throw exception
+     *
+     * @throws \Exception
+     *
+     * @param $key
+     * @param $value
+     *
+     * @return void
+     */
     function __set ( $key, $value );
 }
