@@ -42,15 +42,87 @@ namespace sambhuti\controller;
 class _cli extends controller {
 
     /**
+     * Commands
+     *
+     * List of commands with it's help
+     *
+     * @var array
+     */
+    protected $commands = array(
+        'help' => 'Help', 'app' => 'Create new app'
+    );
+
+    /**
      * Command line index
      *
-     * @todo implement help response from this
+     * Acts as command line router for now (may be refactored to \sambhuti\controller\controller::get() later)
      *
      * @param array $args
      */
     function index ( array $args = array() ) {
         $argv = $this->request->get('argv');
+        //Get rid of filename
         array_shift($argv);
+        if (count($argv)) {
+            $method = strtolower(array_shift($argv));
+        } else {
+            $method = 'help';
+        }
+        if (is_callable(array($this, $method))) {
+            $this->$method($argv);
+        } else {
+            $this->_404($method);
+        }
+    }
 
+    /**
+     * Help Controller
+     *
+     * Gives a list of help responses
+     *
+     * @todo stop the echo and use response with templating and SGR (SELECT GRAPHIC RENDITION) when available
+     * @link http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf
+     *
+     * @param array $args
+     */
+    function help ( array $args = array() ) {
+        $commands = $this->commands;
+        if (0 != count($args)) {
+            if (array_key_exists($args[0], $this->commands)) {
+                $commands = array($args[0] => $this->commands[$args[0]]);
+            } else {
+                echo "\033[1;41;37m$args[0] Command is not in the help\033[0m" . PHP_EOL;
+            }
+        }
+        //8.3.117  SGR - SELECT GRAPHIC RENDITION
+        // \033[<notation1>[;<notation2>;<notation3>;...;]m<string here>\033[0m
+        //eg: \033[1;40;32;4;9m== Sambhuti Help ==\033[0m
+        //for green underlined bold text on black background with a strike through
+        echo "\033[1;40;37m== Sambhuti Help ==" . PHP_EOL . PHP_EOL . "\033[0;40m"; //bold white text on black background
+        foreach ( $commands as $command => $man ) {
+            echo "\033[1;40;32m" . $command . "\033[0m\033[0;40;37m " . $man . PHP_EOL . "\033[0m";
+        }
+        echo PHP_EOL;
+    }
+
+    /**
+     * App
+     *
+     * @todo implement app function
+     *
+     * @param array $args
+     */
+    function app ( array $args = array() ) {
+        echo "\033[0;40;37mUnimplemented function\033[0m" . PHP_EOL;
+    }
+
+    /**
+     * notFound
+     *
+     * @param string $command
+     */
+    function _404 ( $command ) {
+        echo "\033[1;41;37m" . $command . " command not recognized\033[0m" . PHP_EOL;
+        $this->help();
     }
 }
