@@ -1131,7 +1131,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVE1vm0AQvfMr5tCDbbmmTW5JmoZacWIpdSxjK7KUywIDrLrsot3FDv34753FYMdJlVblwLLz8fa92RkuPpd56fmDgQcDCFkR5ZXl7nusylrzLLfQG/fh5MPHk/f0OoU5ryuTU4QLuuMxSoNn7nuZcwMpFwi0lkxbUOkeEXq5teWZ75vWMFI667co+yAHoBHBqNRumcYzqFUFMZOgMeHGah5VlvAtMJn4SkOhEp7WDoNslUxQg80RLOrCuOPd5ma2ghuUqJmAeRUJHne0gRFRZzE5JhA1OC5j4jiELQeYKAJmlis5BOTk17BBbWgPp90ZLeAQlHYgPWYdcw2qdHl9oluDYPaQOvqD9IPCBLhscHNVkpqc4EjflgsBEUJlMK3E0KVTMDxMl7f3qyUEszU8BItFMFuuzynY5oq8uMEdFC9KwQmZNGkmbU3UHcLX68X4llKCL9O76XJNAmAyXc6uwxAm9wsIYB4sltPx6i5YwHy1mN+H1yOAEB0tdABvlDdtbohKmKBlXJhO9Jou1RA7kUDONkiXGyPfEDcGMXXd3y/OgTChZNbI3BeRiE1TkMoOwRDBi7blttvtKJOV6zhf7ACMf9mRuSpZ/I1lCHDU/lesogJqsrYdDxdls17FXI2i75dNUAtHQW+dlZVilNtCNCnxfq7cTB3Gyfc8yQo0RIcGoGXyGCtptRIC9bnn0cU/92gkWzu5hziYSuqzlFBeCzxWaKqocx3SX2j/N/H/o/6VfN7xBj4+qMEnizIx4OQ+Ng7GqSXgh+e5gxv57hmQ7gSf6MeTYWvpHOGu1QzqTTPyu8EqsIltmpSGRNdHRTgCoApqVoAbnBreMZ2ZlwEabaUlbBRPfhb8CZPW4zdrWsnY/Qdoqh3F3nMk+LTb9frQP/d+eb8BtfjHNA==</source>
   </file>
-  <file path="controller/_cli.php" hash="7f02386fcfd12093b09714bec43d6a5f" package="Sambhuti">
+  <file path="controller/_cli.php" hash="a23ff3b2748528e831de14bfbbaa750d" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1168,25 +1168,86 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
         <tag line="30" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
         <tag line="30" name="copyright" description="2012 Piyush"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="51" package="Sambhuti\controller">
-        <name>index</name>
-        <full_name>index</full_name>
+      <property final="false" static="false" visibility="protected" line="51" namespace="sambhuti\controller" package="Default">
+        <name>$commands</name>
+        <default><![CDATA[array('help' => 'Help', 'app' => 'Create new app')]]></default>
         <docblock line="44">
-          <description><![CDATA[Command line index]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="44" name="todo" description="implement help response from this"/>
-          <tag line="44" name="param" description="" type="array" variable="$args">
+          <description><![CDATA[Commands]]></description>
+          <long-description><![CDATA[<p>List of commands with it's help</p>]]></long-description>
+          <tag line="44" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="51">
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="62" package="Sambhuti\controller">
+        <name>index</name>
+        <full_name>index</full_name>
+        <docblock line="55">
+          <description><![CDATA[Command line index]]></description>
+          <long-description><![CDATA[<p>Acts as command line router for now (may be refactored to \sambhuti\controller\controller::get() later)</p>]]></long-description>
+          <tag line="55" name="param" description="" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="62">
           <name>$args</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="88" package="Sambhuti\controller">
+        <name>help</name>
+        <full_name>help</full_name>
+        <docblock line="78">
+          <description><![CDATA[Help Controller]]></description>
+          <long-description><![CDATA[<p>Gives a list of help responses</p>]]></long-description>
+          <tag line="78" name="todo" description="stop the echo and use response with templating and SGR (SELECT GRAPHIC RENDITION) when available"/>
+          <tag line="78" name="link" description="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf" link="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf"/>
+          <tag line="78" name="param" description="" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="88">
+          <name>$args</name>
+          <default><![CDATA[array()]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="115" package="Sambhuti\controller">
+        <name>app</name>
+        <full_name>app</full_name>
+        <docblock line="108">
+          <description><![CDATA[App]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="108" name="todo" description="implement app function"/>
+          <tag line="108" name="param" description="" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="115">
+          <name>$args</name>
+          <default><![CDATA[array()]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\controller" line="124" package="Sambhuti\controller">
+        <name>_404</name>
+        <full_name>_404</full_name>
+        <docblock line="119">
+          <description><![CDATA[notFound]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="119" name="param" description="" type="string" variable="$command">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="124">
+          <name>$command</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
     </class>
-    <source>eJydVF1P2zAUfc+vuA9ItKg0G7wB69pVFCpBqfohVGkScpOb2JpjZ7bT0k38912nSVvYxKblIY59zz0+9/g6V59zngfhyUkAJzBl2ZIXTvjvvs43RqTcQaPfhLMPH89O6XUOY7EpLCeEB92JCJXFC/8948JCIiQCjTkzDnSyY4QGdy6/CENbLbS1SZsVyw7kCQwiWJ24NTN4ARtdQMQUGIyFdUYsC0f8DpiKQ20g07FINp6D1goVowHHERyazPrt/eRmNIcbVGiYhHGxlCKqZQMjoX7FcoxhWfL4jIHXMK00wEATMXNCqxagoLiBFRpLcziv96gIW6CNJ2kw55Ub0LnPa5LcDUjm9qntP5S+rzAGoUpernOqhhMd1bcWUsISobCYFLLl0wkMj8PZ7cN8Br3RAh57k0lvNFtcEthxTVFc4ZZKZLkUxEw1GabchqR7hvvrSf+WUnpfhnfD2YIKgMFwNrqeTmHwMIEejHuT2bA/v+tNYDyfjB+m122AKXpZ6AnesTcpT4gsjNExIW1d9IIO1ZI6GQNnK6TDjVCsSBuDiLru7wfnSZjUKi3L3JlIwoYJKO1aYEngVdVy6/W6narCd1wotwQ27NRiujmLvrEUAV61f5cVZKCh1arj4Sovx24kdHv5o1OCKjoCvbdXmss2d5ksU6LdvfJ3an+dwiBQLENLcugCVEq+Rlo5o6VEcxnUt7Svs4z6H6RQSJMaUNXjzxkzVM6SmQfApFCRb0b7e92vC7fFsg5Fh+SHlvybJ/9jyhtXSmMiyayFp0gKwGeHKrYHyuBnEPi9SnP888YgQX+F5ypSA7pOx3rvFHCUOXWhzXXZtkZn1IDCvs2inxrLwN+fDRwxk9aAsBxrg7c7QuMQCJ+2s0YTmiQYqsfHVhQ78ruddgx+L9C6006KrnHsY8fNyx24JHiyXCSuUSZSrAy+BC/BL9Dp1Tw=</source>
+    <source>eJydV21vGjkQ/s6vmKsqARVhSYjUXghcOEoSpDRBQFRFaRWZXcNa2V3v2QZKT/3vN+N9YXnrVeUD7Nozj58ZPzM2l3/Fflxy3r0rwTsYs3DqL4yg556M10rMfQOVXhXOGqdnJ/jVhKFYL7SPFmR0J1weaX5BzxNfaJiJgAP+xkwZkLMcESq+MfGF4+h0oC7VvJqi5EYEoDgHLWdmxRS/gLVcgMsiUNwT2igxXRjEN8Aiz5EKQumJ2ZowcGwReVyB8TkYrkJNy9PLzf0j3PCIKxbAcDENhJvRBoZEaUT73IOpxSGPa+IwTjnAtURgZoSMasAFzitYcqXxHZrZGilgDaQikAozxFyBjMmvinTXEDCzca0fCH0ToQcisri+jDEaH+EwvpUIAphyWGg+WwQ1ckdj+DyY3D48TqB7/wSfu6NR937y1EJj40uc5UueQIkwDgQiY0yKRWaN1AnhU3/Uu0WX7t+Du8HkCQOA68Hkvj8ew/XDCLow7I4mg97jXXcEw8fR8GHcrwOMOdHiBPCT9M7sDmEKPW6YCHQW9BNuqkZ2gQc+W3LcXJeLJXJj4KLq/n/jCIQFMprbMPMkIrHBDCJpaqCR4GUqudVqVZ9HC1KcEyQA2ulkZK5i5r6yOQfYkv8VW2ACFY6miofL2P5euULWp9871iiFQ6OfrTWPg7pvwsC6uHldUU1tyskplSIWco10sABSJl9cGRklg4CrVimr0p4MQ9Q/BCLi+JIZpPHQPvOQR0ZjMguGs0Xkkhj1ftzbgevFNJtyi+DFlPxaTn4nKTtZsYlxA6Y1vLiBAP7N8MjTBWbwb6lEa9nk0CdPkE7fs+E7rC/SVpoWnYhHmLIGnwfxjvXVkimgWlmnI479jZU03KUSfZvjtBO7SmKInzLhlaHdgfItPdWgzOJ0oKc4NgKI+ApozPpUW8diSPZOYGf7tsOv6+IOs51NVljymBIqvEiuoBKyNXUMxWfMNViJHhgJXw6oq/B4cTHnplJN+lV1NyvY2FmYxAtvmZrrrexkIksYQ6VomKepClXctCxXNLfEubcGz4+TjuL/LLg2Jx0iUaa5MmYnM3acG25ACY/2kc4aKpl81sK/aF/MTMXCFjzFDCoudvJspkjB0gg5ittDItiEjQzkiqvKPmAB8QfwAGV+DCbRQMF8i4rQLy4LAjYNeLJKxcZfywCq+wST/KTze/EdZpP4vJw3zisZ8C6jH3vSI8lu9ZUtBdxgp0bhod6SaqIwUWA6llTWu3Ix0pOYURnbjs5dX9LRTUdY7pOUoeHYt/CUxZ5OBuObEVTG/bt+bwI3o+7wdtCDUf/+42AyeLivwsrHU40t8VChDOarYQ28FpsOd0N2IiLUcWQPcBbYHmTPfNeOaIdUpJ1+71P3ZDxx+uTROP9Qj73Zb0rfJuSXlF9oIOlOZSPbum3AH23YiFfvaYOMEq2+8vUL/4ZboxPT58bX2i74nvsumVSQqT91rR2E52zua0FOR1VIH7vzb740ms3n09b5aav5Pszxs1aHVyA8u/OrD6bR2jfCN1CH4e3wpf9wt7PcgepynA/1Zv309D1YEZ3AMRUVPMAudImrW1Gcdp5b+ctZZ/Pc7LTq9Xrra3hJNzWUKl4GeSdlWcDj8wvIYm20mmet89afYbu9ue3ZEmu39z2pc8/x+hklt1lq6ngzlXhTMnj0AcprGuDhDFP8miu6mSblw6htiVe6leHo3M8htxPfoMQfIFLI8NZT4thAx/BNC+lZJitfGH6UT74yhsKZ62MpbLSF51X2YmWFD7Crxj3GZ1YAuV/OKszJUVRgjQjwQADI/oBU7Epbwtpvht1472Jge1p+zaJTPC/+32wZBPErHaOQmizsxyhngkrJEI8Vzn58KO3rzbbtMk9lnuX+MHs6Xgq7fIxxVve7m5nfYKj48a+AnEfiO/d+VvtpO6IWUalmkf0o/Qf6HErO</source>
   </file>
   <file path="controller/_error.php" hash="05159cc257acf40754a8cab7e72c3949" package="Sambhuti">
     <docblock line="2">
@@ -1796,7 +1857,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVdtuGjEQfY+Uf5iHSLCIQJu85dYQmgtSmiAgipAiRWZ32LXqtbe+gOjl3zv2LpAEmlZdIRbbM8fnHHuGk09FVuzutBuN3R1owJDlk8xZHgZdVSw0TzML9W4EBx8+HuzT1yH0+cKZzIeEsFseozR4FAajjBuYcoFA74JpC2q6QoV6Zm1x1G6baqKldBqtgFZhHkIjglFTO2caj2ChHMRMgsaEG6v5xFnawQKTSVtpyFXCp4sAQpNOJqjBZggWdW48Az+4vnuAa5SomYC+mwgeL6kDI65+xmSYwKQE8ilXnsWwYgFXipCZ5Uo2ATmta5ihNjSGw+UmFWITlA4odWY9eQ2q8IkRMV6AYHad29qqfy0zAS4DdKYKUpQRIGmccyFgguAMTp1ohnyKhsfe6Ob+YQSduzE8dgaDzt1ofEzRNlO0ijMssXheCE7QpEszaRdEP0B8uRx0byinc9G77Y3GpAKueqO7y+EQru4H0IF+ZzDqdR9uOwPoPwz698PLFsAQPTEMCO+4PA0nRUYmaBkXZq18TMdriKFIIGMzpGOOkc+IH4OYLuHfTzCgMKFkGrSurCRyvSlIZZtgiORJdf/m83krlc5fv7YoEUz7bM3nvGDxV5YiwOuKOGeOjNQ0XRUBnBThfR5z1Zp8PyujKkiKem+/tBCtzOaizIlXxeYL7UWNtXd3dncky9EQKaqJis9TTE4e+7Vl7V4oZaErmDHbdLwRYtxkueaB3qr7R3n/pW+LwNizhokX8MNL8tClLP80YIDfHBpSpyTdHLoAy5VVxPmMaZBOiJ9PK4d0mfXEN9La5Y9C8xmVIuxVkXAaII63USAMqkgXW7W5+RCtAVf48tILm3GZbvKjXshyeHp1fOEL9qoDeMls6mTs+wU8P8fLjaEO63iIvFNQPXu0qdk/CwunZcDxxupaZAjYP0vR1mvVbC2qEn5tE3+tNgTd4JvmXqMeqlWMxmzVb1WigCUJ9WTqPdRFqVSpg6JvMdTgGEicQ450AZPNZI3WafnWPf6ZWUZ3wxSqbAFbHUwV1P9kVuUBWWy1EgJ1LSqnXltWzkWr6Dyn/51aFL3wuGK4LY8sLhm+9Jg+vwF0jjvG</source>
   </file>
-  <file path="core/iContainer.php" hash="9235beebd2c570cebc7fc3a02be5a8ae" package="Sambhuti">
+  <file path="core/iContainer.php" hash="0a3fe8d7f1bdaa8f0e10b12af0dd78db" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1820,39 +1881,39 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
       <tag line="2" name="copyright" description="2012 Piyush"/>
     </docblock>
-    <interface namespace="sambhuti\core" line="40" package="Sambhuti\core">
+    <interface namespace="sambhuti\core" line="41" package="Sambhuti\core">
       <name>iContainer</name>
       <full_name>\sambhuti\core\iContainer</full_name>
-      <docblock line="29">
+      <docblock line="30">
         <description><![CDATA[container Interface]]></description>
         <long-description><![CDATA[<p>Base of every container on sambhuti</p>]]></long-description>
-        <tag line="29" name="package" description="Sambhuti"/>
-        <tag line="29" name="subpackage" description="core"/>
-        <tag line="29" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
-        <tag line="29" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-        <tag line="29" name="copyright" description="2012 Piyush"/>
+        <tag line="30" name="package" description="Sambhuti"/>
+        <tag line="30" name="subpackage" description="core"/>
+        <tag line="30" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+        <tag line="30" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+        <tag line="30" name="copyright" description="2012 Piyush"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="51" package="Sambhuti\core">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\core" line="52" package="Sambhuti\core">
         <name>get</name>
         <full_name>get</full_name>
-        <docblock line="42">
+        <docblock line="43">
           <description><![CDATA[Get]]></description>
           <long-description><![CDATA[<p>Every container should implement this in order to provide a clean interface</p>]]></long-description>
-          <tag line="42" name="param" description="" type="null" variable="$data">
+          <tag line="43" name="param" description="" type="null" variable="$data">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="42" name="return" description="" type="mixed">
+          <tag line="43" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="51">
+        <argument line="52">
           <name>$data</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
     </interface>
-    <source>eJydVFFv2jAQfs+vuIc9lIqRrX0rXdcUQYvUURSCKqS9OMklsebYke3Asmn/feeQwMqmbhoP2LHvPn/f5ztff6yKyvPPzz04hxUr46K23M0nqmo0zwsLZ5MBXLx7f/GW/i5hyZvaFBThgh55gtLglZtHBTeQcYFAY8W0BZUdEOGssLa68n3TLYyUzgcdyiHIAWhEMCqzO6bxChpVQ8IkaEy5sZrHtSV8C0ymvtJQqpRnjcOgtVqmqMEWCBZ1adzx7uN+sYZ7lKiZgGUdC570tIERUbdiCkwhbnFcxsxxWHUcYKYImFmu5BCQ076GLWpD33DZn9EBDkFpB3LGrGOuQVUub0B0GxDMHlNHf5B+VJgCly1uoSpSUxAc6dtxISBGqA1mtRi6dAqG53n08LSOIFhs4DkIw2ARbcYUbAtFu7jFPRQvK8EJmTRpJm1D1B3Cp2k4eaCU4G7+OI82JABm82gxXa1g9hRCAMsgjOaT9WMQwnIdLp9W0xHACh0tdACv2Ju1N0QWpmgZF6YXvaFLNcROpFCwLdLlJsi3xI1BQlX394tzIEwombcyDyYSsXkGUtkhGCJ43ZXcbrcb5bJ2FeeLPYDxb3oytxVLvrAcAV6U/y2ryUBNq13Fw3XVjrcJV6P4200b1MFR0Gtn5ZUYFbYUbUpy6CvXU8d28j1PshIN0aEG6Jh8Tsi+cd+eiZLkIxkCc0m1lFFkJ+KOEQmyjW5bN7/EUY2ao6gTuS/1mjrut9yhJx78mwn/48JvNvBeG/DJQch3z3P4rRHuR3WHtpv2K9MT8V2JucLHEqWloqIuo85Sun0oFFRabXmKru4E0ivDj7a+QCbTNCtB1tSAb+gtYKf7Gm2tJZT8K6bdot+OWS0T9wRAjvSQ7pPhwx5pMPZ+eD8BKne+zg==</source>
+    <source>eJydVFFv2jAQfs+vuIc9lIqRrX0rXdcUQYvUURSCKqS9OMklsebYke3Asmn/feeQwMqmbhoP2LHvPn/f5ztff6yKyvPPzz04hxUr46K23M0nqmo0zwsLZ5MBXLx7f/GW/i5hyZvaFBThgh55gtLglZtHBTeQcYFAY8W0BZUdEOGssLa68n3TLYyUzgcdyiHIAWhEMCqzO6bxChpVQ8IkaEy5sZrHtSV8C0ymvtJQqpRnjcOgtVqmqMEWCBZ1adzx7uN+sYZ7lKiZgGUdC570tIERUbdiCkwhbnFcxsxxWHUcYKYImFmu5BCQ076GLWpD33DZn9EBDkFpB3LGrGOuQVUub0B0GxDMHlNHf5B+VJgCly1uoSpSUxAc6dtxISBGqA1mtRi6dAqG53n08LSOIFhs4DkIw2ARbcYUbAtFu7jFPRQvK8EJmTRpJm1D1B3Cp2k4eaCU4G7+OI82JABm82gxXa1g9hRCAMsgjOaT9WMQwnIdLp9W0xHACh0tdACv2Ju1N0QWpmgZF6YXvaFLNcROpFCwLdLlJsi3xI1BQlX394tzIEwombcyDyYSsXkGUtkhGCJ43ZXcbrcb5bJ2FeeLPYDxb3oytxVLvrAcAV6U/y2ryUBNq13Fw3XVjrcJV6P4200b1MFR0Gtn5ZUYFbYUbUpy6CvXU8d28j1PshIN0aEG6Jh8Tsi+sdf3Z6IkGUmOwFxSMWUU2qm4Y8SCfKPr1s0vcVSk5qjqRO9LwaaO+y136okJ/+bC/9jwmw+81wZ8chDy3fMcfmuE+1Hhoe2m/cr0RHxXY67ysURpqaqozai1lG5fCgWVVlueois8gfTM8KOtL5DJNM1KkDV14Bt6DNjpvkZbawkl/4ppt+i3Y1bLxL0BkCO9pPtk+LBHGoy9H95PbOG+2A==</source>
   </file>
   <file path="core/iData.php" hash="70c2b70750b4ccff38802cb6b6a3bcec" package="Sambhuti">
     <docblock line="2">
@@ -3044,7 +3105,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     <namespace name="model" full_name="sambhuti\model"/>
     <namespace name="request" full_name="sambhuti\request"/>
   </namespace>
-  <marker count="8">todo</marker>
+  <marker count="9">todo</marker>
   <marker count="3">fixme</marker>
   <deprecated count="0"/>
 </project>
