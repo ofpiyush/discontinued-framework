@@ -27,15 +27,52 @@
 
 namespace sambhuti\core;
 
+/**
+ * data
+ *
+ * Data object
+ *
+ * __set always throws exceptions
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 class data implements iData {
 
-    private $data = array();
+    /**
+     * Data
+     *
+     * Stores the data being passed to the class
+     *
+     * @var array
+     */
+    protected $data = array();
 
+    /**
+     * Constructor
+     *
+     * Accepts array and stores them in \sambhuti\core\data::$data
+     *
+     * @param array $array
+     */
     function __construct ( array $array = array() ) {
         $this->data = $array;
     }
 
-    public function get ( $key ) {
+    /**
+     * Get
+     *
+     * Accepts list of Keys for a multidimensional array and returns the corresponding value
+     * Or null if not present
+     *
+     * @param $key
+     *
+     * @return array|mixed|null
+     */
+    function get ( $key ) {
         $args = func_get_args();
         $tmp = $this->data;
         foreach ( $args as $arg ) {
@@ -48,29 +85,77 @@ class data implements iData {
         return $tmp;
     }
 
+    /**
+     * Set
+     *
+     * Accepts key value pair and stores them in the data array
+     * if data already present throws exception
+     *
+     * @param $key
+     * @param $value
+     *
+     * @return \sambhuti\core\iData
+     * @throws \Exception
+     */
     function set ( $key, $value ) {
         if (!array_key_exists($key, $this->data)) {
             $this->update($key, $value);
             return $this;
         }
-        throw new \Exception('Data already set');
+        throw new \Exception('Data ' . $key . ' already set with value ' . $this->data[$key]);
     }
 
+    /**
+     * Update
+     *
+     * Sets key value pair without checking like \sambhuti\core\data::set()
+     *
+     * @param $key
+     * @param $value
+     *
+     * @return \sambhuti\core\iData
+     */
     function update ( $key, $value ) {
         $this->data[$key] = $value;
         return $this;
     }
 
+    /**
+     * Get All
+     *
+     * Returns all stored data in \sambhuti\core\data::$data
+     *
+     * @return array
+     */
     function getAll () {
         return $this->data;
     }
 
+    /**
+     * Magic Get
+     *
+     * Same as \sambhuti\core\data::get() for 1 argument
+     *
+     * @param $key
+     *
+     * @return array|mixed|null
+     */
     function __get ( $key ) {
         return $this->get($key);
     }
 
+    /**
+     * Magic set
+     *
+     * Throws exception to let user know they messed up somewhere
+     *
+     * @param $key
+     * @param $value
+     *
+     * @throws \Exception
+     */
     function __set ( $key, $value ) {
         throw new \Exception('Trying to save "' . $value . '" to Config "' . $key . '"
-        via __set use config::set() instead');
+        via __set! Use set($key,$value) / update($key,$value) instead');
     }
 }

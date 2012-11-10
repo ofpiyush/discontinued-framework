@@ -42,5 +42,11 @@ use sambhuti\loader;
  */
 interface iContainer extends core\iContainer {
 
-    function __construct ( loader\iContainer $loader, core\iData $data );
+    /**
+     * Constructor
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     * @param \sambhuti\core\iData        $databaseConfig  database config
+     */
+    function __construct ( loader\iContainer $loader, core\iData $databaseConfig );
 }

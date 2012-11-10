@@ -29,10 +29,36 @@ namespace sambhuti\core;
 
 use sambhuti\loader;
 
+/**
+ * core Interface
+ *
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iCore extends iContainer {
 
+    /**
+     * Constructor
+     *
+     * Should accept loader
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     */
     function __construct ( loader\iContainer $loader );
 
+    /**
+     * Process
+     *
+     * Should process string classname
+     *
+     * @param $class
+     *
+     * @return mixed
+     */
     function process ( $class );
 
 }

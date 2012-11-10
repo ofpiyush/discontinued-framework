@@ -30,6 +30,19 @@ namespace sambhuti\model;
 use sambhuti\core;
 use sambhuti\loader;
 
+/**
+ * model Container
+ *
+ * Connects to db and stores all models
+ *
+ * @todo       add support for master slave
+ *
+ * @package    Sambhuti
+ * @subpackage model
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 class container implements iContainer {
 
     /**
@@ -40,39 +53,97 @@ class container implements iContainer {
      */
     static $dependencies = array('loader', 'config.database');
 
-    /** @var null|\PDO */
-    private $connection = null;
+    /**
+     * Connection
+     *
+     * Stores PDO connection object
+     *
+     * @var null|\PDO
+     */
+    protected $connection = null;
 
-    private $allTypes = array('mysql' => 'MySQL');
+    /**
+     * All types
+     *
+     * Stores all db type data name identifiers
+     *
+     * @todo move this to a config sometime
+     *
+     * @var array
+     */
+    protected $allTypes = array('mysql' => 'MySQL');
 
-    private $type = '';
+    /**
+     * Type
+     *
+     * Stores Db type identifier
+     * Eg: mysql
+     *
+     * @var string
+     */
+    protected $type = '';
 
-    /** @var null|\sambhuti\loader\iContainer */
-    private $loader = null;
+    /**
+     * Loader
+     *
+     * Instance of loader
+     *
+     * @var null|\sambhuti\loader\iContainer
+     */
+    protected $loader = null;
 
-    private $instances = array();
+    /**
+     * Models
+     *
+     * Stores all model objects
+     *
+     * @var array
+     */
+    protected $models = array();
 
-    function __construct ( loader\iContainer $loader, core\iData $data ) {
+    /**
+     * Constructor
+     *
+     * Connects to the mysql server
+     *
+     * @todo may be have connection separate later if the need be?
+     * @todo do some real exception handling :P
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     * @param \sambhuti\core\iData        $databaseConfig database config
+     */
+    function __construct ( loader\iContainer $loader, core\iData $databaseConfig ) {
         $this->loader = $loader;
-        $type = strtolower($data->get('type'));
+        $type = strtolower($databaseConfig->get('type'));
         $this->type = $this->allTypes[$type];
-        $dsn = $type . ":dbname=" . $data->get('select') . ";host=" . $data->get('database') . ";charset=utf8";
+        $dsn = $type . ":dbname=" . $databaseConfig->get('select') . ";host=" . $databaseConfig->get('database') . ";charset=utf8";
         try {
-            $this->connection = new \PDO($dsn, $data->get('username'), $data->get('password'));
+            $this->connection = new \PDO($dsn, $databaseConfig->get('username'), $databaseConfig->get('password'));
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
         }
     }
 
+    /**
+     * Get
+     *
+     * Accepts string identifier and returns model of that
+     *
+     * @param null|string $id
+     *
+     * @fixme make model interface and @return that instead.
+     * @return \sambhuti\model\model
+     * @throws \Exception
+     */
     function get ( $id = null ) {
-        if (empty($this->instances[$id])) {
+        if (empty($this->models[$id])) {
             $class = $this->loader->fetch('model\\' . $this->type . '\\' . $id);
             if (null === $class) {
-                $this->instances[$id] = new $class($this->connection);
+                $this->models[$id] = new $class($this->connection);
             } else {
                 throw new \Exception("Cannot find model " . $id);
             }
         }
-        return $this->instances[$id];
+        return $this->models[$id];
     }
 }

@@ -26,7 +26,17 @@
  */
 
 namespace sambhuti\core;
-
+/**
+ * container Interface
+ *
+ * Base of every container on sambhuti
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
 interface iContainer {
 
     /**
