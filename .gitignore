@@ -1,3 +1,7 @@
 *~
 sample/config/database.php
 .idea
+.buildpath
+.project
+.settings/
+
