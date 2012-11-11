@@ -86,6 +86,7 @@ class container implements iContainer {
      * @param \sambhuti\loader\iContainer $loader
      */
     function __construct ( loader\iContainer $loader ) {
+        //random comment to test merging
         $this->lazyPaths = $loader->getLazyPaths();
         $this->defaultPath = end($this->lazyPaths);
     }
