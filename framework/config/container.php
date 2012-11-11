@@ -105,10 +105,14 @@ class container implements iContainer {
         if (empty($this->confs[$id])) {
             $config = array();
             foreach ( $this->lazyPaths as $path ) {
-                $fullPath = $path . '/config/' . $id . '.php';
-                if (file_exists($fullPath)) {
-                    include $fullPath;
-                }
+                $fullPath = $path . '/config/' . $id . '.json';
+                if (!file_exists($fullPath))
+                    continue;
+                $tmp = @json_decode(file_get_contents($fullPath), true);
+                if (!is_array($tmp))
+                    continue;
+                foreach ($tmp as $k => $v)
+                    $config[$k] = $v;
             }
             $this->confs[$id] = new core\data($config);
         }
@@ -130,11 +134,7 @@ class container implements iContainer {
      * @throws \Exception
      */
     function save ( $id, core\iData $data, $lazyId = null ) {
-        $config = $data->getAll();
-        $fileString = "<?php" . PHP_EOL;
-        foreach ( $config as $key => $value ) {
-            $fileString .= '$config["' . $key . '"] = ' . $value . ';' . PHP_EOL;
-        }
+        $fileString = json_encode($data->getAll());
         $fullPath = $this->defaultPath;
         if ($lazyId !== null && !empty($this->lazyPaths[$lazyId])) {
             $fullPath = $this->lazyPaths[$lazyId];
