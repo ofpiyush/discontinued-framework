@@ -139,7 +139,7 @@ class container implements iContainer {
         if ($lazyId !== null && !empty($this->lazyPaths[$lazyId])) {
             $fullPath = $this->lazyPaths[$lazyId];
         }
-        $fp = fopen($fullPath . '/config/' . $id . '.php', 'wb');
+        $fp = fopen($fullPath . '/config/' . $id . '.json', 'wb');
         if (empty($fp)) {
             throw new \Exception('Config folder not writable');
         }
