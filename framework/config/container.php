@@ -94,7 +94,7 @@ class container implements iContainer {
     /**
      * Get
      *
-     * Takes in string identifier eg: "file" and makes it into config/file.php
+     * Takes in string identifier eg: "file" and makes it into config/file.json
      * Runs through all available lazy paths.
      *
      * @param null|string $id

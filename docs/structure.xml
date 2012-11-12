@@ -1491,33 +1491,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </docblock>
     <source>eJyFk1Fv2jAQx9/5FPcIiCVb+0ZRR4agjcQAJUEV0l6c5BJbc+LIdkDZp985DaBJVfcSx+e7n/93vlt8b3gz8qfTEUwhZlXKWyvc/0o1nRYltzBeTeDh67eHL/R5hIPoWsPJwzltRYa1wbn7T7gwUAiJQGvDtAVV3Igw5tY2c983g8FTupwMlJuTA2hEMKqwF6ZxDp1qIWM1aMyFsVqkrSW+BVbnvtJQqVwUnWOQra1z1GA5gkVdGXe927zsjvCCNWom4dCmUmRX2cBIqLMYjjmkPcdFbJyGeNAAG0VgZoWqZ4CCzjWcURvaw+P1jgE4A6UdZMysU65BNS5uQnI7kMzeQ70PUr9nmIOoey5XDWXDCUf5XYSUkCK0BotWzlw4OcNbmLzujwkEuxO8BVEU7JLTEzlbrugUz/iOElUjBZEpJ81q25F0R/i5jlavFBL8CLdhcqIEYBMmu3Ucw2YfQQCHIErC1XEbRHA4Rod9vPYAYnSy0AE+KW/RvxCVMEfLhDTXpE/0qIbUyRw4OyM9bobiTNoYZNR1/384B2FS1WWf5q2IJCwsoFZ2BoYELoaWu1wuXlm3ruN8+Q4w/vNVzLJh2W9WIsA/7b9kLRVQk3XoeFg0/brMhPLSP8+904Ajp8/uKhvpcVvJPiS7zZWbqfs4+aNRzSo0JIcGYFDyK2MZx6fRX9AbMB0=</source>
   </file>
-  <file path="config/routing.php" hash="112f53c4f756c5d41f1ccf521799160e" package="Sambhuti">
-    <docblock line="2">
-      <description><![CDATA[Sambhuti
-Copyright (C) 2012-2013 Piyush]]></description>
-      <long-description><![CDATA[<p>License:
-This file is part of Sambhuti (http://sambhuti.org)</p>
-
-<p>Sambhuti is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.</p>
-
-<p>Sambhuti is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.</p>
-
-<p>You should have received a copy of the GNU General Public License
-along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
-      <tag line="2" name="package" description="Sambhuti"/>
-      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
-      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
-      <tag line="2" name="copyright" description="2012 Piyush"/>
-    </docblock>
-    <source>eJyFk1Fv2jAQx9/5FP+HSbQVI13bp7brmrHSInUUhaAKTdNkkgu2ZuLIdkDs0+8cAmzS1L0ktu/u5//57m4/VbLqRGdnHZxhKlYLWXsV1gNTba1aSo+TwSkuzj9cvOfPJSZqWzvJHsHpWWVUOroO61Qqh0JpAv8rYT1McSDiRHpfXUeRaw/6xi5PW8rBKQAsEZwp/EZYusbW1MhECUu5ct6qRe2Z7yHKPDIWK5OrYhsYfFaXOVl4SfBkVy5cHzaP4xkeqSQrNCb1QqtsLxuChYYTJynHouGEiGHQMG01YGgYLLwyZQ+k2G6xJut4j8v9HS2wB2MD5ET4oNzCVCHulOVuoYU/hvb/kfoxwxyqbLjSVJyNZBznt1FaY0GoHRW17oVwdsbrKH16maWIx3O8xkkSj9P5DTt7adhKa9qh1KrSismckxWl37L0QPj6kAyeOCT+PHoepXNOAMNROn6YTjF8SRBjEifpaDB7jhNMZsnkZfrQB6YUZFEAvPG8RVMhfsKcvFDa7ZOec1Edq9M5pFgTFzcjtWZtAhl33f8LFyBCm3LZpHl4RBY2KlAa34Njgbdty202m/6yrEPHRXoHcNHdXsx9JbKfYknAX+1/L2p+QMunbcfjtmr+95ky/cWvu8apxbHTW3ctK92XfqWbkOwwV2GmjuMUdfZT+IUKUWuPhOunOMcwUzuHd5kpC7X81r06v+p+x0d0f5C1xnZvjiZpVrSzNas/LJlWbVBY3XR+Awz2Rss=</source>
-  </file>
-  <file path="config/container.php" hash="7dab155cf531d6a24d1597d478a10dbc" package="Sambhuti">
+  <file path="config/container.php" hash="2e19242e6321621be0440b399b25e0cb" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1543,9 +1517,6 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </docblock>
     <namespace-alias name="core">sambhuti\core</namespace-alias>
     <namespace-alias name="loader">sambhuti\loader</namespace-alias>
-    <include line="109" type="Include" package="Default">
-      <name/>
-    </include>
     <class final="false" abstract="false" namespace="sambhuti\config" line="45" package="Sambhuti\config">
       <extends/>
       <implements>\sambhuti\config\iContainer</implements>
@@ -1622,67 +1593,67 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
           <type>\sambhuti\loader\iContainer</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="103" package="Sambhuti\config">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="104" package="Sambhuti\config">
         <name>get</name>
         <full_name>get</full_name>
-        <docblock line="93">
+        <docblock line="94">
           <description><![CDATA[Get]]></description>
-          <long-description><![CDATA[<p>Takes in string identifier eg: "file" and makes it into config/file.php
+          <long-description><![CDATA[<p>Takes in string identifier eg: "file" and makes it into config/file.json
 Runs through all available lazy paths.</p>]]></long-description>
-          <tag line="93" name="param" description="" type="null|string" variable="$id">
+          <tag line="94" name="param" description="" type="null|string" variable="$id">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="93" name="return" description="object" type="\sambhuti\core\iData">
+          <tag line="94" name="return" description="object" type="\sambhuti\core\iData">
             <type by_reference="false">\sambhuti\core\iData</type>
           </tag>
         </docblock>
-        <argument line="103">
+        <argument line="104">
           <name>$id</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="131" package="Sambhuti\config">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="136" package="Sambhuti\config">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="117">
+        <docblock line="122">
           <description><![CDATA[Save Config object]]></description>
           <long-description><![CDATA[<p>Saves data in a config object to the default path (last lazy path)
 Path can be overridden by $lazyId namespace to the path.</p>]]></long-description>
-          <tag line="117" name="see" description="\sambhuti\loader\loader::addLazyPath" refers="\sambhuti\loader\loader::addLazyPath"/>
-          <tag line="117" name="param" description="config file identifier" type="string" variable="$id">
+          <tag line="122" name="see" description="\sambhuti\loader\loader::addLazyPath" refers="\sambhuti\loader\loader::addLazyPath"/>
+          <tag line="122" name="param" description="config file identifier" type="string" variable="$id">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="117" name="param" description="config object" type="\sambhuti\core\iData" variable="$data">
+          <tag line="122" name="param" description="config object" type="\sambhuti\core\iData" variable="$data">
             <type by_reference="false">\sambhuti\core\iData</type>
           </tag>
-          <tag line="117" name="param" description="namespace identifier" type="null|string" variable="$lazyId">
+          <tag line="122" name="param" description="namespace identifier" type="null|string" variable="$lazyId">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="117" name="throws" description="" type="\Exception">
+          <tag line="122" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="131">
+        <argument line="136">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="131">
+        <argument line="136">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type>\sambhuti\core\iData</type>
         </argument>
-        <argument line="131">
+        <argument line="136">
           <name>$lazyId</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
     </class>
-    <source>eJydV21v2kgQ/h4p/2EaoQIRgbv2W94uXN6KxCUIiKooqaLFXuO9LrblXUPpXf/7zawX29iGVoeqUK9nn5l5Zp7Z5fyPyI8OD3rHx4cHcAwTtpj5iRbm4TqM1rGY+xpa12348NvvH07wz0cYiXWifDIxZkPh8EDxU/Mw9YUCT0gO+B2xWEPoZajQ8rWOTns9ZRe6YTxvZ0CZGUHEnIMKPb1iMT+FdZiAwwKIuSuUjsUs0ehBAwvcXhjDInSFtzYguJgELo9B+xw0jxeKIqCH+4cnuOcBj5mEUTKTwtmEDgxjpRXlcxdmKRBtuaMoJjYKuAsRmWkRBh3gAt/HsOSxwmf4uHFiETsQxgalxTQFH0MY0cY2RrwGyXS+t1ubf56mCyIw0H4YYUY+AmKOKyElzDgkinuJ7Jj9aA2fB9NPj09T6D88w+f+eNx/mD6fobX2Q3zLlzzFEotICoTGvGIW6DWGbyD+uh1ff8I9/T8Hw8H0GbOAu8H04XYygbvHMfRh1B9PB9dPw/4YRk/j0ePktgsw4RQYNwh7WPZMpZBIl2smpMozf8byKoxQuuCzJccyO1wsMT4GDjbhzytoUJgMg7nJNaMSgxt4EIS6AwqDPLf9t1qtuvMgofbryRRB9S7zeK4i5nxlcw6wrYgrliCRMS5bEcB5ZL6vHBF2Z98vUysLiVb7/M0j2fX1QqZ7nExsJLSCxnqHB4cHAVtwhUGhJmw8r04YeGJ+Rm+xCYrrMT8rrcmQoSSM7Ubp6XbUeIC1QEqz3PvYWPYl6VgBtb4BcEluoDQ6IJVgSbBRHcmU2mwuk1diTyWzzbvUQ5nUX2T1f9Faw6uJnUJJKTCq4AseaAUiIwb+IdrIa0odfY7hhkccx0zgCK42i9nLK6VxTDj585LFQEpbQ9/8xX52NwBrIKUH8wyml/4nxYCGW/AEFylMq5lWtNk+qwtuyL6vYcS0X4ksc/+Sd9TFpbH9YvQpaSuBY0Q1eaGGXktdZb9OTxu0t+i1mHf2spxmFIeaOzTmcpMszfr0brjHEqnrMxwypfHgwRmAY9NkExW9bseWMr87Ijf1RI4wpmazNpyM09ctDb6KG6YZhLO/EWyH/5Qbq7aSZTUasvsZN9i2mFTiaHP+bLuccGxsuekNI2abYEpYSxJ3GWftasx4oLNFtQMKYmmkS6UkvCRw6PiDtzdnEyC0YOd2aJPqwH4aNGhOLovtYe1OLudcDzfrhpLSpu0KopBaZbTNph91dN5zXWFhyr6iErG70u4BgeLUwhMYNp+fwhFNzSPD7iK1xAM70KEtc49ed82ly+KNk0DhLI3DZI5FwenLlng6shneofL+7e4qRpBI+a+NpCHcqlnMdRIH+5pzV7GQWywSgiJz5Ga7KsKDFl9Eer1h1LTnC5p/aW8ZmmrYHi82b/E9jh7OHJ/clYuNd7OGac8KqAHG24+01U3NutDsWaqb+EDh4xIx3jyr7qcsqCJv/BveuFQrw6vmkG0JHJm4PHddA/tje6n0WCGMCOYrMJXBGyZrWb6KNBUwbEkrMPs6eUL3quvipKnOBzTBmyc1BnY3255LgB1Md7BfmhjpgKELO15RQ7zoxsJFldClwUz5gQv5+WOBCaCmy/ceOcx1h6VDp6wPK41S12BT0KdwzynIePe8K0inYXiCbZL2iTN3XmGg6joHosGwUvB6+83h5ifELrUqKrCRawfKcXYyp3VKzsVpjM1QxVvg9jgljiZpJhdwdE4/G49QWKNPo7fbx2HBsiBli0sK/srXdNFoLJlMeFXKRfgunrR268uRkTBtRg0fkU7MQoqCS2fN2hh+FAMvDIjKmVDYQ5Ngw9K7C8vT+/fwbmvIZXPpxdrWDbuqy+q2XdFGuMnDX3pBPor2jbQONFezZruUhw3Zi6rBmX4y0yZvqVbTDgYvlHT64u8lWMVC0xnU3DGDPDLg5KNTrF7R2nNkqIxJzcG8NfxM3+XTC//9B4Y6vQQ=</source>
+    <source>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</source>
   </file>
   <file path="config/iContainer.php" hash="aa37f1d3a6ce81481f73ea14c381f457" package="Sambhuti">
     <docblock line="2">
