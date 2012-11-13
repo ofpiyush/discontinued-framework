@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a10" title="Sambhuti">
-  <file path="boot.php" hash="956215301e63cab9019fe3ae67310bee" package="Sambhuti">
+  <file path="framework/boot.php" hash="e108e6d34144dd5f134f739ea49ef7f8" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -43,9 +43,9 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
         <long-description><![CDATA[<p>Path to sambhuti/framework</p>]]></long-description>
       </docblock>
     </constant>
-    <source>eJylVO9v2jAQ/Y7E/3AfJhEqmmztt7brmiIokSigEFQhVUImuRCrxs4cB0T/+p0TfnRi6ibtS6yz33t+d+fL3Y88y5sN7+Ki2YALmLL1MisNr4KuynearzIDTrcNV1+/XV3S5xomfFcWmYVUsCGPURZ4UwVRxgtIuUCgNWfagEqPquBkxuQ3nlfsN1ylV+2j0BFmJTQiFCo1W6bxBnaqhJhJ0Jjwwmi+LA3dYIDJxFMa1irh6a4Soc1SJqjBZAgG9bqwDmzwNJrBE0rUTMCkXAoeH6wDI692p8gwgWUtZCl962K6dwF9RcrMcCU7gJzONWxQFxTD9eGSvWIHlK5UHGaseQ0qt8Q2Od6BYObEdf+Y/ynNBLispDOVU0YZCVKOWy4ELBHKAtNSdCo+oeEliAbjWQT+aA4vfhj6o2h+S2iTKTrFDdZafJ0LTtKUl2bS7Mh+JfHcC7sD4viPwTCI5pQF9INo1JtOoT8OwYeJH0ZBdzb0Q5jMwsl42nMBpmiNYaXwSZXTqlNUyAQN46I4ZT6n9hbkUCSQsQ1Sm2PkG/LHIKZH+PcOVipMKLmqcj2WkswFKUhlOlCQybv9+9tut+5Klvb5eaJWKLz7k5+HnMVvbIUAv0/EAyupkJq290MAd3m1PsRcucv3+xq1lyTUZ/etcuFmZi1qTnwcNjtoH2bMazaoyXAYmVehGD3v22bjfGohVMrAhJnTcNoAjDrSvVSzNW6VfttrJ5hyiU5r6j8/DmZRsAjH42gx8aNBq0N9YCInBSfhWhLPWSz6wbC3WLTb4ELLa7XJh8afJde4UDJG51zGAmPquse7SlLfqX0u/XP+lVqn+3/k+Iz7pT6B7yBxC3XweoQ5HyCX9yxJhux9ZyvptA51pOKcX2lpvwAuRq7h</source>
+    <source>eJylVO9v2jAQ/Y7E/3AfJhEqmmztt7brmiIokSigEFQhVUImuRCrxs4cB0T/+p0TfnRi6ibtS6yz33t+d+fL3Y88y5sN7+Ki2YALmLL1MisNr4KuynearzIDTrcNV1+/XV3S5xomfFcWmYVUsCGPURZ4UwVRxgtIuUCgNWfagEqPquBkxuQ3nlfsN1ylV+2j0BFmJTQiFCo1W6bxBnaqhJhJ0Jjwwmi+LA3dYIDJxFMa1irh6a4Soc1SJqjBZAgG9bqwDmzwNJrBE0rUTMCkXAoeH6wDI692p8gwgWUtZCl962K6dwF9RcrMcCU7gJzONWxQFxTD9eGSvWIHlK5UHGaseQ0qt8Q2Od6BYObEdf+Y/ynNBLispDOVU0YZCVKOWy4ELBHKAtNSdCo+oeEliAbjWQT+aA4vfhj6o2h+S2iTKTrFDdZafJ0LTtKUl2bS7Mh+JfHcC7sD4viPwTCI5pQF9INo1JtOoT8OwYeJH0ZBdzb0Q5jMwsl42nMBpmiNYaXwSZXTqlNUyAQN46I4ZT6n9hbkUCSQsQ1Sm2PkG/LHIKZH+PcOVipMKLmqcj2WkswFKUhlOlCQybv9+9tut+5Klvb5eaJWKLz7k5+HnMVvbIUAv0/EAyupkJq290MAd3m1PsRcucv3+xq1lyTUZ/etcuFmZi1qTnwcNjtoH2bMazaoyXAYmVehGD3v22bjfGohVMrAhJnTcNoAjDrSvVSzNW6VfttrJ5hyiU5r6j8/DmZRsAjH42gx8aNBq0N9YCInBSfhWhLPWSz6wbC3WLTb4ELLa7XJh8afJde4UDJG51zGAmPquse7SlLfqX0u/XP+lVqn+3/k+Iz7pT6B7yBxC3XweoQ5HyCX9yxJ/Dx3WocSUl3Ob7OMX7LArNU=</source>
   </file>
-  <file path="loader/container.php" hash="5c4a36f064394b4f53622c60f4b554ad" package="Default">
+  <file path="framework/loader/container.php" hash="7a491882becbba1a9a49f74f10e87dae" package="Default">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -95,10 +95,10 @@ Can be accessed by the string 'loader'.</p>
         <tag line="26" name="copyright" description="2012 Piyush"/>
       </docblock>
       <property final="false" static="false" visibility="protected" line="59" namespace="sambhuti\loader" package="Default">
-        <name>$lazyPath</name>
+        <name>$appPath</name>
         <default><![CDATA[array()]]></default>
         <docblock line="52">
-          <description><![CDATA[Lazy Path]]></description>
+          <description><![CDATA[App Paths]]></description>
           <long-description><![CDATA[<p>Array of [namespace => Path] for lazy loading</p>]]></long-description>
           <tag line="52" name="var" description="" type="array">
             <type by_reference="false">array</type>
@@ -118,7 +118,7 @@ Can be accessed by the string 'loader'.</p>
         <full_name>get</full_name>
         <docblock line="71">
           <description><![CDATA[Get - Autoloader]]></description>
-          <long-description><![CDATA[<p>Autoloader to load the classes under all lazy paths</p>]]></long-description>
+          <long-description><![CDATA[<p>Autoloader to load the classes under all app paths</p>]]></long-description>
           <tag line="71" name="param" description="name of the class to be loaded" type="string" variable="$class">
             <type by_reference="false">string</type>
           </tag>
@@ -156,7 +156,7 @@ Can be accessed by the string 'loader'.</p>
         <full_name>fetch</full_name>
         <docblock line="110">
           <description><![CDATA[Fetch]]></description>
-          <long-description><![CDATA[<p>Looks for a class in all registered paths and
+          <long-description><![CDATA[<p>Looks for a class in all registered app paths and
 returns the class name if matches else gives null</p>]]></long-description>
           <tag line="110" name="param" description="name of class to look for" type="string" variable="$class">
             <type by_reference="false">string</type>
@@ -173,11 +173,11 @@ returns the class name if matches else gives null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="144" package="Sambhuti\loader">
-        <name>addLazyPath</name>
-        <full_name>addLazyPath</full_name>
+        <name>addApp</name>
+        <full_name>addApp</full_name>
         <docblock line="134">
-          <description><![CDATA[Add Lazy Path]]></description>
-          <long-description><![CDATA[<p>Add single lazyPath for loader</p>]]></long-description>
+          <description><![CDATA[Add App Path]]></description>
+          <long-description><![CDATA[<p>Add single app Path for loader</p>]]></long-description>
           <tag line="134" name="param" description="namespace of the path" type="string" variable="$namespace">
             <type by_reference="false">string</type>
           </tag>
@@ -200,12 +200,12 @@ returns the class name if matches else gives null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="159" package="Sambhuti\loader">
-        <name>getLazyPath</name>
-        <full_name>getLazyPath</full_name>
+        <name>getApp</name>
+        <full_name>getApp</full_name>
         <docblock line="150">
-          <description><![CDATA[Get Lazy Path]]></description>
-          <long-description><![CDATA[<p>Get single lazyPath from loader</p>]]></long-description>
-          <tag line="150" name="param" description="namespace of the lazy path" type="string" variable="$key">
+          <description><![CDATA[Get App Path]]></description>
+          <long-description><![CDATA[<p>Get single app path from loader</p>]]></long-description>
+          <tag line="150" name="param" description="namespace of the app path" type="string" variable="$key">
             <type by_reference="false">string</type>
           </tag>
           <tag line="150" name="return" description="string path if $key exists else boolean false" type="string|bool">
@@ -220,12 +220,12 @@ returns the class name if matches else gives null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="173" package="Sambhuti\loader">
-        <name>getLazyPaths</name>
-        <full_name>getLazyPaths</full_name>
+        <name>getApps</name>
+        <full_name>getApps</full_name>
         <docblock line="166">
-          <description><![CDATA[Get Lazy Paths]]></description>
-          <long-description><![CDATA[<p>Get all lazyPath from loader</p>]]></long-description>
-          <tag line="166" name="return" description="all lazy paths." type="array">
+          <description><![CDATA[Get App Paths]]></description>
+          <long-description><![CDATA[<p>Get all app paths from loader</p>]]></long-description>
+          <tag line="166" name="return" description="all app paths." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -236,15 +236,15 @@ returns the class name if matches else gives null</p>]]></long-description>
         <docblock line="177">
           <description><![CDATA[Sleep]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="177" name="return" description="lazy path to be cached" type="array">
+          <tag line="177" name="return" description="app path to be cached" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
     </class>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="loader/iContainer.php" hash="7da988beb2f88b3ec7b8fe7db9d0c3e3" package="Default">
+  <file path="framework/loader/iContainer.php" hash="b2bec8f6e4fb05a887c7ef314dd37f07" package="Default">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -328,15 +328,15 @@ return the class name if matches else should give null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="81" package="Sambhuti\loader">
-        <name>addLazyPath</name>
-        <full_name>addLazyPath</full_name>
+        <name>addApp</name>
+        <full_name>addApp</full_name>
         <docblock line="71">
-          <description><![CDATA[Add Lazy Path]]></description>
-          <long-description><![CDATA[<p>Add single lazyPath for loader</p>]]></long-description>
+          <description><![CDATA[Add App Path]]></description>
+          <long-description><![CDATA[<p>Add single app for loader</p>]]></long-description>
           <tag line="71" name="param" description="namespace for replacement" type="string" variable="$namespace">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="71" name="param" description="the full path to the directory to be added" type="string" variable="$path">
+          <tag line="71" name="param" description="the full path to the app directory to be added" type="string" variable="$path">
             <type by_reference="false">string</type>
           </tag>
           <tag line="71" name="return" description="instance" type="\sambhuti\loader\iContainer">
@@ -355,12 +355,12 @@ return the class name if matches else should give null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="92" package="Sambhuti\loader">
-        <name>getLazyPath</name>
-        <full_name>getLazyPath</full_name>
+        <name>getApp</name>
+        <full_name>getApp</full_name>
         <docblock line="83">
-          <description><![CDATA[Get Lazy Path]]></description>
-          <long-description><![CDATA[<p>Should return single lazy path</p>]]></long-description>
-          <tag line="83" name="param" description="namespace of the lazy path" type="string" variable="$key">
+          <description><![CDATA[Get App]]></description>
+          <long-description><![CDATA[<p>Should return single path to app</p>]]></long-description>
+          <tag line="83" name="param" description="namespace of the app path" type="string" variable="$key">
             <type by_reference="false">string</type>
           </tag>
           <tag line="83" name="return" description="string path if $key exists else boolean false" type="string|bool">
@@ -375,20 +375,20 @@ return the class name if matches else should give null</p>]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\loader" line="101" package="Sambhuti\loader">
-        <name>getLazyPaths</name>
-        <full_name>getLazyPaths</full_name>
+        <name>getApps</name>
+        <full_name>getApps</full_name>
         <docblock line="94">
-          <description><![CDATA[Get Lazy Paths]]></description>
-          <long-description><![CDATA[<p>Should return all lazy paths</p>]]></long-description>
-          <tag line="94" name="return" description="all lazy paths." type="array">
+          <description><![CDATA[Get Apps]]></description>
+          <long-description><![CDATA[<p>Should return all app paths</p>]]></long-description>
+          <tag line="94" name="return" description="Array of all app paths." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
     </interface>
-    <source>eJyFVmFv4kYQ/c6vmA+VjpwotHffctE1NEpySGmCgOgUKVK02GO8yuJ1vetwvrb/vW/WNjgkJHzA9u7s85s3bwZO/sjTvDf6+LFHH2mu1su09Fruz2xeFXqVeuqfHdGn337/9Cu+PtNUV6VLESFBVzrizPGx3C9S7SjRhgnXXBWebLJFpH7qfX48GrlmYWiL1VGDsg0SgIKZnE38RhV8TJUtKVIZFRxr5wu9LD3wPaksHtmC1jbWSSUYWCuzmAvyKZPnYu3k9fJweX1Ll5xxoQxNy6XRUUubFIjKiks5pmXAkRMXwmHecKALC2Dltc0GxBr7BT1x4fBMn9t3NIADsoWA9JUX5gXZXM4dgW5FRvnd0eErqe8yjElnATe1ObJJAYf8NtoYWjKVjpPSDOQ4gun7ZPHt5nZB4+s7+j6ezcbXi7svCPapxS4/cQ2l17nRQEZOhcp8BeqC8Nf57Owbjoz/nFxNFndIgC4mi+vz+ZwubmY0pul4tpic3V6NZzS9nU1v5udDojkLLRaAN+RNQoUgYcxeaePapO9QVAd2JqZUPTGKG7F+AjdFEVz3fuEERBmbrUKaWxFBbJJQZv2AHAieNJbbbDbDVVaK40amBnCjrw2ZUa+XqTW7XEXwXQN0b6yCl770etB6txohF6w1zVLHoE8yJAeWNMlQ4AQ4bW3rFJUxdkORUQ7uZh+lGrxFGgGQ+7DFYn27Do2jo9KoYO7SsOtA1cVHDWFCFLbAkwCIWDHnDP9nUUUaF68Tjf0PNckPrfKnSPNRrZjw6Tb7qSuX7VZ9JKyqEiYqJLhpezrJw/U00na4/Pk1RDWaStRbiq9yM0z92oQz0Xa6hNGymyqjnm5lJL3Tln94pOdISnDfWf+n15P3hpLIR+ZWhjYqIy+tGJZG4ZqUWSTNSA8PURtC/SPU8wVCytEjzfjvUhfcLLZ7TSGMtY+hhqqeeBhHcHE48GCzKIwoncg3/0BXuz0UlKFQa5J2R/l+EQPWhYfTcwVHA7k2TNjydvvC4T5Swb4sMlpaawg5sbw2kYk1oEQZVMXKxNpox6+rEUmyTa7Ub7iIKnuiXIhz3xWjJo3hBdNDkBVyh1PjkJQTldqjDW1xbidRcF8rvAfNwMK9GRIrDAfKSmPelrEDhAlSP3WkO6BcffpfgW+RErl/Tqt+qotZc+vw2ZM0NLloWR96RcxxHNOV+lnRFLrs8ZI96Wq4yiBEIrbTgl8k8dJI9STb3cnZgnOD+zXmwoGTwXXhIyUJAoQl6BemC9whHVXJAqaQimOODwh6vzdFu+2q0Xgqiw54EahXbcr9TjaDht8rSl6yP6hkY8+2zjtNQ2pvK/nIVUfD5gfp4NnnVgq92AAF3vBPAOzaR4IYf2xCk74ux4p9Vw5BeE+B/UHzXAJpym0OL2ZSG4S/B9Ve6PBdgq4epf/1/gcYajTy</source>
+    <source>eJyFVmFv4kYQ/c6vmA+VjkQU2rtvuegaGiU5pDRBQHSKFCla7DFeZfG6u+twXNv/3jdrOxAgOT5ge3fn+c2bNwOnf5R52RkcH3fomKZqOc+roOX+3JZrpxd5oO75EX387fePv+LrE431uvI5Tsiha51w4flE7me59pRpw4RrqVwgm70gUjcPoTwZDHyz0LducdSgvBwSAMdM3mZhpRyf0NpWlKiCHKfaB6fnVQB+IFWkA+toaVOdrQUDa1WRsqOQMwV2Sy+vl4ermzu64oKdMjSu5kYnLW1SICorPueU5hFHIi6Fw7ThQJcWwCpoW/SINfYdPbPzeKZP7TsawB5ZJyBdFYS5I1tK3BHorsmosAntH0h9k2FKuoi4uS2RTQ445LfSxtCcqfKcVaYn4ThM30azr7d3Mxre3NO34WQyvJndf8bhkFvs8jPXUHpZGg1k5ORUEdagLgh/XUzOvyJk+OfoejS7RwJ0OZrdXEyndHk7oSGNh5PZ6Pzuejih8d1kfDu96BNNWWixALwjbxYrBAlTDkob3yZ9j6J6sDMp5eqZUdyE9TO4KUrgup8XTkCUscUipvkiIoiNMips6JEHwdPGcqvVqr8oKnHcwNQAfvClITPodAq1ZF+qBL5rgB6MVfDS504HWm9WE+SCtaZZ6jPokwLJgSWNChQ4A05b2zpFZYxdUWKUh7s5JLkGb5FGAOQ+brFY3y5j4+ikMiqauzLst6Dq4qOGMCEK6/AkACJWyiXD/0WyJo1L0JnG/oea5IdW+TOk+aQWTPhsN/uZr+btVh0SV1UFEzk53LQ9nZbxepZo25//+BJPNZrKqfcUX5Smn4eliTHJy3SJo2UzVQYd3cpIeqMtfw9Iz5OU4GFr/Z9OR94bSyIfmVsF2qhKgrRiXBrEa1YViTQjPT4m7RHqHqGeewg5J0804b8r7bhZbPeaQhhrn2INVT3xMI7g4hjwaIskjiidyTd/R1f7HRSUwaklSbujfL+IAevCw+mlgqOBXBsmbgX78sL+LpLjULmC5tYaQk4sr81kYvUoUwZVsTKxVtrzYTUSSbbJlboNF1FlR5RLce5PxahJY3jB9BBkgdzh1DQm5UWlNrShLc7dShTclwrvQTOwcG+GxALDgYrKmPdl3ALCBKmftqR7Q7k6+l+Bb5EyuX9Nq36qi1lz2+KzI2lsctGyDjog5jBNaViWNIYsO7RkS5paTIUT7ZzgPfr7Fqpn2OZOYh2XBvdLTIQ3IqPf4keKEVOPS1BOFoRECm9IP61lETNIpSmnb8j5sDNDt5tVo+1UkbzhRKCKJt2tZHoNvQMSXnEQCQ87si1trWObjto7viPFE6+35Gt+hUSAcr9OO/aJ/dfgxPfBMxFv2zJyiPFnJjbmYREWHBoRJPjtvHcnyuvEpfta3nuzpz2DvwFrGsZvpPoqpP8eOV9Pzf86/wOxeytn</source>
   </file>
-  <file path="request/container.php" hash="e86bc056c677bfdb76266702a484256a" package="Default">
+  <file path="framework/request/container.php" hash="e86bc056c677bfdb76266702a484256a" package="Default">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -523,7 +523,7 @@ other standard request parameters</p>]]></long-description>
     </class>
     <source>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</source>
   </file>
-  <file path="request/iContainer.php" hash="3b490766d241c626f5f1cf4ca35c1009" package="Default">
+  <file path="framework/request/iContainer.php" hash="3b490766d241c626f5f1cf4ca35c1009" package="Default">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -592,7 +592,7 @@ Should be used for 'request' dependency identifier.</p>]]></long-description>
     </interface>
     <source>eJy1VN9P2zAQfs9fcW8UxJoN3gAxuopCJQZVfwghISEnuTTeXNuzHboy7X/fnZu0sCF4Wh+a5Hz33Xf3ne/ks61sku7tJbAHE7HIqjpIfu8bu3JyXgXo9Hfh4OOngw/0dwgjuap9RR7sdCVz1B6P+H1aSQ+lVAj0tMIFMOUGETpVCPYoTX1j6Bo3321QNk4M4BDBmzIshcMjWJkacqHBYSF9cDKrA+EHELpIjYOFKWS5Ygyy1bpAB6FCCOgWntPzx8X1DC5QoxMKRnWmZN7SBkFE2eIrLCCLOBwxYA6ThgMMDAGLII3eB5R07uARnadvOGxzNID7YByDdERg5g6M5bhdorsCJcI2tPtK6dsKC5A64lbGUjUVwVF9S6kUZAi1x7JW+xxOznA7nF7ezKbQu76D29543Lue3h2Tc6gMneIjrqHkwipJyFSTEzqsiDojfD0f9y8ppPdleDWc3lEBMBhOr88nExjcjKEHo954OuzPrnpjGM3Go5vJeRdggkwLGeCN9pZRIWphgUFI5dui70hUT+xUAZV4RBI3R/lI3ATkNHXvC8cgQhk9j2VumkjEhiVoE/bBE8GTZuSWy2V3rmueuFStAXx62pBJk0SLBXorcpq7Buje4Y8afThOEmr21pxTMWRrbkvjRDdFU3nEE4aaJC4JqSl0e8KtaP1pdundW8M9Mtk3zIOPs7BuCU10iQ51kDQwpHdYIkm4xCwG5kq+ALLG1jxZsWPtwRoUhLXOWMc4avUsw3qGikhqp4nZIZEs0g3S+QpkwelLia6V7Iz6813MEej3fEuc+TprjxqkaBY1jZ9j72ZhwImNz7Ncmm72dBq9GjXY6y2t5lZ1q7BQMSbf7KW4lLb7KE1k236Q287jz0BleWDt7p/ZfyUJ541a8i+qRRewzgNf4mhqT5q+SS1JFCWf0L8j5vPoND7LWue8C+DhIW/zQGeXpulvGrek9Lht5QsaZw5D7TTwDaZ9In1csesd41+MGO0r8Xp6nqOY9p/iFwuuRVFz/mN6Hl9O/zv5A+aDEfg=</source>
   </file>
-  <file path="controller/container.php" hash="a61de8137d451699c232a7491e210c9e" package="Sambhuti">
+  <file path="framework/controller/container.php" hash="a61de8137d451699c232a7491e210c9e" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -779,7 +779,7 @@ if exists or returns not found controller</p>]]></long-description>
     </class>
     <source>eJydV21z2jgQ/s6v2M4wNWQI5Np8SkoajjYtM7k0A2Q6maaTEbaMdbUtjyQn5a7977eSJWMbk+aaDxisfXl299nV5s3bLMo6o4ODDhzAgiSrKFdMf5/ybCPYOlLQm/bh1dEfrw7x4zVcs00uI5TQQpfMp6mkJ/r7MmISQhZTwGdGhAIelhahFymVnYxG0r4YcrHuWyulkDYgKAXJQ/VIBD2BDc/BJykIGjCpBFvlCu0rIGkw4gISHrBwo23guzwNqAAVUVBUJFK71z8+XN3AB5pSQWK4zlcx8x1sIAhUv5ERDWBl7GiNC41hYTHABUfDRDGeDoAyPBfwQIXE3/Da+bAGB8CFNtIjSiMXwDOt10e4G4iJ2qoOW0LfRhgAS43diGcYTYTmML5HFsewopBLGubxQKujMHyeLT9+ulnC5OoWPk/m88nV8vYUhVXE8ZQ+0MIUS7KYoWWMSZBUbRC6tvDX+/n0I6pM/pxdzpa3GABczJZX7xcLuPg0hwlcT+bL2fTmcjKH65v59afF+yHAgmpYVBt4Ir2hqRCmMKCKsFi6oG+xqBLRxQFE5IFicX3KHhAbAR9Z9+vCaSMk5unahFkmEYHNQki5GoBEgG8s5R4fH4frNNeMG8WFATk6c2DOM+J/I2sKUKP/OckxgQLfWsbDm8w8z33Gh6t/zoyQNYdCT/laZ/EwUklsVPyyr3RPbdtp1OmkJKES4WADWCR3Pk+V4HFMxWmng4Wvngh6Wn8VcxIYQdvO01LZfCUMc+l4p1BdYhJj2LqQuymp50TmK3e01Wpk63np+p187STMj4mUBokJzVCcJjRVElgZMPzb6WiHJif67wDe0YzirEh9RqV9547OpcJW98ufD0SAbpgNTMwnUjNw2hvQ/ZqunY2ReRYGoBtUnMC4MNLzEGzI1kOBrYma3gA8XUf9LIrn9U934E5RogFzlqKbFImCeFqODew0j+MfdzW+3DEtDF1/q1KAzgRX1NeDx5whXq29C2Ve4NZ0wjCe7fUdUQS6Nuh9ju3xXt+XJkFPJKJVoA1Ukeq7Cke6cVV3B1pxuhfZFVfFLVHpuGflxgkXUGqKOxhwrBU+9qGodDuzWdlhd0nn/dUvh0FJ2lZKogeR+4o3A11Q7L4801MY5z/iHeAlllCgyse7nSdQZ0GJDBcGkkArcexfgz/7VAzDnUqF6Lvyz6NBmKe+vsTh/t53UUMPWog9gGaPDWCvD+jjYCpxKtydDs+2HeBMnjZFbHd2i+nfOCxp2nU3QUOgwiH7BkuPNJE95/DwbE1Vzzs+Ovb6/RbvJTu+eLqs3tdfmjJiztbPHSZ9oKpBhSX5hhMTFyC9DSQJbnr6B+4SCa5BWwSjhOKVE4yIWP+hP14Nh0NnQuv4eLfJivzJSaHQK0it1QZWrd93iiwE+h3XMKn3IEFVLlK5pXLt0mujr25MXRuDuilSmIP/1f8l+TCVSDpn2s6AGocQeo8mmdr0nFS/eqz/LAJbr0p1toX+WX7DGsG54gHXSwJ/xMVT6f2V4wIrWIAVshCdbwPoxXjcIHPhZy+kSkRP6rUh7GL59JSi37OYB7TnjfAebdGoDDU30+5lxEI0ry1UJQuKoNQLm0ojAG9btOAEPIYX/HfPjkeXCO/eg/F4XHX75egrvHwJIYlx+dFns8X0craTC776G8fwNhWuXU/rYiVI7/746LVXSQ1Q7eAXVss+3eJrTW9ZVBOMtfLjB7xg8l43F1nF1DaTPR04bP3dOv9ObMdea9kLU4dnVrisYinheF4I7ps810UeGm1q3yK/JbIwri66gLRPFQuZ/i+TY29ibvTKbsaNGxasXEiK+759UBSLY9W2NrRnYjxrbajhtBjaR4mtfzFOSp09o2R37leUvra0s1nJx/Ub6fAsxOs/MtuvVfVgCN7dnX6087DGQDNWjOmmQ+P0aZBbNPrSrPLfGKy7bG2h5zkptrKasRb21mfwPnOOsz87/wEFP0I3</source>
   </file>
-  <file path="controller/controller.php" hash="fe04c06b400e52a856914da4403446dc" package="Sambhuti">
+  <file path="framework/controller/controller.php" hash="fe04c06b400e52a856914da4403446dc" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -920,7 +920,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVttu2zgQfddXzIOB2IFr77ZvSTYbrZukBtLEkB0UAQIUtDSSiFKklqTsutv++w51801Ju6sHySJnDs+cucgXf+Zp7o1PTz04hTnLlmlhufs9UflG8yS10J8M4O1vv799Q7d3MOObwqRk4YzueIjS4Jn7vUi5gZgLBHrmTFtQcYsI/dTa/Gw8NvXCSOlkUKO0Rg5AI4JRsV0zjWewUQWETILGiBur+bKwhG+ByWisNGQq4vHGYdBaISPUYFMEizoz7nj3cnv/CLcoUTMBs2IpeNjQBkZE3YpJMYJlieM8bhyHec0BbhQBM8uVHAJy2tewQm3oHd41Z9SAQ1DagfSZdcw1qNz5DYjuBgSzW9dRR+jbCCPgssRNVU7RpARH8a25ELBEKAzGhRg6dzKGT9PFh4fHBfj3T/DJDwL/fvF0TsY2VbSLK6ygeJYLTsgUk2bSboi6Q/h4HUw+kIv/1/RuuniiAOBmuri/ns/h5iEAH2Z+sJhOHu/8AGaPwexhfj0CmKOjhQ7gFXnjMkMkYYSWcWGaoJ8oqYbYiQhStkJKboh8RdwYhFR1P0+cA2FCyaQMsxWRiE1jkMoOwRDBi7rk1uv1KJGFq7ixqADM+LIhc5Wz8AtLEGCv/K9YQQJqWq0rHi7y8nkVcjVafrssjWo4MnrtrCQXo9RmonQJ275yPbVtp7HnSZahITrUADWT51BJq5UQqM89jxK/u6OR1urOnbR2wJZURiy0dXwf2Rc0pZ5rtilTwqiMwpST+lt0c6zGvhymWDZbW68DoX5Nqf8j1ZFWTZAQCmbMDqWyzjFDaQ3wHVX+8Tx3dimXu07hPeZIE0OGHE291mzNq+KkthPIjK2qlCQk/natgMegqI81j8jdtWqtpqNyhHVlLA2PsH1dMcoAteAG/PJOxR41TDbgJoBMGoxx+awAoBftEIY/KpD+ica/CzR2VD9PhrCzZHJFsp4Mzo+iDyqbQ7KOnSyE+P68V2jP/D2zDHp6z6uil2tlMXRDq9kmcg6j69CK0H8+dc+t49hq/8VzqQ5I2CK0bjx3ZlpQcxg3XEPqDsKMtcq2TdI4H+WWPnMsg1/R6me2HRHGhQzd5wM+f245QB86zhhCFxgMqOqhvnqWPs9vLrcZanzPj01aNVuoyujHkbC3eFhBfqVkQvOc9KSJAfqFpFd6uIRBj0eHuxptoWW3XMGraiXoVCLIuhz2ZKhhD0J9KbwptdvX7oppx4z7E8GdHf3nSXA7YHdHa1fg1QzoMZ0cGdQkM/4Vo+8r1YpTBdqOvjbi6vj+LmQ7HwZAzf/D+xf8Iw67</source>
   </file>
-  <file path="controller/home.php" hash="e61fa85206997e6860bf62f121350c8b" package="Sambhuti">
+  <file path="framework/controller/home.php" hash="e61fa85206997e6860bf62f121350c8b" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -976,7 +976,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVFFv2jAQfs+vOFV7gIqRrX1ru64ZKy0SoygEVUh7cZILsebYke1As6n/feeQAN2mbloeSOy7+/x9n++4+ljmpeefnnpwCgtWxHllufseqbLWfJ1b6I36cPbu/dlb+jmHOa8rk1OGS5ryBKXBC/cd5dxAxgUCvUumLahsjwi93NrywvdNuzFUet1vUfZJDkAjglGZ3TKNF1CrChImQWPKjdU8rizhW2Ay9ZWGQqU8qx0G7VUyRQ02R7CoC+OOd4u72RLuUKJmAuZVLHjS0QZGRN2OyTGFuMFxFWPHYdFygLEiYGa5kgNATnENG9SG1nDendECDkBpB9Jj1jHXoEpX1ye6NQhmD6XDP0g/KEyBywY3VyWpyQmO9G25EBAjVAazSgxcOSXD4yS6f1hGEMxW8BiEYTCLVpeUbHNFUdzgDooXpeCETJo0k7Ym6g7hy204uqeS4NNkOolWJADGk2h2u1jA+CGEAOZBGE1Gy2kQwnwZzh8Wt0OABTpa6ABesTdrbogsTNEyLkwnekWXaoidSCFnG6TLTZBviBuDhLru7xfnQJhQct3I3JtIxCYZSGUHYIjgVdty2+12uJaV6zhf7ACMf92RuSlZ8o2tEeBF+9+wigzUtNt2PFyVzfsm4WoYf79uklo4SnrtrHUphrktRFOS7OfKzdRhnHzPk6xAQ3RoAFomXxMlrVZCoL70uim9VwXSeHaBVsdnzFglLBwqGv/NQdMval/KNVXchZJj6GMj/s2J/7Hidy8SwYyh/iep+GRRpuZY2Q/Pcyc1hrinNaV09Dn9DTy1212UZGtWgGv9Gt4wvTZtxG/eWSUTN6i7WugdJ8KH3arXhz6dC+2DSa7gpOEnFEsxPblsYs/es/cTKjexsQ==</source>
   </file>
-  <file path="controller/iContainer.php" hash="3c7903d5ab2bf43c726705a82d072024" package="Sambhuti">
+  <file path="framework/controller/iContainer.php" hash="3c7903d5ab2bf43c726705a82d072024" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1070,7 +1070,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVdtu2kAQffdXzEMfSEShTd5ClIbSXJAoQUAURUKKFnuMV13vWrtrKL38e2eMDSYhaVUeMJ6dOXvmzIXzT1mSBe3j4wCOYSLSeZJ7yb97JltbuUg8NHpHcPLh48l7+jqFkVznLiEPdhrIELXDM/49TaSDWCoEembCejDxFhEaiffZWbvtSkPL2MVRibJ1YgCLCM7EfiUsnsHa5BAKDRYj6byV89wTvgeho7axkJpIxmvGIFuuI7TgEwSPNnV8Pb/cDO/hBjVaoWCUz5UMK9ogiChbXIIRzAscjrhmDpOSA1wbAhZeGt0ElHRuYYnW0TucVneUgE0wlkEawjNzCybjuCOiuwYl/C60dSD1XYYRSF3gJiajbBKCo/xWUimYI+QO41w1OZyc4aE/vb27n0J3+AgP3fG4O5w+dsjZJ4ZOcYkbKJlmShIy5WSF9muizghfr8a9Wwrpfu4P+tNHSgCu+9Ph1WQC13dj6MKoO572e/eD7hhG9+PR3eSqBTBBpoUM8Ia8cVEhkjBCL6RyVdKPVFRH7FQEiVgiFTdEuSRuAkLqur8XjkGEMnpRpLkVkYj1Y9DGN8ERwfOy5VarVWuhc+64ttoAuPZFReYyE+E3sUCAvfa/FDkJaMladjycZ8XzMpSmNf9xUTiVcOT01l2LTLUSn6oiJNzOFc/UbpzaQaBFio7o0ACUTGah0d4apdB2goAKXz+x2Nk3KSOiwrEc510wTbOmEpCW0NfUhjFd8jL/fQFcPq+OdkDPpPk3bf5HnBfqyIo3yF0y+N2jjhywGLOa/WcQ8L2FDvzhdaZpuvLQ84QWpupksulEh7RBMu4e6lua+CYNX4qAPqSdZFKwNE1SL54Fk3pWpDDbK8tMfhFeQPl5V0bSTDsvNCVA/b2P9hpMj4enggnLlzoMO7yKsWmHuizvNqZ9jEFhK1HaxTPOdciLC56ewko3aEAttyqpJtSYFhSb8Pq9R50XdRlZE6Jzh2uSbQ7B0U2q3oYgI9RexpIXviG+tBl5evh/gdaJz62u5WhBk8PhyvHKpdrUoBnnuW8JyTC/ZgeGc5NsCVCnWXI4rG6VXoOV28aQSL+DP4AQdMI=</source>
   </file>
-  <file path="controller/iController.php" hash="119a255bc52b35fe4ad7ba383ef805fa" package="Sambhuti">
+  <file path="framework/controller/iController.php" hash="119a255bc52b35fe4ad7ba383ef805fa" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1131,7 +1131,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVE1vm0AQvfMr5tCDbbmmTW5JmoZacWIpdSxjK7KUywIDrLrsot3FDv34753FYMdJlVblwLLz8fa92RkuPpd56fmDgQcDCFkR5ZXl7nusylrzLLfQG/fh5MPHk/f0OoU5ryuTU4QLuuMxSoNn7nuZcwMpFwi0lkxbUOkeEXq5teWZ75vWMFI667co+yAHoBHBqNRumcYzqFUFMZOgMeHGah5VlvAtMJn4SkOhEp7WDoNslUxQg80RLOrCuOPd5ma2ghuUqJmAeRUJHne0gRFRZzE5JhA1OC5j4jiELQeYKAJmlis5BOTk17BBbWgPp90ZLeAQlHYgPWYdcw2qdHl9oluDYPaQOvqD9IPCBLhscHNVkpqc4EjflgsBEUJlMK3E0KVTMDxMl7f3qyUEszU8BItFMFuuzynY5oq8uMEdFC9KwQmZNGkmbU3UHcLX68X4llKCL9O76XJNAmAyXc6uwxAm9wsIYB4sltPx6i5YwHy1mN+H1yOAEB0tdABvlDdtbohKmKBlXJhO9Jou1RA7kUDONkiXGyPfEDcGMXXd3y/OgTChZNbI3BeRiE1TkMoOwRDBi7blttvtKJOV6zhf7ACMf9mRuSpZ/I1lCHDU/lesogJqsrYdDxdls17FXI2i75dNUAtHQW+dlZVilNtCNCnxfq7cTB3Gyfc8yQo0RIcGoGXyGCtptRIC9bnn0cU/92gkWzu5hziYSuqzlFBeCzxWaKqocx3SX2j/N/H/o/6VfN7xBj4+qMEnizIx4OQ+Ng7GqSXgh+e5gxv57hmQ7gSf6MeTYWvpHOGu1QzqTTPyu8EqsIltmpSGRNdHRTgCoApqVoAbnBreMZ2ZlwEabaUlbBRPfhb8CZPW4zdrWsnY/Qdoqh3F3nMk+LTb9frQP/d+eb8BtfjHNA==</source>
   </file>
-  <file path="controller/_cli.php" hash="a23ff3b2748528e831de14bfbbaa750d" package="Sambhuti">
+  <file path="framework/controller/_cli.php" hash="a23ff3b2748528e831de14bfbbaa750d" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1249,7 +1249,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydV21vGjkQ/s6vmKsqARVhSYjUXghcOEoSpDRBQFRFaRWZXcNa2V3v2QZKT/3vN+N9YXnrVeUD7Nozj58ZPzM2l3/Fflxy3r0rwTsYs3DqL4yg556M10rMfQOVXhXOGqdnJ/jVhKFYL7SPFmR0J1weaX5BzxNfaJiJgAP+xkwZkLMcESq+MfGF4+h0oC7VvJqi5EYEoDgHLWdmxRS/gLVcgMsiUNwT2igxXRjEN8Aiz5EKQumJ2ZowcGwReVyB8TkYrkJNy9PLzf0j3PCIKxbAcDENhJvRBoZEaUT73IOpxSGPa+IwTjnAtURgZoSMasAFzitYcqXxHZrZGilgDaQikAozxFyBjMmvinTXEDCzca0fCH0ToQcisri+jDEaH+EwvpUIAphyWGg+WwQ1ckdj+DyY3D48TqB7/wSfu6NR937y1EJj40uc5UueQIkwDgQiY0yKRWaN1AnhU3/Uu0WX7t+Du8HkCQOA68Hkvj8ew/XDCLow7I4mg97jXXcEw8fR8GHcrwOMOdHiBPCT9M7sDmEKPW6YCHQW9BNuqkZ2gQc+W3LcXJeLJXJj4KLq/n/jCIQFMprbMPMkIrHBDCJpaqCR4GUqudVqVZ9HC1KcEyQA2ulkZK5i5r6yOQfYkv8VW2ACFY6miofL2P5euULWp9871iiFQ6OfrTWPg7pvwsC6uHldUU1tyskplSIWco10sABSJl9cGRklg4CrVimr0p4MQ9Q/BCLi+JIZpPHQPvOQR0ZjMguGs0Xkkhj1ftzbgevFNJtyi+DFlPxaTn4nKTtZsYlxA6Y1vLiBAP7N8MjTBWbwb6lEa9nk0CdPkE7fs+E7rC/SVpoWnYhHmLIGnwfxjvXVkimgWlmnI479jZU03KUSfZvjtBO7SmKInzLhlaHdgfItPdWgzOJ0oKc4NgKI+ApozPpUW8diSPZOYGf7tsOv6+IOs51NVljymBIqvEiuoBKyNXUMxWfMNViJHhgJXw6oq/B4cTHnplJN+lV1NyvY2FmYxAtvmZrrrexkIksYQ6VomKepClXctCxXNLfEubcGz4+TjuL/LLg2Jx0iUaa5MmYnM3acG25ACY/2kc4aKpl81sK/aF/MTMXCFjzFDCoudvJspkjB0gg5ittDItiEjQzkiqvKPmAB8QfwAGV+DCbRQMF8i4rQLy4LAjYNeLJKxcZfywCq+wST/KTze/EdZpP4vJw3zisZ8C6jH3vSI8lu9ZUtBdxgp0bhod6SaqIwUWA6llTWu3Ix0pOYURnbjs5dX9LRTUdY7pOUoeHYt/CUxZ5OBuObEVTG/bt+bwI3o+7wdtCDUf/+42AyeLivwsrHU40t8VChDOarYQ28FpsOd0N2IiLUcWQPcBbYHmTPfNeOaIdUpJ1+71P3ZDxx+uTROP9Qj73Zb0rfJuSXlF9oIOlOZSPbum3AH23YiFfvaYOMEq2+8vUL/4ZboxPT58bX2i74nvsumVSQqT91rR2E52zua0FOR1VIH7vzb740ms3n09b5aav5Pszxs1aHVyA8u/OrD6bR2jfCN1CH4e3wpf9wt7PcgepynA/1Zv309D1YEZ3AMRUVPMAudImrW1Gcdp5b+ctZZ/Pc7LTq9Xrra3hJNzWUKl4GeSdlWcDj8wvIYm20mmet89afYbu9ue3ZEmu39z2pc8/x+hklt1lq6ngzlXhTMnj0AcprGuDhDFP8miu6mSblw6htiVe6leHo3M8htxPfoMQfIFLI8NZT4thAx/BNC+lZJitfGH6UT74yhsKZ62MpbLSF51X2YmWFD7Crxj3GZ1YAuV/OKszJUVRgjQjwQADI/oBU7Epbwtpvht1472Jge1p+zaJTPC/+32wZBPErHaOQmizsxyhngkrJEI8Vzn58KO3rzbbtMk9lnuX+MHs6Xgq7fIxxVve7m5nfYKj48a+AnEfiO/d+VvtpO6IWUalmkf0o/Qf6HErO</source>
   </file>
-  <file path="controller/_error.php" hash="05159cc257acf40754a8cab7e72c3949" package="Sambhuti">
+  <file path="framework/controller/_error.php" hash="05159cc257acf40754a8cab7e72c3949" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1321,7 +1321,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVG1v2jAQ/s6vOFWVCoiSrvRT27EyBC1SRxEvqpAmVU5ySaw6dmY7UDb1v+8cAvRNbGo+xC939/h5fHe+/JYlWcWr1ytQhwlL/SS33M27KltpHicWqt0anJ58OT2mXwtGfJWbhDyc0y0PUBo8d/Npwg1EXCDQmDFtQUVbRKgm1mbnnmfKjabSca1E2To5AI0IRkV2yTSew0rlEDAJGkNurOZ+bgnfApOhpzSkKuTRymHQXi5D1GATBIs6Ne54t7gezuAaJWomYJT7ggcb2sCIqNsxCYbgFzguou84TEoO0FcEzCxXsgHIya5hgdrQGlqbM0rABijtQKrMOuYaVObiakR3BYLZXWjzA+k7hSFwWeAmKiM1CcGRviUXAnyE3GCUi4YLJ2e4H0xv7mZT6AzncN8ZjzvD6fyCnG2iyIoLXEPxNBOckEmTZtKuiLpD+NEbd28opPN9cDuYzkkA9AfTYW8ygf7dGDow6oyng+7stjOG0Ww8upv0mgATdLTQAey53qjIEF1hiJZxYTai55RUQ+xECAlbICU3QL4gbgwCqrp/J86BMKFkXMjcXiIRG0QglW2AIYKXZcktl8tmLHNXcZ5YAxivvSFzlbHgkcUI8Kr8r1hOF6hpt6x4uMyK8Srgqun/bhdOJRw57TsrzkQzsakoQoJtX7me2rWTV6lIlqIhOtQAJZOfgZJWKyFQX1Q2XdrTuigzNx9QVjFFaQ1diAB0JvNe2WtpJvc3ph3+G9H/p/ozst/pDgQzBh4K7oBPFmVoXhCDP5WKO6pQ7746zOSjVEu5lku9EuJTadp4kHbNUnC1voJDpmNTWrxijHIZuM5cx0L1pSN8Xa+qNajR2VB+GCQKDi09csdtjb9yNPa4HaOtHgUqTek9OqpBEw623IosHVwU8c/vFJydnLlCpRahx4Veyxg/5vfgHKuf4eHQi6drD4eWa1GfhyG9ESwI0Jj9VFqfo/L2kC2j58pfpOsCKw==</source>
   </file>
-  <file path="cache/container.php" hash="325567e66e597a9d912045739131c006" package="Sambhuti">
+  <file path="framework/cache/container.php" hash="325567e66e597a9d912045739131c006" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1384,7 +1384,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVN9P2zAQfs9fcQ97oKhrNngDxsgqCpVYqdJUqBIvTnJprDl2ZDutwuB/39lNyoCJTctD7JzvPn/f/cjZ17qsg/DwMIBDWLAqLRvL3X6s6lbzdWnhYDyAo0+fjz7S6xjmvG1MSR7O6YZnKA2euH1ScgMFFwi01kxbUMUeEQ5Ka+uTMDSdYaT0etCh7J0cgEYEowq7ZRpPoFUNZEyCxpwbq3naWMK3wGQeKg2VynnROgyyNTJHDbZEsKgr4653H1ezJVyhRM0EzJtU8KynDYyIOospMYfU47iIieOw6DjARBEws1zJISCncw0b1Ia+4bi/owMcgtIO5IBZx1yDql3cgOi2IJh9Dh39Qfqzwhy49LilqklNSXCkb8uFgBShMVg0YujCyRnupsn17TKBaLaCuyiOo1myOiVnWyo6xQ3uoHhVC07IpEkzaVui7hC+X8bjawqJvk1vpsmKBMBkmswuFwuY3MYQwTyKk+l4eRPFMF/G89vF5QhggY4WOoB30lv4ClEKc7SMC9OLXlFRDbETOZRsg1TcDPmGuDHIqOv+XjgHwoSSay9zn0QiNi1AKjsEQwTPupbbbrejtWxcx4ViB2DC857MRc2yH2yNAC/a/4I1lEBN1q7j4az260XG1Sh9OPdOHRw5vXfXuhaj0lbCh2T7uXIz9TxOYRBIVqEhOjQAHZP7jGUlngYB1fw3I+WUbN3QehcaV0k5pmS9lfVSl2nS/shHvhL7b2r/R+4bvZlgxlDFO+K+Q7FCaQ3wvRz4GQTuQi/WPdRxaLttbyGxmlUgGyEe3QxRY3ywbY2v3TTaRkvYKJ4/3r/M8T0f77LhXUO/Fo3M3PzCGukvuIOEL/4aGPTEnoKn4Bcdia02</source>
   </file>
-  <file path="cache/iCache.php" hash="409f721d12f79054d4d1d93b49ec9157" package="Sambhuti">
+  <file path="framework/cache/iCache.php" hash="409f721d12f79054d4d1d93b49ec9157" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1423,7 +1423,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVFFP2zAQfs+vuIc9tFXXbPAGiJFVFCKxUqWpUKVJyEkutTXHjmynVZn233cOSRGjYtPyEMe+7z5/n32Xiy81r4NwNApgBEtWZbxxwn9Pdb03YsMdDKZDOPn0+eQjvU5hIfaN5YTwoDuRo7J45r9TLiyUQiLQWDPjQJcHRhhw5+qzMLTdwkSbzbBjOYA8gUEEq0u3YwbPYK8byJkCg4WwzoisccTvgKki1AYqXYhy7zlorVEFGnAcwaGprN/eT27mK7hBhYZJWDSZFHkvGxgJ9SuWYwFZy+MzZl7DstMAM03EzAmtxoCC4ga2aCzN4bTfoyMcgzaeZMCcV25A1z5vSHL3IJl7SZ0csf7isAChWl6ua3LDiY787YSUkCE0FstGjn06geEhTm/vVylE8zU8REkSzdP1OYEd1xTFLT5TiaqWgpjJk2HK7Um6Z/h2nUxvKSX6Gt/F6ZoMwCxO59fLJczuE4hgESVpPF3dRQksVsnifnk9AViil4We4J3jLdsboiMs0DEhbW96TZdqSZ0sgLMt0uXmKLakjUFOVff3i/MkTGq1aW0eDpGExSUo7cZgSeBFV3K73W6yUY2vuFA+E9jwshdzVbP8B9sgwKvyv2INHaCh1a7i4aJux6tc6En2dNmCOjoCvbfXppYT7irZpuSHvvI99dJOYRAoVqElOdQAnZLvOcs5ngd9g079FGJFlVQS7q2F1x5sk/WhlugPY//m7H+svfEmeskgnj38DALPHY7awT9lo3LfLfD4mGtFrdDk9O+BD6JA5UQpqHmG58FbuHW+xAhITcqOQ0p0OYfB0ZjBSlMNHg+2/xffNT7sI2TlV/AbwzykJQ==</source>
   </file>
-  <file path="cache/iContainer.php" hash="f237098ce18ad5fb21d7011f6e1ec12e" package="Sambhuti">
+  <file path="framework/cache/iContainer.php" hash="f237098ce18ad5fb21d7011f6e1ec12e" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1465,7 +1465,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydU1Fv2jAQfs+vuMcWMbK1b23VNWPQInWAQlCF1BcnvmBrjh3ZDoxN++87pwHadeqm8UCS893n7/vu7upjLeoo7vUi6MGCVblovAzvQ1PvrFwLDyfDUzh7/+HsHf2dw1zuGicoIyTdywK1w4vwngnpoJQKgZ41sx5MeUCEE+F9fRHHrgsMjF2fdiiHpABgEcGZ0m+ZxQvYmQYKpsEil85bmTee8D0wzWNjoTJclruAQbFGc7TgBYJHW7lwffi4nS7hFjVapmDe5EoWe9rAiGiIOIEc8hYnVIwDh0XHAcaGgJmXRvcBJZ1b2KB19A3n+zs6wD4YG0BOmA/MLZg61J0S3R0o5o+lgz9IPyrkIHWLK0xNagTBkb6tVApyhMZh2ah+KKdkeJhkd7NlBsl0BQ9JmibTbHVJyV4YOsUNPkHJqlaSkEmTZdrviHpA+DJKh3dUknya3E+yFQmA8SSbjhYLGM9SSGCepNlkuLxPUpgv0/lsMRoALDDQwgDwhr1l2yGykKNnUrm96BU11RE7xUGwDVJzC5Qb4sagoKn7e+MCCFNGr1uZBxOJ2KQEbXwfHBG86kZuu90O1roJExerJwAXX+/J3NSs+MrWCPBi/G9YQwZainYTD1d1+7wppBnk36/bpA6Okt66a12rgfCVakuKw16FnTquUxxFmlXoiA4tQMfksWCFwMsoop4/C5KnFOuWtk2hddXkMZlFo0NzVhLKXqA33MDT7zOWlBO2BxjnUCFp5O61Ey+tcE2+P2ov+82ffzPofxx6ZdFBG8ijYPzmUXMHwZbHZ/EfUfQz+gURRpSy</source>
   </file>
-  <file path="cache/file.php" hash="3d1fc8dc2498259130a50067c6a3022c" package="Sambhuti">
+  <file path="framework/cache/file.php" hash="3d1fc8dc2498259130a50067c6a3022c" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1491,7 +1491,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </docblock>
     <source>eJyFk1Fv2jAQx9/5FPcIiCVb+0ZRR4agjcQAJUEV0l6c5BJbc+LIdkDZp985DaBJVfcSx+e7n/93vlt8b3gz8qfTEUwhZlXKWyvc/0o1nRYltzBeTeDh67eHL/R5hIPoWsPJwzltRYa1wbn7T7gwUAiJQGvDtAVV3Igw5tY2c983g8FTupwMlJuTA2hEMKqwF6ZxDp1qIWM1aMyFsVqkrSW+BVbnvtJQqVwUnWOQra1z1GA5gkVdGXe927zsjvCCNWom4dCmUmRX2cBIqLMYjjmkPcdFbJyGeNAAG0VgZoWqZ4CCzjWcURvaw+P1jgE4A6UdZMysU65BNS5uQnI7kMzeQ70PUr9nmIOoey5XDWXDCUf5XYSUkCK0BotWzlw4OcNbmLzujwkEuxO8BVEU7JLTEzlbrugUz/iOElUjBZEpJ81q25F0R/i5jlavFBL8CLdhcqIEYBMmu3Ucw2YfQQCHIErC1XEbRHA4Rod9vPYAYnSy0AE+KW/RvxCVMEfLhDTXpE/0qIbUyRw4OyM9bobiTNoYZNR1/384B2FS1WWf5q2IJCwsoFZ2BoYELoaWu1wuXlm3ruN8+Q4w/vNVzLJh2W9WIsA/7b9kLRVQk3XoeFg0/brMhPLSP8+904Ajp8/uKhvpcVvJPiS7zZWbqfs4+aNRzSo0JIcGYFDyK2MZx6fRX9AbMB0=</source>
   </file>
-  <file path="config/container.php" hash="2e19242e6321621be0440b399b25e0cb" package="Sambhuti">
+  <file path="framework/config/container.php" hash="bbff4c29c8127c0bc164560605ac8ab4" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1544,12 +1544,12 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="63" namespace="sambhuti\config" package="Default">
-        <name>$lazyPaths</name>
+        <name>$appPaths</name>
         <default><![CDATA[array()]]></default>
         <docblock line="55">
-          <description><![CDATA[Lazy Path]]></description>
+          <description><![CDATA[App Path]]></description>
           <long-description><![CDATA[<p>Array of [namespace => Path] for lazy loading</p>]]></long-description>
-          <tag line="55" name="see" description="\sambhuti\loader\loader::$lazyPath" refers="\sambhuti\loader\loader::$lazyPath"/>
+          <tag line="55" name="see" description="\sambhuti\loader\loader::$appPath" refers="\sambhuti\loader\loader::$appPath"/>
           <tag line="55" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -1560,7 +1560,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
         <default><![CDATA['']]></default>
         <docblock line="65">
           <description><![CDATA[Default Path]]></description>
-          <long-description><![CDATA[<p>Last path in lazy paths</p>]]></long-description>
+          <long-description><![CDATA[<p>Last path in app paths (i.e. last app)</p>]]></long-description>
           <tag line="65" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -1582,7 +1582,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
         <full_name>__construct</full_name>
         <docblock line="81">
           <description><![CDATA[Constructor]]></description>
-          <long-description><![CDATA[<p>Sets lazy Path and default path (last lazy path)</p>]]></long-description>
+          <long-description><![CDATA[<p>Sets app paths and default path (last app path)</p>]]></long-description>
           <tag line="81" name="param" description="" type="\sambhuti\loader\iContainer" variable="$loader">
             <type by_reference="false">\sambhuti\loader\iContainer</type>
           </tag>
@@ -1593,69 +1593,69 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
           <type>\sambhuti\loader\iContainer</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="104" package="Sambhuti\config">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="103" package="Sambhuti\config">
         <name>get</name>
         <full_name>get</full_name>
-        <docblock line="94">
+        <docblock line="93">
           <description><![CDATA[Get]]></description>
           <long-description><![CDATA[<p>Takes in string identifier eg: "file" and makes it into config/file.json
-Runs through all available lazy paths.</p>]]></long-description>
-          <tag line="94" name="param" description="" type="null|string" variable="$id">
+Runs through all available app paths.</p>]]></long-description>
+          <tag line="93" name="param" description="" type="null|string" variable="$id">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="94" name="return" description="object" type="\sambhuti\core\iData">
+          <tag line="93" name="return" description="object" type="\sambhuti\core\iData">
             <type by_reference="false">\sambhuti\core\iData</type>
           </tag>
         </docblock>
-        <argument line="104">
+        <argument line="103">
           <name>$id</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="136" package="Sambhuti\config">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="sambhuti\config" line="135" package="Sambhuti\config">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="122">
+        <docblock line="121">
           <description><![CDATA[Save Config object]]></description>
-          <long-description><![CDATA[<p>Saves data in a config object to the default path (last lazy path)
-Path can be overridden by $lazyId namespace to the path.</p>]]></long-description>
-          <tag line="122" name="see" description="\sambhuti\loader\loader::addLazyPath" refers="\sambhuti\loader\loader::addLazyPath"/>
-          <tag line="122" name="param" description="config file identifier" type="string" variable="$id">
+          <long-description><![CDATA[<p>Saves data in a config object to the default path (last app path)
+Path can be overridden by $appId namespace of the app path.</p>]]></long-description>
+          <tag line="121" name="see" description="\sambhuti\loader\loader::addApp" refers="\sambhuti\loader\loader::addApp"/>
+          <tag line="121" name="param" description="config file identifier" type="string" variable="$id">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="122" name="param" description="config object" type="\sambhuti\core\iData" variable="$data">
+          <tag line="121" name="param" description="config object" type="\sambhuti\core\iData" variable="$data">
             <type by_reference="false">\sambhuti\core\iData</type>
           </tag>
-          <tag line="122" name="param" description="namespace identifier" type="null|string" variable="$lazyId">
+          <tag line="121" name="param" description="namespace identifier" type="null|string" variable="$appId">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="122" name="throws" description="" type="\Exception">
+          <tag line="121" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="136">
+        <argument line="135">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="136">
+        <argument line="135">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type>\sambhuti\core\iData</type>
         </argument>
-        <argument line="136">
-          <name>$lazyId</name>
+        <argument line="135">
+          <name>$appId</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
     </class>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="config/iContainer.php" hash="aa37f1d3a6ce81481f73ea14c381f457" package="Sambhuti">
+  <file path="framework/config/iContainer.php" hash="aa37f1d3a6ce81481f73ea14c381f457" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1748,7 +1748,7 @@ interface</p>]]></long-description>
     </interface>
     <source>eJydVE1v2kAQvftXzCEHiChuk1uSpnFpSCylBPGhCAkpWuwxXnW9a+2uIaTtf++ssYEQklblgO3ZmTdv3szsxZc8zT3/+NiDYxiybJYWlrv3jspXms9TC41OE04+fjr5QH+n0OerwqTk4ZzueITS4Jl7H6XcQMIFAj1zpi2oZIMIjdTa/Mz3TWVoKz1vVigbJwegEcGoxC6ZxjNYqQIiJkFjzI3VfFZYwrfAZOwrDZmKebJyGGQrZIwabIpgUWfGpXcfN70x3KBEzQT0i5ngUU0bGBF1FpNiDLMSx0V0HYdhxQG6ioCZ5Uq2ADmda1igNvQNp3WOCrAFSjuQBrOOuQaVu7gm0V2BYHYb2j5Q+rbCGLgscVOVUzUpwVF9Sy4EzBAKg0khWi6cnOEhHN3ej0cQ9CbwEAwGQW80OSdnmyo6xQWuoXiWC07IVJNm0q6IukP4fj3o3FJI8DW8C0cTKgC64ah3PRxC934AAfSDwSjsjO+CAfTHg/798LoNMERHCx3AO/ImZYdIwhgt48LURU+oqYbYiRhStkBqboR8QdwYRDR1f2+cA2FCyXlZ5kZEIhYmIJVtgSGCF9XILZfL9lwWbuJ8sQYw/mVN5ipn0Q82R4AX43/FChJQk7WaeLjIy+dVxFV79nxZOlVw5PRernku2qnNRBkSbfbK7dR2nXzPkyxDQ3RoASom00jJhM/PPY+avmvVeF6aphubUIzGnzyrXV5H0hpL0p5EhFDS/CWEXhUe0DRVTm5rTd0SmrASK3ZLBsZSLrccZUsiwYwpRwkzlJZTByytfbmAe/A7ur4U1hSz+midfk/uf9P7fwR/pfiGM/CtTvhkUcYGnMjTHftPz3N5S3ndz12Rkja2iKzb+tJUn1DxmmWvurMLd7Q2VRF++UwKGbkLAx4foxobGvBmMDSp3/ushrRSh+kc/B3x+E3Wawm+McvgiK5AtucoCxqhV3iCPa/CeJ+BRltoCQvF41/TvfHeqeywHMbdEg1HtQX7nFp1Rvi8JkSa/Pb+AEszKEo=</source>
   </file>
-  <file path="core/boot.php" hash="4ab5ee8971ac1d08fe81bff5d3bc0423" package="Sambhuti">
+  <file path="framework/core/boot.php" hash="4ab5ee8971ac1d08fe81bff5d3bc0423" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1828,7 +1828,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>eJydVdtuGjEQfY+Uf5iHSLCIQJu85dYQmgtSmiAgipAiRWZ32LXqtbe+gOjl3zv2LpAEmlZdIRbbM8fnHHuGk09FVuzutBuN3R1owJDlk8xZHgZdVSw0TzML9W4EBx8+HuzT1yH0+cKZzIeEsFseozR4FAajjBuYcoFA74JpC2q6QoV6Zm1x1G6baqKldBqtgFZhHkIjglFTO2caj2ChHMRMgsaEG6v5xFnawQKTSVtpyFXCp4sAQpNOJqjBZggWdW48Az+4vnuAa5SomYC+mwgeL6kDI65+xmSYwKQE8ilXnsWwYgFXipCZ5Uo2ATmta5ihNjSGw+UmFWITlA4odWY9eQ2q8IkRMV6AYHad29qqfy0zAS4DdKYKUpQRIGmccyFgguAMTp1ohnyKhsfe6Ob+YQSduzE8dgaDzt1ofEzRNlO0ijMssXheCE7QpEszaRdEP0B8uRx0byinc9G77Y3GpAKueqO7y+EQru4H0IF+ZzDqdR9uOwPoPwz698PLFsAQPTEMCO+4PA0nRUYmaBkXZq18TMdriKFIIGMzpGOOkc+IH4OYLuHfTzCgMKFkGrSurCRyvSlIZZtgiORJdf/m83krlc5fv7YoEUz7bM3nvGDxV5YiwOuKOGeOjNQ0XRUBnBThfR5z1Zp8PyujKkiKem+/tBCtzOaizIlXxeYL7UWNtXd3dncky9EQKaqJis9TTE4e+7Vl7V4oZaErmDHbdLwRYtxkueaB3qr7R3n/pW+LwNizhokX8MNL8tClLP80YIDfHBpSpyTdHLoAy5VVxPmMaZBOiJ9PK4d0mfXEN9La5Y9C8xmVIuxVkXAaII63USAMqkgXW7W5+RCtAVf48tILm3GZbvKjXshyeHp1fOEL9qoDeMls6mTs+wU8P8fLjaEO63iIvFNQPXu0qdk/CwunZcDxxupaZAjYP0vR1mvVbC2qEn5tE3+tNgTd4JvmXqMeqlWMxmzVb1WigCUJ9WTqPdRFqVSpg6JvMdTgGEicQ450AZPNZI3WafnWPf6ZWUZ3wxSqbAFbHUwV1P9kVuUBWWy1EgJ1LSqnXltWzkWr6Dyn/51aFL3wuGK4LY8sLhm+9Jg+vwF0jjvG</source>
   </file>
-  <file path="core/iContainer.php" hash="0a3fe8d7f1bdaa8f0e10b12af0dd78db" package="Sambhuti">
+  <file path="framework/core/iContainer.php" hash="0a3fe8d7f1bdaa8f0e10b12af0dd78db" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -1886,7 +1886,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVFFv2jAQfs+vuIc9lIqRrX0rXdcUQYvUURSCKqS9OMklsebYke3Asmn/feeQwMqmbhoP2LHvPn/f5ztff6yKyvPPzz04hxUr46K23M0nqmo0zwsLZ5MBXLx7f/GW/i5hyZvaFBThgh55gtLglZtHBTeQcYFAY8W0BZUdEOGssLa68n3TLYyUzgcdyiHIAWhEMCqzO6bxChpVQ8IkaEy5sZrHtSV8C0ymvtJQqpRnjcOgtVqmqMEWCBZ1adzx7uN+sYZ7lKiZgGUdC570tIERUbdiCkwhbnFcxsxxWHUcYKYImFmu5BCQ076GLWpD33DZn9EBDkFpB3LGrGOuQVUub0B0GxDMHlNHf5B+VJgCly1uoSpSUxAc6dtxISBGqA1mtRi6dAqG53n08LSOIFhs4DkIw2ARbcYUbAtFu7jFPRQvK8EJmTRpJm1D1B3Cp2k4eaCU4G7+OI82JABm82gxXa1g9hRCAMsgjOaT9WMQwnIdLp9W0xHACh0tdACv2Ju1N0QWpmgZF6YXvaFLNcROpFCwLdLlJsi3xI1BQlX394tzIEwombcyDyYSsXkGUtkhGCJ43ZXcbrcb5bJ2FeeLPYDxb3oytxVLvrAcAV6U/y2ryUBNq13Fw3XVjrcJV6P4200b1MFR0Gtn5ZUYFbYUbUpy6CvXU8d28j1PshIN0aEG6Jh8Tsi+sdf3Z6IkGUmOwFxSMWUU2qm4Y8SCfKPr1s0vcVSk5qjqRO9LwaaO+y136okJ/+bC/9jwmw+81wZ8chDy3fMcfmuE+1Hhoe2m/cr0RHxXY67ysURpqaqozai1lG5fCgWVVlueois8gfTM8KOtL5DJNM1KkDV14Bt6DNjpvkZbawkl/4ppt+i3Y1bLxL0BkCO9pPtk+LBHGoy9H95PbOG+2A==</source>
   </file>
-  <file path="core/iData.php" hash="70c2b70750b4ccff38802cb6b6a3bcec" package="Sambhuti">
+  <file path="framework/core/iData.php" hash="70c2b70750b4ccff38802cb6b6a3bcec" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2065,7 +2065,7 @@ Should throw exception if key already stored.</p>]]></long-description>
     </interface>
     <source>eJytVstu20gQvOsr+pCDZGilTXKTvVkrXtsR4NiCHggMGDBGZFOcZMgh5iGFu9h/3+4RKa9pynEeOojicLq6qqaa9smfRVp0hkdHHTiCuchWqXeSf5/pojRynTronvXgze+v3/xGX29hKktvU9rBm65khLnFEf9epNJCIhUCXQthHOhkjwjd1LliNBzaamGgzbpXoew3MYBBBKsTtxUGR1BqD5HIwWAsrTNy5R3hOxB5PNQGMh3LpGQMWvN5jAZciuDQZJbb883l9RIuMUcjFEz9Ssmopg2CiPKKTTGGVcDhigvmMK84wIUmYOGkzvuAkp4b2KCxdA9v6x4VYB+0YZCucMzcgC64rkd0S1DCPZQOWqQ/KIxB5gE31QWpSQmO9G2lUrBC8BYTr/pcTpvh02Tx4Wa5gPH1LXwaz2bj68XtMW12qaanuMEdlMwKJQmZNBmRu5KoM8LH89nZByoZv59cTRa3JAAuJovr8/kcLm5mMIbpeLaYnC2vxjOYLmfTm/n5AGCOTAsZ4Bl7k3BCZGGMTkhla9G3dKiW2KkYUrFBOtwI5Ya4CYgodd8+OAYRSufrIHNvIhGbJJBr1wdLBE+qyG2328E695y4odoB2OG7msxpIaIvYo0Aj+J/KjwZaGi1SjycFOF6Gkk9WP39Lmyq4GjTc73WhRqkLlOhJNrPFc/UwzgNO51cZGiJDg1AxeQuIvuOO/V8UgwFTHLKUUK7KgHvhSVnEp9HnDW7HxlKivVkPrup+a4waDF3nC2xg9Krzxi5Cuf+3qLjHHLEkWtcavQW8GuEIcb2qWOPLbN+VT9i3g0bX+bjjxj5xElZWwTyL9b5T6fD0MFF/vDbLadh85HjgQ1L9ZP5LpgiYtXAw0KjS5PJPgqz9hlZaPn9A9ZxtsmtrAFBBhmRVbWvwqV6NAzX+qzI8qjmAd1H++GP3W23B73jJ+wv0T3LmqfnC5YgYyIrE8mvRR1WA+igrroJ5yqUKut5rACeCuZZFpB55WQsacmGQvi/uIb8V8Sg+cSg8yaHTH7FuN2SNbIVXNsmfP4N4Vy2EcpT2IU0Ve7DOcWDRkUj3CCTUC2UQRGXjaLD0vZLoW1ze2hi4e68bnPAkLtHA38XUtvuj9370696tvm0LGi+m2xeYJUPdfFPqv5uUbu2L9BFwYexUu3CqrYU54Y4W/85bU1rXXZ4TCmT1BS6LYQ+ijW9fA/O4x6Cu5Md4V+ONl9GI2rS7f3KSbq/f36WdtTtwYlSW1Ha5ph8d8B/LDobLQ+qap+Afzv/Ac7AMkE=</source>
   </file>
-  <file path="core/iCore.php" hash="a2ef877304b1093ecc2e8b394a6b7604" package="Sambhuti">
+  <file path="framework/core/iCore.php" hash="a2ef877304b1093ecc2e8b394a6b7604" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2139,7 +2139,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVE1v2kAQvftXzCEHiFLcJrckSkNRSJBSgvhQhBQpWtZjvOqya+2uIbTqf++MsaEhNK3KAXvn4817szO+/JxneRQfH0dwDCOxmGVFUPzesfnaqXkWoNFpwunHT6cf6O8MBmpd+IwiOOheSTQez/l9nCkPqdII9MyFC2DTLSI0shDy8zj2laFl3bxZoWyDGMAhgrdpWAmH57C2BUhhwGGifHBqVgTCDyBMElsHC5uodM0YZCtMgg5ChhDQLTyX58NtfwK3aNAJDYNippWsaYMgomzxGSYwK3E4o8scRhUH6FoCFkFZcwKoyO9gic7TGc7qGhXgCVjHIA0RmLkDm3Nek+iuQYuwS20dkL5TmIAyJW5mc1KTERzpWymtYYZQeEwLfcLpFAyPvfHdw2QM7f4UHtvDYbs/nl5QcMgseXGJGyi1yLUiZNLkhAlros4IX2+GnTtKaX/p3ffGUxIA3d64fzMaQfdhCG0YtIfjXmdy3x7CYDIcPIxuWgAjZFrIAO+0Ny1viFqYYBBK+1r0lC7VEzudQCaWSJcrUS2JmwBJU/f3i2MQoa2ZlzK3TSRivRSMDSfgieBlNXKr1ao1NwVPXKw3AD6+qslc50J+E3MEeDX+16KgBjqyVhMPl3n5vJbKtmbfr8qgCo6C3qs1z3UrCwtdpsjtXvFO7dYpjiIjFuiJDi1AxeRJUvsuooiufGfTVtCgk7XaWo6BnqHpSil3I2tP2WtpvpjVLs7dk/tvev9H8BvFqiYNqsMi8CWgSTyfDE0MXT38iCKuVkrlH3+YDO1JIQPvWmmqPaPNTAkpMQ+wadNeCPXEiQU87TXz6beKR68S4/KZFkbyJsPzs6zLQwP+mAzNize8B85K9P4w53zjBP4C0FhLLbzncThM/6j07/schsIZWKgXTA6zr6s0KoSS5s/oFxCe4uM=</source>
   </file>
-  <file path="core/core.php" hash="f99621c106ef5e5ca2e0b1f5716d078e" package="Sambhuti">
+  <file path="framework/core/core.php" hash="f99621c106ef5e5ca2e0b1f5716d078e" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2280,7 +2280,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </class>
     <source>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</source>
   </file>
-  <file path="core/data.php" hash="249916c1f3855d63bc53542bb2409bee" package="Sambhuti">
+  <file path="framework/core/data.php" hash="249916c1f3855d63bc53542bb2409bee" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2473,7 +2473,7 @@ if data already present throws exception</p>]]></long-description>
     </class>
     <source>eJy9V21P40YQ/o7Ef5hDSCQol/TuvhFKSSlwUTlAedEJHadoY0/iLX7T7jrB7d1/78zasePEpFyl1kLEuzs7L8/MPLs+/SX24v29zvHx/h4cw1AEUy8x0g4uojhVcu4ZaFw04f1P796/pX8f4F6mifZYxIrdSAdDjSd2MPKkhpn0Eeg3FspANCu0QsMzJj7pdHQ+0Y7UvFkoKsRYhUIEHc3MUig8gTRKwBEhKHSlNkpOE0MWDIjQ7UQKgsiVs9QqockkdFGB8RAMqkCzBzy4vh3DNYaohA/3ydSXzsp1EOQrz2gPXZhminjLFXsxzL2Aq4g0CyOjsAUoaV3BApWmMXxYGck1tiBSVktDGHZeQRTzxiZ5nIIvTLm3XRt/GaYLMrSqvSimiDxSSDEupe/DFCHROEv8lt1P0vC5P/p4Nx5B7/YBPvcGg97t6KFL0saLaBUXmOmSQexLUk1xKRGalNy3Kj5dDi4+0p7er/2b/uiBooCr/uj2cjiEq7sB9OC+Nxj1L8Y3vQHcjwf3d8PLNsAQ2TG0GnagPLOZIiBdNEL6uoz8gdKryUPfBU8skNLsoFyQfwIcKsJ/zqDVIvwonNtYCyjJuf4Mwsi0QJOTp3n9LZfL9jxMuPw6fqZBd85Kf85j4TyJOQJUO+JcJASkoum8CeA0tr/njoza0z/PMqlcJUntsjeP/bZnAj/b4xTNxo221mOd/b39vVAEqMkp6oncn0eHkOzy2qp3qTRFEcFvNIBo+gc6ppibTDRSy/hLkWrCU0VLDfjsoK1MXRf8RvQ6ma7W2PomJK/E5F+BUoOK4wutbdS2nDHA0GiQNvK/GBi2lYHDT4bJalBMDg1Fom15WVVTlFREMamm8jORXbCWtnaeL4QC7p90NdXJXmIVGcKd9h9alT9nUo1mt86rC8LeqMQxljGqJnoOZ0dn+5nsQBfuBswLj5VyeGRzJyeHbl2glFYlglzVYZ3fsyR0uBSoUJyVU9Co7ChjgSaDDPlzaIj3357l4Way3Wz5e13Q12heDJZo2J4avyOVKXOGgCDxjXQlZZgZk7q/BEShSVSYJZAwIHDiKHQ5hwvhJ1hov1MQJsSZ0tIB5Qg11ctLKB0+Ybq9ltnKjH8L5DO631jnSzDOkeFjVRtgCTXXBBMLTkhowmNbHSWcQcw4lqiuLRIkKByPVVtFdHjxS9UGPxRqw/o6IRcm+Ey46gaLtqyB5taGiukg/sKyX7tVme+APrVxzc4cHUZkc085XHvN5dnSrlIZ7igVhtammRpWqroGKfq6UvAMTTbrE5ZuuiqHLVZ8TX0Uc5WC26qajVaV62wE57nhx8tNy5tFpYuiauUWq4nnpL/ZznomX9bTdvLzxSSmZWysG2hupLNIHG3o1qbWRgMhLtcCahxZZj6CdtYSbXpdwc9B2XM7C8jKlL5+YfmvzV1FMrZeb5M7bhfJ6i7keOg8MU/48gnriZTcajT/pxLYzHOWh52p3oKI+9bKrWWlJlkvMTL0Si4r5gc5vwriTttbbn7k/tjhs06dO/iSPIBGJch1/ytUWBvFJzGnS2Hd6UI3GXvPr3V6zom2Z807cnGeBP/10TCZvHQ4VONlx1hmZ/FnQeuaoEcbdMYXGp8M01eDgqeQepT4MQW6W/JtJ4npiyvAJX3Y1NTwj1f9qzktu5juKvV6QhmplBuYgtL81XBgeSPbTexywAt0u5rJeb6U085BqXchRWb9DYzpVNM53K2c+KAD63y4mpV0OSLeOlrLCv39Deg+SNo=</source>
   </file>
-  <file path="model/container.php" hash="5e18a0b73b0bf087e4790d531fc89bc8" package="Sambhuti">
+  <file path="framework/model/container.php" hash="5e18a0b73b0bf087e4790d531fc89bc8" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2638,7 +2638,7 @@ Eg: mysql</p>]]></long-description>
     </class>
     <source>eJydV21v4kYQ/h4p/2EURQIiAu3dlwoOLpSQHFJeKBBdo+MULfYab8/2ut41HG3z3zv7YmOwSU9FURKvZ595ZuaZ2eXDx9iPT0/aFxenJ3ABMxIu/VQy/TDk8TZhK19CfdiAdz/9/O4Sf72HCdumwlcm2uyOOTQStKMf5j4T4LGAAv6NSSKBezkq1H0p4067LexCiyerRg6UmymIhFIQ3JMbktAObHkKDokgoS4TMmHLVKIHCSRy2zyBkLvM22oQXEwjlyYgfQqSJqFQDNTD7cMT3NKIJiSASboMmJNRB4Jc1YrwqQtLA6S23CgWM8sCbjgiE8l41ATK8H0Ca5oIfIb3mROL2ASeaJQ6kYp8AjxWGxvIeAsBkbu9rcr4d2G6wCIN7fMYI/IREGPcsCCAJYVUUC8Nmno/WsPn8fzT49McBg/P8HkwnQ4e5s9dtJY+x7d0TQ0WC+OAITTGlZBIbpG+hrgfTYefcM/g1/HdeP6MUcDNeP4wms3g5nEKA5gMpvPx8OluMIXJ03TyOBu1AGZUEaMa4Y0se7pSmEiXSsICsYv8GcsrkGHggk/WFMvsULZGfgQcFOF/V1CjkIBHKx1rnkokN/Yg4rIJAkl+sPrbbDatVZQq+bUDgyDa/R2fq5g438iKAux3xBVJMZEJLtsmgA+x/nvlMN5a/tU3VhYSrd7yt4qDli/DwOxx8mZTjVbosfbpyelJREIqkBT2hOWzQM3ToKteogZ2yw4muHuwFnCCHaFts0bXu7HDI6wEJjSPHFci6kgBkoO7VP0FQiKkwOwGZpfYpUlyl4P5EBct0zjm2PK60EQokYsA61mV14PEinSZvdNODtP9g/n+XwmvyLgTECFQezY9ul9oSCNMDMuTBn+rjCqvJqvqcwHXNKY4gCKHUZEt5i+vhMQB4uye1yQB1YNbGOjfqHQ3A9iCmgHRKodpm38MBpy7BU/QMzD1mil2rQk1pO+xVQtHFlkSQWuNbhVfW3GcRCW2M1P5yfWjSoW1Ar78A/8rh6ZCidIg+GeBGw4oxwmXuAk7+ryA1NP2lawGqDa5jStSONvJEQWqbEBFCKpFgGE6JPMYjtYyQa3WkK/VsGJa4Wq8qBzhSRNSyUJaHZXO7PGIkMpcUd3VINyKP4Ma9PpQu9/Ofrs7knq161h81za2XUS5xWjVAe2hmq0RzXG6GrYHtVolpzstnxLyOELVRTh/UKBBtUlBAAeTZ8GKg+YILWP6libus+lzVBBmqhmBVgjgB2ppJlxeyaMtg0lOHcnLWSgOUHVm6ULh4ZOsq1JmJIl9j0e5PvkK3SEo3p/wpmCvC8ycgRFVVxT68QADf5SG8eTEs5F+d6i+biBm5AaoBuhMys4VfAhvFCsryvEt6rRZsGvVf/Zzno2boems7NF22kHmvTQywb68OFlSoQ5HmTSh4PHQVUMN5JyH6vHLfq6q8/wQ3FmYRkCvkgd8Q5P6AeJlf0Vlvabsao1GtwRuAexTNga+aOCvRXNXRNpO2bfgrOMu1bTqneFDtUtBA1RBraGsuz4X8g3b3XzX1o5PEkFlL5XeL2cFEjLZFvNTCGN/ItMNqAFeV6SbR1zi7SJREdQaxyxiPD83PHH381bp9LKPdAfSXnfrynmnM5jPpy+j6fT+8XrUBLNmH19Gvw9Hk/n48aEI/YrfD6Tjg94/yhvgnO6p4tX8+1rV1be0fKgNHAUk7EwtDGN9M0qoTJNIZGPH07fzY32mJ6PFOWdu2cxj37GBQ/LNXoHw3o9976lLn3J2ZbzZbwDYK5S4rd1u+3axfz9cZJepbFb4Cd8IWOQJOtaPWETsQ+RpB/J+c+EsqtMwltu6raYZm1/Q/mujUZKZuU319nvysu9RLBgelprooqYEXuirFtTsInMPNaT8a1a9Xs/Cl7wWtFZgZxVu9tRLWjx09Aq4kVZB60yabsmTWT8bkgi/bOAXYCyYKeJZdQSvJU2qjy1imXY31y3+/At/V4bj</source>
   </file>
-  <file path="model/iContainer.php" hash="425a2dc3aff1132e552f92e47eaf315c" package="Sambhuti">
+  <file path="framework/model/iContainer.php" hash="425a2dc3aff1132e552f92e47eaf315c" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -2704,7 +2704,7 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
     </interface>
     <source>eJydVFFv2jAQfs+vuIc+QMXI1r6VqmvGSovUAQpBFVKlykkuiTVjR7YDY9P++84hgZat3bQ8JPH57rvvPt/58mNZlJ5/eurBKczZKi4qy93/UJVbzfPCQmfYhbP3H87e0escZnxbmYI8nNM9T1AavHD/UcENZFwg0Ldk2oLK9ojQKawtL3zfNIa+0nm3Qdk7OQCNCEZldsM0XsBWVZAwCRpTbqzmcWUJ3wKTqa80rFTKs63DIFslU9RgCwSLemVcere4nSzgFiVqJmBWxYInLW1gRNRZTIEpxDWOixg5DvOGA4wUATPLlewBctrXsEZtaA3nbY4GsAdKO5AOs465BlW6uC7R3YJg9hDa/0PphwpT4LLGLVRJ1RQER/VtuBAQI1QGs0r0XDg5w8M4upsuIggmS3gIwjCYRMsBOdtC0S6ucQfFV6XghEw1aSbtlqg7hC834fCOQoJP4/txtKQCYDSOJjfzOYymIQQwC8JoPFzcByHMFuFsOr/pA8zR0UIH8Ia8WX1CJGGKlnFh2qKXdKiG2IkUCrZGOtwE+Zq4MUio6/5+cA6ECSXzusy9iERsnIFUtgeGCF42LbfZbPq5rFzH+WIHYPyrlsx1yZKvLEeAF+1/zSoSUJO16Xi4LOvvdcJVP/5+VTs1cOT0Vq68FP3CrkQdkuznys3UYZx8z5NshYbo0AA0TB6pwVEMPI/O/GBMSNPBS5NQjJqfHJtJruNohiUJTwpSP1HzZQS9q/qo8JeVmyput2qYIzn+TY//EeQ3RfasgR9KwW8WZWrAqfD4zP7D81zeWgD3uCtM0kRViXVTWZvaHapdsxU8Hun3HO5kZ3o1Ypf+M7MMmueEbgkWM4MEkvEcoF0TVWdooPz6m1UycXcDPD0lLU3owKs8evAs4XGm7sD76f0CvKngkA==</source>
   </file>
-  <file path="model/model.php" hash="bb2edf02f65b8f87e6f2ba29716e42f7" package="Sambhuti">
+  <file path="framework/model/model.php" hash="bb2edf02f65b8f87e6f2ba29716e42f7" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -3017,7 +3017,7 @@ Adding other authors from there for attribution</p>]]></long-description>
     </class>
     <source>eJy9WFtv2kgUfudXnFZRC1WCu+0bSdNQcilSGiIgW0VtFY3tAc/G9rieMZTd7X/fMxcbY3BImmYRAnvmXL9zG/vgfRIkDefVqwa8ghGJ3CCTTF33eLJI2TSQ0Oy14M3rP97s4c9buGSLTARIoYjOmUdjQTvqehwwARMWUsD/hKQS+KSQCM1AyqTjOMIutHk6bVkpBZESkFIKgk/knKS0AwuegUdiSKnPhEyZm0mUL4HEvsNTiLjPJgslA9ey2KcpyICCpGkklHp1c3ZxBWc0pikJ4TJzQ+blZgNBQ9WKCKgPrpajOE6VDSNrA5xyFEwk4/EuUIb7KcxoKvAe3uY6rMBd4KkS0iRSWZ4CTxRfC81dQEjkkrW9wfWlhz6wWMsNeILeBCgO/ZuzMASXQiboJAt3FTsSw+f++OPgagzdi2v43B0Ouxfj630klgHHXTqjRhSLkpChZPQpJbFcoOlKwqeTYe8jsnQ/9M/742t0AE7744uT0QhOB0PowmV3OO73rs67Q7i8Gl4ORidtgBFVZlEl4A54JzpCCKFPJWGhyJ2+xqAKtC70ISAzisH1KJuhbQQ8zLrtgVNCSMjjqXazABEN608g5nIXBBp4YFNuPp+3p3GmMs4JjQDhHObGHCXEuyVTCrCS/kckQwBTXLUZDweJ/j/yGG+7fx9qIisOie7SNU3CdiCjULN4RV2pmlqWk9NoxCSiAs3BArCWfMUEp+F+Iy/QrospQjwJeh28kAhh/bhM+Yz5VCCIgurak5yHQgfBCxhiXeKhigv6sUgYVhYWHY9U/ca3VwlcHg+OuwNDrXX6PkOkuc58g4owHGrFRJlIk7mY2euwruIqMjffKlSUwIZekGId8MkEtf3JbjF7D7zl0tFMLbUjeljl+0TSW/jMwltGq1tnLCYwTklCYgYHU7yT5uYLkd+mEabmF5/Lbx6P1qTeK/a/EvxK9JW4+BbMR4kTKG+KyZ25bbTLKRnt2EA5bshdJyIC24ozpy5JEucmZK7jE+7oKLdNKNuqw6sEI3n26F2bD/80GkqnTjD1UZ0/jqlnYqlX8o2RxGIWKkGwTmtojmYkhTgLw3+/Ip1ddfR/knKJPJhvO4od3mm6/U360c7Mk6qZbjdA9cqvqwVjfjsdradqII4mEoGyDsr7xsZJFhuhNzdebgY0S9TQQsRsnGBH4szbO7Te6P19vflzzamTH9TDzl4xxq4K3e++ZzRdmI72gcWq6ISac9geZZbGAr3HCRLRWFY9ktzngF/BI9VMsV3SHx7VowcbbOxjak03owBq4mBx74jvYWVLjYmF8tG1tlQlGLM0NFXLqvEuUKXGX0RUady1SgoVCKJeabZWYEYYTV7tCBnJVY25Mh0Ovf2uHJa9wySl6BBtKoWt/YJWItRLDerDJtBk4sYYUJjUalXICkV7h9abEvH+CulPoCE2iK38VbbGUoBHpBdAU7l8UsR0h5aNWpLbiGjpdXl4SlFgJZRnVOqxgS7g6S3lc512Xsixf4GXpYKn7foqWoZCK65Jk4j9oP629JhQ7e0msat1h10gC3WoDZKasYyjXdc+9LQH5d0cKCPmTqigG4ab4IqQkSUGLvEEeOk0vBdeaOAvQ4a8vxu1qwQPyxSbeLbWqBA43ejiLHJxuuMRJdPEvgbxsYgx3N+gvBY8o1uT3gc/TxMW8KHFmvXh8GlBdegpiGqgM0PChtEI008t+tSsbNPzI2dozkiYUYWxx0NLoDKGpUIquFu/Ae5tCE+pvDe8Bjo8ueqq+4TzWze9Tuf0ZNz7eNMdjQa9MtSqSxWd3pS/llGiUQ39mSbEw9wzhqde2VS3X15qOF5+W+vt1rXXSxkbW7glayIErRWBJb6a+OKRm+KTcd/fFF/MRwLPmSU5fm5O2diY6wb/E8TMaO/7DyoJE4VSQa3FYof51cGMZ1CZa9tQJ00r/hBew4sXWgBetuC9vuzkQVqHGJ+kh7Y6NoE8D6h5klnCuqwmfE5HE+tOS/cH2sVHr61Ii9zMe7Xv7fleAKdoETLPREIVu4auDrCuENyDIZ/X9RzbNHJr9QFBrEyox4056OpfffJVz8A+3NKF2IYfUWaj1U/QXfJWXYf2HRhWx9iycatzwmrbXiZgDqfBQF8+eh6WocUxsCJ0K6ji/0FVnT/uBnbg/oUmbsjOoX0qKiWozcsYuGZ6KIDFQ9HKZ8e+ZNmI8YqiWlCRqjZPd62CByHbO0dsc85H5a2Fd8P564GJixlmwBAPPvr+Au6V3Laa7xeHmtR+6kBsT/VjJuxbjbUXHz2i3609My/Z9Ytgv6DWb+C65+dw3B2sYlB4XiJu1r/AMK9jjHE/G/8BEsb4hA==</source>
   </file>
-  <file path="cli.php" hash="0030956e52d3549e34d40ab7de3fbb59" package="Sambhuti">
+  <file path="framework/cli.php" hash="0030956e52d3549e34d40ab7de3fbb59" package="Sambhuti">
     <docblock line="2">
       <description><![CDATA[Sambhuti
 Copyright (C) 2012-2013 Piyush]]></description>
@@ -3055,6 +3055,119 @@ along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://
       </docblock>
     </constant>
     <source>eJyFVNtq4zAQfS/0H+ahELek9m7LvrTdbtOQtIZsGnKhBBaCbI9jUVnSSnJC9ut3pNxaWLovtmc0c3TOSMd3P3SlT0+Si4vTE7iACauzqnE8BF2lN4YvKwdR9xyuvny9uqTHNYz4prGVLwllA56jtHgTgmnFLZRcINBbM+NAlQdUiCrn9E2S2F0iVmZ5fgA6lHkIgwhWlW7NDN7ARjWQMwkGC26d4VnjaAcHTBaJMlCrgpebAELJRhZowFUIDk1tPQMfPA1n8IQSDRMwajLB8z11YMTVZ2yFBWRbIN/S9ywmOxbQV4TMHFeyDchp3cAKjaUYrveb7BDboExAiZjz5A0o7RvPifEGBHPH3vif+o8yC+AyQFdKk6KKAEnjmgsBGUJjsWxEO/RTNbym0+eX2RQ6wzm8dsbjznA6v6VqVylaxRVusXitBSdo0mWYdBuiHyB+9sbdZ+rpPKaDdDonFdBPp8PeZAL9lzF0YNQZT9PubNAZw2g2Hr1MejHABD0xDAifTLkMJ0WDLNAxLuxR+ZyO1xJDUUDFVkjHnCNfET8GOV3C/59gQGFCyWXQehglkUtLkMq1wRLJu939W6/X8VI2/volYotgk/sjnwfN8je2RICPjnhgDQ3SUHpnArjT4f2QcxVnf+63VTtIqvpsv6UWceVqse3JD2bzRnvnseT05IxpvdCMdH2n0TDhP6NWnLTOb2lxb6Z9RcGNZDVGi0U/HfQWC1+093dqydV1TbYBwSUeBD8qJZD8tWKiId85OiULfDv1vDEGpSP/0ZUL1lT1duEdkr8pNOYd4QJLykWtdNIdpK02ONOgp5FXRC76yNjnDf5uuMGFkjl1ZUq5mH5LQR5dcNjX/8qJF+VIT/KGqOFbfO1ZEAzPuOCOnHvma2gKEtfgP0NPdCYUo59CmJeHf1/g4yi0HZYv75cq8tFfkDGeug==</source>
+  </file>
+  <file path="sample/boot.php" hash="70ca5361f351d4c3258611037e17e8d7" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <namespace-alias name="core">sambhuti\core</namespace-alias>
+    <include line="30" type="Require Once" package="Default">
+      <name/>
+      <docblock line="29">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="29" name="noinspection" description="PhpIncludeInspection"/>
+      </docblock>
+    </include>
+    <source>eJyFVNtu2zAMfQ+Qf+BDgDhFam8t9tJ2WbygaQ10aZALigADCtlmYqGKpElyguzrRym3Dhi6F9ukeA4PSdF333Slm43k4qLZgAuYsnVe1Y4HY6D0zvBV5SAadODq0+erS3pcw5jvalv5kBD2xAuUFm+CMau4hSUXCPTWzDhQyxMrRJVz+iZJ7MERK7PqnIhOYZ7CIIJVS7dlBm9gp2oomASDJbfO8Lx2lMEBk2WiDKxVyZe7QELOWpZowFUIDs3aegXeeBjN4QElGiZgXOeCF0fpwEir99gKS8j3RB4y9CqmBxUwVMTMHFeyC8jp3MAGjSUbro9JDoxdUCawRMx58QaU9sAOKd6BYO6Mjf9Z/7nMErgM1JXSVFFFhFTjlgsBOUJtcVmLbsBTNLxks8fn+QzS0QJe0skkHc0WtxTtKkWnuME9F19rwYma6jJMuh3JDxQ/7ieDR8Kk37OnbLagKmCYzUb30ykMnyeQwjidzLLB/CmdwHg+GT9P72OAKXphGBg+6PIyTIoaWaJjXNhz5QsaryWFooSKbZDGXCDfkD4GBV3C/08wsDCh5CrUemolicuWIJXrgiWRd4f7t91u45Ws/fVLxJ7BJr2znr5mxRtbIcDfG9FnNTXSkPuwBHCnw7tfcBXnv3v7qAMlRX2Ub6VFXLm12GOK07L5RXu3Y0mzQUOG48r8LKiDt81G2FnoS8Wl1Vj4ywXjSmeyEHWJ2dnpCQz+qrnBVyULjFpHqlfNqFUxtHOlXEz/gXaHiFtCMdqfyx4ry1TrqE3hWmC7S1NhwkOiFtM6gDsekCRviBq+xNc0rDW5ec4Fd7RFLa8VvoLELfjPoD06JAi5fOb3Ad6OAux0fNlbqchbfwD/Cn15</source>
+  </file>
+  <file path="sample/public_html/index.php" hash="3215a4cf12d304281c27614c1dceed9a" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <include line="31" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <constant namespace="global" line="30" package="Sambhuti">
+      <name>ISCLI</name>
+      <full_name>\ISCLI</full_name>
+      <value><![CDATA[false]]></value>
+      <docblock line="29">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="29" name="ignore" description=""/>
+      </docblock>
+    </constant>
+    <source>eJyFVO9r2zAQ/V7o/3CUQX6Q2Vv7re26eKFpDVkabIeST0W2z7aoYmmSnJD99TspadLB6MDY3Ond03snnW+/q0adn4XD4fkZDCFl67zpLPfBRKqd5nVjoT8ZwOWXr5ef6XUFC77rTOMgHjbjBbYGr32QNdxAxQUCfRXTFmR1ZIV+Y626DkNzSARS14Mj0RHmKDQiGFnZLdN4DTvZQcFa0FhyYzXPO0s7WGBtGUoNa1nyaudJKNm1JWqwDYJFvTZOgQse5kt4wBY1E7DocsGLN+nASKvLmAZLyPdErmTqVKQHFTCVxMwsl+0IkNO6hg1qQzFcvW1yYByB1J6lz6wTr0EqVzggxTsQzJ5qg3/6P9ksgbeeupGKHDVESB63XAjIETqDVSdGvp7Q8Bxnj0/LDKL5Cp6jJInm2eqG0LaRtIob3HPxtRKcqMmXZq3dkXxP8fM+mTxSTfQjnsXZilzANM7m92kK06cEIlhESRZPlrMogcUyWTyl9wFAik4YeoYPulz5k6JGlmgZF+bkfEXHa0ihKKFhG6RjLpBvSB+Dgi7h/0/QszAh29p7PbaSxMUVtNKOwJDI28P92263Qd127vqFYs9gwruTnrFixSurEeDviRizjhqpKX0YArhV/jsuuAzy33d71IGSUB/tVysRNHYt9jXFcdjcoL2bsfD87BNT6kUx8vUNLoIgvLih3NsMvV+gp9JsjVupXz2K5hrGvG5d1x1TiRVvsd+L08ks7o2gYsLggIAaf3Vc44tsC+yf9gugl0tpA/pJ9BzsD2RqUIE=</source>
+  </file>
+  <file path="sample/cli.php" hash="8ef7a70adc89a85c52465c16977a42bd" package="Sambhuti">
+    <docblock line="2">
+      <description><![CDATA[Sambhuti
+Copyright (C) 2012-2013 Piyush]]></description>
+      <long-description><![CDATA[<p>License:
+This file is part of Sambhuti (http://sambhuti.org)</p>
+
+<p>Sambhuti is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Sambhuti is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Sambhuti.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>]]></long-description>
+      <tag line="2" name="package" description="Sambhuti"/>
+      <tag line="2" name="author" description="Piyush &lt;piyush@cio.bz&gt;"/>
+      <tag line="2" name="license" description="http://www.gnu.org/licenses/gpl.html"/>
+      <tag line="2" name="copyright" description="2012 Piyush"/>
+    </docblock>
+    <include line="32" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <constant namespace="global" line="30" package="Sambhuti">
+      <name>ISCLI</name>
+      <full_name>\ISCLI</full_name>
+      <value><![CDATA[true]]></value>
+      <docblock line="29">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="29" name="ignore" description=""/>
+      </docblock>
+    </constant>
+    <source>eJyFVFFv2jAQfq/U/3CqJhEqlmztW9t1MARtJEZRElTxhJzkElsNtuc4IPbrdzYUNmnaHpLozt99/r6zLw9fNdeXF9H19eUFXEPKNjnvrPDBWOm9ETW3EIz7cPPp881Het3CQuy7ljuIh81EgbLFOx9kXLRQiQaBvpoZC6o6sULArdV3UdQeE6Eydf9EdII5CoMIrarsjhm8g73qoGASDJaitUbknaUdLDBZRsrARpWi2nsSSnayRAOWI1g0m9YpcMHTfAlPKNGwBhZd3ojiXTow0uoyLccS8gORK5k6FelRBUwVMTMrlBwAClo3sEXTUgy375scGQegjGcJmHXiDSjtCvukeA8Ns+fa8K/+zzZLENJTc6XJESdC8rgTTQM5Qtdi1TUDX09oeI2z55dlBqP5Cl5HSTKaZ6t7QluuaBW3eOASG90IoiZfhkm7J/me4vskGT9TzehbPIuzFbmAaZzNJ2kK05cERrAYJVk8Xs5GCSyWyeIlnYQAKTph6Bn+0eXKnxQ1skTLRNOena/oeFtS2JTA2RbpmAsUW9LHoKBL+P8T9CysUbL2Xk+tJHFxBVLZAbQk8uF4/3a7XVjLzl2/qDkwtNHjWc9Qs+KN1Qjw50QMWUeNNJQ+DgE8aP8dFkKF+c/HA+pISah/7VfrJuR20xxqitOwuUH7bcaiy4sPTOu1ZuTrC1yF0dU9pd5H6JwPo8qwDe6UefMQmmkYilq6jjuWEishMejF6XgW9wZgTYd9whW8FCagR1J1sF5P49lkve67JYM/OmFwrWSBwVlFCL1cKRvSr6PnYL8A2+9X9w==</source>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="Sambhuti" full_name="Sambhuti">

@@ -77,9 +77,9 @@
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
+<li class="property protected "><a href="#property_appPaths" title="$appPaths :: App Path"><span class="description">App Path</span><pre>$appPaths</pre></a></li>
 <li class="property protected "><a href="#property_confs" title="$confs :: Array of \sambhuti\core\iData objects"><span class="description">Array of \sambhuti\core\iData objects</span><pre>$confs</pre></a></li>
 <li class="property protected "><a href="#property_defaultPath" title="$defaultPath :: Default Path"><span class="description">Default Path</span><pre>$defaultPath</pre></a></li>
-<li class="property protected "><a href="#property_lazyPaths" title="$lazyPaths :: Lazy Path"><span class="description">Lazy Path</span><pre>$lazyPaths</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -130,7 +130,7 @@
 <pre>__construct(\sambhuti\loader\iContainer $loader) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Sets lazy Path and default path (last lazy path)</p></div>
+<div class="long_description"><p>Sets app paths and default path (last app path)</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$loader</h4>
@@ -144,7 +144,7 @@
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Takes in string identifier eg: "file" and makes it into config/file.json
-Runs through all available lazy paths.</p></div>
+Runs through all available app paths.</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$id</h4>
@@ -157,14 +157,14 @@ Runs through all available lazy paths.</p></div>
 </div>
 <a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
 <h2>Save Config object</h2>
-<pre>save(string $id, \sambhuti\core\iData $data, null | string $lazyId) : void | <a href="../classes/sambhuti.config.iContainer.html">\sambhuti\config\iContainer</a></pre>
+<pre>save(string $id, \sambhuti\core\iData $data, null | string $appId) : void | <a href="../classes/sambhuti.config.iContainer.html">\sambhuti\config\iContainer</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Saves data in a config object to the default path (last lazy path)
-Path can be overridden by $lazyId namespace to the path.</p></div>
+<div class="long_description"><p>Saves data in a config object to the default path (last app path)
+Path can be overridden by $appId namespace of the app path.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="">\sambhuti\loader\loader::addLazyPath</a></td>
+<td><a href="">\sambhuti\loader\loader::addApp</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -174,7 +174,7 @@ Path can be overridden by $lazyId namespace to the path.</p></div>
 <h4>$data</h4>
 <code><a href="../classes/sambhuti.core.iData.html">\sambhuti\core\iData</a></code><p>config object</p></div>
 <div class="subelement argument">
-<h4>$lazyId</h4>
+<h4>$appId</h4>
 <code>null</code><code>string</code><p>namespace identifier</p></div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
@@ -201,6 +201,18 @@ Path can be overridden by $lazyId namespace to the path.</p></div>
 </tr></table>
 </div></div>
 </div>
+<a id="property_appPaths"> </a><div class="element clickable property protected property_appPaths" data-toggle="collapse" data-target=".property_appPaths .collapse">
+<h2>App Path</h2>
+<pre>$appPaths : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Array of [namespace => Path] for lazy loading</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\sambhuti\loader\loader::$appPath</a></td>
+</tr></table>
+</div></div>
+</div>
 <a id="property_confs"> </a><div class="element clickable property protected property_confs" data-toggle="collapse" data-target=".property_confs .collapse">
 <h2>Array of \sambhuti\core\iData objects</h2>
 <pre>$confs : array</pre>
@@ -211,19 +223,7 @@ Path can be overridden by $lazyId namespace to the path.</p></div>
 <h2>Default Path</h2>
 <pre>$defaultPath : string</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Last path in lazy paths</p></div></div></div>
-</div>
-<a id="property_lazyPaths"> </a><div class="element clickable property protected property_lazyPaths" data-toggle="collapse" data-target=".property_lazyPaths .collapse">
-<h2>Lazy Path</h2>
-<pre>$lazyPaths : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Array of [namespace => Path] for lazy loading</p></div>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td><a href="">\sambhuti\loader\loader::$lazyPath</a></td>
-</tr></table>
-</div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Last path in app paths (i.e. last app)</p></div></div></div>
 </div>
 </div>
 </div>
@@ -232,7 +232,7 @@ Path can be overridden by $lazyId namespace to the path.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-12T23:12:48+05:30.<br></footer></div>
+            generated on 2012-11-14T00:25:14+05:30.<br></footer></div>
 </div>
 </body>
 </html>

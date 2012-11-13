@@ -68,12 +68,12 @@
                     <ul>
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#method___sleep" title="__sleep :: Sleep"><span class="description">Sleep</span><pre>__sleep()</pre></a></li>
-<li class="method public "><a href="#method_addLazyPath" title="addLazyPath :: Add Lazy Path"><span class="description">Add Lazy Path</span><pre>addLazyPath()</pre></a></li>
+<li class="method public "><a href="#method_addApp" title="addApp :: Add App Path"><span class="description">Add App Path</span><pre>addApp()</pre></a></li>
 <li class="method public "><a href="#method_checkRequire" title="checkRequire :: Check Require"><span class="description">Check Require</span><pre>checkRequire()</pre></a></li>
 <li class="method public "><a href="#method_fetch" title="fetch :: Fetch"><span class="description">Fetch</span><pre>fetch()</pre></a></li>
 <li class="method public "><a href="#method_get" title="get :: Get - Autoloader"><span class="description">Get - Autoloader</span><pre>get()</pre></a></li>
-<li class="method public "><a href="#method_getLazyPath" title="getLazyPath :: Get Lazy Path"><span class="description">Get Lazy Path</span><pre>getLazyPath()</pre></a></li>
-<li class="method public "><a href="#method_getLazyPaths" title="getLazyPaths :: Get Lazy Paths"><span class="description">Get Lazy Paths</span><pre>getLazyPaths()</pre></a></li>
+<li class="method public "><a href="#method_getApp" title="getApp :: Get App Path"><span class="description">Get App Path</span><pre>getApp()</pre></a></li>
+<li class="method public "><a href="#method_getApps" title="getApps :: Get App Paths"><span class="description">Get App Paths</span><pre>getApps()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -81,7 +81,7 @@
                     <ul></ul>
 </li>
 <li class="nav-header protected">» Protected
-                    <ul><li class="property protected "><a href="#property_lazyPath" title="$lazyPath :: Lazy Path"><span class="description">Lazy Path</span><pre>$lazyPath</pre></a></li></ul>
+                    <ul><li class="property protected "><a href="#property_appPath" title="$appPath :: App Paths"><span class="description">App Paths</span><pre>$appPath</pre></a></li></ul>
 </li>
 </ul>
 </div>
@@ -152,15 +152,15 @@ Can be accessed by the string 'loader'.</p>
 <div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>array</code>lazy path to be cached</div>
+<code>array</code>app path to be cached</div>
 </div></div>
 </div>
-<a id="method_addLazyPath"></a><div class="element clickable method public method_addLazyPath" data-toggle="collapse" data-target=".method_addLazyPath .collapse">
-<h2>Add Lazy Path</h2>
-<pre>addLazyPath(string $namespace, string $path) : <a href="../classes/sambhuti.loader.iContainer.html">\sambhuti\loader\iContainer</a></pre>
+<a id="method_addApp"></a><div class="element clickable method public method_addApp" data-toggle="collapse" data-target=".method_addApp .collapse">
+<h2>Add App Path</h2>
+<pre>addApp(string $namespace, string $path) : <a href="../classes/sambhuti.loader.iContainer.html">\sambhuti\loader\iContainer</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Add single lazyPath for loader</p></div>
+<div class="long_description"><p>Add single app Path for loader</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$namespace</h4>
@@ -193,7 +193,7 @@ Can be accessed by the string 'loader'.</p>
 <pre>fetch(string $class) : string | null</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Looks for a class in all registered paths and
+<div class="long_description"><p>Looks for a class in all registered app paths and
 returns the class name if matches else gives null</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -209,7 +209,7 @@ returns the class name if matches else gives null</p></div>
 <pre>get(string $class) : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Autoloader to load the classes under all lazy paths</p></div>
+<div class="long_description"><p>Autoloader to load the classes under all app paths</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$class</h4>
@@ -219,37 +219,37 @@ returns the class name if matches else gives null</p></div>
 <code>bool</code>true if found, false otherwise</div>
 </div></div>
 </div>
-<a id="method_getLazyPath"></a><div class="element clickable method public method_getLazyPath" data-toggle="collapse" data-target=".method_getLazyPath .collapse">
-<h2>Get Lazy Path</h2>
-<pre>getLazyPath(string $key) : string | bool</pre>
+<a id="method_getApp"></a><div class="element clickable method public method_getApp" data-toggle="collapse" data-target=".method_getApp .collapse">
+<h2>Get App Path</h2>
+<pre>getApp(string $key) : string | bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Get single lazyPath from loader</p></div>
+<div class="long_description"><p>Get single app path from loader</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$key</h4>
-<code>string</code><p>namespace of the lazy path</p></div>
+<code>string</code><p>namespace of the app path</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code><code>bool</code>string path if $key exists else boolean false</div>
 </div></div>
 </div>
-<a id="method_getLazyPaths"></a><div class="element clickable method public method_getLazyPaths" data-toggle="collapse" data-target=".method_getLazyPaths .collapse">
-<h2>Get Lazy Paths</h2>
-<pre>getLazyPaths() : array</pre>
+<a id="method_getApps"></a><div class="element clickable method public method_getApps" data-toggle="collapse" data-target=".method_getApps .collapse">
+<h2>Get App Paths</h2>
+<pre>getApps() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Get all lazyPath from loader</p></div>
+<div class="long_description"><p>Get all app paths from loader</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>array</code>all lazy paths.</div>
+<code>array</code>all app paths.</div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a id="property_lazyPath"> </a><div class="element clickable property protected property_lazyPath" data-toggle="collapse" data-target=".property_lazyPath .collapse">
-<h2>Lazy Path</h2>
-<pre>$lazyPath : array</pre>
+<a id="property_appPath"> </a><div class="element clickable property protected property_appPath" data-toggle="collapse" data-target=".property_appPath .collapse">
+<h2>App Paths</h2>
+<pre>$appPath : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>Array of [namespace => Path] for lazy loading</p></div></div></div>
 </div>
@@ -260,7 +260,7 @@ returns the class name if matches else gives null</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-12T23:12:47+05:30.<br></footer></div>
+            generated on 2012-11-14T00:25:14+05:30.<br></footer></div>
 </div>
 </body>
 </html>
