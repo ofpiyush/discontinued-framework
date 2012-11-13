@@ -53,19 +53,19 @@ class container implements iContainer {
     static $dependencies = array('loader');
 
     /**
-     * Lazy Path
+     * App Path
      *
      * Array of [namespace => Path] for lazy loading
      *
-     * @see \sambhuti\loader\loader::$lazyPath
-     * @var array $lazyPaths
+     * @see \sambhuti\loader\loader::$appPath
+     * @var array $appPaths
      */
-    protected $lazyPaths = array();
+    protected $appPaths = array();
 
     /**
      * Default Path
      *
-     * Last path in lazy paths
+     * Last path in app paths (i.e. last app)
      *
      * @var string
      */
@@ -81,21 +81,20 @@ class container implements iContainer {
     /**
      * Constructor
      *
-     * Sets lazy Path and default path (last lazy path)
+     * Sets app paths and default path (last app path)
      *
      * @param \sambhuti\loader\iContainer $loader
      */
     function __construct ( loader\iContainer $loader ) {
-        //random comment to test merging
-        $this->lazyPaths = $loader->getLazyPaths();
-        $this->defaultPath = end($this->lazyPaths);
+        $this->appPaths = $loader->getApps();
+        $this->defaultPath = end($this->appPaths);
     }
 
     /**
      * Get
      *
      * Takes in string identifier eg: "file" and makes it into config/file.json
-     * Runs through all available lazy paths.
+     * Runs through all available app paths.
      *
      * @param null|string $id
      *
@@ -104,7 +103,7 @@ class container implements iContainer {
     function get ( $id = null ) {
         if (empty($this->confs[$id])) {
             $config = array();
-            foreach ( $this->lazyPaths as $path ) {
+            foreach ( $this->appPaths as $path ) {
                 $fullPath = $path . '/config/' . $id . '.json';
                 if (!file_exists($fullPath))
                     continue;
@@ -122,22 +121,22 @@ class container implements iContainer {
     /**
      * Save Config object
      *
-     * Saves data in a config object to the default path (last lazy path)
-     * Path can be overridden by $lazyId namespace to the path.
+     * Saves data in a config object to the default path (last app path)
+     * Path can be overridden by $appId namespace of the app path.
      *
-     * @see \sambhuti\loader\loader::addLazyPath
+     * @see \sambhuti\loader\loader::addApp
      *
      * @param string               $id     config file identifier
      * @param \sambhuti\core\iData $data   config object
-     * @param null|string          $lazyId namespace identifier
+     * @param null|string          $appId namespace identifier
      *
      * @throws \Exception
      */
-    function save ( $id, core\iData $data, $lazyId = null ) {
+    function save ( $id, core\iData $data, $appId = null ) {
         $fileString = json_encode($data->getAll());
         $fullPath = $this->defaultPath;
-        if ($lazyId !== null && !empty($this->lazyPaths[$lazyId])) {
-            $fullPath = $this->lazyPaths[$lazyId];
+        if ($appId !== null && !empty($this->appPaths[$appId])) {
+            $fullPath = $this->appPaths[$appId];
         }
         $fp = fopen($fullPath . '/config/' . $id . '.json', 'wb');
         if (empty($fp)) {

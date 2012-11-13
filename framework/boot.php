@@ -36,4 +36,4 @@ require_once(SAMBHUTI_ROOT_PATH . 'core/iContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'loader/iContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'loader/container.php');
 $loader = new loader\container();
-$loader->addLazyPath('sambhuti', SAMBHUTI_ROOT_PATH);
+$loader->addApp('sambhuti', SAMBHUTI_ROOT_PATH);

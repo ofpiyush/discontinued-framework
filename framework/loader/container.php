@@ -50,13 +50,13 @@ namespace sambhuti\loader;
 class container implements iContainer {
 
     /**
-     * Lazy Path
+     * App Paths
      *
      * Array of [namespace => Path] for lazy loading
      *
-     * @var array $lazyPath
+     * @var array $appPath
      */
-    protected $lazyPath = array();
+    protected $appPath = array();
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ class container implements iContainer {
     /**
      * Get - Autoloader
      *
-     * Autoloader to load the classes under all lazy paths
+     * Autoloader to load the classes under all app paths
      *
      * @param string $class name of the class to be loaded
      *
@@ -82,8 +82,8 @@ class container implements iContainer {
             return true;
         }
         $array = explode('\\', $class);
-        if (array_key_exists($array[0], $this->lazyPath)) {
-            $array[0] = $this->lazyPath[$array[0]];
+        if (array_key_exists($array[0], $this->appPath)) {
+            $array[0] = $this->appPath[$array[0]];
             return $this->checkRequire(implode($array, DIRECTORY_SEPARATOR));
         }
         return false;
@@ -110,7 +110,7 @@ class container implements iContainer {
     /**
      * Fetch
      *
-     * Looks for a class in all registered paths and
+     * Looks for a class in all registered app paths and
      * returns the class name if matches else gives null
      *
      * @param string $class name of class to look for
@@ -121,7 +121,7 @@ class container implements iContainer {
         if (class_exists($class)) {
             return $class;
         }
-        $paths = array_reverse($this->lazyPath);
+        $paths = array_reverse($this->appPath);
         $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
         foreach ( $paths as $ns => $path ) {
             if ($this->checkRequire($path . DIRECTORY_SEPARATOR . $classPath)) {
@@ -132,55 +132,55 @@ class container implements iContainer {
     }
 
     /**
-     * Add Lazy Path
+     * Add App Path
      *
-     * Add single lazyPath for loader
+     * Add single app Path for loader
      *
      * @param string $namespace namespace of the path
      * @param string $path      the full path to the directory to be added
      *
      * @return \sambhuti\loader\iContainer instance
      */
-    function addLazyPath ( $namespace, $path ) {
+    function addApp ( $namespace, $path ) {
         $path = rtrim($path, '/');
-        $this->lazyPath[$namespace] = $path;
+        $this->appPath[$namespace] = $path;
         return $this;
     }
 
     /**
-     * Get Lazy Path
+     * Get App Path
      *
-     * Get single lazyPath from loader
+     * Get single app path from loader
      *
-     * @param string $key namespace of the lazy path
+     * @param string $key namespace of the app path
      *
      * @return string|bool string path if $key exists else boolean false
      */
-    function getLazyPath ( $key ) {
-        if (!empty($this->lazyPath[$key])) {
-            return $this->lazyPath[$key];
+    function getApp ( $key ) {
+        if (!empty($this->appPath[$key])) {
+            return $this->appPath[$key];
         }
         return false;
     }
 
     /**
-     * Get Lazy Paths
+     * Get App Paths
      *
-     * Get all lazyPath from loader
+     * Get all app paths from loader
      *
-     * @return array all lazy paths.
+     * @return array all app paths.
      */
-    function getLazyPaths () {
-        return $this->lazyPath;
+    function getApps () {
+        return $this->appPath;
     }
 
     /**
      * Sleep
      *
-     * @return array lazy path to be cached
+     * @return array app path to be cached
      */
     function __sleep () {
-        return array('lazyPath');
+        return array('appPath');
     }
 
 }

@@ -69,35 +69,35 @@ interface iContainer extends core\iContainer {
     function fetch ( $class );
 
     /**
-     * Add Lazy Path
+     * Add App Path
      *
-     * Add single lazyPath for loader
+     * Add single app for loader
      *
      * @param string $namespace namespace for replacement
-     * @param string $path      the full path to the directory to be added
+     * @param string $path      the full path to the app directory to be added
      *
      * @return \sambhuti\loader\iContainer instance
      */
-    function addLazyPath ( $namespace, $path );
+    function addApp ( $namespace, $path );
 
     /**
-     * Get Lazy Path
+     * Get App
      *
-     * Should return single lazy path
+     * Should return single path to app
      *
-     * @param string $key namespace of the lazy path
+     * @param string $key namespace of the app path
      *
      * @return string|bool string path if $key exists else boolean false
      */
-    function getLazyPath ( $key );
+    function getApp ( $key );
 
     /**
-     * Get Lazy Paths
+     * Get Apps
      *
-     * Should return all lazy paths
+     * Should return all app paths
      *
-     * @return array all lazy paths.
+     * @return array Array of all app paths.
      */
-    function getLazyPaths ();
+    function getApps ();
 
 }
