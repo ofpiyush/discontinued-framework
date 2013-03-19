@@ -40,7 +40,8 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class core implements iCore {
+class core implements iCore
+{
 
     /**
      * Dependencies
@@ -75,7 +76,8 @@ class core implements iCore {
      *
      * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( loader\iContainer $loader ) {
+    function __construct(loader\iContainer $loader)
+    {
         $this->loader = $loader;
         $this->processed['loader'] = $loader;
         $this->processed['core'] = $this;
@@ -92,7 +94,8 @@ class core implements iCore {
      * @return mixed|\sambhuti\core\iContainer container or response of "get" method based on string
      * @throws \Exception
      */
-    function get ( $identifier = null ) {
+    function get($identifier = null)
+    {
         if (null === $identifier || 'core' === $identifier) {
             return $this;
         }
@@ -106,7 +109,7 @@ class core implements iCore {
                     $this->processed[$identifier] = $this->get(implode('.', $parts));
                 } else {
                     $current = $this;
-                    foreach ( $parts as $part ) {
+                    foreach ($parts as $part) {
                         if (!is_object($current)) {
                             throw new \Exception ('Cannot load ' . $identifier . ' dependency ' . $part . ' can not be loaded from a non-object');
                         }
@@ -131,7 +134,8 @@ class core implements iCore {
      * @return object
      * @throws \Exception
      */
-    function process ( $class ) {
+    function process($class)
+    {
         if (empty($class) || !class_exists($class)) {
             throw new \Exception($class . ' not found');
         }

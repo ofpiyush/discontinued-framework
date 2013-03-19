@@ -42,14 +42,15 @@ use \sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer {
+interface iContainer extends core\iContainer
+{
 
     /**
      * Constructor
      *
      * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( loader\iContainer $loader );
+    function __construct(loader\iContainer $loader);
 
 
     /**
@@ -57,9 +58,9 @@ interface iContainer extends core\iContainer {
      *
      * @param                      $id
      * @param \sambhuti\core\iData $data
-     * @param null                 $lazyId
+     * @param null $lazyId
      *
      * @return void|\sambhuti\config\iContainer
      */
-    function save ( $id, core\iData $data, $lazyId = null );
+    function save($id, core\iData $data, $lazyId = null);
 }

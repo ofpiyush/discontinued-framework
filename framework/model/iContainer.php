@@ -40,13 +40,14 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer {
+interface iContainer extends core\iContainer
+{
 
     /**
      * Constructor
      *
      * @param \sambhuti\loader\iContainer $loader
-     * @param \sambhuti\core\iData        $databaseConfig  database config
+     * @param \sambhuti\core\iData $databaseConfig  database config
      */
-    function __construct ( loader\iContainer $loader, core\iData $databaseConfig );
+    function __construct(loader\iContainer $loader, core\iData $databaseConfig);
 }

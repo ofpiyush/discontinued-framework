@@ -38,7 +38,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iController extends core\iContainer {
+interface iController extends core\iContainer
+{
 
     /**
      * Index page
@@ -49,5 +50,5 @@ interface iController extends core\iContainer {
      *
      * @return void|mixed
      */
-    function index ( array $args = array() );
+    function index(array $args = array());
 }

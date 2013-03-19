@@ -40,7 +40,8 @@ namespace sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iData {
+interface iData
+{
 
     /**
      * Constructor
@@ -49,7 +50,7 @@ interface iData {
      *
      * @param array $array
      */
-    function __construct ( array $array = array() );
+    function __construct(array $array = array());
 
     /**
      * Get
@@ -61,7 +62,7 @@ interface iData {
      *
      * @return mixed
      */
-    function get ( $key );
+    function get($key);
 
     /**
      * Set
@@ -76,7 +77,7 @@ interface iData {
      *
      * @return \sambhuti\core\iData
      */
-    function set ( $key, $value );
+    function set($key, $value);
 
     /**
      * Update
@@ -88,7 +89,7 @@ interface iData {
      *
      * @return \sambhuti\core\iData
      */
-    function update ( $key, $value );
+    function update($key, $value);
 
     /**
      * Get All
@@ -97,7 +98,7 @@ interface iData {
      *
      * @return array
      */
-    function getAll ();
+    function getAll();
 
     /**
      * Magic Get
@@ -108,7 +109,7 @@ interface iData {
      *
      * @return mixed
      */
-    function __get ( $key );
+    function __get($key);
 
     /**
      * Magic set
@@ -122,5 +123,5 @@ interface iData {
      *
      * @return void
      */
-    function __set ( $key, $value );
+    function __set($key, $value);
 }

@@ -37,12 +37,13 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer {
+interface iContainer extends core\iContainer
+{
 
     /**
      * Constructor
      */
-    function __construct ();
+    function __construct();
 
 
     /**
@@ -54,7 +55,7 @@ interface iContainer extends core\iContainer {
      *
      * @return bool true if found, false otherwise
      */
-    function checkRequire ( $name );
+    function checkRequire($name);
 
     /**
      * Fetch
@@ -66,7 +67,7 @@ interface iContainer extends core\iContainer {
      *
      * @return string|null string full class name if class exists else null
      */
-    function fetch ( $class );
+    function fetch($class);
 
     /**
      * Add App Path
@@ -78,7 +79,7 @@ interface iContainer extends core\iContainer {
      *
      * @return \sambhuti\loader\iContainer instance
      */
-    function addApp ( $namespace, $path );
+    function addApp($namespace, $path);
 
     /**
      * Get App
@@ -89,7 +90,7 @@ interface iContainer extends core\iContainer {
      *
      * @return string|bool string path if $key exists else boolean false
      */
-    function getApp ( $key );
+    function getApp($key);
 
     /**
      * Get Apps
@@ -98,6 +99,6 @@ interface iContainer extends core\iContainer {
      *
      * @return array Array of all app paths.
      */
-    function getApps ();
+    function getApps();
 
 }

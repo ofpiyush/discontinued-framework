@@ -36,7 +36,8 @@ namespace sambhuti\cache;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iCache {
+interface iCache
+{
 
     /*
         function __construct ( $identifier );

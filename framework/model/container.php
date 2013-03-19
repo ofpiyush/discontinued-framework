@@ -43,7 +43,8 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * Dependencies
@@ -110,13 +111,16 @@ class container implements iContainer {
      * @todo do some real exception handling :P
      *
      * @param \sambhuti\loader\iContainer $loader
-     * @param \sambhuti\core\iData        $databaseConfig database config
+     * @param \sambhuti\core\iData $databaseConfig database config
      */
-    function __construct ( loader\iContainer $loader, core\iData $databaseConfig ) {
+    function __construct(loader\iContainer $loader, core\iData $databaseConfig)
+    {
         $this->loader = $loader;
         $type = strtolower($databaseConfig->get('type'));
         $this->type = $this->allTypes[$type];
-        $dsn = $type . ":dbname=" . $databaseConfig->get('select') . ";host=" . $databaseConfig->get('database') . ";charset=utf8";
+        $dsn = $type . ":dbname=" . $databaseConfig->get('select') . ";host=" . $databaseConfig->get(
+            'database'
+        ) . ";charset=utf8";
         try {
             $this->connection = new \PDO($dsn, $databaseConfig->get('username'), $databaseConfig->get('password'));
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -135,7 +139,8 @@ class container implements iContainer {
      * @return \sambhuti\model\model
      * @throws \Exception
      */
-    function get ( $id = null ) {
+    function get($id = null)
+    {
         if (empty($this->models[$id])) {
             $class = $this->loader->fetch('model\\' . $this->type . '\\' . $id);
             if (null === $class) {

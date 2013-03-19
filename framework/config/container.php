@@ -42,7 +42,8 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * Dependencies
@@ -85,7 +86,8 @@ class container implements iContainer {
      *
      * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( loader\iContainer $loader ) {
+    function __construct(loader\iContainer $loader)
+    {
         $this->appPaths = $loader->getApps();
         $this->defaultPath = end($this->appPaths);
     }
@@ -100,18 +102,22 @@ class container implements iContainer {
      *
      * @return \sambhuti\core\iData object
      */
-    function get ( $id = null ) {
+    function get($id = null)
+    {
         if (empty($this->confs[$id])) {
             $config = array();
-            foreach ( $this->appPaths as $path ) {
+            foreach ($this->appPaths as $path) {
                 $fullPath = $path . '/config/' . $id . '.json';
-                if (!file_exists($fullPath))
+                if (!file_exists($fullPath)) {
                     continue;
+                }
                 $tmp = @json_decode(file_get_contents($fullPath), true);
-                if (!is_array($tmp))
+                if (!is_array($tmp)) {
                     continue;
-                foreach ($tmp as $k => $v)
+                }
+                foreach ($tmp as $k => $v) {
                     $config[$k] = $v;
+                }
             }
             $this->confs[$id] = new core\data($config);
         }
@@ -126,13 +132,14 @@ class container implements iContainer {
      *
      * @see \sambhuti\loader\loader::addApp
      *
-     * @param string               $id     config file identifier
+     * @param string $id     config file identifier
      * @param \sambhuti\core\iData $data   config object
-     * @param null|string          $appId namespace identifier
+     * @param null|string $appId namespace identifier
      *
      * @throws \Exception
      */
-    function save ( $id, core\iData $data, $appId = null ) {
+    function save($id, core\iData $data, $appId = null)
+    {
         $fileString = json_encode($data->getAll());
         $fullPath = $this->defaultPath;
         if ($appId !== null && !empty($this->appPaths[$appId])) {

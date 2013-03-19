@@ -39,18 +39,19 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer {
+interface iContainer extends core\iContainer
+{
 
     /**
      * Constructor
      *
      * Should set up not found, home etc from routing
      *
-     * @param \sambhuti\core\iData        $routing instance of routing
-     * @param \sambhuti\core\iCore        $core    instance of Core
+     * @param \sambhuti\core\iData $routing instance of routing
+     * @param \sambhuti\core\iCore $core    instance of Core
      * @param \sambhuti\loader\iContainer $loader  instance of Loader
      */
-    function __construct ( core\iData $routing, core\iCore $core, loader\iContainer $loader );
+    function __construct(core\iData $routing, core\iCore $core, loader\iContainer $loader);
 
     /**
      * Process
@@ -61,5 +62,5 @@ interface iContainer extends core\iContainer {
      *
      * @return null|\sambhuti\controller\iController controller instance
      */
-    function process ( $controller );
+    function process($controller);
 }

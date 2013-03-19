@@ -1,7 +1,7 @@
 {
-"type": "mysql",
-"host": "local"host",
-"username": "user",
-"password": "password",
-"select": "sambhuti"
+    "type": "mysql",
+    "host": "localhost",
+    "username": "user",
+    "password": "password",
+    "select": "sambhuti"
 }

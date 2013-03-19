@@ -47,7 +47,8 @@ namespace sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * App Paths
@@ -64,7 +65,8 @@ class container implements iContainer {
      * Registers loader::get() as the autoload method
      *
      */
-    function __construct () {
+    function __construct()
+    {
         spl_autoload_register(array($this, 'get'));
     }
 
@@ -77,13 +79,17 @@ class container implements iContainer {
      *
      * @return bool true if found, false otherwise
      */
-    function get ( $class = null ) {
+    function get($class = null)
+    {
         if (class_exists($class)) {
             return true;
         }
         $array = explode('\\', $class);
         if (array_key_exists($array[0], $this->appPath)) {
             $array[0] = $this->appPath[$array[0]];
+            $class = array_pop($array);
+            //TODO: test and fix for PSR-0
+            array_push($array,$this->className($class));
             return $this->checkRequire(implode($array, DIRECTORY_SEPARATOR));
         }
         return false;
@@ -98,7 +104,8 @@ class container implements iContainer {
      *
      * @return bool true if found, false otherwise
      */
-    function checkRequire ( $name ) {
+    function checkRequire($name)
+    {
         $fullPath = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
         if (file_exists($fullPath)) {
             require_once($fullPath);
@@ -117,13 +124,14 @@ class container implements iContainer {
      *
      * @return string|null string full class name if class exists else null
      */
-    function fetch ( $class ) {
+    function fetch($class)
+    {
         if (class_exists($class)) {
             return $class;
         }
         $paths = array_reverse($this->appPath);
         $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        foreach ( $paths as $ns => $path ) {
+        foreach ($paths as $ns => $path) {
             if ($this->checkRequire($path . DIRECTORY_SEPARATOR . $classPath)) {
                 return $ns . '\\' . $class;
             }
@@ -141,7 +149,8 @@ class container implements iContainer {
      *
      * @return \sambhuti\loader\iContainer instance
      */
-    function addApp ( $namespace, $path ) {
+    function addApp($namespace, $path)
+    {
         $path = rtrim($path, '/');
         $this->appPath[$namespace] = $path;
         return $this;
@@ -156,7 +165,8 @@ class container implements iContainer {
      *
      * @return string|bool string path if $key exists else boolean false
      */
-    function getApp ( $key ) {
+    function getApp($key)
+    {
         if (!empty($this->appPath[$key])) {
             return $this->appPath[$key];
         }
@@ -170,8 +180,20 @@ class container implements iContainer {
      *
      * @return array all app paths.
      */
-    function getApps () {
+    function getApps()
+    {
         return $this->appPath;
+    }
+
+    /**
+     * Make Class name
+     *
+     * @param string $class
+     *
+     * @return string
+     */
+    function className($class) {
+        return str_replace("_",DIRECTORY_SEPARATOR,$class);
     }
 
     /**
@@ -179,7 +201,8 @@ class container implements iContainer {
      *
      * @return array app path to be cached
      */
-    function __sleep () {
+    function __sleep()
+    {
         return array('appPath');
     }
 

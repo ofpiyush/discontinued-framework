@@ -39,7 +39,8 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iCore extends iContainer {
+interface iCore extends iContainer
+{
 
     /**
      * Constructor
@@ -48,7 +49,7 @@ interface iCore extends iContainer {
      *
      * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( loader\iContainer $loader );
+    function __construct(loader\iContainer $loader);
 
     /**
      * Process
@@ -59,6 +60,6 @@ interface iCore extends iContainer {
      *
      * @return mixed
      */
-    function process ( $class );
+    function process($class);
 
 }

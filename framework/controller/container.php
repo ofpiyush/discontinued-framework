@@ -41,7 +41,8 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * Dependencies
@@ -95,11 +96,12 @@ class container implements iContainer {
      *
      * Sets up not found, home etc from routing
      *
-     * @param \sambhuti\core\iData        $routing
-     * @param \sambhuti\core\iCore        $core
+     * @param \sambhuti\core\iData $routing
+     * @param \sambhuti\core\iCore $core
      * @param \sambhuti\loader\iContainer $loader
      */
-    function __construct ( core\iData $routing, core\iCore $core, loader\iContainer $loader ) {
+    function __construct(core\iData $routing, core\iCore $core, loader\iContainer $loader)
+    {
         $this->routing = $routing;
         $this->core = $core;
         $this->loader = $loader;
@@ -118,7 +120,8 @@ class container implements iContainer {
      *
      * @return \sambhuti\controller\iController
      */
-    function get ( $command = null ) {
+    function get($command = null)
+    {
         if (empty($command)) {
             return $this->get('home');
         }
@@ -154,7 +157,8 @@ class container implements iContainer {
      *
      * @return null|\sambhuti\controller\iController controller instance
      */
-    function process ( $controller ) {
+    function process($controller)
+    {
         if (empty($this->controllers[$controller])) {
             $class = $this->loader->fetch('controller' . '\\' . $controller);
             if (null !== $class) {

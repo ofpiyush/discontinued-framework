@@ -38,7 +38,8 @@ namespace sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer {
+interface iContainer
+{
 
     /**
      * Get
@@ -49,5 +50,5 @@ interface iContainer {
      *
      * @return mixed
      */
-    function get ( $data = null );
+    function get($data = null);
 }

@@ -44,7 +44,8 @@ namespace sambhuti\model;
  * @copyright  2012 Piyush
  * @link       https://github.com/ginatrapani/ThinkUp/blob/master/webapp/_lib/dao/class.PDODAO.php
  */
-abstract class model {
+abstract class model
+{
 
     /**
      * Connection
@@ -62,7 +63,8 @@ abstract class model {
      *
      * @param \PDO $conn
      */
-    function __construct ( \PDO $conn ) {
+    function __construct(\PDO $conn)
+    {
         $this->conn = $conn;
     }
 
@@ -74,11 +76,12 @@ abstract class model {
      * @todo do some real exception handling
      *
      * @param  string $sql
-     * @param array   $bindings
+     * @param array $bindings
      *
      * @return \PDOStatement
      */
-    protected function execute ( $sql, array $bindings = array() ) {
+    protected function execute($sql, array $bindings = array())
+    {
         /** @var $stmt \PDOStatement */
         $stmt = $this->conn->prepare($sql);
         try {
@@ -101,7 +104,8 @@ abstract class model {
      *
      * @return mixed
      */
-    protected function fetch ( \PDOStatement $stmt ) {
+    protected function fetch(\PDOStatement $stmt)
+    {
         $result = $stmt->fetch();
         $stmt->closeCursor();
         return $result;
@@ -116,7 +120,8 @@ abstract class model {
      *
      * @return array
      */
-    protected function fetchAll ( \PDOStatement $stmt ) {
+    protected function fetchAll(\PDOStatement $stmt)
+    {
         $result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
@@ -131,7 +136,8 @@ abstract class model {
      *
      * @return int Update Count
      */
-    protected function updateCount ( \PDOStatement $stmt ) {
+    protected function updateCount(\PDOStatement $stmt)
+    {
         $count = $stmt->rowCount();
         $stmt->closeCursor();
         return $count;
@@ -147,7 +153,8 @@ abstract class model {
      *
      * @return int
      */
-    protected function getCount ( \PDOStatement $stmt ) {
+    protected function getCount(\PDOStatement $stmt)
+    {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         $row = $this->fetch($stmt);
         if (!$row or !isset($row['count'])) {
@@ -166,7 +173,8 @@ abstract class model {
      *
      * @return int
      */
-    protected function insertId ( \PDOStatement $stmt ) {
+    protected function insertId(\PDOStatement $stmt)
+    {
         $count = $this->updateCount($stmt);
         $id = $this->conn->lastinsertId();
         return ($count > 0 && $id > 0) ? $id : 0;
@@ -181,7 +189,8 @@ abstract class model {
      *
      * @return bool
      */
-    protected function isReturned ( \PDOStatement $stmt ) {
+    protected function isReturned(\PDOStatement $stmt)
+    {
         $row = $this->fetch($stmt);
         return ($row && count($row) > 0);
     }
@@ -195,7 +204,8 @@ abstract class model {
      *
      * @return array Array with named keys
      */
-    protected function assocRow ( \PDOStatement $stmt ) {
+    protected function assocRow(\PDOStatement $stmt)
+    {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetch($stmt);
     }
@@ -209,7 +219,8 @@ abstract class model {
      *
      * @return array Array of arrays
      */
-    protected function assocRows ( \PDOStatement $stmt ) {
+    protected function assocRows(\PDOStatement $stmt)
+    {
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $this->fetchAll($stmt);
     }
@@ -224,7 +235,8 @@ abstract class model {
      *
      * @return object
      */
-    protected function objRow ( \PDOStatement $stmt, $class ) {
+    protected function objRow(\PDOStatement $stmt, $class)
+    {
         $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
         return $this->fetch($stmt);
     }
@@ -239,7 +251,8 @@ abstract class model {
      *
      * @return array Array of objects
      */
-    protected function objRows ( \PDOStatement $stmt, $class ) {
+    protected function objRows(\PDOStatement $stmt, $class)
+    {
         $stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
         return $this->fetchAll($stmt);
     }
@@ -249,7 +262,8 @@ abstract class model {
      *
      * Caution! This will disconnect for ALL DAOs
      */
-    function disconnect () {
+    function disconnect()
+    {
         $this->conn = null;
     }
 }

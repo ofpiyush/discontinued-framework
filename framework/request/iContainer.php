@@ -38,7 +38,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer {
+interface iContainer extends core\iContainer
+{
 
     /**
      * Constructor
@@ -46,7 +47,7 @@ interface iContainer extends core\iContainer {
      * Should initializes request and response objects
      *
      */
-    function __construct ();
+    function __construct();
 
 
     /**
@@ -54,12 +55,12 @@ interface iContainer extends core\iContainer {
      *
      * @return array list of options for request data
      */
-    function web ();
+    function web();
 
     /**
      * Command line Request
      *
      * @return array list of options for request data
      */
-    function cli ();
+    function cli();
 }

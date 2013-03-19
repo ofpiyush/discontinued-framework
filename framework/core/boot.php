@@ -36,7 +36,8 @@ namespace sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class boot {
+class boot
+{
 
     /**
      * Request Container
@@ -52,7 +53,8 @@ class boot {
      *
      * @param \sambhuti\core\core $core
      */
-    function __construct ( core $core ) {
+    function __construct(core $core)
+    {
         $this->core = $core;
         $this->request = $core->get('request');
     }
@@ -66,7 +68,8 @@ class boot {
      *
      * @return \sambhuti\core\iData Response
      */
-    function go () {
+    function go()
+    {
         $this->core->get('controller')->get($this->request->get()->get('command'));
         return $this->request->get('response');
     }

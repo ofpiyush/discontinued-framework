@@ -55,7 +55,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * Request
@@ -83,7 +84,8 @@ class container implements iContainer {
      * Initializes request and response objects
      *
      */
-    function __construct () {
+    function __construct()
+    {
         $data = ISCLI ? $this->cli() : $this->web();
         $this->request = new core\data($data);
         $this->response = new core\data();
@@ -101,7 +103,8 @@ class container implements iContainer {
      *
      * @return \sambhuti\core\iData request or response object
      */
-    function get ( $type = null ) {
+    function get($type = null)
+    {
         if ($type === 'response') {
             return $this->response;
         }
@@ -116,7 +119,8 @@ class container implements iContainer {
      *
      * @return array list of options for request data
      */
-    function web () {
+    function web()
+    {
         $request_uri = $_SERVER["REQUEST_URI"];
         if (false !== ($pos = strpos($request_uri, '?'))) {
             $request_uri = substr($request_uri, 0, $pos);
@@ -127,7 +131,11 @@ class container implements iContainer {
             $command = substr($request_uri, strlen($path));
         }
         return array(
-            'command' => trim($command, "/"), 'get' => $_GET, 'post' => $_POST, 'server' => $_SERVER, 'file' => $_FILES,
+            'command' => trim($command, "/"),
+            'get' => $_GET,
+            'post' => $_POST,
+            'server' => $_SERVER,
+            'file' => $_FILES,
             'cookies' => $_COOKIE
         );
     }
@@ -139,7 +147,8 @@ class container implements iContainer {
      *
      * @return array list of options for request data
      */
-    function cli () {
+    function cli()
+    {
         return array('command' => 'cli', 'server' => $_SERVER, 'argv' => $_SERVER['argv'], 'argc' => $_SERVER['argc']);
     }
 }

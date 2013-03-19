@@ -38,7 +38,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer {
+class container implements iContainer
+{
 
     /**
      * Get
@@ -47,7 +48,8 @@ class container implements iContainer {
      *
      * @return void|\sambhuti\cache\iCache
      */
-    function get ( $type = null ) {
+    function get($type = null)
+    {
 
     }
 }

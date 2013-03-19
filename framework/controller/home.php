@@ -39,14 +39,16 @@ namespace sambhuti\controller;
  * @copyright  2012 Piyush
  */
 
-class home extends controller {
+class home extends controller
+{
 
     /**
      * Home page index
      *
      * @param array $args
      */
-    function index ( array $args = array() ) {
+    function index(array $args = array())
+    {
         echo "home loaded";
     }
 }

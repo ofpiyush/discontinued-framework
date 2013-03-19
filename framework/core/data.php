@@ -40,7 +40,8 @@ namespace sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class data implements iData {
+class data implements iData
+{
 
     /**
      * Data
@@ -58,7 +59,8 @@ class data implements iData {
      *
      * @param array $array
      */
-    function __construct ( array $array = array() ) {
+    function __construct(array $array = array())
+    {
         $this->data = $array;
     }
 
@@ -72,10 +74,11 @@ class data implements iData {
      *
      * @return array|mixed|null
      */
-    function get ( $key ) {
+    function get($key)
+    {
         $args = func_get_args();
         $tmp = $this->data;
-        foreach ( $args as $arg ) {
+        foreach ($args as $arg) {
             if (array_key_exists($arg, $tmp)) {
                 $tmp = $tmp[$arg];
             } else {
@@ -97,7 +100,8 @@ class data implements iData {
      * @return \sambhuti\core\iData
      * @throws \Exception
      */
-    function set ( $key, $value ) {
+    function set($key, $value)
+    {
         if (!array_key_exists($key, $this->data)) {
             $this->update($key, $value);
             return $this;
@@ -115,7 +119,8 @@ class data implements iData {
      *
      * @return \sambhuti\core\iData
      */
-    function update ( $key, $value ) {
+    function update($key, $value)
+    {
         $this->data[$key] = $value;
         return $this;
     }
@@ -127,7 +132,8 @@ class data implements iData {
      *
      * @return array
      */
-    function getAll () {
+    function getAll()
+    {
         return $this->data;
     }
 
@@ -140,7 +146,8 @@ class data implements iData {
      *
      * @return array|mixed|null
      */
-    function __get ( $key ) {
+    function __get($key)
+    {
         return $this->get($key);
     }
 
@@ -154,7 +161,8 @@ class data implements iData {
      *
      * @throws \Exception
      */
-    function __set ( $key, $value ) {
+    function __set($key, $value)
+    {
         throw new \Exception('Trying to save "' . $value . '" to Config "' . $key . '"
         via __set! Use set($key,$value) / update($key,$value) instead');
     }

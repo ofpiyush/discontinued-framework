@@ -40,7 +40,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-abstract class controller implements iController {
+abstract class controller implements iController
+{
 
     /**
      * Dependencies
@@ -74,7 +75,8 @@ abstract class controller implements iController {
      * @param \sambhuti\core\iData $request
      * @param \sambhuti\core\iData $response
      */
-    function __construct ( core\iData $request, core\iData $response ) {
+    function __construct(core\iData $request, core\iData $response)
+    {
         $this->request = $request;
         $this->response = $response;
     }
@@ -88,7 +90,8 @@ abstract class controller implements iController {
      *
      * @return \sambhuti\core\iData Response
      */
-    function get ( $id = null ) {
+    function get($id = null)
+    {
         return $this->response;
     }
 
@@ -101,5 +104,5 @@ abstract class controller implements iController {
      *
      * @return mixed|void
      */
-    abstract function index ( array $args = array() );
+    abstract function index(array $args = array());
 }
