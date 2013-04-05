@@ -41,7 +41,7 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer
+class Container implements IContainer
 {
 
     /**
@@ -50,21 +50,21 @@ class container implements iContainer
      * @static
      * @var array Array of dependency strings
      */
-    static $dependencies = array('config.routing', 'core', 'loader');
+    static $dependencies = ['config.routing', 'core', 'loader'];
 
     /**
      * Core
      *
      * Instance of Core
      *
-     * @var null|\sambhuti\core\iCore $core
+     * @var null|\sambhuti\core\ICore $core
      */
     protected $core = null;
 
     /**
      * Routing Config
      *
-     * @var null|\sambhuti\core\iData $routing
+     * @var null|\sambhuti\core\IData $routing
      */
     protected $routing = null;
 
@@ -73,14 +73,14 @@ class container implements iContainer
      *
      * Instance of Loader
      *
-     * @var null|\sambhuti\loader\iContainer $loader
+     * @var null|\sambhuti\loader\IContainer $loader
      */
     protected $loader = null;
 
     /**
      * Not Found Controller
      *
-     * @var null|\sambhuti\controller\iController
+     * @var null|\sambhuti\controller\IController
      */
     protected $notFound = null;
 
@@ -89,18 +89,18 @@ class container implements iContainer
      *
      * @var array
      */
-    protected $controllers = array();
+    protected $controllers = [];
 
     /**
      * Constructor
      *
      * Sets up not found, home etc from routing
      *
-     * @param \sambhuti\core\iData $routing
-     * @param \sambhuti\core\iCore $core
-     * @param \sambhuti\loader\iContainer $loader
+     * @param \sambhuti\core\IData $routing
+     * @param \sambhuti\core\ICore $core
+     * @param \sambhuti\loader\IContainer $loader
      */
-    function __construct(core\iData $routing, core\iCore $core, loader\iContainer $loader)
+    function __construct(core\IData $routing, core\ICore $core, loader\IContainer $loader)
     {
         $this->routing = $routing;
         $this->core = $core;
@@ -118,10 +118,11 @@ class container implements iContainer
      *
      * @param null $command
      *
-     * @return \sambhuti\controller\iController
+     * @return \sambhuti\controller\IController
      */
     function get($command = null)
     {
+        //@todo: start fixing 5.4 move from here
         if (empty($command)) {
             return $this->get('home');
         }
@@ -133,15 +134,15 @@ class container implements iContainer
         $controller = array_shift($args);
         $method = !empty($args) ? array_shift($args) : 'index';
 
-        if ('_' === $controller[0] && false === ISCLI) {
+        if (strpos($controller,'System_') !==false && false === ISCLI) {
             $object = $this->notFound;
-            $method = '_403';
+            $method = 'forbidden';
         } else {
             $object = $this->process($controller);
         }
-        if (null === $object || !is_callable(array($object, $method))) {
+        if (null === $object || !is_callable([$object, $method])) {
             $object = $this->notFound;
-            $method = '_404';
+            $method = 'notFound';
         }
         $object->$method($args);
 

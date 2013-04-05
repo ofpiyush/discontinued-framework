@@ -27,8 +27,10 @@
 
 namespace sambhuti\cache;
 
+use sambhuti\core;
+
 /**
- * Cache Interface
+ * cache Container
  *
  * @package    Sambhuti
  * @subpackage cache
@@ -36,18 +38,18 @@ namespace sambhuti\cache;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iCache
+class Container implements IContainer
 {
 
-    /*
-        function __construct ( $identifier );
+    /**
+     * Get
+     *
+     * @param null|string $type
+     *
+     * @return void|\sambhuti\cache\iCache
+     */
+    function get($type = null)
+    {
 
-        function store ( $data );
-
-        function fetch ();
-
-        function remove ();
-
-        function modified ();
-    */
+    }
 }

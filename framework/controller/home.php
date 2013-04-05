@@ -47,7 +47,7 @@ class home extends controller
      *
      * @param array $args
      */
-    function index(array $args = array())
+    function index(array $args = [])
     {
         echo "home loaded";
     }

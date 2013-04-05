@@ -25,42 +25,29 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\config;
-
-use sambhuti\core;
-use \sambhuti\loader;
+namespace sambhuti\cache;
 
 /**
- * config Container Interface
- *
- * All config files should be loaded and stored by the class implementing this
- * interface
+ * Cache Interface
  *
  * @package    Sambhuti
- * @subpackage config
+ * @subpackage cache
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer
+interface ICache
 {
 
-    /**
-     * Constructor
-     *
-     * @param \sambhuti\loader\iContainer $loader
-     */
-    function __construct(loader\iContainer $loader);
+    /*
+        function __construct ( $identifier );
 
+        function store ( $data );
 
-    /**
-     * Save
-     *
-     * @param                      $id
-     * @param \sambhuti\core\iData $data
-     * @param null $lazyId
-     *
-     * @return void|\sambhuti\config\iContainer
-     */
-    function save($id, core\iData $data, $lazyId = null);
+        function fetch ();
+
+        function remove ();
+
+        function modified ();
+    */
 }

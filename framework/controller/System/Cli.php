@@ -39,7 +39,7 @@ namespace sambhuti\controller;
  * @copyright  2012 Piyush
  *
  */
-class _cli extends controller
+class System_Cli extends Controller
 {
 
     /**
@@ -61,7 +61,7 @@ class _cli extends controller
      *
      * @param array $args
      */
-    function index(array $args = array())
+    function index(array $args = [])
     {
         $argv = $this->request->get('argv');
         //Get rid of filename
@@ -71,10 +71,10 @@ class _cli extends controller
         } else {
             $method = 'help';
         }
-        if (is_callable(array($this, $method))) {
+        if (is_callable([$this, $method])) {
             $this->$method($argv);
         } else {
-            $this->_404($method);
+            $this->notFound($method);
         }
     }
 
@@ -88,7 +88,7 @@ class _cli extends controller
      *
      * @param array $args
      */
-    function help(array $args = array())
+    function help(array $args = [])
     {
         $commands = $this->commands;
         if (0 != count($args)) {
@@ -116,7 +116,7 @@ class _cli extends controller
      *
      * @param array $args
      */
-    function app(array $args = array())
+    function app(array $args = [])
     {
         echo "\033[0;40;37mUnimplemented function\033[0m" . PHP_EOL;
     }
@@ -126,7 +126,7 @@ class _cli extends controller
      *
      * @param string $command
      */
-    function _404($command)
+    function notFound($command)
     {
         echo "\033[1;41;37m" . $command . " command not recognized\033[0m" . PHP_EOL;
         $this->help();

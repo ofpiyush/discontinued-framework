@@ -40,7 +40,7 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface iContainer extends core\iContainer
+interface IContainer extends core\IContainer
 {
 
 }

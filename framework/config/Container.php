@@ -42,7 +42,7 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class container implements iContainer
+class Container implements IContainer
 {
 
     /**
@@ -51,17 +51,17 @@ class container implements iContainer
      * @static
      * @var array Array of dependency strings
      */
-    static $dependencies = array('loader');
+    static $dependencies = ['loader'];
 
     /**
      * App Path
      *
      * Array of [namespace => Path] for lazy loading
      *
-     * @see \sambhuti\loader\loader::$appPath
+     * @see \sambhuti\loader\Loader::$appPath
      * @var array $appPaths
      */
-    protected $appPaths = array();
+    protected $appPaths = [];
 
     /**
      * Default Path
@@ -73,20 +73,20 @@ class container implements iContainer
     protected $defaultPath = '';
 
     /**
-     * Array of \sambhuti\core\iData objects
+     * Array of \sambhuti\core\IData objects
      *
      * @var array config objects
      */
-    protected $confs = array();
+    protected $confs = [];
 
     /**
      * Constructor
      *
      * Sets app paths and default path (last app path)
      *
-     * @param \sambhuti\loader\iContainer $loader
+     * @param \sambhuti\loader\IContainer $loader
      */
-    function __construct(loader\iContainer $loader)
+    function __construct(loader\IContainer $loader)
     {
         $this->appPaths = $loader->getApps();
         $this->defaultPath = end($this->appPaths);
@@ -100,7 +100,7 @@ class container implements iContainer
      *
      * @param null|string $id
      *
-     * @return \sambhuti\core\iData object
+     * @return \sambhuti\core\IData object
      */
     function get($id = null)
     {
@@ -119,7 +119,7 @@ class container implements iContainer
                     $config[$k] = $v;
                 }
             }
-            $this->confs[$id] = new core\data($config);
+            $this->confs[$id] = new core\Data($config);
         }
         return $this->confs[$id];
     }
@@ -130,15 +130,17 @@ class container implements iContainer
      * Saves data in a config object to the default path (last app path)
      * Path can be overridden by $appId namespace of the app path.
      *
-     * @see \sambhuti\loader\loader::addApp
+     * @see \sambhuti\loader\Loader::addApp
      *
      * @param string $id     config file identifier
-     * @param \sambhuti\core\iData $data   config object
+     * @param \sambhuti\core\IData $data   config object
      * @param null|string $appId namespace identifier
+     *
+     * @return void
      *
      * @throws \Exception
      */
-    function save($id, core\iData $data, $appId = null)
+    function save($id, core\IData $data, $appId = null)
     {
         $fileString = json_encode($data->getAll());
         $fullPath = $this->defaultPath;

@@ -38,7 +38,7 @@ namespace sambhuti\controller;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class _error extends controller
+class System_Error extends Controller
 {
 
     /**
@@ -46,7 +46,7 @@ class _error extends controller
      *
      * @param array $args
      */
-    function index(array $args = array())
+    function index(array $args = [])
     {
         echo $this->request->get('command') . " Unknown Error";
     }
@@ -54,7 +54,7 @@ class _error extends controller
     /**
      * 404 not found page
      */
-    function _404()
+    function notFound()
     {
         echo $this->request->get('command') . " not Found";
     }
@@ -62,7 +62,7 @@ class _error extends controller
     /**
      * 403 forbidden access page
      */
-    function _403()
+    function forbidden()
     {
         echo $this->request->get('command') . " forbidden access";
     }

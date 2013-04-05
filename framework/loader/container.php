@@ -57,7 +57,7 @@ class container implements iContainer
      *
      * @var array $appPath
      */
-    protected $appPath = array();
+    protected $appPath = [];
 
     /**
      * Constructor

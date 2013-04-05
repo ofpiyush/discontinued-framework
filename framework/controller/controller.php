@@ -51,7 +51,7 @@ abstract class controller implements iController
      * @static
      * @var array Array of dependency strings
      */
-    static $dependencies = array('request.request', 'request.response');
+    static $dependencies = ['request.request', 'request.response'];
 
     /**
      * Request
@@ -104,5 +104,5 @@ abstract class controller implements iController
      *
      * @return mixed|void
      */
-    abstract function index(array $args = array());
+    abstract function index(array $args = []);
 }

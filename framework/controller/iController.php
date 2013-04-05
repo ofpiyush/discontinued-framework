@@ -50,5 +50,5 @@ interface iController extends core\iContainer
      *
      * @return void|mixed
      */
-    function index(array $args = array());
+    function index(array $args = []);
 }
