@@ -24,8 +24,31 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\core;
+
+/**
+ * container Interface
+ *
+ * Base of every container on sambhuti
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface IContainer
+{
+
+    /**
+     * Get
+     *
+     * Every container should implement this in order to provide a clean interface
+     *
+     * @param null $data
+     *
+     * @return mixed
+     */
+    public function get($data = null);
+}

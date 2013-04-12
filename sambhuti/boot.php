@@ -24,8 +24,16 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+use sambhuti\loader;
+
+/**
+ * Sambhuti Root Path
+ *
+ * Path to sambhuti/framework
+ */
+define('SAMBHUTI_ROOT_PATH', realpath(dirname(__FILE__)) . '/');
+require_once(SAMBHUTI_ROOT_PATH . 'core/IContainer.php');
+require_once(SAMBHUTI_ROOT_PATH . 'loader/IContainer.php');
+require_once(SAMBHUTI_ROOT_PATH . 'loader/Container.php');
+$loader = new loader\Container();
+$loader->addApp('sambhuti', SAMBHUTI_ROOT_PATH);

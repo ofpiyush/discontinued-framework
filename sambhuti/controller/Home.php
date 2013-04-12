@@ -24,8 +24,31 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\controller;
+
+/**
+ * Home Controller
+ *
+ * Default controller for sambhuti
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+
+class Home extends Controller
+{
+
+    /**
+     * Home page index
+     *
+     * @param array $args
+     */
+    public function index()
+    {
+        echo "home loaded";
+    }
+}

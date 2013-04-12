@@ -24,8 +24,42 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\config;
+
+use sambhuti\core;
+use \sambhuti\loader;
+
+/**
+ * config Container Interface
+ *
+ * All config files should be loaded and stored by the class implementing this
+ * interface
+ *
+ * @package    Sambhuti
+ * @subpackage config
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface IContainer extends core\IContainer
+{
+
+    /**
+     * Constructor
+     *
+     * @param \sambhuti\loader\IContainer $loader
+     */
+    public function __construct(loader\IContainer $loader);
+
+    /**
+     * Save
+     *
+     * @param                      $id
+     * @param \sambhuti\core\IData $data
+     * @param null                 $lazyId
+     *
+     * @return void|\sambhuti\config\IContainer
+     */
+    public function save($id, core\IData $data, $lazyId = null);
+}

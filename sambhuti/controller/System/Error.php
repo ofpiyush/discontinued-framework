@@ -24,8 +24,48 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\controller\System;
+
+use sambhuti\controller\Controller;
+
+/**
+ * Error
+ *
+ * Implements all errors
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+class Error extends Controller
+{
+
+    /**
+     * Unknown error index
+     *
+     * @param array $args
+     */
+    public function index(array $args = [])
+    {
+        echo $this->request->get('command') . " Unknown Error";
+    }
+
+    /**
+     * 404 not found page
+     */
+    public function notFound()
+    {
+        echo $this->request->get('command') . " Not Found";
+    }
+
+    /**
+     * 403 forbidden access page
+     */
+    public function forbidden()
+    {
+        echo $this->request->get('command') . " Forbidden Access";
+    }
+}

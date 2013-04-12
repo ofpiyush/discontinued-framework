@@ -24,8 +24,31 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\controller;
+
+use sambhuti\core;
+
+/**
+ * controller Interface
+ *
+ * @package    Sambhuti
+ * @subpackage controller
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface IController extends core\IContainer
+{
+
+    /**
+     * Index page
+     *
+     * Should serve as the home page for every controller
+     *
+     * @param array $args
+     *
+     * @return void|mixed
+     */
+    public function index();
+}

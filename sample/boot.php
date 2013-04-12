@@ -30,6 +30,6 @@ use sambhuti\core;
 require_once($sambhuti_path . 'boot.php');
 $loader->addApp('sample', realpath($app_path));
 //keep 5.3 compatibility
-$core = new core\core($loader);
-$boot = new core\boot($core);
+$core = new core\Core($loader);
+$boot = new core\Boot($core);
 $boot->go();

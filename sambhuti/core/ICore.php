@@ -24,8 +24,42 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\core;
+
+use sambhuti\loader;
+
+/**
+ * core Interface
+ *
+ *
+ * @package    Sambhuti
+ * @subpackage core
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface ICore extends IContainer
+{
+
+    /**
+     * Constructor
+     *
+     * Should accept loader
+     *
+     * @param \sambhuti\loader\IContainer $loader
+     */
+    public function __construct(loader\IContainer $loader);
+
+    /**
+     * Process
+     *
+     * Should process string classname
+     *
+     * @param $class
+     *
+     * @return mixed
+     */
+    public function process($class);
+
+}

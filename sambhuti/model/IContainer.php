@@ -24,8 +24,30 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+
+namespace sambhuti\model;
+
+use sambhuti\core;
+use sambhuti\loader;
+
+/**
+ * model Container interface
+ *
+ *
+ * @package    Sambhuti
+ * @subpackage model
+ * @author     Piyush <piyush@cio.bz>
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @copyright  2012 Piyush
+ */
+interface IContainer extends core\iContainer
+{
+
+    /**
+     * Constructor
+     *
+     * @param \sambhuti\loader\iContainer $loader
+     * @param \sambhuti\core\iData        $databaseConfig database config
+     */
+    public function __construct(loader\iContainer $loader, core\iData $databaseConfig);
+}

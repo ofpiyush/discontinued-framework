@@ -24,8 +24,19 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-$app_path = "../";
-$sambhuti_path = "../../sambhuti/";
-/** @ignore */
-define('ISCLI', false);
-require_once($app_path . 'boot.php');
+$app_path = realpath('./');
+$sambhuti_path = dirname(__FILE__);
+/**
+ * Is Command line
+ *
+ * Boolean value stores if the current call is from the command line or not
+ */
+define('ISCLI', true);
+chdir($sambhuti_path);
+require_once 'boot.php';
+use sambhuti\core;
+
+//keep 5.3 compatibility
+$core = new core\Core($loader);
+$boot = new core\Boot($core);
+$boot->go();
