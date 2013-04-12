@@ -2,7 +2,7 @@
     "system": {
         "cli": "System\\Cli",
         "error": "System\\Error",
-        "home": "home.index"
+        "home": "Home::index"
     },
     "routes": {
     }

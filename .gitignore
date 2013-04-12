@@ -1,5 +1,5 @@
 *~
-sample/config/database.php
+sample/config/database.json
 .idea
 .buildpath
 .project

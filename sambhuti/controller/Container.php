@@ -169,7 +169,7 @@ class Container implements IContainer
             $mapping = $this->routes[$controller];
         }
         if (null !== $mapping) {
-            $mapping = explode('.', $mapping);
+            $mapping = explode('::', $mapping);
             $controller = $mapping[0];
             $method = !empty($mapping[1]) ? $mapping[1] : $method;
         }
