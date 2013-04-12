@@ -1,7 +1,7 @@
 #Sambhuti
 
 ##Requirements
-* php5.3
+* php5.4
 * SPL library
 
 ##Setting up: 
