@@ -118,7 +118,7 @@ class Container implements IContainer
         $this->loader = $loader;
         $type = strtolower($databaseConfig->get('type'));
         $this->type = $this->allTypes[$type];
-        $dsn = $type . ":dbname=" . $databaseConfig->get('select') . ";host=" . $databaseConfig->get(
+        $dsn = $type . ":dbname=" . $databaseConfig->get('dbname') . ";host=" . $databaseConfig->get(
             'database'
         ) . ";charset=utf8";
         try {

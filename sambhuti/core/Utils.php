@@ -67,14 +67,15 @@ class Utils
         return $output;
     }
 
-    public static function camelCase($string, $caps = false)
+    public static function camelCase($string, array $options = [])
     {
-        if ($caps) {
+        $options = static::arrayMergeRecursive(['delimiter'=>"_", 'caps' => false],$options);
+        if ($options['caps']) {
             $string = ucfirst($string);
         }
 
         return preg_replace_callback(
-            '/_([a-z])/',
+            '/'.$options['delimiter'].'([a-z])/',
             function ($c) {
                 return strtoupper($c[1]);
             },

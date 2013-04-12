@@ -3,5 +3,5 @@
     "host": "localhost",
     "username": "user",
     "password": "password",
-    "select": "sambhuti"
+    "dbname": "sambhuti"
 }
