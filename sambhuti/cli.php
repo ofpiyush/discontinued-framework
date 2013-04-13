@@ -33,7 +33,7 @@ $sambhuti_path = dirname(__FILE__);
  * Boolean value stores if the current call is from the command line or not
  */
 define('IS_SYSTEM', true);
-chdir($sambhuti_path);
+chdir($app_path);
 require_once 'boot.php';
 use sambhuti\core;
 
