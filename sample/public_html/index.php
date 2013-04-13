@@ -27,5 +27,5 @@
 $app_path = "../";
 $sambhuti_path = "../../sambhuti/";
 /** @ignore */
-define('ISCLI', false);
+define('IS_SYSTEM', false);
 require_once($app_path . 'boot.php');

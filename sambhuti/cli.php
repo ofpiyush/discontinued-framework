@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Sambhuti
@@ -27,11 +28,11 @@
 $app_path = realpath('./');
 $sambhuti_path = dirname(__FILE__);
 /**
- * Is Command line
+ * Is System call
  *
  * Boolean value stores if the current call is from the command line or not
  */
-define('ISCLI', true);
+define('IS_SYSTEM', true);
 chdir($sambhuti_path);
 require_once 'boot.php';
 use sambhuti\core;

@@ -1,6 +1,6 @@
 {
     "system": {
-        "cli": "System\\Cli",
+        "cli": "System\\Cli::index",
         "error": "System\\Error",
         "home": "Home::index"
     },

@@ -144,8 +144,9 @@ class Container implements IContainer
         $args = explode('/', $command);
         $controller = array_shift($args);
         $method = !empty($args) ? array_shift($args) : 'index';
-        $this->mapRoute($controller, $method);
-        if (false !== strpos($controller, 'System') && false === ISCLI) {
+        $type = (IS_SYSTEM) ? "system" : "routes";
+        $this->mapRoute($controller, $method, $type);
+        if (false !== strpos($controller, 'System') && false === IS_SYSTEM) {
             $object = $this->error;
             $method = 'forbidden';
         } else {
@@ -160,13 +161,13 @@ class Container implements IContainer
         return $object;
     }
 
-    public function mapRoute(&$controller, &$method)
+    public function mapRoute(&$controller, &$method, $type = "routes")
     {
         $mapping = null;
-        if (!empty($this->routes[$controller . '/' . $method])) {
-            $mapping = $this->routes[$controller . '/' . $method];
-        } elseif (!empty($this->routes[$controller])) {
-            $mapping = $this->routes[$controller];
+        if (!empty($this->{$type}[$controller . '/' . $method])) {
+            $mapping = $this->{$type}[$controller . '/' . $method];
+        } elseif (!empty($this->{$type}[$controller])) {
+            $mapping = $this->{$type}[$controller];
         }
         if (null !== $mapping) {
             $mapping = explode('::', $mapping);

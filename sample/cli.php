@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Sambhuti
@@ -27,6 +28,6 @@
 $app_path = "./";
 $sambhuti_path = "../framework/";
 /** @ignore */
-define('ISCLI', true);
+define('IS_SYSTEM', true);
 chdir(dirname(__FILE__));
 require_once($app_path . 'boot.php');

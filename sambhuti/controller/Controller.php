@@ -100,8 +100,6 @@ abstract class Controller implements IController
      *
      * Should implement as index page for all controllers
      *
-     * @param array $args
-     *
      * @return mixed|void
      */
     abstract public function index();

@@ -80,7 +80,7 @@ abstract class Model
      *
      * @return \PDOStatement
      */
-    protected function execute($sql, array $bindings = array())
+    protected function execute($sql, array $bindings = [])
     {
         /** @var $stmt \PDOStatement */
         $stmt = $this->conn->prepare($sql);

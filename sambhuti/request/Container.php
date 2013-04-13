@@ -30,18 +30,18 @@ use sambhuti\core;
  *
  * Container for request and response objects
  * Differentiates between web and cli request and populates the request object appropriately
- * Can be accessed by the string 'request'. As the get method is supposed to give out \sambhuti\core\iData instance
- * every 'request.*' should be marked with \sambhuti\core\iData
+ * Can be accessed by the string 'request'. As the get method is supposed to give out \sambhuti\core\IData instance
+ * every 'request.*' should be marked with \sambhuti\core\IData
  *
  * <code>
  * use sambhuti\core;
- * class test implements core\iContainer {
+ * class test implements core\IContainer {
  *     static $dependencies = array('request','request.request','request.response');
  *     public $requestContainer = null;
  *     public $request = null;
  *     public $response = null;
  *
- *     function __construct(\sambhuti\request\iContainer $container,core\iData $request, core\iData $response) {
+ *     function __construct(\sambhuti\request\IContainer $container,core\IData $request, core\IData $response) {
  *         $this->requestContainer = $container;
  *         $this->request = $request;
  *         $this->response = $response;
@@ -86,7 +86,7 @@ class Container implements IContainer
      */
     public function __construct()
     {
-        $data = ISCLI ? $this->cli() : $this->web();
+        $data = IS_SYSTEM ? $this->cli() : $this->web();
         $this->request = new core\Data($data);
         $this->response = new core\Data();
 

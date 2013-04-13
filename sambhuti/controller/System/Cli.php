@@ -63,7 +63,7 @@ class Cli extends Controller
      *
      * @param array $args
      */
-    public function index(array $args = [])
+    public function index()
     {
         $argv = $this->request->get('argv');
         //Get rid of filename

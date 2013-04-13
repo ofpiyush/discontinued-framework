@@ -52,7 +52,7 @@ class Container implements IContainer
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = array('loader', 'config.database');
+    public static $dependencies = ['loader', 'config.database'];
 
     /**
      * Connection
@@ -64,25 +64,25 @@ class Container implements IContainer
     protected $connection = null;
 
     /**
-     * All types
+     * All dbmses
      *
-     * Stores all db type data name identifiers
+     * Stores all dbms data name identifiers
      *
      * @todo move this to a config sometime
      *
      * @var array
      */
-    protected $allTypes = array('mysql' => 'MySQL');
+    protected $allDBMS = ['mysql' => 'MySQL'];
 
     /**
-     * Type
+     * dbms
      *
      * Stores Db type identifier
      * Eg: mysql
      *
      * @var string
      */
-    protected $type = '';
+    protected $dbms = '';
 
     /**
      * Loader
@@ -100,7 +100,7 @@ class Container implements IContainer
      *
      * @var array
      */
-    protected $models = array();
+    protected $models = [];
 
     /**
      * Constructor
@@ -116,13 +116,13 @@ class Container implements IContainer
     public function __construct(loader\IContainer $loader, core\IData $databaseConfig)
     {
         $this->loader = $loader;
-        $type = strtolower($databaseConfig->get('type'));
-        $this->type = $this->allTypes[$type];
-        $dsn = $type . ":dbname=" . $databaseConfig->get('dbname') . ";host=" . $databaseConfig->get(
-            'database'
+        $dbms = strtolower($databaseConfig->get('dbms'));
+        $this->dbms = $this->allDBMS[$dbms];
+        $dsn = $dbms . ":dbname=" . $databaseConfig->get('name') . ";host=" . $databaseConfig->get(
+            'host'
         ) . ";charset=utf8";
         try {
-            $this->connection = new \PDO($dsn, $databaseConfig->get('username'), $databaseConfig->get('password'));
+            $this->connection = new \PDO($dsn, $databaseConfig->get('user'), $databaseConfig->get('pass'));
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
         }
@@ -136,13 +136,13 @@ class Container implements IContainer
      * @param null|string $id
      *
      * @fixme make model interface and @return that instead.
-     * @return \sambhuti\model\model
+     * @return \sambhuti\model\Model
      * @throws \Exception
      */
     public function get($id = null)
     {
         if (empty($this->models[$id])) {
-            $class = $this->loader->fetch('model\\' . $this->type . '\\' . $id);
+            $class = $this->loader->fetch('model\\' . $this->dbms . '\\' . $id);
             if (null === $class) {
                 $this->models[$id] = new $class($this->connection);
             } else {
