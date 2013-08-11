@@ -150,6 +150,9 @@ class Container implements IContainer
             if (empty($uri)) {
                 return $this->get('home');
             }
+            if(!empty($this->controllers[$uri])) {
+                return $this->controllers[$uri];
+            }
             foreach ($this->routes as $route) {
                 $mapping = $this->mapRoute($route);
                 if ($mapping) {
@@ -170,7 +173,7 @@ class Container implements IContainer
             if (null === $object || !is_callable([$object, $action])) {
                 throw new \Exception("notFound");
             }
-            $object->$action($args);
+            $object->$action(new core\Data($args));
         } catch (\Exception $e) {
             $object = $this->error;
             $action = $e->getMessage();
