@@ -1,0 +1,16 @@
+{
+    "system": {
+        "cli": "System\\Cli::index",
+        "error": "System\\Error",
+        "home": "Home::index"
+    },
+    "routes": {
+        "human-readable-default": {
+            "uri": "(:controller(/:action))",
+            "defaults": {
+                "controller": "Home",
+                "action": "index"
+            }
+        }
+    }
+}
