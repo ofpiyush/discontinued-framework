@@ -25,74 +25,53 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\config;
+namespace sambhuti\controller\System;
 
 use sambhuti\core;
-use sambhuti\loader;
 
 /**
- * config Container
+ * Error
  *
- * All config files are loaded and stored by this class
- *
+ * Implements all errors
  *
  * @package    Sambhuti
- * @subpackage config
+ * @subpackage controller
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Container implements IContainer
+class Error extends Controller
 {
 
-    /**
-     * Dependencies
-     *
-     * @static
-     * @var array Array of dependency strings
-     */
-    public static $dependencies = ['loader'];
+    public static $codes = [0 => 'index', 301 => 'redirect', 403 => 'forbidden', 404 => 'notFound'];
 
     /**
-     * Loader instance
+     * Unknown error index
      *
-     * @var null|\sambhuti\loader\IContainer
+     * @param array $args
      */
-    protected $loader = null;
-
-    /**
-     * Conf Instance
-     *
-     * @var null|\sambhuti\config\IConfig
-     */
-    protected $instance = null;
-
-    /**
-     * Constructor
-     *
-     * @param loader\IContainer $loader
-     *
-     * @throws \Exception
-     */
-    public function __construct(loader\IContainer $loader)
+    public function index(core\IData $args)
     {
-        $this->loader = $loader;
-        if (!($adapter = $loader->fetch('config\\' . SAMBHUTI_CONFIG_ADAPTER))) {
-            throw new \Exception("Config Adapter " . SAMBHUTI_CONFIG_ADAPTER . " not found");
-        }
-        $this->instance = new $adapter($loader);
+        echo $this->request->get('uri') . " Unknown Error <br/> Details: " . $args->get('error');
     }
 
     /**
-     * Get
-     *
-     * @param null|string $id
-     *
-     * @return \sambhuti\core\IData object
+     * 404 not found page
      */
-    public function get($id = null)
+    public function notFound(core\IData $args)
     {
-        return $this->instance->get($id);
+        echo $this->request->get('uri') . " Not Found<br/> Details: " . $args->get('error');
     }
 
+    /**
+     * 403 forbidden access page
+     */
+    public function forbidden(core\IData $args)
+    {
+        echo $this->request->get('uri') . " Forbidden Access<br/> Details: " . $args->get('error');
+    }
+
+    public function redirect(core\IData $args)
+    {
+    }
 }

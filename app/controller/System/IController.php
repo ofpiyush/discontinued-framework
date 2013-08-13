@@ -46,9 +46,8 @@ interface IController extends core\IContainer
      *
      * Should serve as the home page for every controller
      *
-     * @internal param array $args
-     *
+     * @param array $args
      * @return void|mixed
      */
-    public function index();
+    public function index(core\IData $args);
 }

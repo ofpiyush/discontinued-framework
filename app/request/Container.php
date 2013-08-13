@@ -83,15 +83,6 @@ class Container implements IContainer
     public static $dependencies = ['config.main'];
 
     /**
-     * Response
-     *
-     * Stores response data later passed to controller
-     *
-     * @var null|\sambhuti\core\IData
-     */
-    protected $response = null;
-
-    /**
      * Constructor
      *
      * Initializes request and response objects
@@ -101,26 +92,20 @@ class Container implements IContainer
     {
         $this->config = $config;
         $this->request = new core\Data($this->data());
-        $this->response = new core\Data();
     }
 
     /**
      * Get
      *
      * Implements abstract Get method
-     * Gives \sambhuti\request\Container::$response on type 'response' and
-     * \sambhuti\request\Container::$request otherwise
+     * Gives \sambhuti\request\Container::$request
      *
      * @param string|null $type type of object needed
      *
-     * @return \sambhuti\core\IData request or response object
+     * @return \sambhuti\core\IData request object
      */
     public function get($type = null)
     {
-        if ($type === 'response') {
-            return $this->response;
-        }
-
         return $this->request;
     }
 

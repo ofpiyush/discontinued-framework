@@ -1,0 +1,6 @@
+{
+    "handler": "Volt",
+    "view_dir": "app/view/",
+    "compile_dir": "generated/view/",
+    "smart_reload": true
+}

@@ -25,53 +25,27 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\core;
+namespace sambhuti\view;
+
+use sambhuti\core;
 
 /**
- * Boot Class
+ * View Container Interface
  *
  * @package    Sambhuti
- * @subpackage core
+ * @subpackage view
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Boot
+interface IContainer extends core\IContainer
 {
-
-    /**
-     * Request Container
-     *
-     * @var null|\sambhuti\request\IContainer
-     */
-    private $request = null;
 
     /**
      * Constructor
      *
-     * Sets up everything
-     *
-     * @param \sambhuti\core\Core $core
+     * Should set up view handler
      */
-    public function __construct(Core $core)
-    {
-        $this->core = $core;
-        $this->request = $core->get('request');
-    }
+    public function __construct(core\core $core, core\IData $configMain);
 
-    /**
-     * Go
-     *
-     * Heart of Sambhuti's processing
-     *
-     * @todo add templating here or in a new method
-     *
-     * @return \sambhuti\core\iData Response
-     */
-    public function go()
-    {
-        $this->core->get('controller')->get($this->request->get()->get('uri'));
-
-        return $this->request->get('response');
-    }
 }

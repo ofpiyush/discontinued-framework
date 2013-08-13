@@ -19,51 +19,37 @@
  * You should have received a copy of the GNU General Public License
  * along with Sambhuti.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package   Sambhuti
- * @author    Piyush <piyush@cio.bz>
- * @license   http://www.gnu.org/licenses/gpl.html
- * @copyright 2012 Piyush
  */
 
-namespace sambhuti\controller\System;
+namespace sambhuti\view;
+
+use Phalcon\DI\FactoryDefault;
+use Phalcon\Mvc\View;
+use Phalcon\Mvc\View\Engine;
+use sambhuti\core;
 
 /**
- * Error
- *
- * Implements all errors
+ * View Interface
  *
  * @package    Sambhuti
- * @subpackage controller
+ * @subpackage view
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class ErrorController extends Controller
+interface IView
 {
 
-    /**
-     * Unknown error index
-     *
-     * @param array $args
-     */
-    public function index(array $args = [])
-    {
-        echo $this->request->get('command') . " Unknown Error";
-    }
 
-    /**
-     * 404 not found page
-     */
-    public function notFound()
-    {
-        echo $this->request->get('command') . " Not Found";
-    }
+    function __construct(core\IData $viewConf);
 
-    /**
-     * 403 forbidden access page
-     */
-    public function forbidden()
-    {
-        echo $this->request->get('command') . " Forbidden Access";
-    }
+    function get();
+
+    function render($key, $value);
+
+    function getData();
+
+    function set($key, $value);
+
+    function instance();
 }

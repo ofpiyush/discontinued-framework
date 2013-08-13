@@ -49,7 +49,7 @@ class Core implements ICore
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = array('loader');
+    public static $dependencies = ['loader'];
 
     /**
      * Processed
@@ -58,7 +58,7 @@ class Core implements ICore
      *
      * @var array
      */
-    protected $processed = array();
+    protected $processed = [];
 
     /**
      * Loader
@@ -79,8 +79,8 @@ class Core implements ICore
     public function __construct(loader\IContainer $loader)
     {
         $this->loader = $loader;
-        $this->processed['loader'] = $loader;
-        $this->processed['core'] = $this;
+        $this->processed['Container']['loader'] = $loader;
+        $this->processed['Container']['core'] = $this;
     }
 
     /**
@@ -91,37 +91,42 @@ class Core implements ICore
      *
      * @param null|string $identifier
      *
-     * @return mixed|\sambhuti\core\IContainer container or response of "get" method based on string
+     * @param string $type
      * @throws \Exception
+     * @return mixed|\sambhuti\core\IContainer container or response of "get" method based on string
      */
-    public function get($identifier = null)
+    public function get($identifier = null, $type = 'Container')
     {
         if (null === $identifier || 'core' === $identifier) {
             return $this;
         }
-        if (empty($this->processed[$identifier])) {
+        if (empty($this->processed[$type][$identifier])) {
             if (false === strpos($identifier, '.')) {
-                $this->processed[$identifier] = $this->process($this->loader->fetch($identifier . "\\Container"));
+                $class = $this->loader->fetch($identifier . "\\" . $type);
+                if (empty($class)) {
+                    throw new \Exception("Cannot find " . $identifier . "\\" . $type);
+                }
+                $this->processed[$type][$identifier] = $this->process($class);
             } else {
                 $parts = explode('.', $identifier);
                 if ($parts[0] == 'core') {
                     unset($parts[0]);
-                    $this->processed[$identifier] = $this->get(implode('.', $parts));
+                    $this->processed[$type][$identifier] = $this->get(implode('.', $parts));
                 } else {
                     $current = $this;
                     foreach ($parts as $part) {
                         if (!is_object($current)) {
-                            throw new \Exception ('Cannot load ' . $identifier . ' dependency ' . $part . ' can not be loaded from a non-object');
+                            throw new \Exception ('Cannot load ' . $identifier . '\\' . $type . ' dependency ' . $part . ' can not be loaded from a non-object');
                         }
-                        $current = $current->get($part);
+                        $current = $current->get($part, $type);
                     }
-                    $this->processed[$identifier] = $current;
+                    $this->processed[$type][$identifier] = $current;
                 }
             }
 
         }
 
-        return $this->processed[$identifier];
+        return $this->processed[$type][$identifier];
     }
 
 
@@ -140,9 +145,9 @@ class Core implements ICore
         if (empty($class) || !class_exists($class)) {
             throw new \Exception($class . ' not found');
         }
-        $dependencies = array();
+        $dependencies = [];
         if (!empty($class::$dependencies)) {
-            $dependencies = array_map(array($this, 'get'), $class::$dependencies);
+            $dependencies = @array_map(array($this, 'get'), $class::$dependencies);
         }
         $count = count($dependencies);
         //implement an ugly hack for speed

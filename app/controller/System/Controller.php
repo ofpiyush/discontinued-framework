@@ -28,6 +28,7 @@
 namespace sambhuti\controller\System;
 
 use sambhuti\core;
+use sambhuti\view\IView;
 
 /**
  * Controller abstract
@@ -51,7 +52,7 @@ abstract class Controller implements IController
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['request.request', 'request.response'];
+    public static $dependencies = ['request.request', 'view.view'];
 
     /**
      * Request
@@ -61,11 +62,11 @@ abstract class Controller implements IController
     protected $request = null;
 
     /**
-     * Response
+     * View
      *
-     * @var null|\sambhuti\core\IData $response
+     * @var null|\sambhuti\view\IView
      */
-    protected $response = null;
+    protected $view = null;
 
     /**
      * Constructor
@@ -73,12 +74,12 @@ abstract class Controller implements IController
      * Should always be called from child constructors
      *
      * @param \sambhuti\core\IData $request
-     * @param \sambhuti\core\IData $response
+     * @param \sambhuti\view\IView $view
      */
-    public function __construct(core\IData $request, core\IData $response)
+    public function __construct(core\IData $request, $view)
     {
         $this->request = $request;
-        $this->response = $response;
+        $this->view = $view;
     }
 
     /**
@@ -88,11 +89,11 @@ abstract class Controller implements IController
      *
      * @param null $id
      *
-     * @return \sambhuti\core\IData Response
+     * @return \sambhuti\view\
      */
     public function get($id = null)
     {
-        return $this->response;
+        return $this->view;
     }
 
     /**
@@ -100,7 +101,8 @@ abstract class Controller implements IController
      *
      * Should implement as index page for all controllers
      *
+     * @param \sambhuti\core\IData $args
      * @return mixed|void
      */
-    abstract public function index();
+    abstract public function index(core\IData $args);
 }

@@ -29,6 +29,7 @@ namespace sambhuti\controller;
 
 use sambhuti\core;
 use sambhuti\loader;
+use sambhuti\controller\System\Exception;
 
 /**
  * Controller Container
@@ -50,7 +51,7 @@ class Container implements IContainer
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['config.routing', 'core', 'loader', 'request.request'];
+    public static $dependencies = ['config.routing', 'core', 'request.request'];
 
     /**
      * Core
@@ -94,7 +95,7 @@ class Container implements IContainer
     /**
      * Not Found Controller
      *
-     * @var null|\sambhuti\controller\IController
+     * @var null|\sambhuti\controller\System\Error
      */
     protected $error = null;
 
@@ -112,18 +113,15 @@ class Container implements IContainer
      *
      * @param \sambhuti\core\IData $routing instance of routing
      * @param \sambhuti\core\ICore $core    instance of Core
-     * @param \sambhuti\loader\IContainer $loader  instance of Loader
      * @param \sambhuti\core\IData $request instance of request
      */
-    public function __construct(core\IData $routing, core\ICore $core, loader\IContainer $loader, core\IData $request)
+    public function __construct(core\IData $routing, core\ICore $core, core\IData $request)
     {
         $this->routing = $routing;
         $this->addRoutes($routing->get("routes"));
         $this->system = $routing->get("system");
         $this->core = $core;
-        $this->loader = $loader;
         $this->error = $this->process($this->system['error']);
-        $this->controllers['home'] = $this->process($this->system['home']);
         $this->request = $request;
     }
 
@@ -141,18 +139,12 @@ class Container implements IContainer
      *
      * @param null $uri
      *
-     * @return \sambhuti\controller\IController
+     * @return \sambhuti\controller\System\IController
      */
     public function get($uri = null)
     {
         try {
             $this->request->update('uri', $uri);
-            if (empty($uri)) {
-                return $this->get('home');
-            }
-            if(!empty($this->controllers[$uri])) {
-                return $this->controllers[$uri];
-            }
             foreach ($this->routes as $route) {
                 $mapping = $this->mapRoute($route);
                 if ($mapping) {
@@ -160,24 +152,29 @@ class Container implements IContainer
                 }
             }
             if (empty($mapping)) {
-                throw new \Exception("notFound");
+                throw new Exception("Not Found", 404);
             }
             extract($mapping, EXTR_OVERWRITE);
             $controller = core\Utils::camelCase($controller, ['caps' => true]);
             $action = core\Utils::camelCase($action);
             if (0 === strpos($controller, 'System')) {
-                throw new \Exception("forbidden");
-            } else {
-                $object = $this->process($controller);
+                throw new Exception("Forbidden access to System", 403);
             }
+            if ('Container' === $controller) {
+                throw new Exception("Can't load Container Controller", 404);
+            }
+            $object = $this->process($controller);
             if (null === $object || !is_callable([$object, $action])) {
-                throw new \Exception("notFound");
+                throw new Exception("Not Callable", 404);
             }
             $object->$action(new core\Data($args));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $object = $this->error;
-            $action = $e->getMessage();
-            $object->$action();
+            $action = 'index';
+            if (array_key_exists($e->getCode(), $object::$codes)) {
+                $action = $object::$codes[$e->getCode()];
+            }
+            $object->$action(new core\Data(['error' => $e->getMessage()]));
         }
         return $object;
     }
@@ -187,8 +184,8 @@ class Container implements IContainer
         foreach ($routes as $name => $route) {
             $regex = isset($route['regex']) ? $route['regex'] : [];
             $this->routes[$name] = [
-                'uri' => isset($route['uri']) ? $this->compileRegex($route['uri'], $regex) : NULL,
-                'subdomain' => isset($route['subdomain']) ? $this->compileRegex($route['subdomain'], $regex) : NULL,
+                'uri' => isset($route['uri']) ? $this->compileRegex($route['uri'], $regex) : null,
+                'subdomain' => isset($route['subdomain']) ? $this->compileRegex($route['subdomain'], $regex) : null,
                 'defaults' => isset($route['defaults']) ? $route['defaults'] : [],
                 'callbacks' => isset($route['callbacks']) ? $route['callbacks'] : [],
             ];
@@ -232,37 +229,49 @@ class Container implements IContainer
         $args = $uri_args = $subdomain_args = [];
 
         // Check if URI matches
-        if ($route['uri'])
-            if (!preg_match($route['uri'], $uri, $uri_args))
+        if ($route['uri']) {
+            if (!preg_match($route['uri'], $uri, $uri_args)) {
                 return false;
+            }
+        }
 
         // Check if the subdomain matches
-        if ($route['subdomain'])
-            if (!preg_match($route['subdomain'], $subdomain, $subdomain_args))
+        if ($route['subdomain']) {
+            if (!preg_match($route['subdomain'], $subdomain, $subdomain_args)) {
                 return false;
+            }
+        }
 
         // Extract named arguments from subdomain first, then from URI, so that URI will overwrite in the case of name conflict.
-        foreach ($subdomain_args as $k => $v)
-            if (!is_int($k))
+        foreach ($subdomain_args as $k => $v) {
+            if (!is_int($k)) {
                 $args[$k] = $v;
-        foreach ($uri_args as $k => $v)
-            if (!is_int($k))
+            }
+        }
+        foreach ($uri_args as $k => $v) {
+            if (!is_int($k)) {
                 $args[$k] = $v;
+            }
+        }
 
         // Populate default values.
-        foreach ($route['defaults'] as $k => $v)
-            if (!isset($args[$k]) || $args[$k] === '')
+        foreach ($route['defaults'] as $k => $v) {
+            if (!isset($args[$k]) || $args[$k] === '') {
                 $args[$k] = $v;
+            }
+        }
 
         // Are there user callbacks?
         // If callbacks return something falseish, it's a failed match.
         // If callbacks return an array, then it should replace $args.
         foreach ($route['callbacks'] as $filter) {
             $result = call_user_func($filter, $route, $args, $this->request);
-            if (!$result)
+            if (!$result) {
                 return false;
-            if (is_array($result))
+            }
+            if (is_array($result)) {
                 $args = $result;
+            }
         }
 
         // No controller or action?  Then the route did not match.
@@ -282,19 +291,13 @@ class Container implements IContainer
      *
      * @param string $controller name
      *
-     * @return null|\sambhuti\controller\IController controller instance
+     * @return null|\sambhuti\controller\System\IController controller instance
      */
     public function process($controller)
     {
         if (empty($this->controllers[$controller])) {
-            $class = $this->loader->fetch('controller' . '\\' . $controller . "Controller");
-            if (null !== $class) {
-                $this->controllers[$controller] = $this->core->process($class);
-            } else {
-                $this->controllers[$controller] = null;
-            }
+            $this->controllers[$controller] = $this->core->get('controller', $controller);
         }
-
         return $this->controllers[$controller];
     }
 }

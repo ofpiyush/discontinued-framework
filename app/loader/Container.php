@@ -120,7 +120,6 @@ class Container implements IContainer
 
             return true;
         }
-
         return false;
     }
 

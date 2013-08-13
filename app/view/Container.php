@@ -25,74 +25,40 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\config;
+namespace sambhuti\view;
 
 use sambhuti\core;
 use sambhuti\loader;
 
 /**
- * config Container
- *
- * All config files are loaded and stored by this class
- *
+ * View Container
  *
  * @package    Sambhuti
- * @subpackage config
+ * @subpackage view
  * @author     Piyush <piyush@cio.bz>
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Container implements IContainer
+Class Container implements IContainer
 {
 
-    /**
-     * Dependencies
-     *
-     * @static
-     * @var array Array of dependency strings
-     */
-    public static $dependencies = ['loader'];
-
-    /**
-     * Loader instance
-     *
-     * @var null|\sambhuti\loader\IContainer
-     */
-    protected $loader = null;
-
-    /**
-     * Conf Instance
-     *
-     * @var null|\sambhuti\config\IConfig
-     */
-    protected $instance = null;
+    public static $dependencies = ['core', 'config.view'];
+    protected $config = null;
+    protected $view = null;
 
     /**
      * Constructor
      *
-     * @param loader\IContainer $loader
-     *
-     * @throws \Exception
      */
-    public function __construct(loader\IContainer $loader)
+    public function __construct(core\Core $core, core\IData $config)
     {
-        $this->loader = $loader;
-        if (!($adapter = $loader->fetch('config\\' . SAMBHUTI_CONFIG_ADAPTER))) {
-            throw new \Exception("Config Adapter " . SAMBHUTI_CONFIG_ADAPTER . " not found");
-        }
-        $this->instance = new $adapter($loader);
+        $handler = $config->get('handler');
+        $this->view = $core->get("view", $handler);
     }
 
-    /**
-     * Get
-     *
-     * @param null|string $id
-     *
-     * @return \sambhuti\core\IData object
-     */
-    public function get($id = null)
+    public function get($view = null)
     {
-        return $this->instance->get($id);
+        return $this->view;
     }
 
 }

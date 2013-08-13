@@ -25,13 +25,11 @@
  * @copyright 2012 Piyush
  */
 
-namespace sambhuti\controller;
+namespace sambhuti\controller\System;
 
-use sambhuti\core;
-use sambhuti\loader;
 
 /**
- * controller Container Interface
+ * Exception
  *
  * @package    Sambhuti
  * @subpackage controller
@@ -39,28 +37,7 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-interface IContainer extends core\IContainer
+class Exception extends \Exception
 {
 
-    /**
-     * Constructor
-     *
-     * Should set up not found, home etc from routing
-     *
-     * @param \sambhuti\core\IData $routing instance of routing
-     * @param \sambhuti\core\ICore $core    instance of Core
-     * @param \sambhuti\core\IData $request instance of request
-     */
-    public function __construct(core\IData $routing, core\ICore $core, core\IData $request);
-
-    /**
-     * Process
-     *
-     * Should process single controller identifier to full name and return instance or null
-     *
-     * @param string controller name
-     *
-     * @return null|\sambhuti\controller\IController controller instance
-     */
-    public function process($controller);
 }

@@ -50,7 +50,7 @@ class Data implements IData
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Constructor
@@ -59,7 +59,7 @@ class Data implements IData
      *
      * @param array $array
      */
-    public function __construct(array $array = array())
+    public function __construct(array $array = [])
     {
         $this->data = $array;
     }
