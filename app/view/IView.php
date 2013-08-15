@@ -40,7 +40,7 @@ interface IView
 
     function __construct(core\IData $viewConf);
 
-    function render($key, $value);
+    function render($path);
 
     function getData();
 

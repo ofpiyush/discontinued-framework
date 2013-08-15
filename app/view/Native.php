@@ -47,13 +47,9 @@ class Native implements IView
     }
 
 
-    function render($key, $value)
+    function render($path)
     {
-        if (!empty($key)) {
-            $file = $key . "/" . $value . '.php';
-        } else {
-            $file = $value . '.php';
-        }
+        $file = $path . '.php';
         ob_start();
         self::load($this->vars, $this->conf->get("view_dir") . $file);
         $this->data = ob_get_clean();

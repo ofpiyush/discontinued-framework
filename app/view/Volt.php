@@ -23,7 +23,8 @@
 
 namespace sambhuti\view;
 
-use Phalcon\DI\FactoryDefault;
+use Phalcon\DI;
+use Phalcon\Mvc\Url;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine;
 use sambhuti\core;
@@ -59,7 +60,7 @@ class Volt implements IView
         if (!extension_loaded('phalcon')) {
             throw new \Exception("Phalcon Not loaded");
         }
-        $di = new FactoryDefault();
+        $di = new DI();
         $di->set(
             'view',
             function () use ($viewConf) {
@@ -103,6 +104,13 @@ class Volt implements IView
                                     "compileAlways" => (bool)(!$viewConf->get("smart_reload"))
                                 ]
                             );
+                            $volt->getCompiler()->addFunction(
+                                'vars',
+                                function()
+                                {
+                                    return "get_defined_vars()";
+                                }
+                            );
                             return $volt;
                         }
                     ]
@@ -110,6 +118,11 @@ class Volt implements IView
                 return $view;
             }
         );
+        $di->set('url',function() {
+            $url = new Url();
+            $url->setBasePath(CIO_ROOT_PATH.'public/');
+            return $url;
+        });
         $this->config = $viewConf;
         $this->instance = $di->get("view");
     }
@@ -119,8 +132,13 @@ class Volt implements IView
         $this->instance->setVar($key, $value);
     }
 
-    public function render($key, $value)
+    public function render($path)
     {
+        list($key,$value) = array_merge(explode("/",$path,2), array( false ) );
+        if(empty($value)) {
+            $value = $key;
+            $key="";
+        }
         $view = $this->instance;
         $view->start();
         $view->render($key, $value);

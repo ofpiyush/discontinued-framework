@@ -46,22 +46,8 @@ require_once(SAMBHUTI_ROOT_PATH . 'app/core/IContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'app/loader/IContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'app/loader/Container.php');
 
-//Set Error Handler
-if (set_error_handler(
+set_error_handler(
     function ($errno, $errstr, $errfile, $errline) {
-        if ($errno == E_USER_ERROR) {
-            throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
-        }
-        //Todo: remember and remove echo later
-        if ($errno === E_NOTICE) {
-            echo "Notice:";
-        } elseif ($errno === E_WARNING) {
-            echo "Warning: ";
-        }
-        echo "$errstr $errfile $errline";
-        return true;
+        throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
     }
-)
-) {
-    restore_error_handler();
-}
+);
