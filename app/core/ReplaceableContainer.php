@@ -65,7 +65,7 @@ abstract class ReplaceableContainer implements IContainer
      */
     public function get($id = null)
     {
-        throw new \Exception("Calling $id on ".get_called_class());
+        throw new \Exception("Calling $id on " . get_called_class());
     }
 
 }

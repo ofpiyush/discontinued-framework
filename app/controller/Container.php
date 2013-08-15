@@ -296,8 +296,8 @@ class Container implements IContainer
     public function process($controller)
     {
         if (empty($this->controllers[$controller])) {
-            if(!class_exists($controller)) {
-                $controller = 'controller\\'.$controller;
+            if (!class_exists($controller)) {
+                $controller = 'controller\\' . $controller;
             }
             $this->controllers[$controller] = $this->core->fetchProcess($controller);
         }
