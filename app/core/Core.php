@@ -103,12 +103,12 @@ class Core implements ICore
             $processed_class = null;
             if (false === strpos($identifier, '.')) {
                 $processed_class = $this->fetchProcess($class_ident);
+                if (method_exists($processed_class, 'instance')) {
+                    $processed_class = $processed_class->instance();
+                }
             } else {
                 $parts = explode('.', $identifier);
                 $processed_class = $this->loopGet($parts, $identifier);
-            }
-            if (method_exists($processed_class, 'instance')) {
-                $processed_class = $processed_class->instance();
             }
             $this->processed[$identifier] = $processed_class;
         }

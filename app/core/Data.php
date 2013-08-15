@@ -76,17 +76,8 @@ class Data implements IData
      */
     public function get($key)
     {
-        $args = func_get_args();
-        $tmp = $this->data;
-        foreach ($args as $arg) {
-            if (array_key_exists($arg, $tmp)) {
-                $tmp = $tmp[$arg];
-            } else {
-                return null;
-            }
-        }
-
-        return $tmp;
+        //var_dump($this->data);
+        return $this->data[$key];
     }
 
     /**

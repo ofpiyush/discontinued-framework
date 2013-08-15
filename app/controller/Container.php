@@ -42,7 +42,7 @@ use sambhuti\controller\System\Exception;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Container implements IContainer
+class Container implements core\IContainer
 {
 
     /**
@@ -143,7 +143,7 @@ class Container implements IContainer
     public function get($uri = null)
     {
         try {
-            $this->request->update('uri', $uri);
+            //$this->request->update('uri', $uri);
             foreach ($this->routes as $route) {
                 $mapping = $this->mapRoute($route);
                 if ($mapping) {
@@ -224,7 +224,7 @@ class Container implements IContainer
     protected function mapRoute($route)
     {
         $subdomain = $this->request->get('subdomain');
-        $uri = $this->request->get('uri');
+        $uri = ($this->request->get('uri') === "") ? '/' : $this->request->get('uri');
 
         $args = $uri_args = $subdomain_args = [];
 
@@ -291,7 +291,7 @@ class Container implements IContainer
      *
      * @param string $controller name
      *
-     * @return null|\sambhuti\controller\System\IController controller instance
+     * @return null|\sambhuti\controller\System\Controller controller instance
      */
     public function process($controller)
     {

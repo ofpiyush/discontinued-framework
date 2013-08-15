@@ -41,7 +41,7 @@ use sambhuti\view\IView;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-abstract class Controller implements IController
+abstract class Controller
 {
 
     /**
@@ -52,7 +52,7 @@ abstract class Controller implements IController
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['request', 'view'];
+    public static $dependencies = ['core'];
     /**
      * Request
      *
@@ -60,6 +60,11 @@ abstract class Controller implements IController
      */
     protected $request = null;
 
+    /**
+     * Core
+     * @var null|\sambhuti\core\Core
+     */
+    private $core = null;
     /**
      * View
      *
@@ -72,28 +77,29 @@ abstract class Controller implements IController
      *
      * Should always be called from child constructors
      *
-     * @param \sambhuti\core\IData $request
-     * @param \sambhuti\view\IView $view
+     * @param \sambhuti\core\ICore
      */
-    public function __construct(core\IData $request, IView $view)
+    public function __construct(core\ICore $core)
     {
-        $this->request = $request;
-        $this->view = $view;
+        $this->core = $core;
+        $this->request = $core->get('request');
+        $this->view = $core->get('view');
+        $this->initialize();
     }
 
     /**
      * Get
-     *
-     * Always gives back response
-     *
-     * @param null $id
-     *
-     * @return \sambhuti\view\
+     * Wrapper for core
+     * 
+     * @param $id
+     * @return object|null
      */
-    public function get($id = null)
+    protected function get($id)
     {
-        return $this->view;
+        return $this->core->get($id);
     }
+
+    abstract protected function initialize();
 
     /**
      * Index

@@ -45,6 +45,11 @@ class Error extends Controller
 
     public static $codes = [0 => 'index', 301 => 'redirect', 403 => 'forbidden', 404 => 'notFound'];
 
+
+    protected function initialize()
+    {
+    }
+
     /**
      * Unknown error index
      *

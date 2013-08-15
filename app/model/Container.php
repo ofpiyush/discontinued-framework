@@ -64,6 +64,12 @@ class Container implements IContainer
     protected $connection = null;
 
     /**
+     * Config
+     *
+     * @var array
+     */
+    protected $config = [];
+    /**
      * All dbmses
      *
      * Stores all dbms data name identifiers
@@ -118,14 +124,11 @@ class Container implements IContainer
         $this->loader = $loader;
         $dbms = strtolower($databaseConfig->get('dbms'));
         $this->dbms = $this->allDBMS[$dbms];
-        $dsn = $dbms . ":dbname=" . $databaseConfig->get('name') . ";host=" . $databaseConfig->get(
+        $this->config['dsn'] = $dbms . ":dbname=" . $databaseConfig->get('name') . ";host=" . $databaseConfig->get(
                 'host'
             ) . ";charset=utf8";
-        try {
-            $this->connection = new \PDO($dsn, $databaseConfig->get('user'), $databaseConfig->get('pass'));
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
-        }
+        $this->config['user'] = $databaseConfig->get('user');
+        $this->config['pass'] = $databaseConfig->get('pass');
     }
 
     /**
@@ -143,13 +146,26 @@ class Container implements IContainer
     {
         if (empty($this->models[$id])) {
             $class = $this->loader->fetch('model\\' . $this->dbms . '\\' . $id);
-            if (null === $class) {
-                $this->models[$id] = new $class($this->connection);
+            if (null !== $class) {
+                $this->models[$id] = new $class($this->connect());
             } else {
                 throw new \Exception("Cannot find model " . $id);
             }
         }
 
         return $this->models[$id];
+    }
+
+    protected function connect()
+    {
+        if ($this->connection === null) {
+            try {
+                $this->connection = new \PDO($this->config['dsn'], $this->config['user'], $this->config['pass']);
+                $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $e) {
+                throw new \Exception("PDO Exception with message " . $e->getMessage());
+            }
+        }
+        return $this->connection;
     }
 }

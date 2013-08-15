@@ -106,8 +106,7 @@ class Volt implements IView
                             );
                             $volt->getCompiler()->addFunction(
                                 'vars',
-                                function()
-                                {
+                                function () {
                                     return "get_defined_vars()";
                                 }
                             );
@@ -118,9 +117,9 @@ class Volt implements IView
                 return $view;
             }
         );
-        $di->set('url',function() {
+        $di->set('url', function () {
             $url = new Url();
-            $url->setBasePath(CIO_ROOT_PATH.'public/');
+            $url->setBasePath(CIO_ROOT_PATH . 'public/');
             return $url;
         });
         $this->config = $viewConf;
@@ -134,10 +133,10 @@ class Volt implements IView
 
     public function render($path)
     {
-        list($key,$value) = array_merge(explode("/",$path,2), array( false ) );
-        if(empty($value)) {
+        list($key, $value) = array_merge(explode("/", $path, 2), array(false));
+        if (empty($value)) {
             $value = $key;
-            $key="";
+            $key = "";
         }
         $view = $this->instance;
         $view->start();

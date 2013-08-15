@@ -81,7 +81,7 @@ class Container extends core\ReplaceableContainer implements IContainer
      */
     public function __construct(core\IData $config)
     {
-        $this->config = $config->get('System');
+        $this->config = $config->get('system');
         $this->instance = new core\Data($this->data());
     }
 
