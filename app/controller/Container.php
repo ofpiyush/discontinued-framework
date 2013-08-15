@@ -51,8 +51,7 @@ class Container implements IContainer
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['config.routing', 'core', 'request.request'];
-
+    public static $dependencies = ['config.routing', 'core', 'request'];
     /**
      * Core
      *
@@ -155,7 +154,8 @@ class Container implements IContainer
                 throw new Exception("Not Found", 404);
             }
             extract($mapping, EXTR_OVERWRITE);
-            $controller = core\Utils::camelCase($controller, ['caps' => true]);
+            if (strpos($controller, "\\") === false)
+                $controller = core\Utils::camelCase($controller, ['caps' => true]);
             $action = core\Utils::camelCase($action);
             if (0 === strpos($controller, 'System')) {
                 throw new Exception("Forbidden access to System", 403);
@@ -296,7 +296,10 @@ class Container implements IContainer
     public function process($controller)
     {
         if (empty($this->controllers[$controller])) {
-            $this->controllers[$controller] = $this->core->get('controller', $controller);
+            if(!class_exists($controller)) {
+                $controller = 'controller\\'.$controller;
+            }
+            $this->controllers[$controller] = $this->core->fetchProcess($controller);
         }
         return $this->controllers[$controller];
     }

@@ -39,26 +39,19 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-Class Container implements IContainer
+Class Container extends core\ReplaceableContainer implements IContainer
 {
 
     public static $dependencies = ['core', 'config.view'];
     protected $config = null;
-    protected $view = null;
 
     /**
      * Constructor
      *
      */
-    public function __construct(core\Core $core, core\IData $config)
+    public function __construct(core\ICore $core, core\IData $config)
     {
         $handler = $config->get('handler');
-        $this->view = $core->get("view", $handler);
+        $this->instance = $core->fetchProcess("view\\" . $handler);
     }
-
-    public function get($view = null)
-    {
-        return $this->view;
-    }
-
 }

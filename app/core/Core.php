@@ -79,8 +79,8 @@ class Core implements ICore
     public function __construct(loader\IContainer $loader)
     {
         $this->loader = $loader;
-        $this->processed['Container']['loader'] = $loader;
-        $this->processed['Container']['core'] = $this;
+        $this->set('loader', $loader);
+        $this->set('core', $this);
     }
 
     /**
@@ -91,44 +91,55 @@ class Core implements ICore
      *
      * @param null|string $identifier
      *
-     * @param string $type
-     * @throws \Exception
      * @return mixed|\sambhuti\core\IContainer container or response of "get" method based on string
      */
-    public function get($identifier = null, $type = 'Container')
+    public function get($identifier = null)
     {
-        if (null === $identifier || 'core' === $identifier) {
+        if (null === $identifier) {
             return $this;
         }
-        if (empty($this->processed[$type][$identifier])) {
+        if (empty($this->processed[$identifier])) {
+            $class_ident = $identifier . "\\Container";
+            $processed_class = null;
             if (false === strpos($identifier, '.')) {
-                $class = $this->loader->fetch($identifier . "\\" . $type);
-                if (empty($class)) {
-                    throw new \Exception("Cannot find " . $identifier . "\\" . $type);
-                }
-                $this->processed[$type][$identifier] = $this->process($class);
+                $processed_class = $this->fetchProcess($class_ident);
             } else {
                 $parts = explode('.', $identifier);
-                if ($parts[0] == 'core') {
-                    unset($parts[0]);
-                    $this->processed[$type][$identifier] = $this->get(implode('.', $parts));
-                } else {
-                    $current = $this;
-                    foreach ($parts as $part) {
-                        if (!is_object($current)) {
-                            throw new \Exception ('Cannot load ' . $identifier . '\\' . $type . ' dependency ' . $part . ' can not be loaded from a non-object');
-                        }
-                        $current = $current->get($part, $type);
-                    }
-                    $this->processed[$type][$identifier] = $current;
-                }
+                $processed_class = $this->loopGet($parts, $identifier);
             }
-
+            if (method_exists($processed_class, 'instance')) {
+                $processed_class = $processed_class->instance();
+            }
+            $this->processed[$identifier] = $processed_class;
         }
-
-        return $this->processed[$type][$identifier];
+        return $this->processed[$identifier];
     }
 
+    /**
+     * Set
+     *
+     * @param $identifier string
+     * @param $value object
+     */
+    public function set($identifier, $value)
+    {
+        $this->processed[$identifier] = $value;
+    }
+
+    /**
+     * Fetch and Process
+     * @param $class_ident string
+     * @return object
+     * @throws \Exception
+     */
+    public function fetchProcess($class_ident)
+    {
+        $class = $this->loader->fetch($class_ident);
+        if (empty($class)) {
+            throw new \Exception("Cannot find " . $class_ident);
+        }
+        return $this->process($class);
+    }
 
     /**
      * Process
@@ -186,4 +197,23 @@ class Core implements ICore
         }
     }
 
+    /**
+     * Loop get
+     *
+     * @param array $parts
+     * @param string $identifier
+     * @return mixed|Core|IContainer
+     * @throws \Exception
+     */
+    protected function loopGet(array $parts, $identifier = '')
+    {
+        $current = $this;
+        foreach ($parts as $part) {
+            if (!is_object($current)) {
+                throw new \Exception ('Cannot load ' . $identifier . ' dependency ' . $part . ' can not be loaded from a non-object');
+            }
+            $current = $current->get($part);
+        }
+        return $current;
+    }
 }

@@ -48,7 +48,8 @@ class Error extends Controller
     /**
      * Unknown error index
      *
-     * @param array $args
+     * @param \sambhuti\core\IData $args
+     * @return mixed|void
      */
     public function index(core\IData $args)
     {

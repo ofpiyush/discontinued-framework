@@ -23,9 +23,6 @@
 
 namespace sambhuti\view;
 
-use Phalcon\DI\FactoryDefault;
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\View\Engine;
 use sambhuti\core;
 
 /**
@@ -43,13 +40,10 @@ interface IView
 
     function __construct(core\IData $viewConf);
 
-    function get();
-
     function render($key, $value);
 
     function getData();
 
     function set($key, $value);
 
-    function instance();
 }

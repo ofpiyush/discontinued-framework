@@ -55,17 +55,8 @@ use sambhuti\core;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Container implements IContainer
+class Container extends core\ReplaceableContainer implements IContainer
 {
-
-    /**
-     * Request
-     *
-     * Stores request data later passed to controller
-     *
-     * @var null|\sambhuti\core\IData
-     */
-    protected $request = null;
 
     /**
      * Main Conf
@@ -80,7 +71,7 @@ class Container implements IContainer
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['config.main'];
+    public static $dependencies = ['config.routing'];
 
     /**
      * Constructor
@@ -90,23 +81,8 @@ class Container implements IContainer
      */
     public function __construct(core\IData $config)
     {
-        $this->config = $config;
-        $this->request = new core\Data($this->data());
-    }
-
-    /**
-     * Get
-     *
-     * Implements abstract Get method
-     * Gives \sambhuti\request\Container::$request
-     *
-     * @param string|null $type type of object needed
-     *
-     * @return \sambhuti\core\IData request object
-     */
-    public function get($type = null)
-    {
-        return $this->request;
+        $this->config = $config->get('System');
+        $this->instance = new core\Data($this->data());
     }
 
     /**
@@ -125,12 +101,12 @@ class Container implements IContainer
         if (false !== ($pos = strpos($uri, '?'))) {
             $uri = substr($uri, 0, $pos);
         }
-        $path = $this->config->get('path');
+        $path = $this->config['path'];
         if (strpos($uri, $path) === 0) {
             $uri = substr($uri, strlen($path));
         }
 
-        if (0 !== ($pos = strpos($_SERVER['HTTP_HOST'], $this->config->get('domain')))) {
+        if (0 !== ($pos = strpos($_SERVER['HTTP_HOST'], $this->config['domain']))) {
             $subdomain = substr($_SERVER['HTTP_HOST'], 0, $pos);
         }
 

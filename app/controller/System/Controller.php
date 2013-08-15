@@ -52,8 +52,7 @@ abstract class Controller implements IController
      * @static
      * @var array Array of dependency strings
      */
-    public static $dependencies = ['request.request', 'view.view'];
-
+    public static $dependencies = ['request', 'view'];
     /**
      * Request
      *
@@ -76,7 +75,7 @@ abstract class Controller implements IController
      * @param \sambhuti\core\IData $request
      * @param \sambhuti\view\IView $view
      */
-    public function __construct(core\IData $request, $view)
+    public function __construct(core\IData $request, IView $view)
     {
         $this->request = $request;
         $this->view = $view;

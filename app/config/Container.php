@@ -42,7 +42,7 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-class Container implements IContainer
+class Container extends core\ReplaceableContainer implements IContainer
 {
 
     /**
@@ -60,12 +60,6 @@ class Container implements IContainer
      */
     protected $loader = null;
 
-    /**
-     * Conf Instance
-     *
-     * @var null|\sambhuti\config\IConfig
-     */
-    protected $instance = null;
 
     /**
      * Constructor
@@ -81,18 +75,6 @@ class Container implements IContainer
             throw new \Exception("Config Adapter " . SAMBHUTI_CONFIG_ADAPTER . " not found");
         }
         $this->instance = new $adapter($loader);
-    }
-
-    /**
-     * Get
-     *
-     * @param null|string $id
-     *
-     * @return \sambhuti\core\IData object
-     */
-    public function get($id = null)
-    {
-        return $this->instance->get($id);
     }
 
 }

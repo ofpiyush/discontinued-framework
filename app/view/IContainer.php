@@ -46,6 +46,6 @@ interface IContainer extends core\IContainer
      *
      * Should set up view handler
      */
-    public function __construct(core\core $core, core\IData $configMain);
+    public function __construct(core\ICore $core, core\IData $config);
 
 }

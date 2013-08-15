@@ -62,4 +62,5 @@ interface ICore extends IContainer
      */
     public function process($class);
 
+    public function fetchProcess($ident);
 }

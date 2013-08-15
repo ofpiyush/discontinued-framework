@@ -114,16 +114,6 @@ class Volt implements IView
         $this->instance = $di->get("view");
     }
 
-    public function get()
-    {
-        return $this->instance;
-    }
-
-    public function instance()
-    {
-        return $this->instance;
-    }
-
     public function set($key, $value)
     {
         $this->instance->setVar($key, $value);

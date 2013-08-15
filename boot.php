@@ -24,7 +24,6 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  * @copyright 2012 Piyush
  */
-use sambhuti\loader;
 
 /**
  * Sambhuti Root Path
@@ -46,8 +45,6 @@ define('SAMBHUTI_ROOT_PATH', realpath(dirname(__FILE__)) . '/');
 require_once(SAMBHUTI_ROOT_PATH . 'app/core/IContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'app/loader/IContainer.php');
 require_once(SAMBHUTI_ROOT_PATH . 'app/loader/Container.php');
-$loader = new loader\Container();
-$loader->addApp('sambhuti', SAMBHUTI_ROOT_PATH);
 
 //Set Error Handler
 if (set_error_handler(

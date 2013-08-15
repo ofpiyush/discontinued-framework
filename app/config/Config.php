@@ -42,7 +42,7 @@ use sambhuti\loader;
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Piyush
  */
-abstract class Config
+abstract class Config implements IConfig
 {
 
     /**
@@ -54,7 +54,7 @@ abstract class Config
      * @var array $appPaths
      */
     protected $rootPaths = [];
-
+    public static $dependencies = ['loader'];
     /**
      * Default Path
      *
