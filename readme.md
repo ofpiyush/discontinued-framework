@@ -5,4 +5,7 @@
 * SPL library
 
 ##Setting up: 
-* Visit http://path/to/sambhuti_root_folder/sample/public_html
+* After moving the sample app out it has become a little tricky to set it up.
+I will upload the sample app as soon as I find some time to finish it.
+
+
