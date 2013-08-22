@@ -107,9 +107,8 @@ class Container extends core\ReplaceableContainer implements IContainer
         }
 
         if (0 !== ($pos = strpos($_SERVER['HTTP_HOST'], $this->config['domain']))) {
-            $subdomain = substr($_SERVER['HTTP_HOST'], 0, $pos);
+            $subdomain = substr($_SERVER['HTTP_HOST'], 0, $pos-1);
         }
-
         return array(
             'uri' => trim($uri, '/'),
             'subdomain' => $subdomain,
